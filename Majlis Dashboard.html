@@ -200,6 +200,39 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .cols2--b{gap:14px}.cols2--b>div{display:flex;flex-direction:column;gap:2px;min-width:0}
 .chk small.is-bad{color:var(--bad);font-weight:600}
 
+/* ---------- Action required · direction A "lead with one thing": one headline, ≤3 one-line rows, a different shape per widget ---------- */
+.arls{display:flex;flex-direction:column;min-width:0;flex:none}
+.arr{display:flex;align-items:center;gap:10px;min-height:40px;padding:5px 6px;border-top:1px solid var(--line);font-size:13.5px;min-width:0;text-align:start;width:100%;transition:background .15s}
+.arls>.arr:first-child,.arls>.chk:first-child{border-top:0}.arr[data-act]{cursor:pointer}.arr[data-act]:hover{background:var(--tile);border-radius:10px;border-top-color:transparent}
+.arr>span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.arr>span b{font-weight:600}
+.arr em{font-style:normal;font-size:12px;color:var(--ink3);white-space:nowrap;flex:none}.arr em.is-bad{color:var(--bad);font-weight:600}
+.arr b.v{font:600 13px/1 var(--font);flex:none;font-variant-numeric:tabular-nums}.arr .ib{width:28px;height:28px;box-shadow:none;flex:none}
+.arls .chk{border-top:1px solid var(--line);border-radius:0;padding:9px 4px}.arls .chk small.is-bad{color:var(--bad);font-weight:600}
+.arl{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;padding:5px 8px;margin-inline-start:-8px;border-radius:99px;font:600 12.5px/1 var(--font);color:var(--accent);flex:none;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}.arl:hover{background:var(--tile)}span.arl{color:var(--ink3)}span.arl:hover{background:none}
+.arb{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;flex:none;min-width:0}.arb strong{font:600 34px/1 var(--font);letter-spacing:-.025em;white-space:nowrap}.arb small{font:500 13px/1.2 var(--font);color:var(--ink3)}
+.arsub{font-size:12.5px;color:var(--ink2);flex:none;margin-top:-4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arbar{display:flex;gap:2px;height:14px;border-radius:99px;overflow:hidden;flex:none}.arbar i{display:block;min-width:5px}.arbar i[data-act]{cursor:pointer;transition:filter .15s}.arbar i[data-act]:hover{filter:brightness(1.12)}.arbar--t{height:18px}
+.arlg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink2);flex:none}.arlg span{display:inline-flex;align-items:center;gap:6px}.arlg .dot{width:8px;height:8px}.arlg b{color:var(--ink);font-weight:600}
+.dot--deal{background:var(--c4)}
+.arpills{display:flex;gap:6px;flex:none}.arpill{flex:1;display:flex;flex-direction:column;gap:4px;padding:10px 11px;border-radius:12px;background:var(--tile);min-width:0}.arpill b{font:600 21px/1 var(--font)}.arpill span{font-size:11.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.arpill--bad{background:var(--bad-soft)}.arpill--bad b{color:var(--bad)}.arpill--warn{background:var(--warn-soft)}.arpill--warn b{color:var(--warn)}
+.arstrip{position:relative;height:44px;flex:none;margin:2px 4px 0}.arstrip .ax{position:absolute;inset-inline:0;top:20px;height:2px;border-radius:1px;background:var(--tile2)}.arstrip .nw{position:absolute;inset-inline-start:0;top:12px;width:2px;height:18px;border-radius:1px;background:var(--ink)}
+.arstrip b{position:absolute;top:14px;width:14px;height:14px;margin-inline-start:-7px;border-radius:50%;border:2.5px solid var(--card-s,#fff);cursor:default}.arstrip em{position:absolute;top:32px;font:500 10.5px/1 var(--font);font-style:normal;color:var(--ink3);white-space:nowrap;transform:translateX(-50%)}.arstrip em:first-of-type{transform:none}.arstrip em:last-of-type{transform:translateX(-100%)}
+[dir=rtl] .arstrip em{transform:translateX(50%)}[dir=rtl] .arstrip em:first-of-type{transform:none}[dir=rtl] .arstrip em:last-of-type{transform:translateX(100%)}
+.arw{display:flex;align-items:center;gap:22px;height:100%;min-width:0}.arw>div:first-child{display:flex;flex-direction:column;gap:6px;flex:none;min-width:0;max-width:45%}.arw .arstrip,.arw .arbar{flex:1;min-width:0}.arw .arsub{margin-top:0}
+.archips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;flex:none}.archips button{display:inline-flex;align-items:center;gap:6px;height:27px;padding:0 11px;border-radius:99px;background:var(--tile);font:500 12px/1 var(--font);color:var(--ink2);transition:background .15s}.archips button:hover{background:var(--tile2)}.archips b{color:var(--ink);font-weight:600}
+.arring{display:flex;align-items:center;gap:18px;flex:1;min-height:0}.arring .gg{flex:none}.arring b{font:600 17px/1.3 var(--font);display:block}.arring small{display:block;font-size:12.5px;line-height:1.5;color:var(--ink3)}.arring small.is-bad{color:var(--bad)}
+/* My queue is the section's hero: dark card, the next action only */
+.w[data-type="queue"]{background:var(--deep)!important;border-color:transparent!important;color:#fff;--ink:#fff;--ink2:rgba(255,255,255,.78);--ink3:rgba(255,255,255,.55);--line:rgba(255,255,255,.12);--tile:rgba(255,255,255,.08);--tile2:rgba(255,255,255,.15)}
+.w[data-type="queue"] .cnt{background:rgba(255,255,255,.14);color:#fff}.w[data-type="queue"] .arl{color:var(--hi)}.w[data-type="queue"] .ib--ok{background:var(--hi)}
+.arq{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:26px;flex:1;min-height:0}
+.arf{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1}.arf small{font:600 11px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--hi)}
+.arf h4{margin:0;font:600 24px/1.15 var(--font);letter-spacing:-.015em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.arf p{margin:0;font-size:13px;line-height:1.45;color:rgba(255,255,255,.7);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.w--v-s .arf h4,.w--v-wide .arf h4{font-size:18px;-webkit-line-clamp:1}.w--v-tall .arf h4{font-size:20px}
+.arbtns{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}.arbtn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 15px;border-radius:99px;font:600 13px/1 var(--font);background:rgba(255,255,255,.14);color:#fff;transition:background .15s,filter .15s}.arbtn:hover{background:rgba(255,255,255,.22)}.arbtn--y{background:var(--hi);color:var(--hi-ink)}.arbtn--y:hover{background:var(--hi);filter:brightness(1.05)}
+.w--v-s .arbtn{height:30px;padding:0 12px;font-size:12px}
+.arthen{display:flex;flex-direction:column;min-width:0;min-height:0}.arthen>small{font-size:12px;color:rgba(255,255,255,.55);padding-bottom:2px}
+.arwq{display:flex;align-items:center;gap:18px;height:100%;min-width:0}.arwq .arf{gap:6px}.arwq .arbtns{margin-top:0;flex-wrap:nowrap;flex:none}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -744,11 +777,11 @@ const MON = { Nov: 1, Dec: 2, Jan: 3, Feb: 4 };
 /* priority score: urgency × value × who is waiting */
 const qScore = (d, v, vip) => ({ overdue: 5, today: 4, week: 2, later: 1 })[bucketOf(d)] * (v >= 20 ? 3 : v >= 5 ? 2 : v >= 1 ? 1.5 : 1) * (vip ? 1.5 : 1);
 function queueItems() { const out = [];
-  S.decisions.map(decX).filter(d => d.st === 'open').forEach(d => out.push({ k: d.sign ? 'sign' : 'approve', b: d.title, s: `${d.from} · ${t('q.waiting', { w: d.wait })}`, d: d.d, at: d.at, v: d.v, vip: d.sign, id: d.id, q: d.title + ': what should I know before deciding?' }));
-  S.mails.filter(m => m.lv !== 'ok').forEach(m => out.push({ k: m.lv === 'bad' ? 'decide' : 'reply', b: m.subj, s: `${m.from} · ${m.age}`, d: 0, v: 0, vip: /Amal|Board|Investor/.test(m.from), q: 'Draft a reply: ' + m.subj }));
-  D.fin.deals.filter(x => x.lv === 'bad').forEach(x => out.push({ k: 'deal', b: x.n, s: `${x.d} · ${x.why}`, d: MON[x.close] * 25, v: x.v, q: `How do we save the ${x.n} deal?` }));
-  S.tasks.filter(x => !x.done && x.d <= 0).forEach(x => out.push({ k: 'task', b: x.tx, s: t('w.tasks').split(' · ')[0], d: x.d, at: x.at, v: 0, q: 'Help me with: ' + x.tx }));
-  D.deadlines.filter(x => x.d <= 7).forEach(x => out.push({ k: 'file', b: x.n, s: `${x.o} · ${x.st}`, d: x.d, v: 0, q: `Are we ready for the ${x.n}?` }));
+  S.decisions.map(decX).filter(d => d.st === 'open').forEach(d => out.push({ k: d.sign ? 'sign' : 'approve', b: d.title, s: `${d.from} · ${t('q.waiting', { w: d.wait })}`, d: d.d, at: d.at, v: d.v, vip: d.sign, id: d.id, q: d.title + ': what should I know before deciding?', desc: `${d.detail} ${d.from} has waited ${d.wait}.` }));
+  S.mails.filter(m => m.lv !== 'ok').forEach(m => out.push({ k: m.lv === 'bad' ? 'decide' : 'reply', b: m.subj, s: `${m.from} · ${m.age}`, d: 0, v: 0, vip: /Amal|Board|Investor/.test(m.from), q: 'Draft a reply: ' + m.subj, desc: m.pre }));
+  D.fin.deals.filter(x => x.lv === 'bad').forEach(x => out.push({ k: 'deal', b: x.n, s: `${x.d} · ${x.why}`, d: MON[x.close] * 25, v: x.v, q: `How do we save the ${x.n} deal?`, desc: `${x.d} · ${x.why}. Closes ${x.close}.` }));
+  S.tasks.filter(x => !x.done && x.d <= 0).forEach(x => out.push({ k: 'task', b: x.tx, s: t('w.tasks').split(' · ')[0], d: x.d, at: x.at, v: 0, q: 'Help me with: ' + x.tx, tid: x.id }));
+  D.deadlines.filter(x => x.d <= 7).forEach(x => out.push({ k: 'file', b: x.n, s: `${x.o} · ${x.st}`, d: x.d, v: 0, q: `Are we ready for the ${x.n}?`, desc: `${x.o} · ${x.st}` }));
   return out.map(x => ({ ...x, sc: qScore(x.d, x.v, x.vip) })).sort((a, b) => b.sc - a.sc || a.d - b.d); }
 /* fill a list top-down by pixel budget; returns [html, items shown] */
 function fillGroups(groups, budget, rowPx, row) { let html = '', used = 0, shown = 0;
@@ -768,6 +801,19 @@ _m(TX.ar, { w: { tasks: 'مهامي · الخيار 1', taskProgress: 'مهام�
     batch: 'اعتماد {n} أقل من مليون درهم', batchDone: 'تم اعتماد {n} موافقات صغيرة · {v} مليون', batchL: '{n} موافقات صغيرة · {v} مليون', close: 'الإغلاق', atRiskOf: 'معرّضة للخطر · {n} صفقات · {p}% من الصفقات', underV: '+{n} أقل من {v} مليون', all: 'الكل {n}',
     rolling: 'آخر 7 أيام', onTrack: 'على المسار', catchUp: 'تحتاج متابعة', nOver: '{n} متأخرة', nToday: '{n} مستحقة اليوم', next: 'التالي', allDone: 'لا شيء الآن', ranked: 'مرتبة حسب كلفة الانتظار',
     k: { sign: 'توقيع', approve: 'اعتماد', reply: 'رد', decide: 'قرار', deal: 'صفقة', task: 'مهمة', file: 'تقديم' }, inDays: '{n} ي', next30: 'خلال 30 يومًا', nextDl: 'التالي: {x}', days: '{n} أيام', laterQ: '+{n} لاحقًا هذا الربع', doneOf: '{d} من {n} منجزة' } });
+
+/* Direction A helpers · one headline, ≤3 one-line rows */
+const arBig = (v, sub) => `<div class="arb"><strong>${v}</strong>${sub ? `<small>${sub}</small>` : ''}</div>`;
+const arLink = (txt, act, extra = '') => `<button class="arl" data-act="${act}"${extra}>${txt}${ico('arrowRight', 13)}</button>`;
+const qLv = k => ({ sign: 'bad', decide: 'bad', approve: 'warn', reply: 'warn', deal: 'deal', task: 'ok', file: 'ok' })[k];
+const DEAL_X = { 'MoI digital ID': ['MoI', 'Slipped'], 'Gulf Ports ERP': ['Gulf Ports', 'No contact'], 'Emaar CX platform': ['Emaar', 'Champion left'], 'Etihad renewal': ['Etihad', 'Price'], 'ADNOC analytics': ['ADNOC', 'Slipped'], 'Dubai Health cloud': ['Dubai Health', 'Competitor'] };
+const arTask = x => `<label class="chk"><input type="checkbox" data-act="task" data-id="${x.id}" ${x.done ? 'checked' : ''}><span class="chk__b">${ico('check', 12)}</span><span class="chk__t">${esc(x.tx)}</span><small${!x.done && x.d < 0 ? ' class="is-bad"' : ''}>${whenOf(x.d, x.at)}</small></label>`;
+_m(TX.en, { q: { signNow: 'Sign now', approveNow: 'Approve', markDone: 'Mark done', delegate: 'Delegate', ask: 'Ask', act: { reply: 'Draft reply', decide: 'Decide with Majlis', deal: 'Plan rescue', file: 'Check readiness' },
+  nextL: 'Next', then: 'Then', moreW: '+{n} more', thenDl: 'Then {x} in {n}d', now: 'Now', batchA: 'Approve {n} small ones · AED {v}M', nMore: '{n} more', atRiskP: 'at risk · {p}% of pipeline',
+  needDecision: 'need a decision', needReply: 'need a reply', inboxL: '{r} replies · {f} FYI', moreTasks: '+{n} more this week', nextT: 'Next: {x}', allClear: 'Nothing waiting on you' } });
+_m(TX.ar, { q: { signNow: 'وقّع الآن', approveNow: 'اعتماد', markDone: 'تم', delegate: 'تفويض', ask: 'اسأل', act: { reply: 'صياغة رد', decide: 'قرّر مع مجلس', deal: 'خطة إنقاذ', file: 'تحقق من الجاهزية' },
+  nextL: 'التالي', then: 'ثم', moreW: '+{n} أخرى', thenDl: 'ثم {x} خلال {n} ي', now: 'الآن', batchA: 'اعتماد {n} صغيرة · {v} مليون', nMore: '{n} أخرى', atRiskP: 'معرّضة للخطر · {p}% من الصفقات',
+  needDecision: 'تحتاج قرارًا', needReply: 'تحتاج ردًا', inboxL: '{r} ردود · {f} للعلم', moreTasks: '+{n} أخرى هذا الأسبوع', nextT: 'التالي: {x}', allClear: 'لا شيء بانتظارك' } });
 
 /* ----------------------------------------------------------- the widgets */
 const W = {
@@ -835,8 +881,13 @@ const W = {
         if (v === 'wide') return vz(miniDonut(segs, `<b>${tot}</b>`));
         return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${tot}</b><small>${t('total')}</small>` })}${legend(segs)}</div>${w >= 6 && h >= 5 ? capsules(D.mailVol, D.dow, { hi: 4 }) : ''}`, 'vz--col'); }
       if (v === 's') return `<div class="big"><small>${t('needsYou')}</small><strong>${S.mails.filter(m => m.tag !== 'FYI').length}</strong><span class="big__f">${avatars(ms.map(m => m.from), 4)}<span class="muted">${ms[0].age}</span></span></div>`;
-      const big = w >= 6, n = CAP(h, big ? 60 : 58);
-      return `<ul class="rcl">${ms.slice(0, n).map((m, i) => `<li class="rc rc--hv"><button class="rc__b" data-act="mail-ask" data-id="${m.id}">${av(m.from, i)}<span class="rc__m"><b>${esc(m.from)}</b><small>${esc(big ? m.subj : m.subj)}</small></span>${big ? tag(m.tag, m.lv) : ''}<time>${m.age}</time></button><span class="acts"><button data-act="mail-reply" data-id="${m.id}" title="${t('reply')}">${ico('reply', 14)}</button><button data-act="mail-snooze" data-id="${m.id}" title="${t('snooze')}">${ico('clock', 14)}</button><button data-act="mail-archive" data-id="${m.id}" title="${t('archive')}">${ico('archive', 14)}</button></span></li>`).join('')}</ul>`; } },
+      /* direction A: how many need a decision, then the asks as one-line rows */
+      const asks = ms.filter(m => m.lv !== 'ok').sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)), nd = ms.filter(m => m.lv === 'bad').length, nr = ms.filter(m => m.lv === 'warn').length, nf = ms.filter(m => m.lv === 'ok').length;
+      const head = arBig(nd || nr, nd ? t('q.needDecision') : t('q.needReply'));
+      const row = m => `<div class="arr" role="button" tabindex="0" data-act="mail-ask" data-id="${m.id}"><span><b>${esc(m.from.split(' ')[0])}</b> · ${esc(m.subj)}</span><em>${m.age}</em></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div class="arls" style="flex:1;min-width:0">${asks.slice(0, 1).map(row).join('')}</div></div>`;
+      const k = Math.max(1, Math.min(asks.length, 3, Math.floor((bodyH(h) - 80) / 41)));
+      return `${head}<div class="arls">${asks.slice(0, k).map(row).join('')}</div>${arLink(t('q.inboxL', { r: nr, f: nf }), 'ask-open', ' data-q="Summarise my inbox"')}`; } },
 
   teams: { group: 'comms', icon: 'message', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.channels.reduce((a, x) => a + x.u, 0),
@@ -848,32 +899,23 @@ const W = {
   /* Work */
   decisions: { group: 'work', icon: 'tasks', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.openDecisions().length,
-    ctl: ({ view }) => view === 'viz' ? '' : `<span class="seg">${['due', 'value'].map(k => `<button class="${S.decSort === k ? 'is-on' : ''}" data-act="dec-sort" data-s="${k}">${t('q.' + k)}</button>`).join('')}</span>`,
     render({ v, w, h, view }) { const all = S.decisions, open = S.openDecisions(), ap = all.filter(d => d.st === 'approved').length, rj = all.filter(d => d.st === 'rejected').length;
       if (view === 'viz') { const segs = [{ l: t('open'), v: open.length, c: 'var(--c1)' }, { l: t('approved'), v: ap, c: 'var(--c3)' }, { l: t('rejected'), v: rj, c: 'var(--bad)' }];
         if (v === 's') return vz(donut(segs, { size: 74, sw: 11, center: `<b>${open.length}</b>` }) + `<div class="vz__t"><b>${all.length}</b><small>${t('total')}</small></div>`, 'vz--row');
         if (v === 'wide') return vz(miniDonut(segs, `<b>${open.length}</b>`));
         return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${open.length}</b><small>${t('open')}</small>` })}${legend(segs)}</div>${h >= 5 ? `<div class="chips">${open.map(d => `<span class="chip chip--s">${esc(d.meta.split('·')[1] || d.meta)}</span>`).join('')}</div>` : ''}`, 'vz--col'); }
       if (v === 's') return `<div class="big"><small>${t('w.decisions')}</small><strong>${open.length}</strong><span class="big__f"><i class="bar-s"><b style="width:${all.length ? (all.length - open.length) / all.length * 100 : 0}%"></b></i><span class="muted">${all.length - open.length}/${all.length}</span></span></div>`;
-      /* Option 1 · triage list: grouped Overdue · Today · This week · Later, value on the right, small approvals batched */
-      const big = w >= 6, X = all.map(decX), op = X.filter(d => d.st === 'open'), byV = (a, b) => (b.v || 0) - (a.v || 0) || a.d - b.d;
-      const row = d => `<li class="rc dec dec--${d.st}"><i class="ic-c">${ico('tasks', 16)}</i><span class="rc__m"><b>${esc(d.title)}</b><small>${esc(big ? `${d.meta} · ${t('q.waiting', { w: d.wait })}` : d.meta)}</small></span>${d.v ? `<em class="dec__v">${fmtV(d.v)}</em>` : ''}${d.st === 'open' ? `<span class="acts-i"><button class="ib" data-act="decision" data-do="rejected" data-id="${d.id}" title="${t('reject')}">${ico('x', 14)}</button><button class="ib ib--ok" data-act="decision" data-do="approved" data-id="${d.id}" title="${t('approve')}">${ico('check', 14)}</button></span>` : tag(t(d.st), d.st === 'approved' ? 'ok' : 'bad')}</li>`;
-      const foot = (rest) => { const b = S.batch; return `<div class="qx"><span>${rest ? t('q.more', { n: rest }) + ' · ' : ''}${b.done ? t('q.batchDone', { n: b.n, v: b.v }) : t('q.batchL', { n: b.n, v: b.v })}</span>${b.done ? '' : `<button class="fx-more" data-act="dec-batch">${t('q.batch', { n: b.n })}${ico('arrowRight', 13)}</button>`}</div>`; };
-      if (!op.length) return empty() + `<ul class="rcl rcl--done">${X.slice(0, CAP(h, 58, 30)).map(row).join('')}</ul>` + foot(0);
-      const groups = S.decSort === 'value' ? [['all', [...op].sort(byV), '']] : BUCKETS.map(k => { const it = op.filter(d => bucketOf(d.d) === k).sort(byV); return [k, it, `<h4 class="grp-h"><i class="dot dot--${k === 'overdue' ? 'bad' : k === 'today' ? 'warn' : 'ok'}"></i>${t('q.' + k)}<em>${it.length}</em></h4>`]; });
-      const [html, shown] = fillGroups(groups, bodyH(h) - 30, 58, row);
-      return `<div class="rcl">${html.replace(/<li /g, '<div ').replace(/<\/li>/g, '</div>')}</div>${foot(op.length - shown)}`; } },
-
-  projects: { group: 'work', icon: 'layout', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
-    count: () => D.projects.length,
-    render({ v, w, h, view }) { const p = D.projects, ok = Math.round(p.filter(x => x.r === 'ok').length / p.length * 100);
-      if (view === 'viz') { const segs = [['ok', t('onTrack')], ['risk', t('atRisk')], ['late', t('delayed')]].map(([k, l]) => ({ l, v: p.filter(x => x.r === k).length, c: rag[k][2] }));
-        if (v === 's') return vz(`<div class="gg gg--r">${ring(ok, 66, 8, 'var(--c1)')}<strong>${ok}%</strong></div><div class="vz__t"><b>${p.length}</b><small>${t('w.projects')}</small></div>`, 'vz--row');
-        if (v === 'wide') return vz(`<div class="gg-row">${p.slice(0, w >= 8 ? 5 : 3).map(x => gaugeCell({ p: x.p, v: x.p + '%', l: x.n, c: rag[x.r][2] }, 54)).join('')}</div>`);
-        return vz(`<div class="gg-grid gg-grid--${w >= 6 ? 3 : 2}">${p.slice(0, w >= 6 ? 6 : 4).map(x => gaugeCell({ p: x.p, v: x.p + '%', l: x.n, c: rag[x.r][2] }, h >= 4 ? 70 : 58)).join('')}</div>${h >= 5 ? legend(segs.map(s => ({ ...s, t: s.v }))) : ''}`, 'vz--col'); }
-      if (v === 's') return `<div class="big"><small>${t('onTrack')}</small><strong>${ok}%</strong><span class="big__f"><i class="bar-s"><b style="width:${ok}%"></b></i><span class="muted">${p.length}</span></span></div>`;
-      if (w >= 6 && h >= 3) return `<table class="tbl"><thead><tr><th>${t('w.projects')}</th><th>Owner</th><th>Due</th><th>%</th><th></th></tr></thead><tbody>${p.slice(0, CAP(h, 46, 28)).map(x => `<tr><td><b>${x.n}</b></td><td>${x.o}</td><td>${x.due}</td><td><span class="pbar pbar--${rag[x.r][1]}"><i style="width:${x.p}%"></i></span></td><td>${tag(t(rag[x.r][0]), rag[x.r][1])}</td></tr>`).join('')}</tbody></table>`;
-      return `<ul class="rcl">${p.slice(0, CAP(h, 58)).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="Where is ${x.n} stuck?"><span class="rc__m"><b>${x.n}</b><small>${x.o} · ${x.due}</small></span><span class="pbar pbar--${rag[x.r][1]}"><i style="width:${x.p}%"></i></span><em class="pct">${x.p}%</em></button></li>`).join('')}</ul>`; } },
+      /* Option 1 · triage, direction A: a due-bucket bar, then 2–3 one-line decisions, small approvals batched */
+      const X = all.map(decX), op = X.filter(d => d.st === 'open').sort((a, b) => BUCKETS.indexOf(bucketOf(a.d)) - BUCKETS.indexOf(bucketOf(b.d)) || (b.v || 0) - (a.v || 0)), tot = op.reduce((a, d) => a + (d.v || 0), 0);
+      const cnt = k => op.filter(d => bucketOf(d.d) === k).length, colr = { overdue: 'var(--bad)', today: 'var(--warn)', week: 'var(--c1)', later: 'var(--c5)' }, ks = BUCKETS.filter(cnt);
+      const bar = `<div class="arbar">${ks.map(k => `<i style="flex:${cnt(k)};background:${colr[k]}" title="${t('q.' + k)} · ${cnt(k)}"></i>`).join('')}</div>`;
+      const lg = `<div class="arlg">${ks.map(k => `<span><i class="dot" style="background:${colr[k]}"></i>${t('q.' + k)} ${cnt(k)}</span>`).join('')}${tot ? `<span style="margin-inline-start:auto"><b>AED ${fmtV(tot)}</b></span>` : ''}</div>`;
+      const row = d => `<div class="arr"><span>${esc(d.title)}</span><em>${whenOf(d.d, d.at)}</em>${d.v ? `<b class="v">${fmtV(d.v)}</b>` : ''}<button class="ib ib--ok" data-act="decision" data-do="approved" data-id="${d.id}" title="${t('approve')}">${ico('check', 13)}</button></div>`;
+      const b = S.batch, link = b.done ? `<span class="arl">${t('q.batchDone', { n: b.n, v: b.v })}</span>` : arLink(t('q.batchA', { n: b.n, v: b.v }), 'dec-batch');
+      if (!op.length) return empty() + link;
+      if (v === 'wide') return `${bar}<div class="arls">${row(op[0])}</div>`;
+      const k = Math.max(1, Math.min(op.length, 3, Math.floor((bodyH(h) - 92) / 41)));
+      return `${bar}${lg}<div class="arls">${op.slice(0, k).map(row).join('')}</div>${link}`; } },
 
   tasks: { group: 'work', icon: 'check', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.tasks.filter(x => !x.done).length,
@@ -882,13 +924,12 @@ const W = {
         if (v === 'wide') return vz(miniDonut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], `<b>${pct}%</b>`, 2));
         return vz(`<div class="vzrow">${donut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], { size: 112, sw: 14, center: `<b>${pct}%</b><small>${t('done')}</small>` })}${legend([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }])}</div>${h >= 5 ? capsules(D.taskWeek, D.dow.slice(0, 5), { hi: 1 }) : ''}`, 'vz--col'); }
       if (v === 's') return `<div class="big"><small>${t('w.tasks')}</small><strong>${ts.length - done} ${t('left')}</strong><span class="big__f"><i class="bar-s"><b style="width:${pct}%"></b></i><span class="muted">${done}/${ts.length}</span></span></div>`;
-      /* Option 1 · due buckets: Overdue · Today · This week · Later; tasks finished on earlier days drop off */
-      const item = x => `<label class="chk"><input type="checkbox" data-act="task" data-id="${x.id}" ${x.done ? 'checked' : ''}><span class="chk__b">${ico('check', 12)}</span><span class="chk__t">${esc(x.tx)}</span><small${!x.done && x.d < 0 ? ' class="is-bad"' : ''}>${whenOf(x.d, x.at)}</small></label>`;
-      const live = ts.filter(x => !(x.done && x.d < 0)), G = k => { const it = live.filter(x => bucketOf(x.d) === k).sort((a, b) => a.done - b.done || a.d - b.d); return [k, it, `<h4 class="grp-h"><i class="dot dot--${k === 'overdue' ? 'bad' : k === 'today' ? 'warn' : 'ok'}"></i>${t('q.' + k)}<em>${it.filter(x => !x.done).length}</em></h4>`]; };
-      const col = (keys, budget) => { const gs = keys.map(G), [html, shown] = fillGroups(gs, budget, 40, item), all = gs.reduce((a, g) => a + g[1].length, 0), rest = gs.flatMap(g => g[1]).slice(shown);
-        return `<div class="rcl rcl--c">${html}</div>${all > shown ? `<div class="qx"><span>${t('q.more', { n: all - shown })} · ${esc(rest.slice(0, 2).map(x => x.tx).join(', '))}</span></div>` : ''}`; };
-      if (w >= 8 && h >= 3) return `<div class="cols2 cols2--b"><div>${col(['overdue', 'today'], bodyH(h) - 24)}</div><div>${col(['week', 'later'], bodyH(h) - 24)}</div></div>`;
-      return col(BUCKETS, bodyH(h) - 24); } },
+      /* Option 1 · due buckets, direction A: count pills, then today's tasks as one-line rows */
+      const open = ts.filter(x => !x.done).sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99')), c = k => open.filter(x => bucketOf(x.d) === k).length;
+      const pills = `<div class="arpills">${[['overdue', 'bad'], ['today', 'warn'], ['week', '']].map(([k, l]) => `<div class="arpill${c(k) && l ? ' arpill--' + l : ''}"><b>${c(k)}</b><span>${t('q.' + k)}</span></div>`).join('')}</div>`;
+      if (v === 'wide' || bodyH(h) < 150) return pills;
+      const k = Math.max(1, Math.min(open.length, 3, Math.floor((bodyH(h) - 96) / 40)));
+      return `${pills}<div class="arls">${open.slice(0, k).map(arTask).join('')}</div>${open.length > k ? arLink(t('q.moreTasks', { n: open.length - k }), 'ask-open', ' data-q="Show all my tasks this week"') : ''}`; } },
 
   docs: { group: 'docs', icon: 'folder', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.docs.length,
@@ -913,35 +954,43 @@ const W = {
       return list(CAP(h, 58)); } },
 
   /* People */
-  /* Action required · new widgets */
+  /* Action required · new widgets (direction A) */
   queue: { group: 'work', icon: 'zap', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
     count: () => queueItems().length,
-    render({ v, w, h }) { const Q = queueItems();
-      if (!Q.length) return empty();
-      if (v === 's') return finBig(t('q.ranked'), Q.length, `<span class="muted">${esc(Q[0].b)}</span>`);
-      const row = x => `<li class="rc"><div class="rc__b" role="button" tabindex="0" data-act="ask-open" data-q="${esc(x.q)}"><span class="qt qt--${x.k}">${t('q.k.' + x.k)}</span><span class="rc__m"><b>${esc(x.b)}</b><small>${esc(x.s)}</small></span>${w >= 6 ? `<span class="q-when${x.d < 0 || (x.d === 0 && x.at) ? ' is-bad' : ''}">${whenOf(x.d, x.at)}</span>` : ''}${x.v ? `<em class="fx-v">${fmtV(x.v)}</em>` : ''}${x.id ? `<button class="ib ib--ok" data-act="decision" data-do="approved" data-id="${x.id}" title="${t('approve')}">${ico('check', 14)}</button>` : ''}</div></li>`;
-      const k = Math.min(Q.length, CAP(h, 58, 26));
-      return `<ul class="rcl">${Q.slice(0, k).map(row).join('')}</ul><div class="qx"><span>${Q.length > k ? t('q.more', { n: Q.length - k }) + ' · ' : ''}${t('q.ranked')}</span></div>`; } },
+    render({ v, w, h }) { const Q = queueItems(); if (!Q.length) return `<div class="arf"><small>${t('q.ranked')}</small><h4>${t('q.allClear')}</h4></div>`;
+      const x = Q[0], rest = Q.slice(1);
+      const prim = x.id ? `<button class="arbtn arbtn--y" data-act="decision" data-do="approved" data-id="${x.id}">${ico('check', 14)}${t(x.k === 'sign' ? 'q.signNow' : 'q.approveNow')}</button>`
+        : x.tid ? `<button class="arbtn arbtn--y" data-act="task-done" data-id="${x.tid}">${ico('check', 14)}${t('q.markDone')}</button>`
+        : `<button class="arbtn arbtn--y" data-act="ask-open" data-q="${esc(x.q)}">${ico('sparkles', 14)}${t('q.act.' + x.k)}</button>`;
+      const btns = `<div class="arbtns">${prim}${v === 's' ? '' : `<button class="arbtn" data-act="ask-open" data-q="${esc('Who should I delegate this to: ' + x.b + '?')}">${t('q.delegate')}</button>`}${w >= 6 || v === 'tall' ? `<button class="arbtn" data-act="ask-open" data-q="${esc(x.q)}">${t('q.ask')}</button>` : ''}</div>`;
+      const label = `<small>${t('q.nextL')} · ${whenOf(x.d, x.at)}</small>`;
+      if (v === 's') return `<div class="arf">${label}<h4>${esc(x.b)}</h4>${btns}</div>`;
+      if (v === 'wide') return `<div class="arwq"><div class="arf">${label}<h4>${esc(x.b)}</h4></div>${btns}</div>`;
+      const then = n => n > 0 && rest.length ? `<div class="arthen"><small>${t('q.then')}</small><div class="arls">${rest.slice(0, n).map(y => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(y.q)}"><i class="dot dot--${qLv(y.k)}"></i><span>${t('q.k.' + y.k)} · ${esc(y.b)}</span><em>${y.v ? fmtV(y.v) : whenOf(y.d, y.at)}</em></div>`).join('')}</div>${rest.length > n ? arLink(t('q.moreW', { n: rest.length - n }), 'ask-open', ' data-q="Show my whole queue, ranked"') : ''}</div>` : '';
+      const focus = `<div class="arf">${label}<h4>${esc(x.b)}</h4>${x.desc ? `<p>${esc(x.desc)}</p>` : ''}${btns}</div>`;
+      if (v === 'tall') return focus + then(Math.min(3, Math.floor((bodyH(h) - 200) / 41)));
+      return `<div class="arq">${focus}${then(Math.min(3, Math.floor((bodyH(h) - 50) / 41)))}</div>`; } },
 
   deadlines: { group: 'work', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.deadlines.filter(x => x.d <= 30).length,
-    render({ v, w, h }) { const L = [...D.deadlines].sort((a, b) => a.d - b.d), lv = d => d <= 7 ? 'bad' : d <= 21 ? 'warn' : 'n';
-      if (v === 's') return finBig(t('q.nextDl', { x: L[0].n }), t('q.days', { n: L[0].d }), `<span class="muted">${esc(L[0].o)}</span>`);
-      const k = Math.min(L.length, CAP(h, 58, 26)), rest = L.slice(k);
-      return `<ul class="rcl">${L.slice(0, k).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="Are we ready for the ${esc(x.n)}?"><span class="dlt dlt--${lv(x.d)}">${t('q.inDays', { n: x.d })}</span><span class="rc__m"><b>${esc(x.n)}</b><small>${esc(x.o)}${w < 6 ? ' · ' + esc(x.st) : ''}</small></span>${w >= 6 ? tag(x.st, x.st === 'Ready' || x.st === 'Draft ready' ? 'ok' : x.st === 'Not started' && x.d <= 14 ? 'bad' : 'warn') : ''}</button></li>`).join('')}</ul>${rest.length ? `<div class="qx"><span>${t('q.laterQ', { n: rest.length })}</span></div>` : ''}`; } },
+    render({ v, h }) { const L = [...D.deadlines].sort((a, b) => a.d - b.d), x = L[0], nx = L[1], col = d => d <= 7 ? 'var(--bad)' : d <= 21 ? 'var(--warn)' : 'var(--ink3)';
+      if (v === 's') return finBig(esc(x.n), t('q.days', { n: x.d }), '');
+      const head = `${arBig(t('q.days', { n: x.d }))}<p class="arsub">${esc(x.n)} · ${esc(x.o.split(' · ')[0])}</p>`;
+      const strip = `<div class="arstrip" role="img" aria-label="${L.filter(y => y.d <= 30).map(y => `${y.n} ${y.d}d`).join(', ')}"><i class="ax"></i><i class="nw"></i>${L.filter(y => y.d <= 30).map(y => `<b style="inset-inline-start:${(y.d / 30 * 100).toFixed(1)}%;background:${col(y.d)}" title="${esc(y.n)} · ${t('q.days', { n: y.d })}"></b>`).join('')}${[0, 7, 14, 21, 30].map(d => `<em style="inset-inline-start:${(d / 30 * 100).toFixed(1)}%">${d ? t('q.inDays', { n: d }) : t('q.now')}</em>`).join('')}</div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div>${strip}</div>`;
+      return `${head}${strip}${nx ? arLink(t('q.thenDl', { x: nx.n, n: nx.d }), 'ask-open', ` data-q="Are we ready for the ${esc(nx.n)}?"`) : ''}`; } },
 
   taskProgress: { group: 'work', icon: 'check', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => { const win = S.tasks.filter(x => x.d >= -3 && x.d <= 4); return t('q.doneOf', { d: win.filter(x => x.done).length, n: win.length }); },
-    render({ v, w, h }) { /* Option 2 · progress + next: rolling 7-day completion, then only what's next */
+    render({ v, h }) { /* Option 2 · the ring, then the one next task */
       const win = S.tasks.filter(x => x.d >= -3 && x.d <= 4), dn = win.filter(x => x.done).length, pc = win.length ? Math.round(dn / win.length * 100) : 100;
       const over = S.tasks.filter(x => !x.done && x.d < 0).length, today = S.tasks.filter(x => !x.done && x.d === 0).length;
-      const next = S.tasks.filter(x => !x.done).sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99'));
-      const item = x => `<label class="chk"><input type="checkbox" data-act="task" data-id="${x.id}"><span class="chk__b">${ico('check', 12)}</span><span class="chk__t">${esc(x.tx)}</span><small${x.d < 0 ? ' class="is-bad"' : ''}>${whenOf(x.d, x.at)}</small></label>`;
-      const head = (sz) => `<div class="tp"><div class="gg gg--r">${ring(pc, sz, Math.max(7, sz / 10), over ? 'var(--warn)' : 'var(--c1)')}<strong>${pc}%</strong></div><div class="tp__t"><b>${over ? t('q.catchUp') : t('q.onTrack')}</b><small>${t('q.rolling')}</small><small${over ? ' class="is-bad"' : ''}>${[over ? t('q.nOver', { n: over }) : '', today ? t('q.nToday', { n: today }) : ''].filter(Boolean).join(' · ') || t('q.allDone')}</small></div></div>`;
+      const nx = S.tasks.filter(x => !x.done).sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99'))[0];
       if (v === 's') return `<div class="big"><small>${t('q.rolling')}</small><strong>${pc}%</strong><span class="big__f"><i class="bar-s"><b style="width:${pc}%"></b></i><span class="muted">${dn}/${win.length}</span></span></div>`;
-      if (v === 'wide') return `<div class="tp-w">${head(64)}<div class="rcl rcl--c">${next.slice(0, 1).map(item).join('')}</div></div>`;
-      const k = Math.max(1, Math.min(next.length, Math.floor((bodyH(h) - 120) / 40)));
-      return `${head(84)}${next.length ? `<h4 class="grp-h">${t('q.next')}</h4><div class="rcl rcl--c">${next.slice(0, k).map(item).join('')}</div>` : empty()}`; } },
+      const sz = v === 'wide' ? 64 : Math.max(76, Math.min(112, bodyH(h) - 80));
+      const ringH = `<div class="arring"><div class="gg gg--r">${ring(pc, sz, Math.max(7, sz / 10), over ? 'var(--warn)' : 'var(--c1)')}<strong>${pc}%</strong></div><div><b>${over ? t('q.catchUp') : t('q.onTrack')}</b><small>${t('q.rolling')}</small><small${over ? ' class="is-bad"' : ''}>${[over ? t('q.nOver', { n: over }) : '', today ? t('q.nToday', { n: today }) : ''].filter(Boolean).join(' · ') || t('q.allDone')}</small></div></div>`;
+      if (v === 'wide') return ringH;
+      return ringH + (nx ? `<div class="arls">${arTask(nx).replace('<span class="chk__t">', `<span class="chk__t">${t('q.nextL')}: `)}</div>` : ''); } },
 
   /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
   deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
@@ -1025,13 +1074,17 @@ const W = {
 
   deals: { group: 'exec', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.fin.deals.length,
-    ctl: () => `<span class="seg">${['value', 'close'].map(k => `<button class="${S.dealSort === k ? 'is-on' : ''}" data-act="deal-sort" data-s="${k}">${t('q.' + k)}</button>`).join('')}</span>`,
-    render({ v, w, h }) { /* Option 1 · ranked by value: total at risk first, then the biggest deals and why they slip */
-      const L = [...D.fin.deals].sort(S.dealSort === 'close' ? (a, b) => MON[a.close] - MON[b.close] || b.v - a.v : (a, b) => b.v - a.v), tot = +L.reduce((a, x) => a + x.v, 0).toFixed(1), pipe = D.fin.stages.reduce((a, x) => a + x[1], 0);
+    render({ v, h }) { /* Option 1 · direction A: the total first, one bar of deals, then why they slip */
+      const L = [...D.fin.deals].sort((a, b) => b.v - a.v), tot = +L.reduce((a, x) => a + x.v, 0).toFixed(1), pipe = D.fin.stages.reduce((a, x) => a + x[1], 0), sh = x => (DEAL_X[x.n] || [x.n])[0];
       if (v === 's') return finBig(t('fin.atRisk'), `AED ${tot}M`, `<span class="muted">${L.length} ${t('fin.deals')}</span>`);
-      const head = v === 'wide' ? '' : `<div class="rev-h"><strong>${tot}M</strong><span class="muted">${t('q.atRiskOf', { n: L.length, p: Math.round(tot / pipe * 100) })}</span></div>`;
-      const k = Math.min(L.length, CAP(h, 58, head ? 76 : 26)), rest = L.slice(k);
-      return `${head}<ul class="rcl">${L.slice(0, k).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="How do we save the ${esc(x.n)} deal?">${dot(x.lv)}<span class="rc__m"><b>${esc(x.n)}</b><small>${esc(x.d)} · ${esc(x.why)}${w < 6 ? ' · ' + x.close : ''}</small></span>${w >= 6 ? tag(t('fin.closes', { m: x.close }), x.lv) : ''}<em class="fx-v">${x.v}M</em></button></li>`).join('')}</ul>${rest.length ? `<div class="qx"><span>${t('q.underV', { n: rest.length, v: Math.ceil(Math.max(...rest.map(x => x.v))) })}</span><button class="fx-more" data-act="ask-open" data-q="Show all deals at risk">${t('q.all', { n: L.length })}${ico('arrowRight', 13)}</button></div>` : ''}`; } },
+      const head = arBig(`${tot}M`, t('q.atRiskP', { p: Math.round(tot / pipe * 100) }));
+      const bar = `<div class="arbar arbar--t">${L.map((x, i) => `<i data-act="ask-open" data-q="How do we save the ${esc(x.n)} deal?" title="${esc(x.n)} · ${x.v}M · ${esc(x.why)}" style="flex:${x.v};background:var(--${x.lv === 'bad' ? 'bad' : 'warn'});opacity:${(1 - i * .09).toFixed(2)}"></i>`).join('')}</div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div>${bar}</div>`;
+      const top = L.slice(0, 2), rest = L.slice(2);
+      const lg = `<div class="arlg">${top.map(x => `<span><i class="dot dot--${x.lv}"></i>${esc(sh(x))} <b>${x.v}</b></span>`).join('')}${rest.length ? `<span><i class="dot dot--warn"></i>${t('q.nMore', { n: rest.length })} <b>${fM(rest.reduce((a, x) => a + x.v, 0))}</b></span>` : ''}</div>`;
+      const rs = {}; L.forEach(x => { const r = (DEAL_X[x.n] || [, 'Other'])[1]; rs[r] = (rs[r] || 0) + 1; });
+      const rows = `<div class="arls">${top.map(x => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="How do we save the ${esc(x.n)} deal?"><i class="dot dot--${x.lv}"></i><span>${esc(x.n)} · <em style="font-size:12.5px">${esc(x.why.toLowerCase())}</em></span><em>${x.close}</em><b class="v">${x.v}M</b></div>`).join('')}</div>`;
+      return `${head}${bar}${h >= 4 ? rows : lg}${h >= 4 ? `<div class="archips">${Object.entries(rs).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([r, n]) => `<button data-act="ask-open" data-q="Which deals are at risk because of: ${esc(r.toLowerCase())}?">${esc(r)} <b>${n}</b></button>`).join('')}</div>` : ''}`; } },
 
   people: { group: 'people', icon: 'users', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     render({ v, w, h, view }) { const p = D.people, tot = D.depts.reduce((a, x) => a + x[1], 0), cs = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--warn)'];
@@ -1477,6 +1530,7 @@ document.addEventListener('click', e => {
   else if (a === 'mail-snooze') { const i = S.mails.findIndex(x => x.id === id), m = S.mails.splice(i, 1)[0]; S.mails.push(m); afterState(['inbox']); toast(t('snooze') + ' · 1 h'); }
   else if (a === 'decision') { const d = S.decisions.find(x => x.id === id); d.st = b.dataset.do; afterState(['decisions']); toast(t(d.st) + ': ' + d.title); if (CHAT_OPEN) syncChat(); }
   else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; afterState(['tasks', 'taskProgress']); }
+  else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (x) { x.done = true; afterState(['tasks', 'taskProgress']); toast(t('done') + ': ' + x.tx); } }
   else if (a === 'dec-sort') { S.decSort = b.dataset.s; Grid.refreshType('decisions'); }
   else if (a === 'deal-sort') { S.dealSort = b.dataset.s; Grid.refreshType('deals'); }
   else if (a === 'dec-batch') { S.batch.done = true; afterState(['decisions']); toast(t('q.batchDone', { n: S.batch.n, v: S.batch.v }), t('undo'), () => { S.batch.done = false; afterState(['decisions']); }); }
