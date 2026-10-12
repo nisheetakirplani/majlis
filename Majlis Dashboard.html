@@ -121,6 +121,40 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .prog{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}.prog b{display:block;height:100%;background:var(--hi);animation:prog 6s linear both}@keyframes prog{from{width:0}to{width:100%}}
 .pin{display:none;position:absolute;top:0;left:50%;transform:translateX(-50%);align-items:center;gap:5px;padding:5px 12px 5px;border-radius:0 0 10px 10px;background:var(--dark);color:var(--dark-ink);font:600 11px/1 var(--font);z-index:3}body.is-edit .hero .pin{display:inline-flex}body.is-edit .hero>.card{outline:1.5px dashed var(--line2);outline-offset:-1px}
 
+/* ---------- executive finance widgets ---------- */
+.fx-key{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--ink3);flex:none;flex-wrap:wrap}.fx-key span{display:inline-flex;align-items:center;gap:6px}.fx-key i{width:10px;height:10px;border-radius:3px;background:var(--c1)}.fx-key .k-c{opacity:.35}.fx-key .k-p{width:2px;height:12px;border-radius:1px;background:var(--ink)}.fx-key .k-h{background:repeating-linear-gradient(135deg,var(--c1) 0 1.5px,transparent 1.5px 4.5px);box-shadow:inset 0 0 0 1px var(--c1)}.fx-key .k-2{background:var(--c2)}.fx-key .k-5{background:var(--c5)}.fx-key small{margin-inline-start:auto}
+.fx-more{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;padding:4px 8px;border-radius:99px;font:600 12.5px/1 var(--font);color:var(--accent);flex:none}.fx-more:hover{background:var(--tile)}
+.bul{display:flex;flex-direction:column;gap:2px;flex:none}.bul__b{display:grid;grid-template-columns:minmax(60px,112px) minmax(0,1fr) 38px;align-items:center;gap:12px;width:100%;min-height:32px;padding:4px 8px;border-radius:10px;text-align:start;font-size:13px;transition:background .15s}.bul__b:hover{background:var(--tile)}
+.w--v-tall .bul__b{grid-template-columns:minmax(52px,84px) minmax(0,1fr) 32px;gap:9px}
+.bul__n{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bul__t{position:relative;height:12px}.bul__tg{position:absolute;inset-block:0;inset-inline-start:0;width:var(--w);border-radius:99px;background:var(--tile2)}
+.bul__a,.bul__c{position:absolute;inset-block:0;background:var(--bc)}.bul__a{inset-inline-start:0;border-radius:99px}.bul__c{opacity:.35;border-radius:0 99px 99px 0}[dir=rtl] .bul__c{border-radius:99px 0 0 99px}
+.bul__p{position:absolute;top:-4px;bottom:-4px;width:2px;margin-inline-start:-1px;border-radius:1px;background:var(--ink)}
+.bul__v{font:600 13px/1 var(--font);color:var(--bc);text-align:end;font-style:normal;font-variant-numeric:tabular-nums}
+.bul--ok{--bc:var(--c1)}.bul--warn{--bc:var(--warn)}.bul--bad{--bc:var(--bad)}
+.lnd{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0}.lnd--w{flex-direction:row;align-items:center;gap:22px}.lnd--w .lr{flex:1}
+.lnd__h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.lnd__h strong{font:600 34px/36px var(--font);letter-spacing:-.025em;font-variant-numeric:tabular-nums}.lnd__h .tag{align-self:center}
+.lr{display:flex;flex-direction:column;gap:7px;padding-top:18px}.lr__t{position:relative;height:12px;border-radius:99px;background:var(--tile)}.lr__r{position:absolute;inset-block:0;border-radius:99px;background:var(--c1);opacity:.3}
+.lr__d{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);box-shadow:0 0 0 3px var(--card-s,#fff)}[dir=rtl] .lr__d{margin:-8px -8px 0 0}
+.lr__tg{position:absolute;top:-6px;bottom:-6px;width:2px;margin-inline-start:-1px;background:var(--ink)}.lr__tg em{position:absolute;bottom:100%;inset-inline-start:50%;transform:translateX(-50%);padding-bottom:3px;font:600 11px/1 var(--font);font-style:normal;white-space:nowrap}[dir=rtl] .lr__tg em{transform:translateX(50%)}
+.lr__l{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3)}.lr__l b{color:var(--ink2);font-weight:600}
+.lb{display:flex;flex-direction:column;gap:9px;margin-top:auto}.lb li{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr) 40px;align-items:center;gap:10px;font-size:12.5px;color:var(--ink2)}.lb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb__t{position:relative;height:10px}.lb__t b{position:absolute;inset-block:0;border-radius:3px}.lb em{font-style:normal;font-weight:600;color:var(--ink);text-align:end;font-variant-numeric:tabular-nums}
+.lb .b-a{background:var(--c1)}.lb .b-c{background:var(--c1);opacity:.4}.lb .b-p{background:repeating-linear-gradient(135deg,var(--c1) 0 1.5px,transparent 1.5px 4.5px);box-shadow:inset 0 0 0 1px var(--c1)}.lb .b-t{background:var(--dark)}.lb li.is-t{padding-top:8px;border-top:1px solid var(--line);color:var(--ink);font-weight:600}
+.stg{display:flex;flex-direction:column;gap:4px}.stg button{display:grid;grid-template-columns:minmax(0,84px) minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;min-height:34px;padding:4px 8px;border-radius:10px;text-align:start;font-size:13px;color:var(--ink2);transition:background .15s}.stg button:hover{background:var(--tile)}
+.stg__t{position:relative;height:14px}.stg__t b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:4px}.stg__u{background:var(--tile2)}.stg__w{background:var(--c1)}
+.stg em{font:600 13px/1 var(--font);font-style:normal;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.stg em small{font-weight:500;color:var(--ink3)}
+.bk{display:flex;gap:10px;flex:1;min-height:80px}.bk__c{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;border-radius:10px;padding:0 2px}.bk__c:hover .bk__s{filter:brightness(1.08)}
+.bk__p{position:relative;flex:1}.bk__s{position:absolute;inset-inline:0;bottom:0;display:flex;flex-direction:column-reverse;gap:2px;transition:filter .15s}.bk__s i{display:block;min-height:3px;border-radius:5px}
+.bk__v{position:absolute;bottom:100%;inset-inline:0;padding-bottom:4px;text-align:center;font:600 12.5px/1 var(--font);font-variant-numeric:tabular-nums}.bk__c em{font:500 12px/1 var(--font);font-style:normal;color:var(--ink3);text-align:center}
+.dv{display:flex;flex-direction:column;gap:2px}.dv button{display:grid;grid-template-columns:minmax(0,104px) minmax(0,1fr) 44px;align-items:center;gap:10px;width:100%;min-height:30px;padding:3px 8px;border-radius:10px;text-align:start;font-size:13px;color:var(--ink2);transition:background .15s}.dv button:hover{background:var(--tile)}
+.dv span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dv__t{position:relative;height:12px}.dv__t::after{content:'';position:absolute;top:-4px;bottom:-4px;inset-inline-start:50%;width:1px;background:var(--line2)}.dv__t b{position:absolute;inset-block:0;border-radius:3px}
+.dv em{font:600 13px/1 var(--font);font-style:normal;text-align:end;font-variant-numeric:tabular-nums}.dv--bad{background:var(--bad)}.dv--warn{background:var(--warn)}.dv--ok{background:var(--c1)}.dv em.dv--bad,.dv em.dv--warn,.dv em.dv--ok{background:none}.dv em.dv--bad{color:var(--bad)}.dv em.dv--warn{color:var(--warn)}.dv em.dv--ok{color:var(--accent)}
+.dp{display:flex;flex-direction:column;gap:2px}.dp button{display:grid;grid-template-columns:minmax(0,104px) minmax(0,1fr) 40px;align-items:center;gap:10px;width:100%;min-height:30px;padding:3px 8px;border-radius:10px;text-align:start;font-size:13px;color:var(--ink2);transition:background .15s}.dp button:hover{background:var(--tile)}
+.dp span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dp__t{position:relative;height:12px}.dp__t::before{content:'';position:absolute;inset-inline:0;top:50%;height:2px;margin-top:-1px;border-radius:1px;background:var(--tile2)}.dp__t::after{content:'';position:absolute;top:-5px;bottom:-5px;inset-inline-start:var(--avg);border-inline-start:1.5px dashed var(--ink3)}
+.dp__d{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--c1)}[dir=rtl] .dp__d{margin:-6px -6px 0 0}.dp__d.is-lo{background:var(--warn)}.dp em{font:600 13px/1 var(--font);font-style:normal;color:var(--ink);text-align:end;font-variant-numeric:tabular-nums}
+.fx-foot{font-size:12px;color:var(--ink3);flex:none;margin-top:auto}.fx-foot b{color:var(--ink2);font-weight:600}
+.rc__b .fx-v{font:600 13px/1 var(--font);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -591,7 +625,62 @@ const miniDonut = (segs, center, n = 3) => `<div class="vzrow vzrow--c">${donut(
 const vz = (inner, cls = '') => `<div class="vz ${cls}">${inner}</div>`;
 const gaugeCell = (g, size) => `<div class="gg"><span class="gg__r">${ring(g.p, size, Math.max(6, size / 9), g.c)}<strong>${g.v}</strong></span><small>${g.l}</small></div>`;
 
-/* ----------------------------------------------------------- the 14 widgets */
+/* ----------------------------------------------------------- Executive finance · demo data (AED M, FY to date, 78% of the year gone)
+   Every department target splits into achieved + committed (signed, not started) + gap; weighted pipeline can close the gap. */
+D.fin = { E: .78, wkGone: 40.7, wkLeft: 11.3,
+  /* name, target, achieved, committed, weighted pipeline, headcount */
+  depts: [['Enterprise', 120, 88, 18, 22, 110], ['Government', 95, 52, 21, 14, 80], ['Consulting', 60, 49, 6, 8, 95], ['Cloud', 55, 47, 7, 6, 38], ['Managed services', 45, 30, 9, 5, 45],
+    ['SMB', 35, 21, 4, 6, 30], ['Licensing', 30, 25, 3, 2, 16], ['Digital', 25, 14, 5, 3, 20], ['Training', 15, 9, 1, 2, 22]],
+  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+  cumA: [30, 62, 95, 126, 160, 192, 228, 262, 300, 335], cumP: [40, 80, 120, 160, 200, 240, 280, 320, 360, 374],
+  stages: [['qualify', 140, .1], ['propose', 92, .25], ['negotiate', 48, .4], ['verbal', 14, .85]],
+  /* committed revenue by start month: Enterprise, Government, other */
+  backlog: [['Nov', [8, 9, 5]], ['Dec', [6, 7, 5]], ['Jan', [3, 4, 9]], ['Feb', [1, 1, 8]], ['Mar+', [0, 0, 8]]],
+  budget: { plan: 218, lines: [['Payroll', 4.2], ['Cloud hosting', 2.1], ['Marketing', -1.4], ['Consultants', 1.1], ['Travel', -0.8], ['Facilities', 0.3], ['Training', -0.3]] },
+  cash: { bal: [60, 64, 58, 66, 71, 69, 74, 72, 76, 78], runway: 14.2, burn: 5.5, dec: 79 },
+  deals: [{ n: 'MoI digital ID', d: 'Government', v: 9.4, why: 'Close date slipped twice', lv: 'bad', close: 'Nov' }, { n: 'Gulf Ports ERP', d: 'Enterprise', v: 6.1, why: 'No contact for 24 days', lv: 'bad', close: 'Dec' },
+    { n: 'Emaar CX platform', d: 'Digital', v: 4.8, why: 'Champion left the company', lv: 'warn', close: 'Dec' }, { n: 'Etihad renewal', d: 'Managed services', v: 3.9, why: 'Pushing back on price', lv: 'warn', close: 'Nov' },
+    { n: 'ADNOC analytics', d: 'Consulting', v: 3.2, why: 'Legal review stalled', lv: 'warn', close: 'Jan' }, { n: 'Dubai Health cloud', d: 'Cloud', v: 3.0, why: 'Competitor in the final round', lv: 'warn', close: 'Dec' }],
+  alerts: [{ lv: 'warn', b: 'Payroll AED 4.2M over budget', s: 'FY27 hiring started early in Enterprise', v: '+4.2' }, { lv: 'warn', b: 'Enterprise deal slipped to Q1', s: 'Gulf Ports ERP · AED 6.1M', v: '6.1' }, { lv: 'warn', b: 'DSO up 4 days', s: 'Receivables now take 52 days to collect', v: '52d' }],
+};
+const FIN = (() => { const E = D.fin.E;
+  const ds = D.fin.depts.map(([n, tg, a, c, p, hc]) => { const gap = tg - a - c, pace = a / (tg * E), cov = gap > 0 ? p / gap : 9;
+    return { n, t: tg, a, c, p, hc, gap, pace, cov, rpe: a / E / hc, st: pace >= .95 ? 'ok' : (pace >= .85 || cov >= 1) ? 'warn' : 'bad' }; });
+  const T = ds.reduce((s, d) => ({ t: s.t + d.t, a: s.a + d.a, c: s.c + d.c, p: s.p + d.p, hc: s.hc + d.hc }), { t: 0, a: 0, c: 0, p: 0, hc: 0 });
+  T.gap = T.t - T.a - T.c; T.land = T.a + T.c + T.p; T.pace = T.a / (T.t * E); T.cov = T.p / T.gap; T.floor = T.a + T.c; T.best = Math.round(T.floor + T.p * 1.6); T.rpe = T.a / E / T.hc;
+  return { E, ds, T, byGap: [...ds].sort((x, y) => y.gap - x.gap) }; })();
+const fPct = v => Math.round(v * 100) + '%', fM = v => Math.abs(v) >= 10 ? String(Math.round(v)) : String(+v.toFixed(1));
+const finSel = () => FIN.ds.find(d => d.n === S.finDept) || null;
+const finChip = () => `<button class="chipb" data-act="fin-dept" title="${t('fin.switch')}">${esc(S.finDept || t('fin.allDepts'))}${ico('chevDown', 13)}</button>`;
+const finBig = (l, v, f = '') => `<div class="big"><small>${l}</small><strong>${v}</strong>${f}</div>`;
+const finTiles = ks => `<div class="sts sts--${ks.length}">${ks.map(k => `<div class="st st--static"><span class="st__v"${k.c ? ` style="color:${k.c}"` : ''}>${k.v}</span><span class="st__l">${k.l}</span></div>`).join('')}</div>`;
+function finAlerts() { return [...FIN.ds.filter(d => d.st === 'bad').sort((a, b) => a.pace - b.pace).map(d => ({ lv: d.pace < .8 ? 'bad' : 'warn', b: t('fin.aPace', { n: d.n, p: fPct(d.pace) }), s: t('fin.aPaceD', { g: d.gap, c: d.cov.toFixed(1) }), v: '−' + d.gap, q: `Why is ${d.n} behind pace?` })),
+  ...D.fin.alerts.map(a => ({ ...a, q: a.b + '?' }))].sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)); }
+function bulRow(d) { const aed = S.finScale === 'aed', mx = aed ? Math.max(...FIN.ds.map(x => x.t)) : d.t, base = d.t / mx, f = x => (x / mx * 100).toFixed(1);
+  return `<li><button class="bul__b bul--${d.st}" data-act="ask-open" data-q="Why is ${esc(d.n)} ${d.gap} short of target?" title="${esc(d.n)} · ${t('fin.ach')} ${d.a} · ${t('fin.com')} ${d.c} · ${t('fin.gap')} ${d.gap} · ${t('fin.pace')} ${fPct(d.pace)}"><span class="bul__n">${esc(d.n)}</span><span class="bul__t" style="--w:${(base * 100).toFixed(1)}%"><i class="bul__tg"></i><b class="bul__a" style="width:${f(d.a)}%"></b><b class="bul__c" style="inset-inline-start:${f(d.a)}%;width:${f(d.c)}%"></b><i class="bul__p" style="inset-inline-start:${(FIN.E * base * 100).toFixed(1)}%"></i></span><em class="bul__v">${d.gap > 0 ? '−' + d.gap : '✓'}</em></button></li>`; }
+_m(TX.en, { tabs: { exec: 'Executive finance' },
+  w: { deptScore: 'Department scorecard', landing: 'Year-end outlook · Option 1', runrate: 'Year-end outlook · Option 2', pipeline: 'Pipeline by stage', backlog: 'Backlog start timeline', budget: 'Budget vs actual', cash: 'Cash & runway', rpe: 'Revenue per employee', alerts: 'Variance alerts', deals: 'Deals at risk' },
+  wd: { deptScore: 'Each department against its target, biggest gap first', landing: 'Likely landing with a floor-to-best range', runrate: 'Cumulative revenue against plan, and the run-rate needed', pipeline: 'Weighted against total pipeline, by stage', backlog: 'When signed work starts turning into revenue', budget: 'Cost lines over or under budget', cash: 'Cash balance, runway and burn', rpe: 'Productivity by department against the company', alerts: 'Only what crossed a threshold', deals: 'Big deals that slipped or went quiet' },
+  fin: { pct: '% target', aed: 'AED', nBehind: '{n} behind', behindPace: 'Behind pace', behind: 'Behind', watch: 'Watch', onPace: 'On pace', more: 'more', ach: 'Achieved', com: 'Committed', gap: 'Gap', pace: 'Pace', paceL: 'Pace line',
+    target: 'Target', likely: 'Year-end landing', ofTarget: 'of target', floor: 'Floor', best: 'Best', pipeW: 'Weighted pipeline', landing: 'Landing', company: 'Company', allDepts: 'All departments', switch: 'Switch department',
+    needWk: 'Needed / week', nowWk: 'Current / week', actual: 'Actual', plan: 'Plan', total: 'total', weightedOf: 'weighted of {u} total', cov: 'coverage',
+    st: { qualify: 'Qualify', propose: 'Propose', negotiate: 'Negotiate', verbal: 'Verbal' }, signed: 'signed, not started', next90: 'Next 90 days: {n}', other: 'Other',
+    opex: 'Opex vs budget', overBudget: 'over budget, year to date', budgetL: 'Budget', actualL: 'Actual', variance: 'Variance', under: 'Under', over: 'Over',
+    cashL: 'Cash', runway: 'Runway', burn: 'Net burn / mo', mo: 'mo', decF: 'Dec forecast {n}', rpeL: 'Revenue per employee', perHead: 'per head, annualised', top: 'Top', low: 'Lowest',
+    red: 'red', alertsL: 'Variance alerts', aPace: '{n} at {p} of pace', aPaceD: 'Gap {g} · coverage {c}×', atRisk: 'At risk', deals: 'deals', closes: 'closes {m}' } });
+_m(TX.ar, { tabs: { exec: 'المالية التنفيذية' },
+  w: { deptScore: 'أداء الأقسام', landing: 'توقعات نهاية العام · الخيار 1', runrate: 'توقعات نهاية العام · الخيار 2', pipeline: 'الصفقات حسب المرحلة', backlog: 'جدول بدء الأعمال الموقّعة', budget: 'الميزانية مقابل الفعلي', cash: 'النقد ومدة التشغيل', rpe: 'الإيراد لكل موظف', alerts: 'تنبيهات الانحراف', deals: 'صفقات معرّضة للخطر' },
+  wd: { deptScore: 'كل قسم مقابل هدفه، الأكبر فجوة أولًا', landing: 'التوقع المرجّح مع نطاق من الأدنى إلى الأفضل', runrate: 'الإيراد التراكمي مقابل الخطة والوتيرة المطلوبة', pipeline: 'المرجّح مقابل الإجمالي لكل مرحلة', backlog: 'متى تبدأ الأعمال الموقّعة بتحقيق الإيراد', budget: 'بنود التكلفة فوق الميزانية أو دونها', cash: 'رصيد النقد ومدة التشغيل والحرق', rpe: 'إنتاجية الأقسام مقابل الشركة', alerts: 'فقط ما تجاوز الحد', deals: 'صفقات كبيرة تأخرت أو توقفت' },
+  fin: { pct: '% من الهدف', aed: 'درهم', nBehind: '{n} متأخرة', behindPace: 'متأخرة عن الوتيرة', behind: 'متأخر', watch: 'للمراقبة', onPace: 'على الوتيرة', more: 'أخرى', ach: 'المحقق', com: 'الملتزم', gap: 'الفجوة', pace: 'الوتيرة', paceL: 'خط الوتيرة',
+    target: 'الهدف', likely: 'توقع نهاية العام', ofTarget: 'من الهدف', floor: 'الأدنى', best: 'الأفضل', pipeW: 'الصفقات المرجّحة', landing: 'التوقع', company: 'الشركة', allDepts: 'كل الأقسام', switch: 'تبديل القسم',
+    needWk: 'المطلوب / أسبوع', nowWk: 'الحالي / أسبوع', actual: 'الفعلي', plan: 'الخطة', total: 'إجمالي', weightedOf: 'مرجّح من {u} إجمالي', cov: 'تغطية',
+    st: { qualify: 'تأهيل', propose: 'عرض', negotiate: 'تفاوض', verbal: 'موافقة شفهية' }, signed: 'موقّع ولم يبدأ', next90: 'خلال 90 يومًا: {n}', other: 'أخرى',
+    opex: 'المصروفات مقابل الميزانية', overBudget: 'فوق الميزانية منذ بداية العام', budgetL: 'الميزانية', actualL: 'الفعلي', variance: 'الانحراف', under: 'دون', over: 'فوق',
+    cashL: 'النقد', runway: 'مدة التشغيل', burn: 'صافي الحرق / شهر', mo: 'شهر', decF: 'توقع ديسمبر {n}', rpeL: 'الإيراد لكل موظف', perHead: 'لكل موظف سنويًا', top: 'الأعلى', low: 'الأدنى',
+    red: 'حرجة', alertsL: 'تنبيهات الانحراف', aPace: '{n} عند {p} من الوتيرة', aPaceD: 'الفجوة {g} · التغطية {c}×', atRisk: 'معرّض للخطر', deals: 'صفقات', closes: 'الإغلاق {m}' } });
+_m(TX.en, { sec: { rHealthF: 'Pace {p} · landing {l} of {t}' } }); _m(TX.ar, { sec: { rHealthF: 'الوتيرة {p} · التوقع {l} من {t}' } });
+
+/* ----------------------------------------------------------- the widgets */
 const W = {
   /* AI row (pinned to the top row of Overview; rendered by HERO, not by the grid) */
   ask: { group: 'ai', icon: 'sparkles', pinned: true, sizes: { M: [8, 3] }, def: 'M', min: [8, 3], max: [8, 3], render: () => '' },
@@ -725,6 +814,93 @@ const W = {
       return list(CAP(h, 58)); } },
 
   /* People */
+  /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
+  deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
+    count: () => t('fin.nBehind', { n: FIN.ds.filter(d => d.st === 'bad').length }),
+    ctl: () => `<span class="seg">${['pct', 'aed'].map(k => `<button class="${(S.finScale || 'pct') === k ? 'is-on' : ''}" data-act="fin-scale" data-s="${k}">${t('fin.' + k)}</button>`).join('')}</span>`,
+    render({ v, h }) { const ds = FIN.byGap, n = st => ds.filter(d => d.st === st).length;
+      if (v === 's') return finBig(t('fin.behindPace'), `${n('bad')} ${t('of')} ${ds.length}`, `<span class="big__f">${ds.map(d => dot(d.st)).join('')}</span>`);
+      if (v === 'wide') return finTiles([{ v: n('bad'), l: t('fin.behind'), c: 'var(--bad)' }, { v: n('warn'), l: t('fin.watch'), c: 'var(--warn)' }, { v: n('ok'), l: t('fin.onPace'), c: 'var(--accent)' }]);
+      const key = h >= 4 ? `<div class="fx-key"><span><i></i>${t('fin.ach')}</span><span><i class="k-c"></i>${t('fin.com')}</span><span><i class="k-p"></i>${t('fin.paceL')}</span><small>${t('fin.gap')}</small></div>` : '';
+      const k = Math.min(ds.length, CAP(h, 34, h >= 4 ? 40 : 34)), rest = ds.slice(k);
+      return `${key}<ul class="bul">${ds.slice(0, k).map(bulRow).join('')}</ul>${rest.length ? `<button class="fx-more" data-act="ask-open" data-q="Show every department against target">+${rest.length} ${t('fin.more')} · ${rest.filter(d => d.st === 'ok').length} ${t('fin.onPace').toLowerCase()}${ico('arrowRight', 13)}</button>` : ''}`; } },
+
+  landing: { group: 'exec', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 6],
+    render({ v, h }) { const T = FIN.T, df = T.land - T.t;
+      if (v === 's') return finBig(t('fin.likely'), T.land, `<span class="muted">${fPct(T.land / T.t)} ${t('fin.ofTarget')}</span>`);
+      const lo = Math.floor((T.floor - 20) / 10) * 10, hi = Math.ceil((T.best + 10) / 10) * 10, X = x => ((x - lo) / (hi - lo) * 100).toFixed(1);
+      const head = `<div class="lnd__h"><strong>${T.land}</strong><span class="muted">/ ${T.t} ${t('fin.target').toLowerCase()}</span>${tag((df >= 0 ? '+' : '−') + Math.abs(df), df >= 0 ? 'ok' : 'warn')}</div>`;
+      const rng = `<div class="lr" title="${t('fin.floor')} ${T.floor} · ${t('fin.landing')} ${T.land} · ${t('fin.best')} ${T.best}"><div class="lr__t"><b class="lr__r" style="inset-inline-start:${X(T.floor)}%;width:${(X(T.best) - X(T.floor)).toFixed(1)}%"></b><i class="lr__tg" style="inset-inline-start:${X(T.t)}%"><em>${t('fin.target')}</em></i><i class="lr__d" style="inset-inline-start:${X(T.land)}%"></i></div><div class="lr__l"><span>${t('fin.floor')} <b>${T.floor}</b></span><span>${t('fin.best')} <b>${T.best}</b></span></div></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="lnd lnd--w">${head}${rng}</div>`;
+      const mx = Math.max(T.t, T.land), P = x => (x / mx * 100).toFixed(1); let acc = 0;
+      const rows = [['fin.ach', T.a, 'b-a'], ['fin.com', T.c, 'b-c'], ['fin.pipeW', T.p, 'b-p']].map(([k, x, c]) => { const r = `<li><span>${t(k)}</span><i class="lb__t"><b class="${c}" style="inset-inline-start:${P(acc)}%;width:${P(x)}%"></b></i><em>${acc ? '+' : ''}${x}</em></li>`; acc += x; return r; }).join('');
+      return `<div class="lnd">${head}${rng}${h >= 4 ? `<ul class="lb">${rows}<li class="is-t"><span>${t('fin.landing')}</span><i class="lb__t"><b class="b-t" style="inset-inline-start:0;width:${P(T.land)}%"></b></i><em>${T.land}</em></li></ul>` : ''}</div>`; } },
+
+  runrate: { group: 'exec', icon: 'trend', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
+    ctl: () => finChip(),
+    render({ v, h }) { const d = finSel(), sa = d ? d.a / FIN.T.a : 1, sp = d ? d.t / FIN.T.t : 1, A = D.fin.cumA.map(x => +(x * sa).toFixed(1)), P = D.fin.cumP.map(x => +(x * sp).toFixed(1));
+      const tg = d ? d.t : FIN.T.t, ach = A.at(-1), pace = ach / (tg * FIN.E), need = (tg - ach) / D.fin.wkLeft, now = ach / D.fin.wkGone;
+      if (v === 's') return finBig(`${t('fin.pace')} · ${esc(d ? d.n : t('fin.company'))}`, fPct(pace), spark(A, 140, 32));
+      const tiles = finTiles([{ v: fPct(pace), l: t('fin.pace'), c: pace < .95 ? 'var(--warn)' : '' }, { v: need.toFixed(1), l: t('fin.needWk'), c: need > now ? 'var(--bad)' : '' }, { v: now.toFixed(1), l: t('fin.nowWk') }]);
+      if (v === 'wide' || bodyH(h) < 230) return tiles;
+      const lg = `<div class="fx-key"><span><i></i>${t('fin.actual')}</span><span><i class="k-5"></i>${t('fin.plan')}</span><small>AED M</small></div>`;
+      return `${v === 'tall' ? '' : tiles}${lg}${areaChart([{ n: t('fin.actual'), v: A, c: 'var(--c1)' }, { n: t('fin.plan'), v: P, c: 'var(--c5)' }], D.fin.months)}${v === 'tall' ? `<p class="fx-foot">${t('fin.needWk')} <b>${need.toFixed(1)}</b> · ${t('fin.nowWk')} <b>${now.toFixed(1)}</b></p>` : ''}`; } },
+
+  pipeline: { group: 'exec', icon: 'chart', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
+    ctl: () => finChip(),
+    render({ v, h }) { const d = finSel(), sc = d ? d.p / FIN.T.p : 1, st = D.fin.stages.map(([k, u, pr]) => ({ k, u: u * sc, wv: u * pr * sc })), Wt = st.reduce((a, x) => a + x.wv, 0), U = st.reduce((a, x) => a + x.u, 0), gap = d ? d.gap : FIN.T.gap, cov = gap > 0 ? Wt / gap : 9;
+      if (v === 's') return finBig(t('fin.pipeW'), fM(Wt), `<span class="muted">${t('fin.weightedOf', { u: fM(U) })}</span>`);
+      const head = `<div class="rev-h"><strong>${fM(Wt)}</strong><span class="muted">${t('fin.weightedOf', { u: fM(U) })}</span>${tag(cov >= 5 ? '5×+ ' + t('fin.cov') : cov.toFixed(2) + '× ' + t('fin.cov'), cov >= 1.2 ? 'ok' : cov >= 1 ? 'warn' : 'bad')}</div>`;
+      if (v === 'wide') return head;
+      const mx = Math.max(...st.map(x => x.u));
+      return `${head}<ul class="stg">${st.map(x => `<li><button data-act="ask-open" data-q="Which ${t('fin.st.' + x.k).toLowerCase()} deals matter most${d ? ' in ' + esc(d.n) : ''}?"><span>${t('fin.st.' + x.k)}</span><i class="stg__t"><b class="stg__u" style="width:${(x.u / mx * 100).toFixed(1)}%"></b><b class="stg__w" style="width:${(x.wv / mx * 100).toFixed(1)}%"></b></i><em>${fM(x.wv)}<small> / ${fM(x.u)}</small></em></button></li>`).join('')}</ul>${h >= 4 ? `<div class="fx-key" style="margin-top:auto"><span><i></i>${t('fin.pipeW')}</span><span><i style="background:var(--tile2)"></i>${t('fin.total')}</span><small>AED M</small></div>` : ''}`; } },
+
+  backlog: { group: 'exec', icon: 'calendar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
+    render({ v, h }) { const B = D.fin.backlog, tot = B.reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0), n90 = B.slice(0, 3).reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0), C = ['var(--c1)', 'var(--c2)', 'var(--c5)'];
+      if (v === 's') return finBig(t('fin.com'), tot, `<span class="muted">${t('fin.next90', { n: n90 })}</span>`);
+      const head = `<div class="rev-h"><strong>${tot}</strong><span class="muted">${t('fin.signed')}</span>${tag(t('fin.next90', { n: n90 }), 'ok')}</div>`;
+      if (v === 'wide') return head;
+      const mx = Math.max(...B.map(([, x]) => x[0] + x[1] + x[2]));
+      const cols = `<div class="bk">${B.map(([m, x]) => { const s = x[0] + x[1] + x[2]; return `<button class="bk__c" data-act="ask-open" data-q="What signed work starts in ${m}?" title="${m} · Enterprise ${x[0]} · Government ${x[1]} · ${t('fin.other')} ${x[2]}"><span class="bk__p"><span class="bk__s" style="height:${(s / mx * 82).toFixed(1)}%"><b class="bk__v">${s}</b>${x.map((y, i) => y ? `<i style="flex:${y};background:${C[i]}"></i>` : '').join('')}</span></span><em>${m}</em></button>`; }).join('')}</div>`;
+      return `${head}${cols}${h >= 4 ? `<div class="fx-key"><span><i></i>Enterprise</span><span><i class="k-2"></i>Government</span><span><i class="k-5"></i>${t('fin.other')}</span><small>AED M</small></div>` : ''}`; } },
+
+  budget: { group: 'exec', icon: 'dollar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 7],
+    count: () => { const v = D.fin.budget.lines.reduce((a, [, x]) => a + x, 0); return (v > 0 ? '+' : '−') + fM(Math.abs(v)) + 'M'; },
+    render({ v, h }) { const L = [...D.fin.budget.lines].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])), vr = +L.reduce((a, [, x]) => a + x, 0).toFixed(1), plan = D.fin.budget.plan, mx = Math.max(...L.map(x => Math.abs(x[1])));
+      if (v === 's') return finBig(t('fin.opex'), (vr > 0 ? '+' : '−') + Math.abs(vr) + 'M', `<span class="muted">${esc(L[0][0])} ${L[0][1] > 0 ? '+' : ''}${L[0][1]}</span>`);
+      if (v === 'wide') return finTiles([{ v: plan, l: t('fin.budgetL') }, { v: +(plan + vr).toFixed(1), l: t('fin.actualL') }, { v: (vr > 0 ? '+' : '−') + Math.abs(vr), l: t('fin.variance'), c: vr > 0 ? 'var(--bad)' : 'var(--accent)' }]);
+      const k = Math.min(L.length, CAP(h, 32, 62));
+      return `<div class="rev-h"><strong>${vr > 0 ? '+' : '−'}${Math.abs(vr)}M</strong><span class="muted">${t('fin.overBudget')}</span></div><ul class="dv">${L.slice(0, k).map(([n, x]) => { const c = x > 1 ? 'bad' : x > 0 ? 'warn' : 'ok';
+        return `<li><button data-act="ask-open" data-q="Why is ${esc(n)} ${x > 0 ? 'over' : 'under'} budget?"><span>${esc(n)}</span><i class="dv__t"><b class="dv--${c}" style="${x > 0 ? 'inset-inline-start' : 'inset-inline-end'}:50%;width:${(Math.abs(x) / mx * 50).toFixed(1)}%"></b></i><em class="dv--${c}">${x > 0 ? '+' : '−'}${Math.abs(x)}</em></button></li>`; }).join('')}</ul>${h >= 4 ? `<div class="fx-key" style="margin-top:auto"><span><i style="background:var(--accent)"></i>${t('fin.under')}</span><span><i style="background:var(--bad)"></i>${t('fin.over')}</span><small>AED M</small></div>` : ''}`; } },
+
+  cash: { group: 'exec', icon: 'shield', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
+    render({ v, w, h }) { const c = D.fin.cash, k = [{ v: c.bal.at(-1) + 'M', l: t('fin.cashL') }, { v: c.runway + ' ' + t('fin.mo'), l: t('fin.runway') }, { v: c.burn + 'M', l: t('fin.burn') }];
+      if (v === 's') return finBig(t('fin.runway'), c.runway + ' ' + t('fin.mo'), spark(c.bal, 140, 32));
+      if (v === 'wide') return finTiles(w >= 6 ? k : k.slice(0, 2));
+      const tiles = finTiles(w >= 6 ? k : k.slice(0, 2));
+      if (bodyH(h) < 230) return tiles;
+      return `${tiles}<div class="fx-key"><span><i></i>${t('fin.cashL')}</span><small>${t('fin.decF', { n: c.dec })} · AED M</small></div>${areaChart([{ n: t('fin.cashL'), v: c.bal, c: 'var(--c1)' }], D.fin.months)}`; } },
+
+  rpe: { group: 'exec', icon: 'users', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+    render({ v, h }) { const ds = [...FIN.ds].sort((a, b) => a.rpe - b.rpe), co = FIN.T.rpe, mx = ds.at(-1).rpe * 1.1, /* lowest first: sort by the problem */ X = x => (x / mx * 100).toFixed(1);
+      if (v === 's') return finBig(t('fin.rpeL'), co.toFixed(2) + 'M', `<span class="muted">${t('fin.low')}: ${esc(ds[0].n)} ${ds[0].rpe.toFixed(1)}M</span>`);
+      if (v === 'wide') return finTiles([{ v: co.toFixed(2), l: t('fin.company') }, { v: ds.at(-1).rpe.toFixed(2), l: `${t('fin.top')} · ${ds.at(-1).n}` }, { v: ds[0].rpe.toFixed(2), l: `${t('fin.low')} · ${ds[0].n}`, c: 'var(--warn)' }]);
+      const k = Math.min(ds.length, CAP(h, 32, 30));
+      return `<ul class="dp" style="--avg:${X(co)}%">${ds.slice(0, k).map(d => `<li><button data-act="ask-open" data-q="Why is revenue per employee ${d.rpe < co ? 'low' : 'high'} in ${esc(d.n)}?" title="${esc(d.n)} · ${d.hc} people"><span>${esc(d.n)}</span><i class="dp__t"><i class="dp__d${d.rpe < co * .85 ? ' is-lo' : ''}" style="inset-inline-start:${X(d.rpe)}%"></i></i><em>${d.rpe.toFixed(2)}</em></button></li>`).join('')}</ul><p class="fx-foot">┆ ${t('fin.company')} <b>${co.toFixed(2)}M</b> ${t('fin.perHead')}</p>`; } },
+
+  alerts: { group: 'exec', icon: 'bell', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 7],
+    count: () => finAlerts().length,
+    render({ v, w, h }) { const A = finAlerts(), nb = A.filter(a => a.lv === 'bad').length;
+      if (v === 's') return finBig(t('fin.alertsL'), `${nb} ${t('fin.red')}`, `<span class="big__f">${A.map(a => dot(a.lv)).join('')}</span>`);
+      return `<ul class="rcl">${A.slice(0, CAP(h, 58)).map(a => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="${esc(a.q)}">${dot(a.lv)}<span class="rc__m"><b>${esc(a.b)}</b><small>${esc(a.s)}</small></span>${w >= 5 ? `<em class="fx-v" style="color:var(--${a.lv})">${esc(a.v)}</em>` : ''}</button></li>`).join('')}</ul>`; } },
+
+  deals: { group: 'exec', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+    count: () => D.fin.deals.length,
+    render({ v, w, h }) { const L = D.fin.deals, tot = +L.reduce((a, x) => a + x.v, 0).toFixed(1);
+      if (v === 's') return finBig(t('fin.atRisk'), `AED ${tot}M`, `<span class="muted">${L.length} ${t('fin.deals')}</span>`);
+      const k = CAP(h, 58, v === 'wide' ? 0 : 0), more = L.length - k;
+      return `<ul class="rcl">${L.slice(0, k).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="How do we save the ${esc(x.n)} deal?">${dot(x.lv)}<span class="rc__m"><b>${esc(x.n)}</b><small>${esc(x.d)} · ${esc(x.why)}</small></span>${w >= 6 ? tag(t('fin.closes', { m: x.close }), x.lv) : ''}<em class="fx-v">${x.v}M</em></button></li>`).join('')}</ul>`; } },
+
   people: { group: 'people', icon: 'users', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     render({ v, w, h, view }) { const p = D.people, tot = D.depts.reduce((a, x) => a + x[1], 0), cs = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--warn)'];
       if (view === 'viz') { const segs = D.depts.map((x, i) => ({ l: x[0], v: x[1], c: cs[i], t: Math.round(x[1] / tot * 100) + '%' })); if (v === 's') return vz(`<div class="big"><small>${t('w.people')}</small><strong>${p.hc}</strong>${spark(p.s, 140, 30)}</div>`);
@@ -751,7 +927,7 @@ const W = {
       const cell = (x, big) => `<div class="clk${big ? ' clk--big' : ''}"><small>${x.c}</small><strong data-clock="${x.tz}">--:--</strong><em data-clock-d="${x.tz}"></em></div>`;
       const n = v === 's' ? 2 : v === 'tall' ? Math.min(4, Math.floor((bodyH(h)) / 66)) : w >= 6 ? 4 : 3; return `<div class="clks clks--${v}">${c.slice(0, n).map(x => cell(x, v === 's')).join('')}</div>`; } },
 };
-const GROUPS = ['ai', 'overview', 'comms', 'work', 'docs', 'finance', 'people', 'utils'];
+const GROUPS = ['ai', 'overview', 'exec', 'comms', 'work', 'docs', 'finance', 'people', 'utils'];
 
 /* ----------------------------------------------------------- hero row (Overview): Ask Majlis 70% + Daily brief 30% */
 /* Ask Majlis · pinned threads (persisted) + "ask about today" prompts built from calendar, inbox and decisions */
@@ -789,7 +965,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['decisions', 6, 4], ['inbox', 6, 4], ['calendar', 8, 4], ['teams', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['risks', 6, 3], ['projects', 6, 3]],
+  default: [['decisions', 4, 4], ['inbox', 4, 4], ['deals', 4, 4], ['calendar', 8, 4], ['teams', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
   focus: [['decisions', 4, 4], ['calendar', 4, 4], ['tasks', 4, 4], ['inbox', 6, 3], ['clocks', 6, 2]],
   minimal: [['pulse', 8, 4], ['calendar', 4, 4], ['inbox', 4, 3], ['decisions', 4, 3], ['projects', 4, 3]],
 };
@@ -807,7 +983,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['decisions', 'inbox', 'tasks'], today: ['calendar', 'teams', 'clocks'], health: ['pulse', 'revenue', 'customers', 'people'], watch: ['risks', 'projects', 'insights', 'docs'] };
+const SECS = { needs: ['decisions', 'inbox', 'deals', 'tasks'], today: ['calendar', 'teams', 'clocks'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'watch';
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Needs you', today: 'Today', health: 'Business health', watch: 'Watchlist', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -825,7 +1001,8 @@ function secHealth(k) {
   if (k === 'today') { const now = new Date(), cur = now.getHours() * 60 + now.getMinutes(), left = D.meetings.filter(x => mins(x.e) > cur), nx = left.find(x => mins(x.s) >= cur) || left[0];
     if (!nx) return { lv: 'ok', n: 0, why: t('sec.rTodayDone') }; const gap = mins(nx.s) - cur;
     return { lv: gap <= 30 ? 'warn' : 'ok', n: left.length, why: gap <= 30 && gap >= 0 ? t('sec.rTodaySoon', { n: gap, x: nx.title }) : t('sec.rToday', { x: nx.title, s: nx.s }) }; }
-  if (k === 'health') { const r = D.kpis[0], c = D.kpis[1]; return { lv: r.up && c.up ? 'ok' : 'warn', n: 0, why: t('sec.rHealth', { r: r.delta, c: c.val }) }; }
+  if (k === 'health') { const T = FIN.T; /* amber under 95% pace or 1.2× coverage, red when the landing misses target by 5%+ */
+    return { lv: T.land < T.t * .95 ? 'bad' : T.pace < .95 || T.cov < 1.2 ? 'warn' : 'ok', n: FIN.ds.filter(d => d.st === 'bad').length, why: t('sec.rHealthF', { p: fPct(T.pace), l: T.land, t: T.t }) }; }
   const b = D.risks.filter(x => x.lv === 'bad').length, l = D.projects.filter(x => x.r === 'late').length, w = D.risks.filter(x => x.lv === 'warn').length + D.projects.filter(x => x.r === 'risk').length;
   return { lv: b || l ? 'bad' : w ? 'warn' : 'ok', n: b + l, why: b || l ? t('sec.rWatch', { b, l, bs: pl(b, 'risk', 'risks'), ls: pl(l, 'project', 'projects') }) : t('sec.rWatchOk') };
 }
@@ -860,7 +1037,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout2.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout3.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1018,10 +1195,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout2.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout3.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special; $('#dPresets').hidden = !pg.hero;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout2.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout3.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1116,6 +1293,8 @@ document.addEventListener('click', e => {
   else if (a === 'decision') { const d = S.decisions.find(x => x.id === id); d.st = b.dataset.do; afterState(['decisions']); toast(t(d.st) + ': ' + d.title); if (CHAT_OPEN) syncChat(); }
   else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; afterState(['tasks']); }
   else if (a === 'period') { S.period = b.dataset.p; Grid.refreshType('revenue'); Grid.refreshType('pulse'); refreshCards(); }
+  else if (a === 'fin-scale') { S.finScale = b.dataset.s; Grid.refreshType('deptScore'); }
+  else if (a === 'fin-dept') { const ns = [null, ...FIN.byGap.map(d => d.n)]; S.finDept = ns[(ns.indexOf(S.finDept || null) + 1) % ns.length]; Grid.refreshType('pipeline'); Grid.refreshType('runrate'); }
   else if (a === 'sort') { S.sort = S.sort === 'desc' ? 'asc' : 'desc'; Grid.refreshType('pulse'); }
   else if (a === 'view') { const w = b.closest('.w'); Grid.setView(w.dataset.id, b.dataset.v); }
   else if (a === 'brief-play') { S.playing = !S.playing; renderHero(); if (S.playing) setTimeout(() => { S.playing = false; renderHero(); }, 6000); }
@@ -1136,7 +1315,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout2.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout3.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
