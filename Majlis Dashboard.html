@@ -306,7 +306,7 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .hfn{display:flex;align-items:stretch;gap:4px;flex:none}.hfn button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px 4px;border-radius:var(--rs);background:var(--tile);min-width:0;transition:background .15s}.hfn button:hover{background:var(--tile2)}.hfn b{font:600 22px/1 var(--font)}.hfn span{font-size:11.5px;color:var(--ink2);white-space:nowrap}
 .hfn button{position:relative;overflow:hidden;isolation:isolate}.hfn__f{position:absolute;inset-inline:0;bottom:0;height:var(--f);background:var(--accent);opacity:.16;z-index:-1;transition:height .4s ease}
 .hfn__c{align-self:center;font:600 11px/1 var(--font);font-style:normal;color:var(--ink3);flex:none;writing-mode:horizontal-tb}
-.hfn--g{flex:1;min-height:96px;margin-top:4px}.hfn--g button{justify-content:flex-end;gap:5px;padding:14px 4px}.hfn span{overflow:hidden;text-overflow:ellipsis;max-width:100%}.hfn--g b{font-size:26px}.hfn--g button:first-child .hfn__f{opacity:.1}
+.hfn--g{flex:1;min-height:96px;margin-top:4px;gap:8px}.hfn--g button{justify-content:flex-end;gap:5px;padding:14px 4px}.hfn span{overflow:hidden;text-overflow:ellipsis;max-width:100%}.hfn--g b{font-size:26px}.hfn--g button:first-child .hfn__f{opacity:.1}
 .hfn__ft{margin:0;font-size:12.5px;color:var(--ink3);flex:none}.hfn__ft b{color:var(--ink2);font-weight:600}
 .cmp{display:flex;flex-direction:column;flex:1;min-height:0}
 .bk6{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:6px;flex:1;min-height:0}
@@ -1265,8 +1265,8 @@ const W = {
         return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${p.hc}</b><small>${t('total')}</small>` })}${legend(segs.slice(0, h >= 4 ? 6 : 4))}</div>`, 'vz--col'); }
       /* Option 3 · hiring funnel: how fast open roles are being filled */
       if (v === 's') return finBig(t('bh.openRoles'), D.hiring[0][1], `<span class="muted">${p.hc} · ${p.hires} hires YTD</span>`);
-      /* each stage is a column filled to its share of open roles; the gaps carry the conversion rate */
-      const mx = D.hiring[0][1], stage = ([k, n], i) => `${i ? `<em class="hfn__c" title="${t('bh.conv')}">${Math.round(n / D.hiring[i - 1][1] * 100)}%</em>` : ''}<button data-act="ask-open" data-q="Show the ${t('bh.stage.' + k).toLowerCase()} in hiring" style="--f:${(n / mx * 100).toFixed(0)}%"><i class="hfn__f"></i><b>${n}</b><span>${t('bh.stage.' + k)}</span></button>`;
+      /* each stage is a column filled to its share of open roles */
+      const mx = D.hiring[0][1], stage = ([k, n], i) => `<button data-act="ask-open" data-q="Show the ${t('bh.stage.' + k).toLowerCase()} in hiring" style="--f:${(n / mx * 100).toFixed(0)}%"><i class="hfn__f"></i><b>${n}</b><span>${t('bh.stage.' + k)}</span></button>`;
       if (v === 'wide') return `<div class="hfn">${D.hiring.map(stage).join('')}</div>`;
       return `<div class="arb"><strong>${p.hc}</strong><small>${t('bh.people', { h: p.hires, a: p.attr })}</small></div><div class="hfn hfn--g">${D.hiring.map(stage).join('')}</div><p class="hfn__ft">${t('bh.hireSub')}</p>`; } },
 
