@@ -320,6 +320,18 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .w--v-wide .bkt em{display:none}
 
 .arr>.tag{flex:none}.cmp .arr{align-items:flex-start;padding-top:8px;padding-bottom:8px}.cmp .arr>span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35}.cmp .arr .dot{margin-top:6px}
+/* ---------- Money · People & customers · Strategy & outside world ---------- */
+.mg{display:grid;grid-template-columns:minmax(0,96px) minmax(0,1fr) 40px;gap:10px;align-items:center;min-height:34px;padding:2px 4px;border-radius:9px;font-size:13px;width:100%;text-align:start;transition:background .15s}.mg:hover{background:var(--tile)}
+.mg>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink2)}.mg>i{position:relative;height:10px;border-radius:99px;background:var(--tile)}.mg>i b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:99px}.mg>i u{position:absolute;top:-4px;bottom:-4px;width:0;border-inline-start:1.5px dashed var(--ink3);text-decoration:none}.mg em{font:600 13px/1 var(--font);font-style:normal;text-align:end;font-variant-numeric:tabular-nums}
+.wc3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;flex:none}.wc3>button{display:flex;flex-direction:column;gap:2px;padding:9px 10px;border-radius:12px;background:var(--tile);text-align:start;min-width:0;transition:background .15s}.wc3>button:hover{background:var(--tile2)}.wc3 small{font-size:11px;color:var(--ink3)}.wc3 b{font:600 19px/1.1 var(--font);white-space:nowrap}.wc3 em{font:600 11px/1 var(--font);font-style:normal}
+.rl-c{display:flex;gap:6px;flex-wrap:wrap;flex:none}.rl-c span{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:99px;background:var(--tile);font:500 11.5px/1 var(--font);color:var(--ink2)}.rl-c b{color:var(--ink);font-weight:600}
+.arr>.rl-av{flex:none}.rl-av{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 10.5px/1 var(--font);color:#fff;flex:none}
+.ini{display:grid;grid-template-columns:minmax(0,1fr) 72px 34px;gap:10px;align-items:center;min-height:36px;padding:2px 4px;border-radius:9px;font-size:13px;width:100%;text-align:start;transition:background .15s}.ini:hover{background:var(--tile)}
+.ini>span{display:flex;align-items:center;gap:8px;min-width:0}.ini>span b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ini>i{height:8px;border-radius:99px;background:var(--tile);overflow:hidden}.ini>i b{display:block;height:100%;border-radius:99px}.ini em{font:600 12.5px/1 var(--font);font-style:normal;text-align:end}
+.md-s{display:flex;gap:2px;height:14px;border-radius:99px;overflow:hidden;flex:none}.md-s i{display:block}
+.inc{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:var(--rs);background:var(--bad-soft);flex:none}.inc small{display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--bad)}.inc small::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--bad);animation:calPulse 1.6s ease-in-out infinite}
+.inc h4{margin:0;font:600 16px/1.3 var(--font)}.inc p{margin:0;font-size:12.5px;color:var(--ink2)}.inc--calm{background:var(--ok-soft)}.inc--calm small{color:var(--accent)}.inc--calm small::before{background:var(--accent);animation:none}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -941,6 +953,27 @@ _m(TX.ar, { w: { competitive: 'نبض المنافسين', boardKpis: 'مؤشر�
   bh: { aim: 'الهدف', cashIn: 'النقد الوارد {c} مليون · نسبة التحصيل {r}%', covers: 'الصفقات المرجّحة مقابل فجوة <b>{g} مليون</b>', stage: { open: 'شاغرة', interview: 'مقابلات', offer: 'عروض', joined: 'انضموا' }, people: 'موظف · {h} تعيينًا منذ بداية العام · دوران {a}', conv: 'نسبة التحويل من المرحلة السابقة', hireSub: 'متوسط <b>54 يومًا</b> للتوظيف · <b>3 وظائف قيادية</b> شاغرة منذ 90+ يومًا', openRoles: 'وظائف شاغرة',
     scanned: 'رصد مجلس · {n} مصدرًا هذا الأسبوع', moves: 'تحركات هذا الأسبوع', tag: { threat: 'تهديد', watch: 'مراقبة', opportunity: 'فرصة' }, respond: 'ماذا نفعل؟', askWhy: 'لماذا؟', onPromise: '{n} من {t} حسب الوعد', toBoard: '{n} يومًا على المجلس', pack: 'فتح ملف المجلس' } });
 
+/* ----------------------------------------------------------- Money · People & customers · Strategy & outside world · demo data */
+D.margin = { co: 22, plan: 24, depts: [['Licensing', 52], ['Cloud', 34], ['Enterprise', 24], ['Consulting', 18], ['Managed services', 16], ['SMB', 14], ['Digital', 12], ['Training', 10], ['Government', 9]] };
+D.wc = { dso: 52, dsoD: '+4', dpo: 38, dpoD: '−2', overdue: 15, aging: [['0–30', 42], ['31–60', 18], ['61–90', 9], ['90+', 6]], top: ['Ministry of Finance', 4.1, 94] };
+D.rel = [{ n: 'Khalid Al-Rashid', r: 'Board chair', g: 'board', last: '3 weeks ago', st: 'cold', note: 'Owes a call on the audit pick', av: 4 },
+  { n: 'GIC', r: 'Investor', g: 'investor', last: '2 days ago', st: 'owed', note: 'Waiting on your co-invest reply', av: 2 },
+  { n: 'Ministry of Finance', r: 'Top client', g: 'client', last: '5 weeks ago', st: 'cold', note: 'Renewal in 60 days', av: 0 },
+  { n: 'Jane Lowe', r: 'Audit chair', g: 'board', last: 'Monday', st: 'warm', note: 'Agreed Q3 sign-off plan', av: 1 }, { n: 'Emirates Group', r: 'Top client', g: 'client', last: 'Last week', st: 'warm', note: '', av: 3 }];
+D.media = { pos: 64, neu: 26, neg: 10, mentions: 1240, delta: '+18%', stories: [{ s: 'Gulf News', h: 'Majlis named a top GCC digital partner', lv: 'ok' }, { s: 'X / Twitter', h: 'Thread on Tuesday\'s portal outage is spreading', lv: 'bad' }, { s: 'Reuters', h: 'GCC IT spend to grow 9% in 2027', lv: 'n' }] };
+D.incidents = [{ live: true, n: 'Customer portal outage', sev: 'P1', since: '38 min', o: 'Omar K', st: 'Mitigating · 60% of users back', area: 'Operations' }, { live: false, n: 'Payments latency', sev: 'P2', since: 'resolved in 42 min', o: 'Omar K', area: 'Operations' }];
+const AVC = ['#0b825a', '#2a8fb0', '#8b6fd9', '#d0802a', '#c0567a'];
+_m(TX.en, { sec: { money: 'Money', people: 'People & customers', strategy: 'Strategy & outside world', rMoney: 'Coverage {c}× · DSO {d} days', rPeople: '{c} relationships going cold · {r} open roles', rPeopleOk: 'Relationships warm · {r} open roles', rStrat: '{i} live incident · {o} initiatives off track', rStratOk: 'No incidents · initiatives on track' },
+  w: { margin: 'Margin by department', workingCap: 'Working capital', relationships: 'Key relationships', initiatives: 'Strategic initiatives', media: 'Brand & media', incidents: 'Incidents' },
+  wd: { margin: 'Which departments earn and which burn, against the company average', workingCap: 'How fast work turns into cash: DSO, DPO and overdue', relationships: 'Board, investors and key clients: who is owed and who is going cold', initiatives: 'The year\'s big bets, worst first', media: 'What the press and social media say about us', incidents: 'Only live, serious issues: outages, cyber, legal, safety' },
+  ex: { coMargin: 'gross margin', vsPlan: '{d} pts vs plan', best: 'Best', avg: 'Company average', dso: 'DSO', dpo: 'DPO', overdue: 'Overdue', days: 'days', overdueRow: '{n} · AED {v}M · {d} days', cold: 'going cold', owed: 'Owed reply', coldT: 'Going cold', warm: 'Warm', board: 'Board', investor: 'Investors', client: 'Clients',
+    onTrack: '{n} of {t} on track', next: 'Next: {x}', pos: 'positive', mentions: '{n} mentions · {d}', live: 'Live · {s} · {t}', resolved: 'Resolved today', calm: 'All clear', calmT: 'No live incidents', calmS: 'No outages, cyber, legal or safety issues', update: 'Get update', bridge: 'Join bridge', reach: 'Reach out' } });
+_m(TX.ar, { sec: { money: 'المال', people: 'الأفراد والعملاء', strategy: 'الاستراتيجية والعالم الخارجي', rMoney: 'التغطية {c}× · التحصيل {d} يومًا', rPeople: '{c} علاقات تبرد · {r} وظائف شاغرة', rPeopleOk: 'العلاقات جيدة · {r} وظائف شاغرة', rStrat: '{i} حادث مباشر · {o} مبادرات متعثرة', rStratOk: 'لا حوادث · المبادرات على المسار' },
+  w: { margin: 'الهامش حسب القسم', workingCap: 'رأس المال العامل', relationships: 'العلاقات الرئيسية', initiatives: 'المبادرات الاستراتيجية', media: 'العلامة والإعلام', incidents: 'الحوادث' },
+  wd: { margin: 'أي الأقسام تربح وأيها تستنزف مقارنة بمتوسط الشركة', workingCap: 'سرعة تحويل العمل إلى نقد', relationships: 'المجلس والمستثمرون وكبار العملاء', initiatives: 'رهانات العام الكبرى، الأضعف أولًا', media: 'ما تقوله الصحافة ووسائل التواصل عنا', incidents: 'المشكلات الجدية المباشرة فقط' },
+  ex: { coMargin: 'الهامش الإجمالي', vsPlan: '{d} نقطة مقابل الخطة', best: 'الأفضل', avg: 'متوسط الشركة', dso: 'أيام التحصيل', dpo: 'أيام السداد', overdue: 'متأخرات', days: 'يومًا', overdueRow: '{n} · {v} مليون · {d} يومًا', cold: 'تبرد', owed: 'بانتظار ردك', coldT: 'تبرد', warm: 'جيدة', board: 'المجلس', investor: 'المستثمرون', client: 'العملاء',
+    onTrack: '{n} من {t} على المسار', next: 'التالي: {x}', pos: 'إيجابي', mentions: '{n} إشارة · {d}', live: 'مباشر · {s} · {t}', resolved: 'حُلّ اليوم', calm: 'لا شيء', calmT: 'لا حوادث مباشرة', calmS: 'لا انقطاعات أو مشكلات سيبرانية أو قانونية', update: 'آخر المستجدات', bridge: 'انضم للاجتماع', reach: 'تواصل' } });
+
 /* ----------------------------------------------------------- the widgets */
 const W = {
   /* AI row (pinned to the top row of Overview; rendered by HERO, not by the grid) */
@@ -1187,6 +1220,63 @@ const W = {
       const n = v === 'wide' || w >= 8 ? 6 : w >= 6 ? 3 : 2;
       return `<div class="bk6" style="--n:${n}">${K.map(tile).join('')}</div>${v === 'wide' || bodyH(h) < 250 ? '' : arLink(`${t('bh.onPromise', { n: ok, t: K.length })} · ${t('bh.pack')}`, 'ask-open', ' data-q="Prepare me for the board: which KPIs are off promise and why?"')}`; } },
 
+  /* Money · People & customers · Strategy & outside world */
+  margin: { group: 'exec', icon: 'pie', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+    render({ v, h }) { const M = D.margin, d = M.co - M.plan, L = [...M.depts].sort((a, b) => a[1] - b[1]), mx = 60, X = x => (x / mx * 100).toFixed(1);
+      const head = `<div class="arb"><strong>${M.co}%</strong><small>${t('ex.coMargin')}</small>${tag(t('ex.vsPlan', { d: (d > 0 ? '+' : '') + d }), d >= 0 ? 'ok' : 'warn')}</div>`;
+      if (v === 's') return finBig(t('ex.coMargin'), M.co + '%', `<span class="muted">${esc(L[0][0])} ${L[0][1]}%</span>`);
+      const row = ([n, m]) => `<button class="mg" data-act="ask-open" data-q="Why is ${esc(n)} margin ${m}%?"><span>${esc(n)}</span><i><b style="width:${X(m)}%;background:${m < 15 ? 'var(--bad)' : m < M.co ? 'var(--warn)' : 'var(--c1)'}"></b><u style="inset-inline-start:${X(M.co)}%"></u></i><em>${m}%</em></button>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div style="flex:1;min-width:0">${row(L[0])}</div></div>`;
+      const k = Math.max(1, Math.min(3, Math.floor((bodyH(h) - 96) / 36))), best = L[L.length - 1];
+      return `${head}<div class="arls">${L.slice(0, k).map(row).join('')}</div><p class="fx-foot">┆ ${t('ex.avg')} <b>${M.co}%</b> · ${t('ex.best')}: <b>${esc(best[0])} ${best[1]}%</b></p>`; } },
+
+  workingCap: { group: 'exec', icon: 'dollar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
+    render({ v, h }) { const C = D.wc, tot = C.aging.reduce((a, x) => a + x[1], 0), cols = ['var(--c1)', 'var(--c3)', 'var(--warn)', 'var(--bad)'];
+      if (v === 's') return finBig(t('ex.dso'), `${C.dso} ${t('ex.days')}`, `<span class="muted" style="color:var(--warn)">${C.dsoD}</span>`);
+      const tiles = `<div class="wc3">${[[t('ex.dso'), C.dso + 'd', C.dsoD, 'var(--warn)'], [t('ex.dpo'), C.dpo + 'd', C.dpoD, 'var(--accent)'], [t('ex.overdue'), C.overdue + 'M', '90+ ' + C.aging[3][1] + 'M', 'var(--bad)']].map(([l, val, d, c]) => `<button data-act="ask-open" data-q="Explain our ${esc(l)}"><small>${l}</small><b>${val}</b><em style="color:${c}">${d}</em></button>`).join('')}</div>`;
+      if (v === 'wide' || h <= 2) return tiles;
+      const bar = `<div class="arbar">${C.aging.map(([l, x], i) => `<i style="flex:${x};background:${cols[i]}" title="${l} days · AED ${x}M"></i>`).join('')}</div><div class="arlg">${C.aging.map(([l, x], i) => `<span><i class="dot" style="background:${cols[i]}"></i>${l} <b>${x}</b></span>`).join('')}</div>`;
+      return `${tiles}${bar}${bodyH(h) > 210 ? `<div class="arls" style="margin-top:auto"><div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="How do we collect from ${esc(C.top[0])}?"><i class="dot dot--bad"></i><span><b>${esc(C.top[0])}</b> · AED ${C.top[1]}M</span><em class="is-bad">${C.top[2]}d</em></div></div>` : ''}`; } },
+
+  relationships: { group: 'people', icon: 'users', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+    count: () => D.rel.filter(r => r.st !== 'warm').length,
+    render({ v, w, h }) { const R = [...D.rel].sort((a, b) => ({ owed: 0, cold: 1, warm: 2 })[a.st] - ({ owed: 0, cold: 1, warm: 2 })[b.st]), cold = R.filter(r => r.st === 'cold').length, lv = { owed: 'warn', cold: 'bad', warm: 'ok' };
+      if (v === 's') return finBig(t('ex.cold'), cold, `<span class="muted">${esc(R[0].n)} · ${esc(R[0].r)}</span>`);
+      const head = `<div class="arb"><strong>${cold}</strong><small>${t('ex.cold')}</small></div>`;
+      const chips = `<div class="rl-c">${['board', 'investor', 'client'].map(g => `<span>${t('ex.' + g)} <b>${R.filter(r => r.g === g).length}</b></span>`).join('')}</div>`;
+      const row = r => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(`${r.n} (${r.r}): last contact ${r.last}. ${r.note}. How should I reach out?`)}"><span class="rl-av" style="background:${AVC[r.av % 5]}">${initials(r.n)}</span><span><b>${esc(r.n)}</b> · ${esc(r.last)}</span>${w >= 6 ? `<em>${esc(r.note)}</em>` : ''}${tag(t('ex.' + (r.st === 'owed' ? 'owed' : r.st === 'cold' ? 'coldT' : 'warm')), lv[r.st])}</div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div class="arls" style="flex:1;min-width:0">${row(R[0])}</div></div>`;
+      const k = Math.max(1, Math.min(3, Math.floor((bodyH(h) - 100) / 41)));
+      return `${head}${chips}<div class="arls">${R.slice(0, k).map(row).join('')}</div>${arLink(t('ex.reach'), 'ask-open', ' data-q="Who should I reach out to this week, and what should I say?"')}`; } },
+
+  initiatives: { group: 'work', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 7],
+    count: () => D.projects.length,
+    render({ v, h }) { const P = [...D.projects].sort((a, b) => ({ late: 0, risk: 1, ok: 2 })[a.r] - ({ late: 0, risk: 1, ok: 2 })[b.r] || a.p - b.p), ok = P.filter(x => x.r === 'ok').length, col = { late: 'var(--bad)', risk: 'var(--warn)', ok: 'var(--c1)' };
+      if (v === 's') return finBig(t('w.initiatives'), t('ex.onTrack', { n: ok, t: P.length }), `<span class="big__f">${P.map(x => dot(rag[x.r][1])).join('')}</span>`);
+      const head = `<div class="arb"><strong>${ok}/${P.length}</strong><small>${t('ex.onTrack', { n: ok, t: P.length }).replace(/^\d+ \S+ \d+ /, '')}</small></div>`;
+      const row = x => `<button class="ini" data-act="ask-open" data-q="Where is ${esc(x.n)} stuck, and what does ${esc(x.o)} need?" title="${esc(x.o)} · due ${x.due}"><span><i class="dot dot--${rag[x.r][1]}"></i><b>${esc(x.n)}</b></span><i><b style="width:${x.p}%;background:${col[x.r]}"></b></i><em>${x.p}%</em></button>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div style="flex:1;min-width:0">${row(P[0])}</div></div>`;
+      const k = Math.max(1, Math.min(4, Math.floor((bodyH(h) - 80) / 38)));
+      return `${head}<div class="arls">${P.slice(0, k).map(row).join('')}</div>${P.length > k ? arLink(`+${P.length - k} · ${t('ex.next', { x: P[0].n + ' · ' + P[0].due })}`, 'ask-open', ' data-q="Give me a status update on all strategic initiatives"') : ''}`; } },
+
+  media: { group: 'exec', icon: 'message', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
+    render({ v, h }) { const M = D.media;
+      if (v === 's') return finBig(t('w.media'), M.pos + '%', `<span class="muted">${t('ex.pos')} · ${M.delta}</span>`);
+      const head = `<div class="arb"><strong>${M.pos}%</strong><small>${t('ex.pos')} · ${t('ex.mentions', { n: M.mentions.toLocaleString(), d: M.delta })}</small></div>`;
+      const bar = `<div class="md-s"><i style="flex:${M.pos};background:var(--c1)" title="Positive ${M.pos}%"></i><i style="flex:${M.neu};background:var(--c5)" title="Neutral ${M.neu}%"></i><i style="flex:${M.neg};background:var(--bad)" title="Negative ${M.neg}%"></i></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div>${bar}</div>`;
+      const st = [...M.stories].sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)), k = Math.max(1, Math.min(3, Math.floor((bodyH(h) - 96) / 41)));
+      return `${head}${bar}<div class="arls">${st.slice(0, k).map(x => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(`${x.s}: ${x.h}. Should we respond?`)}"><i class="dot dot--${x.lv === 'n' ? 'ok' : x.lv}" ${x.lv === 'n' ? 'style="background:var(--c5)"' : ''}></i><span><b>${esc(x.s)}</b> · ${esc(x.h)}</span></div>`).join('')}</div>`; } },
+
+  incidents: { group: 'work', icon: 'alert', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
+    count: () => D.incidents.filter(x => x.live).length || null,
+    render({ v, h }) { const live = D.incidents.filter(x => x.live), done = D.incidents.filter(x => !x.live), x = live[0];
+      if (v === 's') return x ? finBig(t('ex.live', { s: x.sev, t: x.since }), esc(x.n), `<span class="muted">${esc(x.o)}</span>`) : finBig(t('ex.calm'), t('ex.calmT'), '');
+      const card = x ? `<div class="inc"><small>${t('ex.live', { s: x.sev, t: x.since })}</small><h4>${esc(x.n)}</h4><p>${esc(x.st)} · ${esc(x.o)}</p></div>` : `<div class="inc inc--calm"><small>${t('ex.calm')}</small><h4>${t('ex.calmT')}</h4><p>${t('ex.calmS')}</p></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw">${card}</div>`;
+      const btns = x ? `<div class="cph__b"><button class="btn btn--dark btn--sm" data-act="ask-open" data-q="${esc(`Give me the latest on the ${x.n}: impact, cause and ETA`)}">${t('ex.update')}</button><button class="btn btn--ghost btn--sm" data-act="ask-open" data-q="${esc(`Who is on the ${x.n} bridge call, and should I join?`)}">${t('ex.bridge')}</button></div>` : '';
+      return `${card}${btns}${done.length && bodyH(h) > 200 ? `<div class="arls" style="margin-top:auto">${done.slice(0, 2).map(d => `<div class="arr"><i class="dot dot--ok"></i><span><b>${esc(d.n)}</b> · ${esc(d.since)}</span><em>${t('ex.resolved')}</em></div>`).join('')}</div>` : ''}`; } },
+
   /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
   deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
     count: () => t('fin.nBehind', { n: FIN.ds.filter(d => d.st === 'bad').length }),
@@ -1353,7 +1443,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['revenue', 4, 4], ['people', 4, 4], ['competitive', 4, 4]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 12, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 4, 4], ['customers', 4, 4], ['relationships', 4, 4], ['initiatives', 6, 4], ['incidents', 6, 4], ['competitive', 6, 4], ['media', 6, 4]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1369,7 +1459,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'revenue', 'people', 'competitive', 'customers'] };
+const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing', 'runrate'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'relationships', 'rpe'], strategy: ['initiatives', 'incidents', 'competitive', 'media'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'health'; /* widgets from other pages land in Business health if added to Overview */
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -1387,6 +1477,9 @@ function secHealth(k) {
   if (k === 'today') { const now = new Date(), cur = now.getHours() * 60 + now.getMinutes(), left = D.meetings.filter(x => mins(x.e) > cur), nx = left.find(x => mins(x.s) >= cur) || left[0];
     if (!nx) return { lv: 'ok', n: 0, why: t('sec.rTodayDone') }; const gap = mins(nx.s) - cur;
     return { lv: gap <= 30 ? 'warn' : 'ok', n: left.length, why: gap <= 30 && gap >= 0 ? t('sec.rTodaySoon', { n: gap, x: nx.title }) : t('sec.rToday', { x: nx.title, s: nx.s }) }; }
+  if (k === 'money') { const T = FIN.T; return { lv: T.cov < 1 || D.fin.cash.runway < 12 ? 'bad' : D.wc.dso > 45 || T.cov < 1.2 ? 'warn' : 'ok', n: 0, why: t('sec.rMoney', { c: T.cov.toFixed(2), d: D.wc.dso }) }; }
+  if (k === 'people') { const cold = D.rel.filter(r => r.st === 'cold').length, roles = D.hiring[0][1]; return { lv: cold ? 'warn' : 'ok', n: cold, why: cold ? t('sec.rPeople', { c: cold, r: roles }) : t('sec.rPeopleOk', { r: roles }) }; }
+  if (k === 'strategy') { const live = D.incidents.filter(x => x.live).length, off = D.projects.filter(p => p.r !== 'ok').length; return { lv: live ? 'bad' : off ? 'warn' : 'ok', n: live + off, why: live || off ? t('sec.rStrat', { i: live, o: off }) : t('sec.rStratOk') }; }
   if (k === 'health') { const T = FIN.T; /* amber under 95% pace or 1.2× coverage, red when the landing misses target by 5%+ */
     return { lv: T.land < T.t * .95 ? 'bad' : T.pace < .95 || T.cov < 1.2 ? 'warn' : 'ok', n: FIN.ds.filter(d => d.st === 'bad').length, why: t('sec.rHealthF', { p: fPct(T.pace), l: T.land, t: T.t }) }; }
   const b = D.risks.filter(x => x.lv === 'bad').length, l = D.projects.filter(x => x.r === 'late').length, w = D.risks.filter(x => x.lv === 'warn').length + D.projects.filter(x => x.r === 'risk').length;
@@ -1423,7 +1516,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout7.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout8.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1581,10 +1674,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout7.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout8.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout7.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout8.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1769,7 +1862,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout7.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout8.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
