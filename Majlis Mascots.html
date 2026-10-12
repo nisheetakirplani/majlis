@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Majlis Mascots</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:'Host Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bg:#eef1ec; --card:#f7fbf4; --card-s:#fff; --line:#dfe6df;
+  --ink:#1c2420; --ink2:#56615b; --ink3:#8b958f;
+  --accent:#0b825a; --accent-ink:#064933; --hi:#d3ee9a; --hi-ink:#27360d;
+  --stage:#f4f9f1; --is-dark:0;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b100e; --card:#121a16; --card-s:#1b2420; --line:#24302a;
+    --ink:#eef3f0; --ink2:#aab5af; --ink3:#76827c;
+    --accent:#3ed598; --accent-ink:#bff3dc; --hi:#c4e78f; --hi-ink:#1d2a0a;
+    --stage:#0f1714; --is-dark:1; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b100e; --card:#121a16; --card-s:#1b2420; --line:#24302a;
+  --ink:#eef3f0; --ink2:#aab5af; --ink3:#76827c;
+  --accent:#3ed598; --accent-ink:#bff3dc; --hi:#c4e78f; --hi-ink:#1d2a0a;
+  --stage:#0f1714; --is-dark:1; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 24px 64px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0}
+.sub{color:var(--ink2);margin:4px 0 0;max-width:620px}
+.kbd{font-size:12px;color:var(--ink3)}
+kbd{font:600 11px var(--font);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--card-s);color:var(--ink2)}
+
+/* toolbar */
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:10px 12px;margin:0 -12px 18px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:14px}
+.grp{display:flex;align-items:center;gap:8px}
+.lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.seg{display:flex;background:var(--card-s);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{font:500 13px var(--font);color:var(--ink2);background:none;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;transition:background .2s,color .2s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tog{display:flex;align-items:center;gap:8px;font:500 13px var(--font);color:var(--ink2);background:var(--card-s);border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 8px;cursor:pointer}
+.tog i{width:26px;height:16px;border-radius:99px;background:var(--line);position:relative;transition:background .2s}
+.tog i::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--card-s);box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.tog[aria-pressed="true"] i{background:var(--accent)}
+.tog[aria-pressed="true"] i::after{transform:translateX(10px)}
+
+/* stage */
+.stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;margin-bottom:28px}
+.panel{background:var(--card-s);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.hero{position:relative;background:var(--stage);aspect-ratio:1/1;max-height:560px;width:100%}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;cursor:pointer;touch-action:none}
+.hero .hint{position:absolute;left:16px;bottom:14px;font-size:12px;color:var(--ink3);pointer-events:none}
+.hero .badge{position:absolute;left:16px;top:14px;font:600 12px var(--font);color:var(--hi-ink);background:var(--hi);border-radius:999px;padding:4px 10px}
+.info{padding:22px 24px;display:flex;flex-direction:column;gap:18px}
+.info h2{margin:0;font-size:26px;letter-spacing:-.02em}
+.info .num{font:600 12px var(--font);color:var(--ink3)}
+.info p{margin:6px 0 0;color:var(--ink2)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{font-size:11.5px;font-weight:500;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent-ink)}
+.behave{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:13px}
+.behave dt{font-weight:600;color:var(--ink)}
+.behave dd{margin:0;color:var(--ink2)}
+.behave .on dt{color:var(--accent)}
+.sizes{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.sizes figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.sizes figcaption{font-size:11px;color:var(--ink3)}
+.sizes canvas{background:var(--stage);border-radius:16px;display:block}
+.chat{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:16px;padding:10px 14px 10px 10px}
+.chat canvas{flex:none;border-radius:50%;background:var(--card-s)}
+.chat b{font-weight:600}
+.chat span{color:var(--ink2);font-size:13px}
+.h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin:0 0 10px}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card-s);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .25s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px -18px rgba(10,40,30,.5)}
+.card[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.card .cv{position:relative;aspect-ratio:1/1;background:var(--stage)}
+.card canvas{position:absolute;inset:0;width:100%;height:100%}
+.card .meta{padding:12px 14px 14px}
+.card .row{display:flex;justify-content:space-between;align-items:baseline}
+.card h4{margin:0;font-size:16px;font-weight:600}
+.card .n{font-size:12px;color:var(--ink3);font-weight:600}
+.card p{margin:4px 0 0;color:var(--ink2);font-size:12.5px;line-height:1.4}
+footer{margin-top:28px;color:var(--ink3);font-size:12px}
+
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr}
+  .hero{max-height:none}
+}
+@media (max-width:560px){
+  .wrap{padding:18px 16px 48px}
+  h1{font-size:23px}
+  .bar{position:static;margin:0 0 14px;padding:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .card p{display:none}
+  .info{padding:18px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Majlis mascot options</h1>
+      <p class="sub">Eight live takes on the dotted-ring character. Every option reacts to your cursor, blinks, and can play each assistant state. Click a mascot to poke it.</p>
+    </div>
+    <div class="kbd"><kbd>1</kbd>–<kbd>6</kbd> states · <kbd>←</kbd><kbd>→</kbd> options · <kbd>Space</kbd> poke</div>
+  </header>
+
+  <div class="bar" role="toolbar" aria-label="Preview controls">
+    <div class="grp"><span class="lbl">State</span><div class="seg" id="states"></div></div>
+    <div class="grp"><span class="lbl">Palette</span><div class="seg" id="palettes"></div></div>
+    <div class="grp">
+      <button class="tog" id="follow" aria-pressed="true"><i></i>Eyes follow</button>
+      <button class="tog" id="cycle" aria-pressed="false"><i></i>Auto‑cycle</button>
+      <button class="tog" id="theme" aria-pressed="false"><i></i>Dark</button>
+    </div>
+  </div>
+
+  <section class="stage">
+    <div class="panel hero" id="hero">
+      <span class="badge" id="heroState">Idle</span>
+      <canvas id="heroCanvas" aria-label="Selected mascot preview"></canvas>
+      <span class="hint">Move your cursor · click to poke</span>
+    </div>
+    <div class="panel info">
+      <div>
+        <div class="num" id="infoNum">Option 01</div>
+        <h2 id="infoName">Orbit</h2>
+        <p id="infoBlurb"></p>
+        <div class="tags" id="infoTags"></div>
+      </div>
+      <div>
+        <div class="h3">How it plays each state</div>
+        <dl class="behave" id="behave"></dl>
+      </div>
+      <div>
+        <div class="h3">At product sizes</div>
+        <div class="sizes" id="sizes"></div>
+      </div>
+      <div>
+        <div class="h3">In context</div>
+        <div class="chat"><canvas id="chatCanvas" width="40" height="40"></canvas><div><b>Majlis</b><br><span id="chatLine">Here whenever you need me.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid" id="grid"></div>
+  <footer>Rendered live on canvas, no images. Particles are placed with collision-free sampling so the ring stays airy like the reference art.</footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- data ---------- */
+const STATES = [
+  {id:'idle',      name:'Idle',      line:'Here whenever you need me.'},
+  {id:'listening', name:'Listening', line:'Listening…'},
+  {id:'thinking',  name:'Thinking',  line:'Pulling the numbers together…'},
+  {id:'speaking',  name:'Speaking',  line:'Revenue is up 12% this quarter.'},
+  {id:'happy',     name:'Happy',     line:'Done! Your report is ready.'},
+  {id:'sleeping',  name:'Sleeping',  line:'Resting. Say hi to wake me.'},
+];
+
+const STYLES = [
+  {id:'orbit', name:'Orbit', tags:['calm','default pick'],
+   blurb:'Inner and outer bands slowly counter‑rotate around the eyes, like a quiet galaxy. Closest to the reference.',
+   act:{idle:'Bands drift in opposite directions',listening:'Ring ripples with your voice',thinking:'Spins up with a bright comet sweep',speaking:'Pulses ripple outward per syllable',happy:'Bounces with ^ ^ eyes',sleeping:'Slows, dims and snoozes'}},
+  {id:'breathe', name:'Breathe', tags:['calm','wellbeing'],
+   blurb:'The whole ring inhales and exhales; a wave of dot sizes rolls from the inside out on every breath.',
+   act:{idle:'Slow breathing, staggered dot swell',listening:'Breath shortens, ring wobbles',thinking:'Breath holds while the comet runs',speaking:'Exhales on each word',happy:'Big happy breath',sleeping:'Deep, slow sleep breath'}},
+  {id:'magnetic', name:'Magnetic', tags:['playful','interactive'],
+   blurb:'Dots shy away from your cursor and drift back; the eyes lock onto you eagerly. Best for hover moments.',
+   act:{idle:'Dots part around the cursor',listening:'Leans in and wobbles',thinking:'Comet sweep, still repels',speaking:'Ripples, eyes keep contact',happy:'Bounce + scatter',sleeping:'Ignores you, mostly'}},
+  {id:'swarm', name:'Swarm', tags:['organic','alive'],
+   blurb:'Each dot wanders on its own loose orbit and the ring is held together by soft springs. A poke scatters it wide.',
+   act:{idle:'Loose, buzzing wander',listening:'Swarm tightens and wobbles',thinking:'Swarm streams around in a loop',speaking:'Gusts outward per syllable',happy:'Celebratory scatter',sleeping:'Settles almost still'}},
+  {id:'ripple', name:'Ripple', tags:['fluid','voice'],
+   blurb:'A three‑lobed wave travels around the ring continuously, giving a soft liquid edge that suits voice features.',
+   act:{idle:'Wave rolls around the ring',listening:'Wave reacts to level',thinking:'Wave speeds up with comet',speaking:'Wave + outward pulses',happy:'Wave bounces',sleeping:'Wave almost flat'}},
+  {id:'twinkle', name:'Twinkle', tags:['magic','subtle'],
+   blurb:'Dots fade and glint individually like a field of stars, while the shape stays perfectly still.',
+   act:{idle:'Random star‑like glints',listening:'Glints sync to the level',thinking:'Glints chase the comet',speaking:'Flashes on syllables',happy:'Sparkle burst',sleeping:'Faint starlight'}},
+  {id:'jelly', name:'Jelly', tags:['bouncy','character'],
+   blurb:'The ring bobs over its shadow with squash‑and‑stretch and leans toward the cursor. The most character‑led option.',
+   act:{idle:'Bobs and leans toward you',listening:'Squashes with the level',thinking:'Tilts while the comet runs',speaking:'Jiggles per syllable',happy:'Big hops',sleeping:'Slumps low and still'}},
+  {id:'constellation', name:'Constellation', tags:['data','smart'],
+   blurb:'Faint threads connect neighbouring dots, nodding to the network look in the second reference. Fits the data story.',
+   act:{idle:'Threads shimmer as it turns',listening:'Threads stretch with the level',thinking:'Threads light up along the comet',speaking:'Network pulses outward',happy:'Network flares',sleeping:'Threads fade out'}},
+];
+
+const PALETTES = [
+  {id:'forest', name:'Forest', dots:['#0f5a45','#1f7a5e','#3a9a7c','#6cc0a2','#b5ddca'], accent:['#a9b84b','#c9d97a','#a7b8ab'], eye:['#1d5c45','#052c1d']},
+  {id:'mint',   name:'Mint',   dots:['#06523d','#0f8a67','#22a882','#5fd0a0','#b8ecd6'], accent:['#86e3b5','#c7f2dd','#9fd9bf'], eye:['#0a4a36','#043526']},
+  {id:'majlis', name:'Majlis', dots:['#143a2d','#0b825a','#2fb3b3','#7fcfa8','#c4e78f'], accent:['#8b6fd9','#d3ee9a','#b9c3bd'], eye:['#1a4a39','#0a2a1f']},
+];
+
+/* ---------- helpers ---------- */
+const TAU = Math.PI*2;
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const lerp = (a,b,t) => a+(b-a)*t;
+const hex = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const mix = (a,b,t) => { const x=hex(a), y=hex(b); return '#'+x.map((v,i)=>Math.round(lerp(v,y[i],t)).toString(16).padStart(2,'0')).join(''); };
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- global state ---------- */
+const G = {
+  state:'idle', palette:PALETTES[0], follow:true, dark:false,
+  pointer:{x:-9999,y:-9999,lastMove:0,inside:false},
+  speech:0, level:0, colors:null,
+};
+function refreshColors(){
+  G.dark = getComputedStyle(document.documentElement).getPropertyValue('--is-dark').trim()==='1';
+  const p = G.palette, bg = G.dark ? '#0f1714' : '#f4f9f1';
+  G.colors = G.dark ? {
+    dots: p.dots.map((c,i)=> i<3 ? mix(c,'#ffffff',0.18+i*0.06) : mix(c,bg,0.25)),
+    accent: p.accent.map(c=>mix(c,bg,0.15)),
+    eye:['#f2fff8','#bff3dc'], shadow:'0,0,0', z:'#bff3dc', line:mix(p.dots[3],bg,0.2),
+  } : {
+    dots:p.dots, accent:p.accent, eye:p.eye, shadow:'20,70,50', z:p.dots[1], line:p.dots[2],
+  };
+}
+
+/* ---------- mascot ---------- */
+class Mascot {
+  constructor(canvas, styleId, opts={}){
+    this.c = canvas; this.ctx = canvas.getContext('2d');
+    this.small = !!opts.small; this.fixed = opts.size || 0;
+    this.clock = Math.random()*100; this.visible = true;
+    this.look = {x:0,y:0}; this.lookT = {x:0,y:0}; this.glanceAt = 0;
+    this.blinkAt = performance.now()/1000 + 1 + Math.random()*3; this.blinkT = -1;
+    this.happyUntil = 0; this.lean = {x:0,y:0};
+    this.setStyle(styleId);
+    if (opts.interactive !== false){
+      canvas.addEventListener('pointerdown', e => { this.poke(e); });
+    }
+    this.resize();
+  }
+  setStyle(id){ this.style = id; this.build(); }
+  build(){
+    // normalized (canvas side = 1) collision-free sampling
+    const small = this.small;
+    const mid = 0.235, half = small ? 0.085 : 0.075;
+    const maxN = small ? 26 : 175, gap = small ? 0.02 : 0.0055;
+    const pts = [];
+    let tries = 0;
+    while (pts.length < maxN && tries++ < 9000){
+      const g = (Math.random()+Math.random()+Math.random()-1.5)/1.5; // ~normal, [-1,1]
+      const r = mid + g*half*1.25;
+      const a = Math.random()*TAU;
+      const t = clamp(Math.abs(r-mid)/(half*1.25),0,1);
+      let s = lerp(0.0165,0.0055,Math.pow(t,1.3))*(0.62+0.5*Math.random());
+      if (small) s = s*1.9 + 0.006;
+      const x = Math.cos(a)*r, y = Math.sin(a)*r;
+      let ok = true;
+      for (const q of pts){ const dx=q.hx-x, dy=q.hy-y, m=q.s0+s+gap; if (dx*dx+dy*dy < m*m){ ok=false; break; } }
+      if (!ok) continue;
+      const rnd = Math.random();
+      let tone, acc = -1;
+      if (Math.random() < (small?0:0.035)) acc = Math.floor(Math.random()*3);
+      if (rnd < 0.12+0.55*t) tone = 3 + (Math.random() < t ? 1 : 0);
+      else tone = Math.floor(Math.random()*3);
+      pts.push({a0:a, r0:r, hx:x, hy:y, s0:s, tone, acc,
+        al: 1 - 0.5*t*Math.random(), layer: r > mid ? 1 : 0,
+        p1:Math.random()*TAU, p2:Math.random()*TAU, f1:0.6+Math.random()*1.4, f2:0.6+Math.random()*1.4,
+        x:NaN, y:NaN, vx:0, vy:0, cx:0, cy:0, ca:1, cs:0});
+    }
+    this.pts = pts;
+    // neighbour threads for constellation
+    this.pairs = [];
+    if (this.style === 'constellation'){
+      const md = small ? 0.09 : 0.058;
+      for (let i=0;i<pts.length;i++) for (let j=i+1;j<pts.length;j++){
+        const dx=pts[i].hx-pts[j].hx, dy=pts[i].hy-pts[j].hy;
+        if (dx*dx+dy*dy < md*md) this.pairs.push([i,j]);
+      }
+    }
+  }
+  resize(){
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    const w = this.fixed || this.c.clientWidth || 200, h = this.fixed || this.c.clientHeight || 200;
+    if (this.fixed){ this.c.style.width = w+'px'; this.c.style.height = h+'px'; }
+    this.c.width = Math.round(w*dpr); this.c.height = Math.round(h*dpr);
+    this.w = w; this.h = h; this.dpr = dpr; this.S = Math.min(w,h);
+    for (const p of this.pts) p.x = NaN;
+  }
+  poke(e){
+    const now = performance.now()/1000;
+    this.happyUntil = now + 0.9;
+    const S = this.S, cx = this.w/2, cy = this.h/2;
+    let ox = cx, oy = cy;
+    if (e && e.clientX != null){ const r = this.c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; }
+    const k = this.style==='swarm' ? 2.2 : this.style==='magnetic' ? 1.5 : 1;
+    for (const p of this.pts){
+      let dx = p.x-ox, dy = p.y-oy; const d = Math.hypot(dx,dy)||1;
+      const f = S*0.022*k*(0.5+Math.random()) * clamp(1.6 - d/(S*0.5), 0.4, 1.6);
+      p.vx += dx/d*f; p.vy += dy/d*f;
+    }
+    this.blinkT = -1;
+  }
+
+  frame(now, dt){
+    if (!this.visible) return;
+    const st = G.state;
+    const speed = (st==='sleeping' ? 0.3 : 1) * (reduceMotion ? 0.5 : 1);
+    this.clock += dt*speed;
+    const t = this.clock, S = this.S, sty = this.style, f = clamp(dt*60, 0.2, 3);
+    const happy = st==='happy' || now < this.happyUntil;
+    const env = G.speech, lvl = G.level;
+    const amp = reduceMotion ? 0.5 : 1;
+
+    // pointer in local coords
+    const rect = this.c.getBoundingClientRect();
+    const mx = G.pointer.x - rect.left, my = G.pointer.y - rect.top;
+    const near = mx > -S*0.1 && mx < this.w+S*0.1 && my > -S*0.1 && my < this.h+S*0.1;
+
+    // global transform
+    let cx = this.w/2, cy = this.h/2 - S*0.02, gs = 1, sx = 1, sy = 1, rot = 0;
+    if (sty==='breathe') gs *= 1 + 0.04*amp*Math.sin(t*1.4) * (st==='listening'?0.5:1);
+    if (st==='sleeping') gs *= 1 + 0.018*Math.sin(t*3.2);
+    let lift = 0;
+    if (sty==='jelly'){
+      const bob = Math.sin(t*2.3);
+      lift = (st==='sleeping' ? -0.02 : (0.5+0.5*bob)*0.03)*S*amp;
+      const sq = st==='sleeping' ? 0.06 : 0.035*Math.cos(t*4.6) + (st==='listening'?lvl*0.06:0) + (st==='speaking'?env*0.05:0);
+      sy = 1 - sq*amp; sx = 1 + sq*amp;
+      const tx = near && G.follow ? clamp((mx-cx)/S,-0.6,0.6)*S*0.05 : 0;
+      this.lean.x = lerp(this.lean.x, tx, 0.06*f);
+      cx += this.lean.x; rot = this.lean.x/S*0.8;
+      if (st==='thinking') rot += 0.12;
+    }
+    if (happy) lift += Math.abs(Math.sin(t*7.5))*S*(sty==='jelly'?0.06:0.03)*amp;
+    cy -= lift;
+
+    const k = (sty==='swarm' ? 0.035 : 0.11), damp = sty==='swarm' ? 0.9 : 0.8;
+    const repR = S*(sty==='magnetic' ? 0.22 : 0.11), repF = (sty==='magnetic' ? 2.6 : 0.8) * (st==='sleeping'?0.2:1);
+    const head = t*2.6;
+    const cr = Math.cos(rot), sr = Math.sin(rot);
+    const dots = G.colors.dots, accs = G.colors.accent;
+
+    for (const p of this.pts){
+      let a = p.a0, r = p.r0*S*gs, size = p.s0*S, al = p.al, wx = 0, wy = 0;
+      switch (sty){
+        case 'orbit': a += t*0.12*(p.layer ? 1 : -1.35); break;
+        case 'constellation': a += t*0.06; break;
+        case 'ripple': { const w = Math.sin(p.a0*3 - t*2.4); r += S*0.022*w*amp; size *= 1 + 0.22*w; break; }
+        case 'breathe': size *= 1 + 0.28*Math.sin(t*1.4 - p.r0*22); break;
+        case 'twinkle': { const tw = 0.5+0.5*Math.sin(t*p.f1*2.2 + p.p1); al *= 0.22 + 0.78*tw*tw; size *= 0.75 + 0.4*tw; break; }
+        case 'swarm': wx = Math.sin(t*p.f1*1.6+p.p1)*S*0.016*amp; wy = Math.cos(t*p.f2*1.6+p.p2)*S*0.016*amp; break;
+      }
+      if (st==='listening'){
+        r += lvl*S*0.04*amp*(0.45+0.55*Math.sin(p.a0*5 + t*6 + p.p1*0.4));
+        if (sty==='twinkle') al = Math.max(al, lvl*p.al);
+      } else if (st==='thinking'){
+        a += t*(sty==='swarm' ? 1.4 : 0.9);
+        const d = (1+Math.cos(a - head))/2, c = Math.pow(d,4);
+        al *= 0.28 + 0.72*c; size *= 0.82 + 0.38*c;
+      } else if (st==='speaking'){
+        const pulse = 0.5+0.5*Math.sin(p.r0*70 - t*11);
+        r += env*S*(sty==='swarm'?0.05:0.03)*amp*pulse;
+        if (sty==='twinkle') al *= 0.5 + 0.5*env + 0.3*pulse;
+      } else if (st==='sleeping'){
+        al *= 0.5; size *= 0.92;
+      }
+      if (happy) size *= 1.08;
+
+      let x = Math.cos(a)*r*sx, y = Math.sin(a)*r*sy;
+      const tx = cx + x*cr - y*sr + wx, ty = cy + x*sr + y*cr + wy;
+      if (isNaN(p.x)){ p.x = tx; p.y = ty; }
+      p.vx += (tx - p.x)*k*f; p.vy += (ty - p.y)*k*f;
+      if (near){
+        const dx = p.x - mx, dy = p.y - my, d2 = dx*dx + dy*dy;
+        if (d2 < repR*repR){ const d = Math.sqrt(d2)||1, q = 1 - d/repR; p.vx += dx/d*q*q*repF*f; p.vy += dy/d*q*q*repF*f; }
+      }
+      const dm = Math.pow(damp, f);
+      p.vx *= dm; p.vy *= dm; p.x += p.vx*f; p.y += p.vy*f;
+      p.ca = al; p.cs = size;
+      p.col = p.acc >= 0 ? accs[p.acc] : dots[p.tone];
+    }
+
+    // eyes: look target
+    const lookMax = S*(sty==='magnetic' ? 0.03 : 0.022);
+    const idleLong = now - G.pointer.lastMove > 3.5;
+    if (st==='thinking'){
+      this.lookT.x = lookMax*0.7 + Math.sin(t*3)*lookMax*0.12; this.lookT.y = -lookMax*0.8;
+    } else if (st==='sleeping'){
+      this.lookT.x = 0; this.lookT.y = lookMax*0.3;
+    } else if (G.follow && !idleLong && G.pointer.x > -9000){
+      const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy)||1, m = clamp(d/(S*0.7),0,1);
+      this.lookT.x = dx/d*m*lookMax; this.lookT.y = dy/d*m*lookMax*0.7;
+    } else if (now > this.glanceAt){
+      const g = Math.random();
+      this.lookT.x = g < 0.4 ? 0 : (Math.random()*2-1)*lookMax; this.lookT.y = g < 0.4 ? 0 : (Math.random()*2-1)*lookMax*0.5;
+      this.glanceAt = now + 1.2 + Math.random()*2.8;
+    }
+    const lk = (sty==='magnetic' ? 0.3 : 0.16)*f;
+    this.look.x = lerp(this.look.x, this.lookT.x, clamp(lk,0,1));
+    this.look.y = lerp(this.look.y, this.lookT.y, clamp(lk,0,1));
+
+    // blink
+    let open = 1;
+    if (st!=='sleeping'){
+      if (this.blinkT < 0 && now > this.blinkAt){ this.blinkT = 0; }
+      if (this.blinkT >= 0){
+        this.blinkT += dt;
+        const bt = this.blinkT/0.16;
+        open = bt < 1 ? Math.abs(1-2*bt)*0.92+0.08 : 1;
+        if (bt >= 1){ this.blinkT = -1; this.blinkAt = now + (Math.random()<0.18 ? 0.22 : 2 + Math.random()*3.5); }
+      }
+    }
+
+    this.draw({cx, cy, S, rot, lift, open, happy, env, lvl, st, t, sx, sy, near});
+  }
+
+  draw(o){
+    const {ctx, dpr} = this, {cx, cy, S, st, t} = o;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,this.w,this.h);
+    const C = G.colors;
+
+    // shadow
+    if (!this.small){
+      const shY = this.h/2 + S*0.39, k = 1 - o.lift/(S*0.12);
+      const sw = S*0.24*clamp(k,0.5,1.1), sh = S*0.03*clamp(k,0.5,1.1);
+      const g = ctx.createRadialGradient(this.w/2, shY, 0, this.w/2, shY, sw);
+      const sa = (G.dark ? 0.45 : 0.16)*clamp(k,0.4,1);
+      g.addColorStop(0, `rgba(${C.shadow},${sa})`); g.addColorStop(1, `rgba(${C.shadow},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(this.w/2, shY, sw, sh, 0, 0, TAU); ctx.fill();
+    }
+
+    // threads
+    if (this.pairs.length){
+      const md = S*(this.small?0.11:0.075);
+      ctx.lineWidth = Math.max(0.6, S*0.0018); ctx.strokeStyle = C.line;
+      for (const [i,j] of this.pairs){
+        const a = this.pts[i], b = this.pts[j];
+        const d = Math.hypot(a.x-b.x, a.y-b.y);
+        if (d > md) continue;
+        let al = (1 - d/md)*0.45*Math.min(a.ca,b.ca);
+        if (st==='sleeping') al *= 0.3;
+        if (st==='happy') al *= 1.6;
+        ctx.globalAlpha = clamp(al,0,1);
+        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+      }
+    }
+
+    // dots
+    for (const p of this.pts){
+      ctx.globalAlpha = clamp(p.ca,0,1); ctx.fillStyle = p.col;
+      ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.4,p.cs), 0, TAU); ctx.fill();
+    }
+    // twinkle sparkle crosses
+    if (this.style==='twinkle' && !this.small){
+      ctx.strokeStyle = C.dots[3]; ctx.lineCap = 'round'; ctx.lineWidth = Math.max(1, S*0.003);
+      for (let i=0;i<this.pts.length;i+=11){
+        const p = this.pts[i], v = Math.sin(t*p.f1*1.1 + p.p2);
+        if (v < 0.93) continue;
+        const L = p.cs*2.4*(v-0.93)/0.07 + p.cs;
+        ctx.globalAlpha = (v-0.93)/0.07*0.8;
+        ctx.beginPath(); ctx.moveTo(p.x-L,p.y); ctx.lineTo(p.x+L,p.y); ctx.moveTo(p.x,p.y-L); ctx.lineTo(p.x,p.y+L); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // eyes
+    const sp = S*(this.small ? 0.06 : 0.046);
+    const ew = S*(this.small ? 0.05 : 0.036), eh0 = S*(this.small ? 0.11 : 0.088);
+    ctx.save();
+    ctx.translate(cx + this.look.x, cy + this.look.y);
+    ctx.rotate(o.rot);
+    ctx.scale(o.sx, o.sy);
+    const grad = ctx.createLinearGradient(0, -eh0/2, 0, eh0/2);
+    grad.addColorStop(0, C.eye[0]); grad.addColorStop(1, C.eye[1]);
+    ctx.fillStyle = grad; ctx.strokeStyle = grad; ctx.lineCap = 'round';
+    for (const side of [-1,1]){
+      const ex = side*sp;
+      if (o.happy){
+        ctx.lineWidth = ew*0.82;
+        ctx.beginPath(); ctx.arc(ex, eh0*0.2, ew*1.05, Math.PI*1.18, Math.PI*1.82); ctx.stroke();
+      } else if (st==='sleeping'){
+        ctx.lineWidth = ew*0.6;
+        ctx.beginPath(); ctx.arc(ex, -ew*0.5, ew*1.0, Math.PI*0.2, Math.PI*0.8); ctx.stroke();
+      } else {
+        let eh = eh0*o.open, ewd = ew;
+        if (st==='listening'){ eh *= 1.06 + o.lvl*0.08; ewd *= 1.08; }
+        if (st==='speaking'){ eh *= 1 - o.env*0.22; }
+        if (st==='thinking' && side===-1){ eh *= 0.86; }
+        if (o.near && this.style==='magnetic') { eh *= 1.06; }
+        const bounce = st==='speaking' ? -o.env*S*0.008 : 0;
+        const rr = Math.min(ewd/2, eh/2);
+        ctx.beginPath();
+        ctx.roundRect(ex - ewd/2, -eh/2 + bounce, ewd, eh, rr);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+
+    // zZ
+    if (st==='sleeping' && !this.small){
+      ctx.fillStyle = C.z; ctx.textAlign = 'center';
+      for (let i=0;i<2;i++){
+        const ph = ((t*0.9 + i*0.5) % 1);
+        ctx.globalAlpha = Math.sin(ph*Math.PI)*0.85;
+        ctx.font = `600 ${S*(0.04+i*0.015)}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.fillText('z', cx + S*(0.13 + i*0.05 + ph*0.04), cy - S*(0.05 + i*0.05 + ph*0.12));
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+}
+
+/* ---------- build UI ---------- */
+const $ = s => document.querySelector(s);
+const mascots = [];
+let selected = 0;
+
+function segButtons(el, items, current, onPick, keyHint){
+  el.innerHTML = '';
+  items.forEach((it, i) => {
+    const b = document.createElement('button');
+    b.textContent = it.name; b.dataset.id = it.id;
+    if (keyHint) b.title = `Press ${i+1}`;
+    b.setAttribute('aria-pressed', it.id===current);
+    b.onclick = () => onPick(it.id);
+    el.appendChild(b);
+  });
+}
+function markSeg(el, id){ el.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.id===id)); }
+
+function setState(id){
+  G.state = id; markSeg($('#states'), id);
+  const s = STATES.find(x=>x.id===id);
+  $('#heroState').textContent = s.name; $('#chatLine').textContent = s.line;
+  renderBehave();
+}
+function setPalette(id){ G.palette = PALETTES.find(p=>p.id===id); markSeg($('#palettes'), id); refreshColors(); }
+
+segButtons($('#states'), STATES, G.state, id => { stopCycle(); setState(id); }, true);
+segButtons($('#palettes'), PALETTES, G.palette.id, setPalette);
+
+// grid cards
+const grid = $('#grid');
+STYLES.forEach((s, i) => {
+  const card = document.createElement('button');
+  card.className = 'card'; card.type = 'button';
+  card.innerHTML = `<div class="cv"><canvas></canvas></div><div class="meta"><div class="row"><h4>${s.name}</h4><span class="n">${String(i+1).padStart(2,'0')}</span></div><p>${s.blurb.match(/^[^.]*\./)[0]}</p></div>`;
+  grid.appendChild(card);
+  const m = new Mascot(card.querySelector('canvas'), s.id, {interactive:false});
+  card.addEventListener('click', e => { m.poke(e); select(i); });
+  mascots.push(m);
+});
+
+// hero, sizes, chat
+const hero = new Mascot($('#heroCanvas'), STYLES[0].id);
+mascots.push(hero);
+const sizeWrap = $('#sizes');
+const sizeMascots = [120, 64, 36].map(px => {
+  const fig = document.createElement('figure');
+  fig.innerHTML = `<canvas></canvas><figcaption>${px}px</figcaption>`;
+  sizeWrap.appendChild(fig);
+  const m = new Mascot(fig.querySelector('canvas'), STYLES[0].id, {size:px, small:px<80});
+  mascots.push(m); return m;
+});
+const chat = new Mascot($('#chatCanvas'), STYLES[0].id, {size:40, small:true});
+mascots.push(chat);
+
+function renderBehave(){
+  const s = STYLES[selected];
+  $('#behave').innerHTML = STATES.map(st => `<div class="${st.id===G.state?'on':''}" style="display:contents"><dt>${st.name}</dt><dd>${s.act[st.id]}</dd></div>`).join('');
+}
+function select(i){
+  selected = (i + STYLES.length) % STYLES.length;
+  const s = STYLES[selected];
+  [hero, ...sizeMascots, chat].forEach(m => m.setStyle(s.id));
+  grid.querySelectorAll('.card').forEach((c,j) => c.setAttribute('aria-current', j===selected));
+  $('#infoNum').textContent = 'Option ' + String(selected+1).padStart(2,'0');
+  $('#infoName').textContent = s.name;
+  $('#infoBlurb').textContent = s.blurb;
+  $('#infoTags').innerHTML = s.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  renderBehave();
+}
+
+/* ---------- toggles ---------- */
+const followBtn = $('#follow');
+followBtn.onclick = () => { G.follow = !G.follow; followBtn.setAttribute('aria-pressed', G.follow); };
+const themeBtn = $('#theme');
+function syncThemeBtn(){ refreshColors(); themeBtn.setAttribute('aria-pressed', G.dark); }
+themeBtn.onclick = () => { document.documentElement.dataset.theme = G.dark ? 'light' : 'dark'; syncThemeBtn(); };
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeBtn);
+
+let cycleTimer = null;
+const cycleBtn = $('#cycle');
+function stopCycle(){ clearInterval(cycleTimer); cycleTimer = null; cycleBtn.setAttribute('aria-pressed', false); }
+cycleBtn.onclick = () => {
+  if (cycleTimer) return stopCycle();
+  cycleBtn.setAttribute('aria-pressed', true);
+  cycleTimer = setInterval(() => { const i = STATES.findIndex(s=>s.id===G.state); setState(STATES[(i+1)%STATES.length].id); }, 3200);
+};
+
+/* ---------- input ---------- */
+addEventListener('pointermove', e => { G.pointer.x = e.clientX; G.pointer.y = e.clientY; G.pointer.lastMove = performance.now()/1000; }, {passive:true});
+document.addEventListener('pointerleave', () => { G.pointer.x = -9999; G.pointer.y = -9999; });
+addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('input,textarea')) return;
+  const n = parseInt(e.key,10);
+  if (n>=1 && n<=STATES.length){ stopCycle(); setState(STATES[n-1].id); }
+  else if (e.key==='ArrowRight'){ select(selected+1); }
+  else if (e.key==='ArrowLeft'){ select(selected-1); }
+  else if (e.key===' ' && e.target===document.body){ e.preventDefault(); hero.poke(); }
+});
+
+/* ---------- visibility + resize ---------- */
+const io = new IntersectionObserver(es => es.forEach(en => { const m = mascots.find(m=>m.c===en.target); if (m) m.visible = en.isIntersecting; }));
+mascots.forEach(m => io.observe(m.c));
+const ro = new ResizeObserver(es => es.forEach(en => { const m = mascots.find(m=>m.c===en.target); if (m && !m.fixed) m.resize(); }));
+mascots.forEach(m => ro.observe(m.c));
+
+/* ---------- loop ---------- */
+let last = performance.now();
+let lvlT = 0;
+function loop(ms){
+  const now = ms/1000, dt = Math.min(0.05, (ms-last)/1000); last = ms;
+  // simulated voice envelopes
+  const syll = Math.max(0, Math.sin(now*13)*0.6 + Math.sin(now*7.3+1)*0.4);
+  const phrase = Math.sin(now*0.9) > -0.55 ? 1 : 0.08;
+  G.speech = lerp(G.speech, clamp(syll*phrase,0,1), 0.35);
+  if (Math.random() < 0.08) lvlT = Math.random()*(Math.sin(now*0.7)>-0.3 ? 1 : 0.25);
+  G.level = lerp(G.level, lvlT, 0.12);
+  for (const m of mascots) m.frame(now, dt);
+  requestAnimationFrame(loop);
+}
+
+refreshColors(); syncThemeBtn();
+select(0); setState('idle');
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
