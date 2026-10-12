@@ -1016,10 +1016,10 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 const SECS = { needs: ['decisions', 'inbox', 'deals', 'tasks'], today: ['calendar', 'teams', 'clocks'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'watch';
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
-_m(TX.en, { sec: { needs: 'Needs you', today: 'Today', health: 'Business health', watch: 'Watchlist', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
+_m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
   rNeeds: '{d} {ds} open · {m} urgent {ms}', rNeedsOk: 'Nothing waiting on you', rToday: 'Next: {x} at {s}', rTodayDone: 'No more meetings today', rTodaySoon: 'Starts in {n} min: {x}',
   rHealth: 'Revenue {r} · runway {c}', rWatch: '{b} high {bs} · {l} {ls} delayed', rWatchOk: 'No high risks or delays' } });
-_m(TX.ar, { sec: { needs: 'بانتظارك', today: 'اليوم', health: 'صحة الأعمال', watch: 'قائمة المراقبة', nav: 'أقسام اللوحة', more: 'أقسام أخرى', prev: 'الأقسام السابقة',
+_m(TX.ar, { sec: { needs: 'يتطلب إجراء', today: 'الجدول', health: 'صحة الأعمال', watch: 'المخاطر والانكشاف', nav: 'أقسام اللوحة', more: 'أقسام أخرى', prev: 'الأقسام السابقة',
   rNeeds: '{d} قرارات مفتوحة · {m} رسائل عاجلة', rNeedsOk: 'لا شيء بانتظارك', rToday: 'التالي: {x} الساعة {s}', rTodayDone: 'لا اجتماعات أخرى اليوم', rTodaySoon: 'يبدأ خلال {n} د: {x}',
   rHealth: 'الإيرادات {r} · السيولة {c}', rWatch: '{b} مخاطر عالية · {l} مشاريع متأخرة', rWatchOk: 'لا مخاطر عالية أو تأخير' } });
 _m(TX.en, { br: { score: 'Health score', healthy: 'Healthy', steady: 'Steady', pressure: 'Under pressure', good: 'going well', watch: 'to watch', todo: 'to do', rev: 'Revenue', top5: 'Top-5 share', board: 'Board pack', signed: 'Signed', boardDone: 'Q3 board pack signed' } });
