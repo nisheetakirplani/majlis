@@ -332,6 +332,15 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .inc{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:var(--rs);background:var(--bad-soft);flex:none}.inc small{display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--bad)}.inc small::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--bad);animation:calPulse 1.6s ease-in-out infinite}
 .inc h4{margin:0;font:600 16px/1.3 var(--font)}.inc p{margin:0;font-size:12.5px;color:var(--ink2)}.inc--calm{background:var(--ok-soft)}.inc--calm small{color:var(--accent)}.inc--calm small::before{background:var(--accent);animation:none}
 
+/* ---------- Text view: the same numbers as a one-line takeaway + label/value rows ---------- */
+.txh{margin:0;font:400 13.5px/1.45 var(--font);color:var(--ink2);flex:none}.txh b{color:var(--ink);font-weight:600}
+.txl{display:flex;flex-direction:column;min-width:0;flex:none}
+.txr{display:flex;align-items:center;gap:10px;min-height:38px;padding:4px 6px;border-top:1px solid var(--line);width:100%;text-align:start;font-size:13.5px;transition:background .15s}.txl>.txr:first-child{border-top:0}
+button.txr:hover{background:var(--tile);border-radius:9px;border-top-color:transparent}
+.txr>span{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.txr>span em{font-style:normal;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.txr>span small{font-size:12px;line-height:15px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.txr .dot--none{visibility:hidden}.txr>b{font:600 14px/1 var(--font);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}.txr .dot{flex:none}
+.txm{margin:auto 0 0;font:500 12px/1 var(--font);color:var(--ink3);flex:none}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -692,7 +701,7 @@ _m(TX.en, {
   nav: { overview: 'Overview', documents: 'Documents', analytics: 'Analytics', insights: 'Insights', plans: 'Plans', team: 'Team', integrations: 'Integrations', settings: 'Settings', logout: 'Log out', new: 'New' },
   pageS: { documents: 'Files and conversations changing across your company', analytics: 'Performance, cash and risk at a glance', insights: 'What Majlis noticed for you', plans: 'Strategic projects, decisions and commitments', team: 'People, teams and customers', integrations: 'Connect the tools Majlis reads from', settings: 'Personalise your workspace' },
   period: { Week: 'Week', Month: 'Month', Year: 'Year' }, mix: 'Revenue by market', sortDesc: 'Descending', sortAsc: 'Ascending',
-  pinned: 'Pinned', pinnedNote: 'Pinned to the top row', viewData: 'Data view', viewViz: 'Visual view', collapse: 'Collapse sidebar', expand: 'Expand sidebar', autofit: 'Auto-fit', menu: 'Menu',
+  pinned: 'Pinned', pinnedNote: 'Pinned to the top row', viewData: 'Text view', viewViz: 'Graph view', collapse: 'Collapse sidebar', expand: 'Expand sidebar', autofit: 'Auto-fit', menu: 'Menu',
   askSub: 'Connected to Outlook, Teams, SharePoint and Excel', newChat: 'New chat', back: 'Back to dashboard', recent: 'Recent', chatHi: 'How can I help, {n}?', chatSub: 'Ask anything about your company. I read across your connected tools and show my working.', resume: 'Resume: {q}', fullBrief: 'Full brief', listen: 'Listen · 0:42', playing: 'Playing 0:42',
   goodWell: 'Going well', watch: 'Watch', doNext: 'Do next', user: 'Syed Hafeez', plan: 'Enterprise', signedOut: 'Signed out (demo)', editHint: 'Customize mode · drag to rearrange, drag a corner to resize, tap − to hide. Widgets snap to the bento grid and fill gaps automatically.',
   decisionsNeed: '{d} decisions need you', meetingsToday: '{mt} meetings today', revVs: 'Revenue {r} vs plan', syncedN: 'Synced {m} min ago · {n} sources',
@@ -704,7 +713,7 @@ _m(TX.ar, {
   nav: { overview: 'نظرة عامة', documents: 'المستندات', analytics: 'التحليلات', insights: 'الرؤى', plans: 'الخطط', team: 'الفريق', integrations: 'التكاملات', settings: 'الإعدادات', logout: 'تسجيل الخروج', new: 'جديد' },
   pageS: { documents: 'ملفات ومحادثات تتغير في شركتك', analytics: 'الأداء والسيولة والمخاطر بنظرة واحدة', insights: 'ما لاحظه مجلس لأجلك', plans: 'المشاريع الاستراتيجية والقرارات والالتزامات', team: 'الأفراد والفرق والعملاء', integrations: 'اربط الأدوات التي يقرأ منها مجلس', settings: 'خصّص مساحة عملك' },
   period: { Week: 'أسبوع', Month: 'شهر', Year: 'سنة' }, mix: 'الإيرادات حسب السوق', sortDesc: 'تنازلي', sortAsc: 'تصاعدي',
-  pinned: 'مثبّت', pinnedNote: 'مثبّت في الصف العلوي', viewData: 'عرض البيانات', viewViz: 'عرض مرئي', collapse: 'طيّ الشريط الجانبي', expand: 'توسيع الشريط الجانبي', autofit: 'ملاءمة تلقائية', menu: 'القائمة',
+  pinned: 'مثبّت', pinnedNote: 'مثبّت في الصف العلوي', viewData: 'عرض نصي', viewViz: 'عرض بياني', collapse: 'طيّ الشريط الجانبي', expand: 'توسيع الشريط الجانبي', autofit: 'ملاءمة تلقائية', menu: 'القائمة',
   askSub: 'متصل بـ Outlook وTeams وSharePoint وExcel', newChat: 'محادثة جديدة', back: 'العودة إلى اللوحة', recent: 'الأحدث', chatHi: 'كيف أساعدك يا {n}؟', chatSub: 'اسأل عن أي شيء في شركتك. أقرأ عبر أدواتك المتصلة وأعرض طريقة وصولي للإجابة.', resume: 'متابعة: {q}', fullBrief: 'الموجز الكامل', listen: 'استمع · 0:42', playing: 'يتم التشغيل 0:42',
   goodWell: 'يسير جيدًا', watch: 'للمراقبة', doNext: 'الخطوة التالية', user: 'سيد حافظ', plan: 'المؤسسات', signedOut: 'تم تسجيل الخروج (عرض)', editHint: 'وضع التخصيص · اسحب لإعادة الترتيب، واسحب الزاوية لتغيير الحجم، واضغط − للإخفاء. تلتصق الأدوات بالشبكة وتملأ الفراغات تلقائيًا.',
   decisionsNeed: '{d} قرارات بانتظارك', meetingsToday: '{mt} اجتماعات اليوم', revVs: 'الإيرادات {r} عن الخطة', syncedN: 'آخر مزامنة منذ {m} د · {n} مصادر',
@@ -1354,6 +1363,53 @@ const W = {
       const cols = v === 's' ? 2 : w >= 8 ? 4 : w >= 6 ? 4 : 2, rows = v === 's' || h <= 2 ? 1 : Math.max(1, Math.min(2, Math.floor((bodyH(h) + 8) / 104))), n = Math.min(c.length, cols * rows);
       return `<div class="sdl" style="--n:${Math.min(cols, n)}">${c.slice(0, n).map(cell).join('')}</div>`; } },
 };
+/* ----------------------------------------------------------- Text view for every widget with a chart.
+   Graph = the designed view (default). Text = a one-line takeaway, then the same numbers as tappable label/value rows. */
+const txRow = (l, val, o = {}) => { const tagN = o.q ? 'button' : 'div';
+  return `<${tagN} class="txr"${o.q ? ` data-act="ask-open" data-q="${esc(o.q)}"` : ''}><i class="dot dot--${o.lv || 'none'}"></i><span><em>${l}</em>${o.sub ? `<small>${o.sub}</small>` : ''}</span><b${o.c ? ` style="color:${o.c}"` : ''}>${val}</b></${tagN}>`; };
+const txView = (h, lead, rows) => { const per = rows.some(r => r[2] && r[2].sub) ? 46 : 38, k = Math.max(1, Math.floor((bodyH(h) - (lead ? 34 : 0) - 18) / per));
+  return `${lead ? `<p class="txh">${lead}</p>` : ''}<div class="txl">${rows.slice(0, k).map(r => txRow(r[0], r[1], r[2])).join('')}</div>${rows.length > k ? `<p class="txm">${t('tx.more', { n: rows.length - k })}</p>` : ''}`; };
+const LVC = { bad: 'var(--bad)', warn: 'var(--warn)', ok: 'var(--accent)' };
+_m(TX.en, { viewData: 'Text view', viewViz: 'Graph view', tx: { more: '+{n} more · switch to graph for the full picture' } });
+_m(TX.ar, { viewData: 'عرض نصي', viewViz: 'عرض بياني', tx: { more: '+{n} أخرى · بدّل إلى العرض البياني للصورة كاملة' } });
+const TXT = {
+  deadlines({ h }) { const L = [...D.deadlines].sort((a, b) => a.d - b.d), lv = d => d <= 7 ? 'bad' : d <= 21 ? 'warn' : 'ok';
+    return txView(h, `Next: <b>${esc(L[0].n)}</b> in ${t('q.days', { n: L[0].d })}`, L.map(x => [esc(x.n), t('q.inDays', { n: x.d }), { lv: lv(x.d), sub: `${esc(x.o)} · ${esc(x.st)}`, c: LVC[lv(x.d)], q: `Are we ready for the ${x.n}?` }])); },
+  deals({ h }) { const L = [...D.fin.deals].sort((a, b) => b.v - a.v), tot = +L.reduce((a, x) => a + x.v, 0).toFixed(1), pipe = D.fin.stages.reduce((a, x) => a + x[1], 0);
+    return txView(h, `<b>AED ${tot}M</b> at risk across ${L.length} deals · ${Math.round(tot / pipe * 100)}% of pipeline`, L.map(x => [esc(x.n), x.v + 'M', { lv: x.lv, sub: `${esc(x.d)} · ${esc(x.why)} · ${t('fin.closes', { m: x.close })}`, q: `How do we save the ${x.n} deal?` }])); },
+  calendar({ h }) { const now = nowMin(), ms = D.meetings, left = ms.filter(m => toM(m.e) > now), nx = left[0];
+    return txView(h, nx ? `${left.length} meetings left today · next <b>${esc(nx.title)}</b> at ${nx.s}` : t('cal.endT'), ms.map(m => { const past = toM(m.e) <= now, live = toM(m.s) <= now && !past;
+      return [esc(m.title), `${m.s}–${m.e}`, { lv: live ? 'bad' : past ? '' : 'ok', sub: `${esc(m.where)}${past ? ' · done' : live ? ' · now' : ''}`, c: past ? 'var(--ink3)' : '', q: t('cal.brief', { x: m.title }) }]; })); },
+  clocks({ h }) { const base = tzParts('Asia/Dubai').hour;
+    return txView(h, '', D.clocks.map(x => { const p = tzParts(x.tz), off = ((p.hour - base + 36) % 24) - 12; return [x.c, `<span data-clock="${x.tz}">--:--</span>`, { sub: `${t('sd.' + dayPart(p.hour))}${off ? ` · ${off > 0 ? '+' : ''}${off}h vs Dubai` : ''}` }]; })); },
+  pulse({ h }) { const k = D.kp[S.period], hc = D.kpis.find(x => x.id === 'hc'), V = [k[0], k[1], { l: hc.label, v: hc.val, d: hc.delta.replace(/^\+/, ''), up: hc.up, good: 1 }, k[2]];
+    return txView(h, `${t('period.' + S.period)} · <b>${V.filter(x => x.good).length} of 4</b> vitals healthy`, V.map(x => [esc(x.l), esc(x.v), { lv: x.good ? 'ok' : 'warn', sub: `${x.up ? '▲' : '▼'} ${esc(x.d)}`, q: `Explain the change in ${x.l.toLowerCase()}` }])); },
+  boardKpis({ h }) { const K = D.board.kpis, ok = K.filter(x => x[2] === 'ok').length;
+    return txView(h, `<b>${ok} of ${K.length}</b> on promise · board in ${D.board.days} days`, K.map(([l, v, st, note]) => [l, v, { lv: st, sub: note, c: LVC[st], q: `Board KPI ${l}: ${v}, ${note}. What will the board ask?` }])); },
+  deptScore({ h }) { const ds = FIN.byGap, bad = ds.filter(d => d.st === 'bad').length;
+    return txView(h, `<b>${bad}</b> departments behind pace · company at <b>${fPct(FIN.T.pace)}</b> of pace`, ds.map(d => [esc(d.n), d.gap > 0 ? '−' + d.gap : '✓', { lv: d.st, sub: `${fPct(d.a / d.t)} of target · ${fPct(d.pace)} of pace`, c: LVC[d.st], q: `Why is ${d.n} ${d.gap} short of target?` }])); },
+  landing({ h }) { const T = FIN.T, df = T.land - T.t;
+    return txView(h, `Likely to land <b>${Math.abs(df)}M ${df < 0 ? 'short of' : 'above'}</b> the ${T.t}M target`, [[t('fin.landing'), T.land, { lv: df >= 0 ? 'ok' : 'warn', sub: `${t('fin.target')} ${T.t}` }], [t('fin.floor'), T.floor, { sub: `${t('fin.ach')} + ${t('fin.com').toLowerCase()}` }], [t('fin.best'), T.best, { sub: 'If pipeline converts above plan' }], [t('fin.ach'), T.a, {}], [t('fin.com'), '+' + T.c, {}], [t('fin.pipeW'), '+' + T.p, {}]]); },
+  pipeline({ h }) { const d = finSel(), sc = d ? d.p / FIN.T.p : 1, st = D.fin.stages.map(([k, u, pr]) => ({ k, u: u * sc, wv: u * pr * sc, pr })), Wt = st.reduce((a, x) => a + x.wv, 0), U = st.reduce((a, x) => a + x.u, 0), gap = d ? d.gap : FIN.T.gap, cov = gap > 0 ? Wt / gap : 9;
+    return txView(h, `Coverage <b>${cov >= 5 ? '5×+' : cov.toFixed(2) + '×'}</b> of the gap · aim 1.2×${d ? ' · ' + esc(d.n) : ''}`, [[t('fin.gap'), fM(gap) + 'M', {}], [t('fin.pipeW'), fM(Wt) + 'M', { lv: cov >= 1.2 ? 'ok' : cov >= 1 ? 'warn' : 'bad', sub: t('fin.weightedOf', { u: fM(U) }) }], ...st.map(x => [t('fin.st.' + x.k), fM(x.wv) + 'M', { sub: `${fM(x.u)}M total · ${Math.round(x.pr * 100)}% chance to close`, q: `Which ${t('fin.st.' + x.k).toLowerCase()} deals matter most?` }])]); },
+  backlog({ h }) { const B = D.fin.backlog, tot = B.reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0), n90 = B.slice(0, 3).reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0);
+    return txView(h, `<b>${tot}M</b> signed, not started · <b>${n90}M</b> starts in 90 days`, B.map(([m, x]) => [m, (x[0] + x[1] + x[2]) + 'M', { sub: `Enterprise ${x[0]} · Government ${x[1]} · ${t('fin.other')} ${x[2]}`, q: `What signed work starts in ${m}?` }])); },
+  cash({ h }) { const c = D.fin.cash, b = c.bal, lo = Math.min(...b);
+    return txView(h, `<b>${c.runway} months</b> of runway at today's burn`, [[t('fin.cashL'), b.at(-1) + 'M', { lv: 'ok', sub: `+${b.at(-1) - b[0]}M since ${D.fin.months[0]}` }], [t('fin.runway'), c.runway + ' ' + t('fin.mo'), {}], [t('fin.burn'), c.burn + 'M', {}], ['Dec forecast', c.dec + 'M', {}], ['Lowest point', lo + 'M', { sub: D.fin.months[b.indexOf(lo)] }]]); },
+  revenue({ h }) { const k = D.kp[S.period][0], s = D.series[S.period], mx = Math.max(...s.a), mn = Math.min(...s.a), rate = Math.round(s.b.reduce((a, x) => a + x, 0) / s.a.reduce((a, x) => a + x, 0) * 100);
+    return txView(h, `${esc(k.l)} · ${t('period.' + S.period)}`, [[esc(k.l), esc(k.v), { lv: k.good ? 'ok' : 'warn', sub: `${k.up ? '▲' : '▼'} ${esc(k.d)}` }], ['Cash collected', s.b.at(-1) + 'M', { sub: `Collection rate ${rate}%` }], ['Best point', mx + 'M', { sub: s.l[s.a.indexOf(mx)] }], ['Lowest point', mn + 'M', { sub: s.l[s.a.indexOf(mn)] }]]); },
+  margin({ h }) { const M = D.margin, L = [...M.depts].sort((a, b) => a[1] - b[1]);
+    return txView(h, `Company <b>${M.co}%</b> · ${Math.abs(M.co - M.plan)} pts ${M.co < M.plan ? 'below' : 'above'} plan`, L.map(([n, m]) => { const lv = m < 15 ? 'bad' : m < M.co ? 'warn' : 'ok'; return [esc(n), m + '%', { lv, c: LVC[lv], sub: m === M.co ? 'At average' : `${Math.abs(m - M.co)} pts ${m < M.co ? 'below' : 'above'} average`, q: `Why is ${n} margin ${m}%?` }]; })); },
+  workingCap({ h }) { const C = D.wc;
+    return txView(h, `Customers take <b>${C.dso} days</b> to pay, ${C.dsoD.replace('+', 'up ')}`, [[t('ex.dso'), C.dso + ' ' + t('ex.days'), { lv: 'warn', sub: C.dsoD + ' vs last month' }], [t('ex.dpo'), C.dpo + ' ' + t('ex.days'), { sub: C.dpoD + ' vs last month' }], ...C.aging.map(([l, v], i) => [`${l} days`, v + 'M', { lv: ['ok', 'ok', 'warn', 'bad'][i] }]), [esc(C.top[0]), C.top[1] + 'M', { lv: 'bad', sub: `${C.top[2]} days overdue`, q: `How do we collect from ${C.top[0]}?` }]]); },
+  people({ h }) { const p = D.people;
+    return txView(h, `<b>${p.hc}</b> people · ${p.d}`, [['Hires this year', p.hires, {}], ['Attrition', p.attr, { lv: 'ok', sub: 'Under the 8% cap' }], ...D.hiring.map(([k, n]) => [t('bh.stage.' + k), n, { q: `Show the ${t('bh.stage.' + k).toLowerCase()} in hiring` }]), ['Time to hire', '54 days', { lv: 'warn', sub: '3 senior roles open 90+ days' }]]); },
+  competitive({ h }) { const ord = { bad: 0, warn: 1, ok: 2 }, L = [...D.compet].sort((a, b) => ord[a.lv] - ord[b.lv]);
+    return txView(h, `This week: ${['bad', 'warn', 'ok'].map(lv => `<b>${L.filter(x => x.lv === lv).length}</b> ${t('bh.tag.' + { bad: 'threat', warn: 'watch', ok: 'opportunity' }[lv]).toLowerCase()}`).join(' · ')}`, L.map(x => [esc(x.c), t('bh.tag.' + x.tag), { lv: x.lv, c: LVC[x.lv], sub: `${esc(x.m)} · ${esc(x.dep)}`, q: `${x.c} ${x.m}. What does it mean for our ${x.dep} business?` }])); },
+  media({ h }) { const M = D.media;
+    return txView(h, `<b>${M.mentions.toLocaleString()}</b> mentions this week · ${M.delta}`, [['Positive', M.pos + '%', { lv: 'ok' }], ['Neutral', M.neu + '%', {}], ['Negative', M.neg + '%', { lv: 'bad' }], ...[...M.stories].sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)).map(x => [esc(x.s), '', { lv: x.lv === 'n' ? '' : x.lv, sub: esc(x.h), q: `${x.s}: ${x.h}. Should we respond?` }])]); },
+};
+for (const k in TXT) { W[k].text = TXT[k]; W[k].viz = true; W[k].defView = 'viz'; }
 const GROUPS = ['ai', 'overview', 'exec', 'comms', 'work', 'docs', 'finance', 'people', 'utils'];
 
 /* ----------------------------------------------------------- hero row (Overview): Ask Majlis 70% + Daily brief 30% */
@@ -1420,7 +1476,7 @@ const PAGES = {
   integrations: { icon: 'plug', special: true },
   settings: { icon: 'settings', special: true, bottom: true },
 };
-const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1), type, w, h, view: 'data' }));
+const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1), type, w, h, view: (W[type] && W[type].defView) || 'data' }));
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
@@ -1481,7 +1537,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout9.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout10.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1528,7 +1584,7 @@ const Grid = {
   canUndo() { return this.hi > 0; }, canRedo() { return this.hi < this.hist.length - 1; },
   resetHistory() { this.hist = [this.snap()]; this.hi = 0; this.onHist && this.onHist(); },
   /* mutations */
-  add(type, index, size) { const d = W[type], [w, h] = size || d.sizes[d.def]; const it = { id: type + '-' + Date.now().toString(36) + Math.floor(Math.random() * 99), type, w, h, view: 'data' };
+  add(type, index, size) { const d = W[type], [w, h] = size || d.sizes[d.def]; const it = { id: type + '-' + Date.now().toString(36) + Math.floor(Math.random() * 99), type, w, h, view: d.defView || 'data' };
     if (index == null || index < 0 || index > this.items.length) this.items.push(it); else this.items.splice(index, 0, it); this.mount(it, true); this.layout(); this.commit(); return it; },
   remove(id) { const it = this.items.find(i => i.id === id); if (!it) return; this.els.get(id)?.remove(); this.els.delete(id); this.items = this.items.filter(i => i !== it); this.layout(); this.commit(); return it; },
   removeType(type) { const it = this.items.find(i => i.type === type); return it && this.remove(it.id); },
@@ -1569,7 +1625,7 @@ const Grid = {
 /* ---- widget chrome shared by the live grid and the drawer previews ---- */
 const vtHTML = view => `<span class="vt" role="group"><button data-act="view" data-v="data" class="${view !== 'viz' ? 'is-on' : ''}" title="${t('viewData')}" aria-label="${t('viewData')}">${ico('list', 14)}</button><button data-act="view" data-v="viz" class="${view === 'viz' ? 'is-on' : ''}" title="${t('viewViz')}" aria-label="${t('viewViz')}">${ico('bars', 14)}</button></span>`;
 function wInner(type, w, h, view) { const d = W[type], v = VARIANT(w, h), ctx = { v, w, h, view }; const ctl = v !== 's' && d.ctl ? d.ctl(ctx) : '', cnt = d.count ? d.count() : null;
-  const html = `<header class="w__h"><span class="w__t"><b>${t('w.' + type)}</b>${cnt != null ? `<em class="cnt">${cnt}</em>` : ''}</span>${w >= 6 && ctl ? `<span class="w__c">${ctl}</span>` : ''}${d.viz ? vtHTML(view) : ''}<span class="w__mv">${ico('drag', 16)}</span></header>${w < 6 && ctl ? `<div class="w__ctl">${ctl}</div>` : ''}<div class="w__b">${d.render(ctx)}</div>`;
+  const html = `<header class="w__h"><span class="w__t"><b>${t('w.' + type)}</b>${cnt != null ? `<em class="cnt">${cnt}</em>` : ''}</span>${w >= 6 && ctl ? `<span class="w__c">${ctl}</span>` : ''}${d.viz ? vtHTML(view) : ''}<span class="w__mv">${ico('drag', 16)}</span></header>${w < 6 && ctl ? `<div class="w__ctl">${ctl}</div>` : ''}<div class="w__b">${d.text ? (view === 'viz' || v === 's' ? d.render({ ...ctx, view: 'data' }) : d.text(ctx)) : d.render(ctx)}</div>`;
   return { html, v, hi: !!(d.hi && d.hi(ctx)) }; }
 
 /* Majlis Executive Dashboard v2 · app shell: sidebar + pages, hero row, full-screen AI, customize mode + drawer, search, notifications */
@@ -1639,10 +1695,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout9.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout10.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout9.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1659,7 +1715,7 @@ function setEdit(on) { EDIT = on; document.body.classList.toggle('is-edit', on);
   Grid.refreshAll(true); }
 const catSize = {};
 function previewHTML(type, k) { const d = W[type]; if (d.pinned) return `<div class="cc__pin">${ico('lock', 22)}<b>${t('pinned')}</b><small>${t('pinnedNote')}</small></div>`;
-  const [w, h] = d.sizes[k], pw = w * 80 + (w - 1) * GAP, ph = h * ROW + (h - 1) * GAP, s = Math.min(236 / pw, 150 / ph), r = wInner(type, w, h, 'data');
+  const [w, h] = d.sizes[k], pw = w * 80 + (w - 1) * GAP, ph = h * ROW + (h - 1) * GAP, s = Math.min(236 / pw, 150 / ph), r = wInner(type, w, h, d.defView || 'data');
   return `<div class="cc__scale" style="width:${pw}px;height:${ph}px;transform:scale(${s.toFixed(3)});margin-inline-start:${Math.max(0, (236 - pw * s) / 2).toFixed(0)}px"><article class="w w--v-${r.v}${r.hi ? ' w--hi' : ''}" style="width:${pw}px;height:${ph}px;position:relative"><div class="w__in">${r.html}</div></article></div>`; }
 function card(type) { const d = W[type], k = catSize[type] || d.def, n = Grid.items.filter(i => i.type === type).length;
   if (d.pinned) return `<div class="cc cc--pin" data-type="${type}"><div class="cc__pv">${previewHTML(type, k)}</div><div class="cc__f"><div class="cc__m"><b>${t('w.' + type)}</b><small>${t('wd.' + type)}</small></div><div class="cc__a"><span class="chipb">${ico('lock', 12)}${t('pinnedNote')}</span></div></div></div>`;
@@ -1705,7 +1761,7 @@ const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
     $('#palF').innerHTML = `<span><kbd>↑</kbd><kbd>↓</kbd>${t('pal.kMove')}</span><span><kbd>↵</kbd>${t('pal.kAdd')}</span><span><kbd>⇧</kbd><kbd>↵</kbd>${t('pal.kKeep')}</span><span><kbd>esc</kbd>${t('pal.kClose')}</span>`;
     this.preview(); $('.pal__r.is-sel')?.scrollIntoView({ block: 'nearest' }); },
   preview() { const ty = this.sel, el = $('#palPv'); if (!ty) { el.innerHTML = ''; return; } const d = W[ty], k = this.size[ty] || d.def, sk = secOf(ty), n = this.onDash(ty);
-    const [w, h] = d.sizes[k], pw = w * 80 + (w - 1) * GAP, ph = h * ROW + (h - 1) * GAP, sc = Math.min(244 / pw, 138 / ph), r = wInner(ty, w, h, 'data');
+    const [w, h] = d.sizes[k], pw = w * 80 + (w - 1) * GAP, ph = h * ROW + (h - 1) * GAP, sc = Math.min(244 / pw, 138 / ph), r = wInner(ty, w, h, d.defView || 'data');
     el.innerHTML = `<div class="pal__sh"><div style="position:relative;flex:none;width:${(pw * sc).toFixed(0)}px;height:${(ph * sc).toFixed(0)}px"><div class="pal__sc" style="width:${pw}px;height:${ph}px;transform:scale(${sc.toFixed(3)})"><article class="w w--v-${r.v}${r.hi ? ' w--hi' : ''}" style="width:${pw}px;height:${ph}px;position:relative"><div class="w__in">${r.html}</div></article></div></div></div><h3>${t('w.' + ty)}</h3><p>${t('wd.' + ty)}</p>
       <span class="pal__to">${t('pal.goes')} <i class="dot dot--${secHealth(sk).lv}"></i><b>${t('sec.' + sk)}</b></span>
       <div class="pal__sz">${t('pal.size')}<span class="seg">${Object.keys(d.sizes).map(s => `<button data-ps="${s}" class="${s === k ? 'is-on' : ''}" title="${d.sizes[s][0]}×${d.sizes[s][1]}">${t('sizes.' + s)}</button>`).join('')}</span></div>
@@ -1827,7 +1883,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout9.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout10.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
