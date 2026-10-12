@@ -1200,7 +1200,7 @@ $('#chatPin').innerHTML = ico('pin', 18); $('#chatPin').onclick = () => { const 
 
 /* ---------- boot ---------- */
 (function boot() {
-  root.dataset.theme = store.get('theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); root.lang = LANG; root.dir = LANG === 'ar' ? 'rtl' : 'ltr';
+  root.dataset.theme = store.get('theme', 'light'); root.lang = LANG; root.dir = LANG === 'ar' ? 'rtl' : 'ltr';
   const mqSide = matchMedia('(max-width:1180px)'), syncSide = () => { const pref = store.get('side', null); app.classList.toggle('is-collapsed', pref === null ? mqSide.matches : pref); }; syncSide(); mqSide.addEventListener?.('change', syncSide);
   Grid.auto = store.get('auto', true); Grid.rtl = LANG === 'ar'; Grid.sec = true; SecBar.init(); Grid.init($('#grid'));
   const p0 = new URLSearchParams(location.search).get('page') || store.get('page', 'overview'); renderTop(); renderNotifs(); renderHero(); setPage(PAGES[p0] ? p0 : 'overview'); syncChat(); tickClocks(); setInterval(tickClocks, 1000);
