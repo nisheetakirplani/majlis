@@ -257,6 +257,43 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 @media (max-width:1280px){.bs__big{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.bs__st{animation:none}.bs__pg i.is-on b{animation:none;width:100%}}
 
+/* ---------- Schedule section ---------- */
+/* Schedule · next up + day strip: a focus card for one meeting, stepped with Next ›, mirrored on the strip */
+.cal{display:flex;flex-direction:column;gap:9px;flex:1;min-height:0}
+.cal__f{display:flex;flex-direction:column;gap:5px;min-width:0;animation:calIn .25s ease}@keyframes calIn{from{opacity:0;transform:translateX(8px)}}[dir=rtl] .cal__f{animation-name:calInR}@keyframes calInR{from{opacity:0;transform:translateX(-8px)}}
+.cal__lr{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.cal__bk{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 9px;border-radius:99px;background:var(--tile);font:600 11.5px/1 var(--font);color:var(--ink2);flex:none;transition:background .15s}.cal__bk:hover{background:var(--tile2);color:var(--ink)}
+.cal__l{display:flex;align-items:center;gap:7px;font:600 11px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}.cal__l.is-now{color:var(--bad)}.cal__l.is-now::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--bad);animation:calPulse 1.6s ease-in-out infinite}@keyframes calPulse{50%{opacity:.3}}.cal__l.is-past{color:var(--ink3)}
+.cal__t{font:600 24px/1.15 var(--font);letter-spacing:-.015em;text-align:start;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.cal__t:hover{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.cal__s{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink3);min-width:0}.cal__s span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cal__s .avs{flex:none;margin:0}.cal__b a.btn{text-decoration:none}[dir=rtl] .cal__nx svg,[dir=rtl] .cal__pv svg{transform:scaleX(-1)}
+.cal__b{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}.cal__b .btn{height:36px}.cal__nx{gap:4px}.cal__nx b{font-weight:600}.cal__pv{width:36px;padding:0!important;justify-content:center}
+.cal__end{display:flex;flex-direction:column;gap:6px}.cal__end b{font:600 22px/1.2 var(--font)}.cal__end span{font-size:13px;color:var(--ink3)}
+.cal__st{position:relative;height:40px;border-radius:10px;background:var(--tile);flex:none;margin-top:auto}
+.cal__st button{position:absolute;top:5px;bottom:5px;border-radius:7px;background:var(--mc);opacity:.72;transition:opacity .2s,box-shadow .2s,transform .2s;min-width:6px}.cal__st button:hover{opacity:1;transform:translateY(-1px)}
+.cal__st button.is-past{opacity:.28}.cal__st button.is-sel{opacity:1;box-shadow:0 0 0 2px var(--card-s,#fff),0 0 0 4px var(--mc)}
+.cal__now{position:absolute;top:-5px;bottom:-5px;width:2px;margin-inline-start:-1px;border-radius:1px;background:var(--ink);pointer-events:none}
+.cal__x{position:relative;height:12px;flex:none}.cal__x em{position:absolute;font:500 10.5px/1 var(--font);font-style:normal;color:var(--ink3);transform:translateX(-50%)}.cal__x em:first-child{transform:none}.cal__x em:last-child{transform:translateX(-100%)}
+[dir=rtl] .cal__x em{transform:translateX(50%)}[dir=rtl] .cal__x em:first-child{transform:none}[dir=rtl] .cal__x em:last-child{transform:translateX(100%)}
+.cal-w{display:flex;align-items:center;gap:16px;height:100%;min-width:0}.cal-w .cal__f{flex:1;min-width:0}.cal-w .cal__b{margin:0;flex:none;flex-wrap:nowrap}.cal-w .cal__t{font-size:19px}
+.w--v-s .cal__t{font-size:17px}.w--v-tall .cal__t{font-size:20px}
+.mk--board{--mc:var(--c4)}.mk--ext{--mc:var(--c1)}.mk--int{--mc:var(--c2)}.mk--one{--mc:#d0802a}
+/* Teams · AI summary */
+.tms{display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}.tms__by{display:flex;align-items:center;gap:6px;font:600 11px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.tms__p{font:400 14px/1.5 var(--font);color:var(--ink2);text-align:start;border-radius:10px;padding:2px 6px;margin:0 -6px;transition:background .15s;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.tms__p:hover{background:var(--tile)}.tms__p b{color:var(--ink);font-weight:600}.tms__p b.is-bad{color:var(--bad)}
+.tms__m{font-size:12.5px;color:var(--ink3)}.tms__a{display:flex;gap:8px;margin-top:auto;flex:none}.tms__a .btn{flex:1;justify-content:center;height:36px}
+/* World clocks · sun dial */
+.sdl{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:8px;flex:1;min-height:0;align-content:stretch}
+.sdc{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:12px;border-radius:var(--rs);background:var(--tile);min-width:0}
+.sdc strong{font:600 22px/1 var(--font);letter-spacing:-.01em;font-variant-numeric:tabular-nums}.sdc span{font:600 12.5px/1.2 var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sdc small{font-size:11.5px;color:var(--ink3)}
+.sdd{position:relative;width:40px;height:20px;border-radius:40px 40px 0 0;margin-bottom:6px;overflow:hidden;background:var(--dbg)}.sdd i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--dc);box-shadow:0 0 0 3px color-mix(in srgb,var(--dc) 25%,transparent)}
+.sdd--day{--dbg:rgba(245,183,60,.16);--dc:#f5b73c}.sdd--night{--dbg:rgba(139,111,217,.16);--dc:var(--c4)}
+.w--v-s .sdc{padding:8px 10px}.w--v-s .sdc strong{font-size:18px}.w--v-s .sdd{display:none}
+/* Invites & conflicts */
+.inv-row{display:flex;align-items:center;gap:10px;min-height:44px;padding:5px 4px;border-top:1px solid var(--line);font-size:13.5px;min-width:0}.inv-row:first-child{border-top:0}.inv-row>span:not(.inv-n){flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.inv-row>span b{font-weight:600}.inv-row .btn{height:30px;padding:0 12px;flex:none}
+.inv-n{display:grid;place-items:center;min-width:30px;height:30px;padding:0 6px;border-radius:9px;background:var(--tile2);font:700 12.5px/1 var(--font);flex:none}.inv-n--bad{background:var(--bad-soft);color:var(--bad)}
+/* Trips & travel */
+.trp{display:flex;flex-direction:column;gap:6px;flex:none}.trp small{font:600 11px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}.trp strong{font:600 30px/1.05 var(--font);letter-spacing:-.02em}.trp>span{font-size:12.5px;color:var(--ink3)}
+.route{display:flex;align-items:center;gap:10px;font:700 12px/1 var(--font);color:var(--ink2);flex:none;margin:4px 0}.route i{flex:1;height:2px;border-radius:1px;background:repeating-linear-gradient(90deg,var(--line2) 0 6px,transparent 6px 10px);position:relative}.route i::after{content:'✈';position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-size:14px;color:var(--accent);background:var(--card-s,#fff);padding:0 4px;font-style:normal}[dir=rtl] .route i::after{transform:translate(50%,-55%) scaleX(-1)}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -839,6 +876,31 @@ _m(TX.ar, { q: { signNow: 'وقّع الآن', approveNow: 'اعتماد', markD
   nextL: 'التالي', then: 'ثم', moreW: '+{n} أخرى', thenDl: 'ثم {x} خلال {n} ي', now: 'الآن', batchA: 'اعتماد {n} صغيرة · {v} مليون', nMore: '{n} أخرى', atRiskP: 'معرّضة للخطر · {p}% من الصفقات',
   needDecision: 'تحتاج قرارًا', needReply: 'تحتاج ردًا', inboxL: '{r} ردود · {f} للعلم', moreTasks: '+{n} أخرى هذا الأسبوع', nextT: 'التالي: {x}', allClear: 'لا شيء بانتظارك', doneAt: 'أُنجزت {at}', wasYesterday: 'كانت مستحقة أمس', wasAgo: 'كانت مستحقة قبل {n} أيام', before: 'قبل {at}', dueToday: 'مستحقة اليوم', dueOn: 'مستحقة {d}', allTasks: 'كل المهام' } });
 
+/* ----------------------------------------------------------- Schedule section · data + helpers */
+const MEET_K = { 'Executive staff sync': 'int', 'Board pre-read with CFO': 'board', 'Lunch with investor': 'ext', 'Customer escalation review': 'int', '1:1 with Head of People': 'one' };
+D.meetings.forEach(m => { m.k = m.k || MEET_K[m.title] || 'int'; });
+S.calSel = null; /* null follows "now"; a number pins a meeting */
+const calOnline = m => /^Teams/.test(m.where);
+function calState() { const ms = D.meetings, now = nowMin(), auto = ms.findIndex(m => toM(m.e) > now), autoI = auto < 0 ? ms.length : auto, i = S.calSel == null ? autoI : S.calSel; return { ms, now, autoI, i: Math.max(0, Math.min(i, ms.length)) }; }
+D.invites = { clash: { a: 'Customer escalation review', at: '14:30', b: 'Board pack signing', bt: '14:45' },
+  groups: [{ g: 'team', n: 7, l: 'from your team', s: 'syncs, 1:1s, offsite planning', act: 'accept' }, { g: 'ext', n: 2, l: 'external', s: 'Aldar, Emaar', act: 'review' }, { g: 'board', n: 1, l: 'from the board', s: 'Audit committee · 4 Nov', act: 'accept' }] };
+S.inv = D.invites.groups.map(x => ({ ...x })); S.clash = true;
+D.trips = [{ city: 'Riyadh', d: 2, when: 'Wed 14 Oct', flight: 'EK 815', dep: '07:40', from: 'DXB', to: 'RUH', tz: '−1h', meet: 3, meetDay: 'Thu', hotel: 'Ritz-Carlton · 2 nights' },
+  { city: 'London', d: 21, when: '2–5 Nov', flight: 'EK 1', dep: '07:45', from: 'DXB', to: 'LHR', tz: '−4h', meet: 6, meetDay: 'Mon–Wed', hotel: 'The Connaught · 3 nights' }, { city: 'Singapore', d: 57, when: '8–10 Dec', from: 'DXB', to: 'SIN', tz: '+4h' }];
+const dayPart = h => h < 5 ? 'night' : h < 12 ? 'morning' : h < 14 ? 'noon' : h < 17 ? 'afternoon' : h < 21 ? 'evening' : 'night';
+_m(TX.en, { w: { invites: 'Invites & conflicts', trips: 'Trips & travel' }, wd: { invites: 'Clashes and invitations waiting for an answer', trips: 'Upcoming trips, flights and timezone shifts' },
+  cal: { nowB: 'Now', next: 'Next', nowL: 'Now · ends in {n}', nextIn: 'Next · {x}', later: 'Later · {x}', earlier: 'Earlier · ended {e}', join: 'Join', directions: 'Directions', notes: 'Notes', back: 'Back to now', prev: 'Previous meeting', endT: 'That\'s your day', endS: '{n} meetings · last ends {e}', joining: 'Joining "{x}" on Teams…', more: '+{n}', brief: 'Brief me for: {x}' },
+  tm: { by: 'Summarised by Majlis', esc: 'is escalating:', up: 'is upbeat.', meta: '{m} mentions for you · {r} messages read across {c} channels', open: 'Open mentions', ask: 'Ask Majlis', mentions: 'mentions' },
+  sd: { night: 'Night', morning: 'Morning', noon: 'Noon', afternoon: 'Afternoon', evening: 'Evening' },
+  inv: { waiting: 'invites waiting', clash: '{n} clash', clashes: 'clash', fix: 'Fix', acceptAll: 'Accept all', accept: 'Accept', review: 'Review', accepted: '{n} invites accepted', allClear: 'No clashes or open invites' },
+  trip: { next: 'Next trip · in {d} days', meetIn: '{n} meetings in {c} · {d}', then: 'Then {c} · {w}' } });
+_m(TX.ar, { w: { invites: 'الدعوات والتعارضات', trips: 'الرحلات والسفر' }, wd: { invites: 'التعارضات والدعوات بانتظار الرد', trips: 'الرحلات والرحلات الجوية وفروق التوقيت' },
+  cal: { nowB: 'الآن', next: 'التالي', nowL: 'الآن · ينتهي خلال {n}', nextIn: 'التالي · {x}', later: 'لاحقًا · {x}', earlier: 'سابقًا · انتهى {e}', join: 'انضمام', directions: 'الاتجاهات', notes: 'الملاحظات', back: 'العودة إلى الآن', prev: 'الاجتماع السابق', endT: 'انتهى يومك', endS: '{n} اجتماعات · آخرها ينتهي {e}', joining: 'جارٍ الانضمام إلى «{x}» على Teams…', more: '+{n}', brief: 'جهّزني لـ: {x}' },
+  tm: { by: 'ملخّص من مجلس', esc: 'يتصاعد:', up: 'إيجابي.', meta: '{m} إشارات لك · {r} رسالة مقروءة في {c} قناة', open: 'فتح الإشارات', ask: 'اسأل مجلس', mentions: 'إشارات' },
+  sd: { night: 'ليل', morning: 'صباح', noon: 'ظهر', afternoon: 'بعد الظهر', evening: 'مساء' },
+  inv: { waiting: 'دعوات بانتظارك', clash: '{n} تعارض', clashes: 'تعارض', fix: 'حل', acceptAll: 'قبول الكل', accept: 'قبول', review: 'مراجعة', accepted: 'تم قبول {n} دعوات', allClear: 'لا تعارضات ولا دعوات' },
+  trip: { next: 'الرحلة التالية · خلال {d} أيام', meetIn: '{n} اجتماعات في {c} · {d}', then: 'ثم {c} · {w}' } });
+
 /* ----------------------------------------------------------- the widgets */
 const W = {
   /* AI row (pinned to the top row of Overview; rendered by HERO, not by the grid) */
@@ -879,7 +941,7 @@ const W = {
       return `<div class="rev-h"><strong>${k.v}</strong>${dl(k.d, k.up, k.good)}${h >= 4 ? `<div class="lgrow">${lg}</div>` : ''}</div>${ch}`; } },
 
   /* Communication */
-  calendar: { group: 'comms', icon: 'calendar', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [4, 7], XL: [6, 5] }, def: 'L', min: [3, 2], max: [12, 7],
+  calendar: { group: 'comms', icon: 'calendar', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
     hi: ({ v, view }) => v === 's' && view !== 'viz', count: () => D.meetings.length,
     after(el) { const tl = $('.tl', el); if (tl) tl.scrollTop = Math.max(0, (nowMin() - 480) / 60 * 64 - 120); },
     render({ v, w, h, view }) { const nm = nextMeeting(), nmn = nowMin();
@@ -889,13 +951,24 @@ const W = {
         const stat3 = `<div class="sts sts--3">${[[t('meetingsL'), D.meetings.length], [t('busy'), Math.floor(busy / 60) + 'h ' + busy % 60 + 'm'], [t('free'), Math.floor(free / 60) + 'h ' + free % 60 + 'm']].map(([l, x], i) => `<div class="st st--static${i === 1 ? ' st--hi' : ''}"><span class="st__v">${x}</span><span class="st__l">${l}</span></div>`).join('')}</div>`;
         if (v === 'wide') return vz(stat3, 'vz--col');
         return vz(`${stat3}${capsules(per, ['8', '9', '10', '11', '12', '13', '14', '15', '16'], { max: 60, hi: Math.floor((nmn - 480) / 60), fmt: x => x ? x + 'm' : '' })}${h >= 6 ? `<ul class="rcl">${D.meetings.filter(m => toM(m.e) > nmn).slice(0, 2).map(m => `<li class="rc"><button class="rc__b" data-act="prep" data-title="${esc(m.title)}"><time>${m.s}</time><span class="rc__m"><b>${esc(m.title)}</b><small>${esc(m.where)}</small></span></button></li>`).join('')}</ul>` : ''}`, 'vz--col'); }
-      if (v === 's') return `<div class="big"><small>${nm.mins > 0 ? t('next') : t('now')} · ${nm.s}</small><strong>${esc(nm.title)}</strong><span class="muted">${esc(nm.where)}</span><span class="big__f"><span class="pill pill--d">${fmtIn(nm.mins)}</span>${avatars(nm.who)}</span></div>`;
-      if (v === 'wide') { const up = D.meetings.filter(m => toM(m.e) > nmn).slice(0, w >= 8 ? 4 : 2); return `<div class="evr">${up.map((m, i) => `<button class="ev ev--card${i === 0 ? ' ev--hi' : m.k === 'ext' ? ' ev--ext' : ''}" data-act="prep" data-title="${esc(m.title)}"><time>${m.s}</time><b>${esc(m.title)}</b><small>${esc(m.where)}</small></button>`).join('')}</div>`; }
-      const HH = 64, hrs = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], hl = nm.title;
-      const evs = D.meetings.map(m => { const s = toM(m.s), e = toM(m.e), ht = Math.max(54, (e - s) / 60 * HH - 6), cls = (m.title === hl ? 'ev--hi' : m.k === 'ext' ? 'ev--ext' : '') + (e <= nmn ? ' ev--past' : '');
-        return `<button class="ev ${cls}" style="top:${(s - 480) / 60 * HH}px;height:${ht}px" data-act="prep" data-title="${esc(m.title)}">${ht >= 84 ? `<span class="ev__i">${ico(m.k === 'ext' ? 'briefcase' : 'user', 16)}</span>` : ''}<span class="ev__m">${m.title === hl ? `<span class="pill pill--l">${s <= nmn ? t('now') : t('next')}</span>` : ''}<b>${esc(m.title)}</b><small>${ht >= 70 ? esc(m.where) : m.s + '–' + m.e + ' · ' + esc(m.where)}</small>${ht >= 70 ? `<span class="ev__t">${ico('clock', 12)}${m.s} – ${m.e}</span>` : ''}</span>${w >= 5 ? avatars(m.who) : ''}</button>`; }).join('');
-      const ny = (nmn - 480) / 60 * HH;
-      return `<div class="tl"><div class="tl__in" style="height:${10 * HH}px">${hrs.map(x => `<span class="tl__h" style="top:${(x - 8) * HH}px"><em>${String(x).padStart(2, '0')}:00</em></span>`).join('')}<div class="tl__ev">${evs}</div><i class="tl__now" style="top:${ny}px"><em>${hhmm(nmn)}</em></i></div></div>`; } },
+      /* Schedule · Option 1 · next up + day strip. One meeting in focus (Join / Directions), Next › steps through the day, the strip mirrors the selection */
+      const { ms, now, autoI, i } = calState(), m = ms[i], X = mm => ((mm - 480) / 600 * 100).toFixed(2);
+      const strip = `<div class="cal__st" role="group" aria-label="${t('w.calendar')}">${ms.map((x, k) => `<button class="mk--${x.k}${toM(x.e) <= now ? ' is-past' : ''}${k === i ? ' is-sel' : ''}" style="inset-inline-start:${X(toM(x.s))}%;width:calc(${(X(toM(x.e)) - X(toM(x.s))).toFixed(2)}% - 3px)" data-act="cal-sel" data-i="${k}" title="${x.s}–${x.e} · ${esc(x.title)}" aria-label="${x.s} ${esc(x.title)}" aria-pressed="${k === i}"></button>`).join('')}${now >= 480 && now <= 1080 ? `<i class="cal__now" style="inset-inline-start:${X(now)}%"></i>` : ''}</div><div class="cal__x">${[8, 10, 12, 14, 16, 18].map(hh => `<em style="inset-inline-start:${X(hh * 60)}%">${hh}</em>`).join('')}</div>`;
+      const nxt = ms[i + 1], back = S.calSel != null && i !== autoI;
+      const prevB = i > 0 ? `<button class="btn btn--ghost btn--sm cal__pv" data-act="cal-step" data-d="-1" title="${t('cal.prev')}" aria-label="${t('cal.prev')}">${ico('chevL', 15)}</button>` : '';
+      const nextB = nxt ? `<button class="btn btn--ghost btn--sm cal__nx" data-act="cal-step" data-d="1">${t('cal.next')} · <b>${nxt.s}</b>${ico('chevR', 15)}</button>` : '';
+      if (!m) { const last = ms[ms.length - 1]; return `<div class="cal"><div class="cal__f cal__end"><b>${t('cal.endT')}</b><span>${t('cal.endS', { n: ms.length, e: last.e })}</span><div class="cal__b">${i > 0 ? prevB : ''}${S.calSel != null ? `<button class="btn btn--ghost btn--sm" data-act="cal-now">${ico('reset', 14)}${t('cal.back')}</button>` : ''}</div></div>${v === 'wide' || v === 's' ? '' : strip}</div>`; }
+      const s0 = toM(m.s), e0 = toM(m.e), past = e0 <= now, live = s0 <= now && !past;
+      const lab = live ? `<span class="cal__l is-now">${t('cal.nowL', { n: fmtIn(e0 - now).replace(/^in /, '') })}</span>` : past ? `<span class="cal__l is-past">${t('cal.earlier', { e: m.e })}</span>` : `<span class="cal__l">${t(i === autoI ? 'cal.nextIn' : 'cal.later', { x: `${m.s} · ${fmtIn(s0 - now)}` })}</span>`;
+      const prim = past ? `<button class="btn btn--dark btn--sm" data-act="ask-open" data-q="${esc('Summarise the notes and actions from ' + m.title)}">${ico('file', 14)}${t('cal.notes')}</button>`
+        : calOnline(m) ? `<button class="btn btn--dark btn--sm" data-act="cal-join" data-i="${i}">${ico('arrowUR', 14)}${t('cal.join')}</button>`
+        : `<a class="btn btn--dark btn--sm" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(m.where + ' Dubai')}" target="_blank" rel="noopener">${ico('send', 14)}${t('cal.directions')}</a>`;
+      const bk = back ? `<button class="cal__bk" data-act="cal-now" title="${t('cal.back')}">${ico('reset', 12)}${t('cal.nowB')}</button>` : '';
+      const focus = `<div class="cal__f" key="${i}"><div class="cal__lr">${lab}${bk}</div><button class="cal__t" data-act="ask-open" data-q="${esc(t('cal.brief', { x: m.title }))}" title="${esc(t('cal.brief', { x: m.title }))}">${esc(m.title)}</button>${v === 's' ? '' : `<div class="cal__s">${avatars(m.who, 3)}<span>${esc(m.where)} · ${m.s}–${m.e}</span></div>`}</div>`;
+      const btns = `<div class="cal__b">${prim}${v === 's' ? '' : prevB + nextB}</div>`;
+      if (v === 's') return `<div class="cal">${focus}${btns}</div>`;
+      if (v === 'wide') return `<div class="cal-w">${focus}${btns}</div>`;
+      return `<div class="cal">${focus}${btns}${strip}${h >= 4 && v !== 'tall' ? `<div class="arlg">${[['board', 'Board'], ['ext', 'External'], ['int', 'Internal'], ['one', '1:1']].map(([k, l]) => `<span><i class="dot mk--${k}" style="background:var(--mc)"></i>${l}</span>`).join('')}</div>` : ''}</div>`; } },
 
   inbox: { group: 'comms', icon: 'mail', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.mails.filter(m => m.tag !== 'FYI').length,
@@ -917,8 +990,14 @@ const W = {
     count: () => D.channels.reduce((a, x) => a + x.u, 0),
     render({ v, w, h, view }) { const c = D.channels, tot = c.reduce((a, x) => a + x.u, 0);
       if (view === 'viz') { const hb = hbars(c.map((x, i) => ({ l: '#' + x.n, v: x.u, c: ['var(--c1)', 'var(--c2)', 'var(--c4)', 'var(--c3)'][i % 4] }))); if (v === 's') return vz(`<div class="big"><small>${t('unreadL')}</small><strong>${tot}</strong></div>${hbars(c.slice(0, 2).map(x => ({ l: '#' + x.n.slice(0, 6), v: x.u })))}`, 'vz--col'); if (v === 'wide') return vz(hbars(c.slice(0, 2).map((x, i) => ({ l: '#' + x.n, v: x.u, c: ['var(--c1)', 'var(--c2)'][i] }))), 'vz--col'); return vz(hb + (h >= 5 ? capsules([4, 7, 5, 9, 6, 3, 8], D.dow, { hi: 3 }) : ''), 'vz--col'); }
-      if (v === 's') return `<div class="big"><small>${t('w.teams')}</small><strong>${tot}</strong><span class="muted">${t('unread')} · ${c.length} ${t('w.teams').includes('Teams') ? 'channels' : ''}</span></div>`;
-      return `<ul class="rcl">${c.slice(0, CAP(h, 58)).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="What is happening in #${x.n}?"><i class="ic-c ic-c--n">${ico('hash', 16)}</i><span class="rc__m"><b>${x.n}</b><small>${esc(w >= 6 ? x.who + ': ' + x.m : x.m)}</small></span><em class="badge badge--a">${x.u}</em></button></li>`).join('')}</ul>`; } },
+      /* Teams · Option 3 · AI summary: what the company is talking about, in three sentences */
+      const hot = c.find(x => /customer|incident/.test(x.n)) || c[0], up = c.find(x => /sales/.test(x.n)) || c[1], mentions = 3, read = 412, chans = 28;
+      if (v === 's') return finBig(t('tm.by'), `${mentions} ${t('tm.mentions')}`, `<span class="muted">${read} · ${chans}</span>`);
+      const p1 = `<button class="tms__p" data-act="ask-open" data-q="What is happening in #${hot.n}?"><b class="is-bad">#${hot.n}</b> <b>${t('tm.esc')}</b> ${esc(hot.m)}</button>`;
+      const p2 = `<button class="tms__p" data-act="ask-open" data-q="What is happening in #${up.n}?"><b>#${up.n}</b> ${t('tm.up')} ${esc(up.m)}</button>`;
+      const acts = `<div class="tms__a"><button class="btn btn--ghost btn--sm" data-act="ask-open" data-q="Show my Teams mentions">${t('tm.open')}</button><button class="btn btn--dark btn--sm" data-act="ask-open" data-q="What is the company talking about today?">${ico('sparkles', 14)}${t('tm.ask')}</button></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div class="tms" style="flex:1;min-width:0">${p1}</div><div class="tms__a" style="margin:0;flex:none">${acts.replace('<div class="tms__a">', '').replace(/<\/div>$/, '')}</div></div>`;
+      return `<div class="tms"><span class="tms__by">${ico('sparkles', 12)}${t('tm.by')}</span>${p1}${p2}<p class="tms__m">${t('tm.meta', { m: mentions, r: read, c: chans })}</p>${acts}</div>`; } },
 
   /* Work */
   decisions: { group: 'work', icon: 'tasks', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
@@ -1019,6 +1098,30 @@ const W = {
       const ringH = `<div class="arring"><div class="gg gg--r">${ring(pc, sz, Math.max(7, sz / 10), over ? 'var(--warn)' : 'var(--c1)')}<strong>${pc}%</strong></div><div><b>${over ? t('q.catchUp') : t('q.onTrack')}</b><small>${t('q.rolling')}</small><small${over ? ' class="is-bad"' : ''}>${[over ? t('q.nOver', { n: over }) : '', today ? t('q.nToday', { n: today }) : ''].filter(Boolean).join(' · ') || t('q.allDone')}</small></div></div>`;
       if (v === 'wide') return ringH;
       return ringH + (nx ? `<div class="arls">${arTask(nx).replace('<span class="chk__t">', `<span class="chk__t">${t('q.nextL')}: `)}</div>` : ''); } },
+
+  /* Schedule · new widgets */
+  invites: { group: 'comms', icon: 'calendar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
+    count: () => S.inv.reduce((a, x) => a + x.n, 0) + (S.clash ? 1 : 0),
+    render({ v, h }) { const n = S.inv.reduce((a, x) => a + x.n, 0), c = D.invites.clash;
+      if (!n && !S.clash) return empty().replace(t('allClear'), t('inv.allClear'));
+      if (v === 's') return finBig(t('inv.waiting'), n, S.clash ? `<span class="muted" style="color:var(--bad)">${t('inv.clash', { n: 1 })}</span>` : '');
+      const head = `<div class="arb"><strong>${n}</strong><small>${t('inv.waiting')}</small>${S.clash ? tag(t('inv.clash', { n: 1 }), 'bad') : ''}</div>`;
+      const clash = S.clash ? `<div class="inv-row"><span class="inv-n inv-n--bad">!</span><span><b>${c.at}</b> ${esc(c.a)} × <b>${c.bt}</b> ${esc(c.b)}</span><button class="btn btn--dark btn--sm" data-act="inv-fix">${t('inv.fix')}</button></div>` : '';
+      const rows = S.inv.map(x => `<div class="inv-row"><span class="inv-n">${x.n}</span><span><b>${x.l.charAt(0).toUpperCase() + x.l.slice(1)}</b> · ${esc(x.s)}</span>${x.act === 'accept' ? `<button class="btn btn--ghost btn--sm" data-act="inv-accept" data-g="${x.g}">${x.n > 1 ? t('inv.acceptAll') : t('inv.accept')}</button>` : `<button class="btn btn--ghost btn--sm" data-act="ask-open" data-q="Help me review ${x.n} ${esc(x.l)} invites">${t('inv.review')}</button>`}</div>`);
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div class="arls" style="flex:1;min-width:0">${clash || rows[0] || ''}</div></div>`;
+      const k = Math.max(1, Math.floor((bodyH(h) - 56) / 45) - (S.clash ? 1 : 0));
+      return `${head}<div class="arls">${clash}${rows.slice(0, k).join('')}</div>`; } },
+
+  trips: { group: 'comms', icon: 'globe', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 5],
+    count: () => D.trips.length,
+    render({ v, h }) { const [x, nx] = D.trips;
+      if (v === 's') return finBig(t('trip.next', { d: x.d }), x.city, `<span class="muted">${x.when} · ${x.flight} ${x.dep}</span>`);
+      const head = `<div class="trp"><small>${t('trip.next', { d: x.d })}</small><strong>${x.city}</strong><span>${x.when} · ${x.flight} ${x.dep} · ${x.tz}</span></div>`;
+      const route = `<div class="route"><span>${x.from}</span><i></i><span>${x.to}</span></div>`;
+      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div>${route}</div>`;
+      const rows = [`<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="Brief me on my ${x.city} meetings"><span>${t('trip.meetIn', { n: x.meet, c: x.city, d: x.meetDay })}</span><em>${ico('chevR', 13)}</em></div>`, `<div class="arr"><span>${esc(x.hotel)}</span></div>`];
+      const k = Math.max(0, Math.min(2, Math.floor((bodyH(h) - 150) / 41)));
+      return `${head}${route}<div class="arls">${rows.slice(0, k).join('')}</div>${nx ? arLink(t('trip.then', { c: nx.city, w: nx.when }), 'ask-open', ` data-q="Show my ${nx.city} trip"`) : ''}`; } },
 
   /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
   deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
@@ -1134,11 +1237,14 @@ const W = {
       return `<ul class="rcl">${ac.slice(0, CAP(h, 58)).map(a => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="What is happening with ${esc(a.n)}?"><i class="ic-c ic-c--n">${ico('building', 16)}</i><span class="rc__m"><b>${a.n}</b><small>${esc(a.why)}</small></span>${tag(a.arr, 'warn')}</button></li>`).join('')}</ul>`; } },
 
   /* Utilities */
-  clocks: { group: 'utils', icon: 'clock', viz: true, sizes: { S: [3, 2], M: [4, 2], L: [4, 3], XL: [6, 2] }, def: 'M', min: [3, 2], max: [12, 4],
+  clocks: { group: 'utils', icon: 'clock', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [6, 3], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 4],
     render({ v, w, h, view }) { const c = D.clocks;
       if (view === 'viz') { const sz = v === 'tall' ? 70 : 62, cols = v === 'tall' || v === 's' ? 2 : w >= 6 ? 4 : 3, rows = Math.max(1, Math.floor((bodyH(h) + 8) / (sz + 26))), n = Math.min(4, cols * rows); return vz(`<div class="anr" style="--n:${cols}">${c.slice(0, n).map(x => `<div class="an-w">${analog(x.tz, sz)}<small>${x.c}</small></div>`).join('')}</div>`); }
-      const cell = (x, big) => `<div class="clk${big ? ' clk--big' : ''}"><small>${x.c}</small><strong data-clock="${x.tz}">--:--</strong><em data-clock-d="${x.tz}"></em></div>`;
-      const n = v === 's' ? 2 : v === 'tall' ? Math.min(4, Math.floor((bodyH(h)) / 66)) : w >= 6 ? 4 : 3; return `<div class="clks clks--${v}">${c.slice(0, n).map(x => cell(x, v === 's')).join('')}</div>`; } },
+      /* World clocks · Option 3 · sun dial: a day/night dial per city, the local time and the part of the day */
+      const cell = x => { const p = tzParts(x.tz), hr = p.hour + p.minute / 60, day = hr >= 6 && hr < 18, f = day ? (hr - 6) / 12 : ((hr - 18 + 24) % 24) / 12, a = Math.PI * (1 - f);
+        return `<div class="sdc" title="${x.c}"><span class="sdd sdd--${day ? 'day' : 'night'}" aria-hidden="true"><i style="left:${(50 + 42 * Math.cos(a)).toFixed(1)}%;top:${(100 - 84 * Math.sin(a)).toFixed(1)}%"></i></span><strong data-clock="${x.tz}">--:--</strong><span>${x.c}</span><small>${t('sd.' + dayPart(p.hour))}</small></div>`; };
+      const cols = v === 's' ? 2 : w >= 8 ? 4 : w >= 6 ? 4 : 2, rows = v === 's' || h <= 2 ? 1 : Math.max(1, Math.min(2, Math.floor((bodyH(h) + 8) / 104))), n = Math.min(c.length, cols * rows);
+      return `<div class="sdl" style="--n:${Math.min(cols, n)}">${c.slice(0, n).map(cell).join('')}</div>`; } },
 };
 const GROUPS = ['ai', 'overview', 'exec', 'comms', 'work', 'docs', 'finance', 'people', 'utils'];
 
@@ -1194,7 +1300,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 4, 4], ['tasks', 4, 4], ['taskProgress', 4, 4], ['calendar', 8, 4], ['teams', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 4, 4], ['tasks', 4, 4], ['taskProgress', 4, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1210,7 +1316,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks', 'taskProgress'], today: ['calendar', 'teams', 'clocks'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
+const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks', 'taskProgress'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'watch';
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -1264,7 +1370,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout4.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout5.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1422,10 +1528,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout4.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout5.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout4.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout5.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1577,6 +1683,12 @@ document.addEventListener('click', e => {
   else if (a === 'decision') { const d = S.decisions.find(x => x.id === id); d.st = b.dataset.do; afterState(['decisions']); toast(t(d.st) + ': ' + d.title); if (CHAT_OPEN) syncChat(); }
   else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; afterState(['tasks', 'taskProgress']); }
   else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (x) { x.done = true; afterState(['tasks', 'taskProgress']); toast(t('done') + ': ' + x.tx); } }
+  else if (a === 'cal-step') { const { i } = calState(); S.calSel = Math.max(0, Math.min(D.meetings.length, i + (+b.dataset.d))); Grid.refreshType('calendar'); $('.w[data-type="calendar"] .cal__nx, .w[data-type="calendar"] [data-act="cal-now"]')?.focus(); }
+  else if (a === 'cal-sel') { S.calSel = +b.dataset.i; Grid.refreshType('calendar'); }
+  else if (a === 'cal-now') { S.calSel = null; Grid.refreshType('calendar'); }
+  else if (a === 'cal-join') { toast(t('cal.joining', { x: D.meetings[+b.dataset.i].title })); }
+  else if (a === 'inv-accept') { const g = S.inv.find(x => x.g === b.dataset.g), i = S.inv.indexOf(g); S.inv.splice(i, 1); afterState(['invites']); toast(t('inv.accepted', { n: g.n }), t('undo'), () => { S.inv.splice(i, 0, g); afterState(['invites']); }); }
+  else if (a === 'inv-fix') { const c = D.invites.clash; openChat(from); chatSend(`${c.a} at ${c.at} clashes with ${c.b} at ${c.bt}. What should I move?`); }
   else if (a === 'dec-sort') { S.decSort = b.dataset.s; Grid.refreshType('decisions'); }
   else if (a === 'deal-sort') { S.dealSort = b.dataset.s; Grid.refreshType('deals'); }
   else if (a === 'dec-batch') { S.batch.done = true; afterState(['decisions']); toast(t('q.batchDone', { n: S.batch.n, v: S.batch.v }), t('undo'), () => { S.batch.done = false; afterState(['decisions']); }); }
@@ -1603,7 +1715,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout4.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout5.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
