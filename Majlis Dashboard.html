@@ -850,14 +850,14 @@ function fillGroups(groups, budget, rowPx, row) { let html = '', used = 0, shown
     for (const it of items) { if (used + rowPx > budget) break; html += row(it); used += rowPx; shown++; } }
   return [html, shown]; }
 const fmtV = v => v == null ? '' : (v >= 10 ? Math.round(v) : +v.toFixed(1)) + 'M';
-_m(TX.en, { w: { tasks: 'My tasks · Option 1', taskProgress: 'My tasks · Option 2', queue: 'My queue', deadlines: 'Deadlines & filings' },
-  wd: { tasks: 'Your commitments by due date', taskProgress: 'This week\'s progress and what\'s next', queue: 'Everything waiting on you, ranked by cost of waiting', deadlines: 'Regulatory, audit and board deadlines' },
+_m(TX.en, { w: { tasks: 'My tasks', queue: 'My queue', deadlines: 'Deadlines & filings' },
+  wd: { tasks: 'Your commitments by due date', queue: 'Everything waiting on you, ranked by cost of waiting', deadlines: 'Regulatory, audit and board deadlines' },
   q: { overdue: 'Overdue', today: 'Today', week: 'This week', later: 'Later', overdueBy: '{n}d overdue', tomorrow: 'Tomorrow', waiting: 'waiting {w}', more: '+{n} more', value: 'Value', due: 'Due',
     batch: 'Approve {n} under AED 1M', batchDone: '{n} small approvals signed off · AED {v}M', batchL: '{n} small approvals · AED {v}M', close: 'Close', atRiskOf: 'at risk · {n} deals · {p}% of pipeline', underV: '+{n} under AED {v}M', all: 'All {n}',
     rolling: 'Rolling 7 days', onTrack: 'On track', catchUp: 'Catch up', nOver: '{n} overdue', nToday: '{n} due today', next: 'Next up', allDone: 'All clear for now', ranked: 'Ranked by cost of waiting',
     k: { sign: 'Sign', approve: 'Approve', reply: 'Reply', decide: 'Decide', deal: 'Deal', task: 'Task', file: 'Filing' }, inDays: '{n}d', next30: 'in 30 days', nextDl: 'Next: {x}', days: '{n} days', laterQ: '+{n} later this quarter', doneOf: '{d} of {n} done' } });
-_m(TX.ar, { w: { tasks: 'مهامي · الخيار 1', taskProgress: 'مهامي · الخيار 2', queue: 'قائمتي', deadlines: 'المواعيد والتقديمات' },
-  wd: { tasks: 'التزاماتك حسب موعد الاستحقاق', taskProgress: 'تقدّم هذا الأسبوع وما التالي', queue: 'كل ما ينتظرك مرتبًا حسب كلفة الانتظار', deadlines: 'مواعيد تنظيمية ومراجعة ومجلس' },
+_m(TX.ar, { w: { tasks: 'مهامي', queue: 'قائمتي', deadlines: 'المواعيد والتقديمات' },
+  wd: { tasks: 'التزاماتك حسب موعد الاستحقاق', queue: 'كل ما ينتظرك مرتبًا حسب كلفة الانتظار', deadlines: 'مواعيد تنظيمية ومراجعة ومجلس' },
   q: { overdue: 'متأخرة', today: 'اليوم', week: 'هذا الأسبوع', later: 'لاحقًا', overdueBy: 'متأخرة {n} يوم', tomorrow: 'غدًا', waiting: 'بانتظارك {w}', more: '+{n} أخرى', value: 'القيمة', due: 'الموعد',
     batch: 'اعتماد {n} أقل من مليون درهم', batchDone: 'تم اعتماد {n} موافقات صغيرة · {v} مليون', batchL: '{n} موافقات صغيرة · {v} مليون', close: 'الإغلاق', atRiskOf: 'معرّضة للخطر · {n} صفقات · {p}% من الصفقات', underV: '+{n} أقل من {v} مليون', all: 'الكل {n}',
     rolling: 'آخر 7 أيام', onTrack: 'على المسار', catchUp: 'تحتاج متابعة', nOver: '{n} متأخرة', nToday: '{n} مستحقة اليوم', next: 'التالي', allDone: 'لا شيء الآن', ranked: 'مرتبة حسب كلفة الانتظار',
@@ -1087,18 +1087,6 @@ const W = {
       if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div>${strip}</div>`;
       return `${head}${strip}${nx ? arLink(t('q.thenDl', { x: nx.n, n: nx.d }), 'ask-open', ` data-q="Are we ready for the ${esc(nx.n)}?"`) : ''}`; } },
 
-  taskProgress: { group: 'work', icon: 'check', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
-    count: () => { const win = S.tasks.filter(x => x.d >= -3 && x.d <= 4); return t('q.doneOf', { d: win.filter(x => x.done).length, n: win.length }); },
-    render({ v, h }) { /* Option 2 · the ring, then the one next task */
-      const win = S.tasks.filter(x => x.d >= -3 && x.d <= 4), dn = win.filter(x => x.done).length, pc = win.length ? Math.round(dn / win.length * 100) : 100;
-      const over = S.tasks.filter(x => !x.done && x.d < 0).length, today = S.tasks.filter(x => !x.done && x.d === 0).length;
-      const nx = S.tasks.filter(x => !x.done).sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99'))[0];
-      if (v === 's') return `<div class="big"><small>${t('q.rolling')}</small><strong>${pc}%</strong><span class="big__f"><i class="bar-s"><b style="width:${pc}%"></b></i><span class="muted">${dn}/${win.length}</span></span></div>`;
-      const sz = v === 'wide' ? 64 : Math.max(76, Math.min(112, bodyH(h) - 80));
-      const ringH = `<div class="arring"><div class="gg gg--r">${ring(pc, sz, Math.max(7, sz / 10), over ? 'var(--warn)' : 'var(--c1)')}<strong>${pc}%</strong></div><div><b>${over ? t('q.catchUp') : t('q.onTrack')}</b><small>${t('q.rolling')}</small><small${over ? ' class="is-bad"' : ''}>${[over ? t('q.nOver', { n: over }) : '', today ? t('q.nToday', { n: today }) : ''].filter(Boolean).join(' · ') || t('q.allDone')}</small></div></div>`;
-      if (v === 'wide') return ringH;
-      return ringH + (nx ? `<div class="arls">${arTask(nx).replace('<span class="chk__t">', `<span class="chk__t">${t('q.nextL')}: `)}</div>` : ''); } },
-
   /* Schedule · new widgets */
   invites: { group: 'comms', icon: 'calendar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
     count: () => S.inv.reduce((a, x) => a + x.n, 0) + (S.clash ? 1 : 0),
@@ -1300,7 +1288,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 4, 4], ['tasks', 4, 4], ['taskProgress', 4, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1316,7 +1304,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks', 'taskProgress'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
+const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'watch';
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -1528,7 +1516,7 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout5.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout5.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout5.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
@@ -1681,8 +1669,8 @@ document.addEventListener('click', e => {
   else if (a === 'mail-archive') { const i = S.mails.findIndex(x => x.id === id), m = S.mails.splice(i, 1)[0]; afterState(['inbox']); toast(t('archived'), t('undo'), () => { S.mails.splice(i, 0, m); afterState(['inbox']); }); }
   else if (a === 'mail-snooze') { const i = S.mails.findIndex(x => x.id === id), m = S.mails.splice(i, 1)[0]; S.mails.push(m); afterState(['inbox']); toast(t('snooze') + ' · 1 h'); }
   else if (a === 'decision') { const d = S.decisions.find(x => x.id === id); d.st = b.dataset.do; afterState(['decisions']); toast(t(d.st) + ': ' + d.title); if (CHAT_OPEN) syncChat(); }
-  else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; afterState(['tasks', 'taskProgress']); }
-  else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (x) { x.done = true; afterState(['tasks', 'taskProgress']); toast(t('done') + ': ' + x.tx); } }
+  else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; afterState(['tasks']); }
+  else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (x) { x.done = true; afterState(['tasks']); toast(t('done') + ': ' + x.tx); } }
   else if (a === 'cal-step') { const { i } = calState(); S.calSel = Math.max(0, Math.min(D.meetings.length, i + (+b.dataset.d))); Grid.refreshType('calendar'); $('.w[data-type="calendar"] .cal__nx, .w[data-type="calendar"] [data-act="cal-now"]')?.focus(); }
   else if (a === 'cal-sel') { S.calSel = +b.dataset.i; Grid.refreshType('calendar'); }
   else if (a === 'cal-now') { S.calSel = null; Grid.refreshType('calendar'); }
