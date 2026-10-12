@@ -294,6 +294,25 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .trp{display:flex;flex-direction:column;gap:6px;flex:none}.trp small{font:600 11px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}.trp strong{font:600 30px/1.05 var(--font);letter-spacing:-.02em}.trp>span{font-size:12.5px;color:var(--ink3)}
 .route{display:flex;align-items:center;gap:10px;font:700 12px/1 var(--font);color:var(--ink2);flex:none;margin:4px 0}.route i{flex:1;height:2px;border-radius:1px;background:repeating-linear-gradient(90deg,var(--line2) 0 6px,transparent 6px 10px);position:relative}.route i::after{content:'✈';position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);font-size:14px;color:var(--accent);background:var(--card-s,#fff);padding:0 4px;font-style:normal}[dir=rtl] .route i::after{transform:translate(50%,-55%) scaleX(-1)}
 
+/* ---------- Business health · vitals, coverage gauge, hiring funnel, competitive pulse, board KPIs ---------- */
+.vt4{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:8px;flex:1;min-height:0}
+.vtl{display:flex;flex-direction:column;gap:2px;padding:11px 12px 8px;border-radius:var(--rs);background:var(--tile);text-align:start;min-width:0;transition:background .15s,transform .15s}.vtl:hover{background:var(--tile2);transform:translateY(-1px)}
+.vtl small{font:500 12px/1.2 var(--font);color:var(--ink3)}.vtl b{font:600 22px/1.1 var(--font);letter-spacing:-.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vtl em{font:600 11.5px/1 var(--font);font-style:normal;color:var(--vc)}
+.vtl svg{display:block;width:100%;height:26px;margin-top:auto}.vtl .sl{fill:none;stroke:var(--vc);stroke-width:2;vector-effect:non-scaling-stroke}.vtl .sa{fill:var(--vc);opacity:.13}
+.w--v-wide .vtl{padding:8px 10px}.w--v-wide .vtl b{font-size:18px}.w--v-wide .vtl svg{display:none}
+.rvt{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0}.rvt>svg{display:block;width:100%;flex:1;min-height:40px}.rvt .sl{fill:none;stroke:var(--c1);stroke-width:2.2;vector-effect:non-scaling-stroke}.rvt .sa{fill:var(--c1);opacity:.13}
+.cvg{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-height:0;justify-content:center}.cvg svg{display:block;width:min(190px,100%);height:auto}.cvg p{margin:0;font-size:12.5px;color:var(--ink3);text-align:center}.cvg p b{color:var(--ink2)}
+.cvg-w{display:flex;align-items:center;gap:16px;height:100%}.cvg-w svg{width:120px;flex:none}
+.hfn{display:flex;align-items:stretch;gap:4px;flex:none}.hfn button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px 4px;border-radius:var(--rs);background:var(--tile);min-width:0;transition:background .15s}.hfn button:hover{background:var(--tile2)}.hfn b{font:600 22px/1 var(--font)}.hfn span{font-size:11.5px;color:var(--ink2);white-space:nowrap}
+.hfn i{align-self:center;font:600 11px/1 var(--font);font-style:normal;color:var(--ink3);flex:none}
+.cmp{display:flex;flex-direction:column;flex:1;min-height:0}
+.bk6{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:6px;flex:1;min-height:0}
+.bkt{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:9px 10px;border-radius:12px;background:var(--bkb);text-align:start;min-width:0;transition:filter .15s}.bkt:hover{filter:brightness(.97)}
+.bkt small{font:500 11.5px/1 var(--font);color:var(--ink2)}.bkt b{font:600 17px/1.15 var(--font);color:var(--bkc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bkt em{font:500 10.5px/1.2 var(--font);font-style:normal;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bkt--ok{--bkb:var(--ok-soft);--bkc:var(--accent)}.bkt--warn{--bkb:var(--warn-soft);--bkc:var(--warn)}.bkt--bad{--bkb:var(--bad-soft);--bkc:var(--bad)}
+.w--v-wide .bkt em{display:none}
+
+.arr>.tag{flex:none}.cmp .arr{align-items:flex-start;padding-top:8px;padding-bottom:8px}.cmp .arr>span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35}.cmp .arr .dot{margin-top:6px}
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -901,6 +920,21 @@ _m(TX.ar, { w: { invites: 'الدعوات والتعارضات', trips: 'الر�
   inv: { waiting: 'دعوات بانتظارك', clash: '{n} تعارض', clashes: 'تعارض', fix: 'حل', acceptAll: 'قبول الكل', accept: 'قبول', review: 'مراجعة', accepted: 'تم قبول {n} دعوات', allClear: 'لا تعارضات ولا دعوات' },
   trip: { next: 'الرحلة التالية · خلال {d} أيام', meetIn: '{n} اجتماعات في {c} · {d}', then: 'ثم {c} · {w}' } });
 
+/* ----------------------------------------------------------- Business health · helpers + demo data */
+const sparkA = (pts, w = 100, h = 30) => { const mx = Math.max(...pts), mn = Math.min(...pts), xy = pts.map((v, i) => [i / (pts.length - 1) * w, h - 3 - (v - mn) / (mx - mn || 1) * (h - 7)]), d = xy.map((q, i) => (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join(' ');
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path class="sa" d="${d} L${w} ${h} L0 ${h}Z"/><path class="sl" d="${d}"/></svg>`; };
+const arcGauge = (val, max, col, label, mark) => { const f = Math.max(0, Math.min(1, val / max)), P = q => [60 - 46 * Math.cos(Math.PI * q), 58 - 46 * Math.sin(Math.PI * q)], [x, y] = P(f), m = mark != null ? P(mark / max) : null;
+  return `<svg viewBox="0 0 120 66" role="img" aria-label="${label}"><path d="M14 58 A46 46 0 0 1 106 58" fill="none" stroke="var(--tile2)" stroke-width="11" stroke-linecap="round"/>${f > 0 ? `<path d="M14 58 A46 46 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}" fill="none" stroke="${col}" stroke-width="11" stroke-linecap="round"/>` : ''}${m ? `<line x1="${(60 + (m[0] - 60) * .78).toFixed(1)}" y1="${(58 + (m[1] - 58) * .78).toFixed(1)}" x2="${(60 + (m[0] - 60) * 1.2).toFixed(1)}" y2="${(58 + (m[1] - 58) * 1.2).toFixed(1)}" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>` : ''}<text x="60" y="54" text-anchor="middle" style="font:600 20px var(--font);fill:var(--ink)">${label}</text></svg>`; };
+D.hiring = [['open', 21], ['interview', 14], ['offer', 5], ['joined', 3]];
+D.compet = [{ c: 'G42', m: 'won a federal cloud deal worth ~AED 90M', lv: 'bad', tag: 'threat', dep: 'Cloud' }, { c: 'Accenture ME', m: 'is hiring 40 consultants in Riyadh', lv: 'warn', tag: 'watch', dep: 'Consulting' }, { c: 'Oracle', m: 'raised GCC licence prices 9%', lv: 'ok', tag: 'opportunity', dep: 'Licensing' }];
+D.board = { days: 18, kpis: [['Revenue', 'AED 412M', 'ok', 'On promise · 400M'], ['EBITDA', '18.2%', 'warn', 'Promised 20%'], ['Cash', 'AED 78M', 'ok', 'Above 70M floor'], ['NPS', '47', 'warn', 'Promised 50'], ['Headcount', '1,248', 'ok', 'Within plan'], ['Risk', '1 high', 'bad', 'Promised none']] };
+_m(TX.en, { w: { competitive: 'Competitive pulse', boardKpis: 'Board KPIs' }, wd: { competitive: 'Competitor moves this week, summarised by Majlis', boardKpis: 'The six numbers the board will ask about, against what was promised' },
+  bh: { cashIn: 'Cash in {c}M · collection rate {r}%', covers: 'Pipeline covers the <b>{g}M</b> gap · aim <b>1.2×</b>', stage: { open: 'Open roles', interview: 'Interviewing', offer: 'Offers out', joined: 'Joined' }, hireSub: 'Avg. <b>54 days</b> to hire · <b>3 senior</b> roles open 90+ days', openRoles: 'open roles',
+    scanned: 'Scanned by Majlis · {n} sources this week', moves: 'moves this week', tag: { threat: 'Threat', watch: 'Watch', opportunity: 'Opening' }, respond: 'What should we do?', onPromise: '{n} of {t} on promise', toBoard: '{n} days to board', pack: 'Open board pack' } });
+_m(TX.ar, { w: { competitive: 'نبض المنافسين', boardKpis: 'مؤشرات المجلس' }, wd: { competitive: 'تحركات المنافسين هذا الأسبوع بتلخيص من مجلس', boardKpis: 'الأرقام الستة التي سيسأل عنها المجلس مقابل ما وُعد به' },
+  bh: { cashIn: 'النقد الوارد {c} مليون · نسبة التحصيل {r}%', covers: 'الصفقات تغطي فجوة <b>{g} مليون</b> · الهدف <b>1.2×</b>', stage: { open: 'وظائف شاغرة', interview: 'مقابلات', offer: 'عروض', joined: 'انضموا' }, hireSub: 'متوسط <b>54 يومًا</b> للتوظيف · <b>3 وظائف قيادية</b> شاغرة منذ 90+ يومًا', openRoles: 'وظائف شاغرة',
+    scanned: 'رصد مجلس · {n} مصدرًا هذا الأسبوع', moves: 'تحركات هذا الأسبوع', tag: { threat: 'تهديد', watch: 'مراقبة', opportunity: 'فرصة' }, respond: 'ماذا نفعل؟', onPromise: '{n} من {t} حسب الوعد', toBoard: '{n} يومًا على المجلس', pack: 'فتح ملف المجلس' } });
+
 /* ----------------------------------------------------------- the widgets */
 const W = {
   /* AI row (pinned to the top row of Overview; rendered by HERO, not by the grid) */
@@ -924,21 +958,24 @@ const W = {
         if (v === 'wide' || h <= 3) return vz(`<div class="gg-row">${G.slice(0, v === 'tall' ? 2 : w >= 8 ? 4 : w >= 6 ? 3 : 2).map(g => gaugeCell(g, v === 'wide' ? 54 : 52)).join('')}</div>`);
         if (v === 'tall') return vz(`<div class="gg-grid">${G.map(g => gaugeCell(g, h >= 5 ? 78 : 60)).join('')}</div>`);
         return vz(`<div class="pz"><div class="gg-grid gg-grid--2">${G.map(g => gaugeCell(g, 78)).join('')}</div>${w >= 8 && h >= 4 ? `<div class="pz__c"><div class="sec__h"><b>${t('w.revenue')}</b></div>${areaChart([{ n: 'Revenue', v: D.series[S.period].a, c: 'var(--c1)' }], D.series[S.period].l)}</div>` : ''}</div>`); }
-      if (v === 's') return `<button class="big" data-act="ask-open" data-q="Explain the change in revenue"><small>${k[0].l} · ${t('period.' + S.period)}</small><strong>${k[0].v}</strong>${dl(k[0].d, k[0].up, k[0].good)}${spark(k[0].s, 140, 32, 'spark--ink')}</button>`;
-      const cols = v === 'tall' ? 2 : w >= 8 ? 4 : w >= 6 ? 3 : 2, ctlH = w < 6 ? 46 : 0, rows = (v === 'wide') ? 1 : v === 'tall' ? Math.max(1, Math.floor((bodyH(h) - ctlH + 10) / 94)) : 1;
-      const nT = Math.min(4, cols * rows), tiles = `<div class="sts sts--${cols}">${k.slice(0, nT).map((x, i) => tile(x, { hi: !i })).join('')}</div>`;
-      const room = bodyH(h) - ctlH - rows * 94 - 10, md = mixData();
-      if (v === 'wide' || room < 100) return tiles;
-      return tiles + `<div class="sec sec--grow">${secH(t('mix'), `<button class="chipb" data-act="sort">${S.sort === 'desc' ? t('sortDesc') : t('sortAsc')}${ico('chevDown', 13)}</button>`)}<div class="mixrow">${capsules(md.map(x => x[1]), md.map(x => x[0]), { fmt: x => x + '%', hi: S.sort === 'desc' ? 0 : md.length - 1 })}${w >= 8 ? mixLegend() : ''}</div></div>`; } },
+      /* Option 1 · four vitals: value, delta and a sparkline each; green = healthy, amber = watch */
+      const hc = D.kpis.find(x => x.id === 'hc'), V = [k[0], k[1], { l: hc.label, v: hc.val, d: hc.delta.replace(/^\+/, ''), up: hc.up, good: 1, s: hc.s }, k[2]];
+      const tile = x => `<button class="vtl" style="--vc:${x.good ? 'var(--accent)' : 'var(--warn)'}" data-act="ask-open" data-q="Explain the change in ${esc(x.l.toLowerCase())}"><small>${esc(x.l)}</small><b>${esc(x.v)}</b><em>${x.up ? '▲' : '▼'} ${esc(x.d)}</em>${sparkA(x.s)}</button>`;
+      if (v === 's') return `<button class="big" data-act="ask-open" data-q="Explain the change in revenue"><small>${V[0].l} · ${t('period.' + S.period)}</small><strong>${V[0].v}</strong>${dl(V[0].d, V[0].up, V[0].good)}</button>`;
+      const n = v === 'wide' || w >= 8 ? 4 : 2, rows = v === 'wide' ? 1 : Math.max(1, Math.min(2, Math.floor((bodyH(h) + 8) / 96)));
+      return `<div class="vt4" style="--n:${n}">${V.slice(0, n * rows).map(tile).join('')}</div>`; } },
 
   revenue: { group: 'finance', icon: 'dollar', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
     ctl: () => seg(PERIODS, S.period, 'period'),
     render({ v, w, h, view }) { const k = D.kp[S.period][0], s = D.series[S.period], ch = areaChart([{ n: 'Revenue', v: s.a, c: 'var(--c1)' }, { n: 'Cash', v: s.b, c: 'var(--c3)' }], s.l);
       const lg = `<span class="lgn"><i style="background:var(--c1)"></i>${t('w.revenue').split(' ')[0]}</span><span class="lgn"><i style="background:var(--c3)"></i>Cash</span><small class="muted">AED M</small>`;
       if (view === 'viz') { if (v === 's' || v === 'wide') return vz(spark(s.a, 160, 56, 'spark--fill'), 'vz--c'); return vz(`<div class="lgrow">${lg}</div>${ch}`, 'vz--col'); }
-      if (v === 's') return `<div class="big"><small>${k.l} · ${t('period.' + S.period)}</small><strong>${k.v}</strong>${dl(k.d, k.up, k.good)}${spark(k.s, 140, 32)}</div>`;
-      if (v === 'wide') return `<div class="rev-w"><div><strong>${k.v}</strong>${dl(k.d, k.up, k.good)}</div>${spark(s.a, 300, 54, 'spark--wide')}<div class="rev-w__b"><small>${D.kp[S.period][1].l}</small><strong>${D.kp[S.period][1].v}</strong></div></div>`;
-      return `<div class="rev-h"><strong>${k.v}</strong>${dl(k.d, k.up, k.good)}${h >= 4 ? `<div class="lgrow">${lg}</div>` : ''}</div>${ch}`; } },
+      /* Option 1 · number + trend: the period's revenue, one line, cash collected underneath */
+      const cin = s.b[s.b.length - 1], rate = Math.round(s.b.reduce((a, x) => a + x, 0) / s.a.reduce((a, x) => a + x, 0) * 100);
+      if (v === 's') return `<div class="big"><small>${k.l} · ${t('period.' + S.period)}</small><strong>${k.v}</strong>${dl(k.d, k.up, k.good)}</div>`;
+      const head = `<div class="arb"><strong>${k.v}</strong><small>${t('period.' + S.period)}</small>${dl(k.d, k.up, k.good)}</div>`;
+      if (v === 'wide') return `<div class="arw"><div>${head}</div><div class="rvt" style="height:60px">${sparkA(s.a, 300, 60)}</div></div>`;
+      return `<div class="rvt">${head}${sparkA(s.a, 300, 90)}<p class="arsub" style="margin:0">${t('bh.cashIn', { c: cin, r: rate })}</p></div>`; } },
 
   /* Communication */
   calendar: { group: 'comms', icon: 'calendar', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
@@ -1111,6 +1148,22 @@ const W = {
       const k = Math.max(0, Math.min(2, Math.floor((bodyH(h) - 150) / 41)));
       return `${head}${route}<div class="arls">${rows.slice(0, k).join('')}</div>${nx ? arLink(t('trip.then', { c: nx.city, w: nx.when }), 'ask-open', ` data-q="Show my ${nx.city} trip"`) : ''}`; } },
 
+  /* Business health · new widgets */
+  competitive: { group: 'exec', icon: 'eye', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
+    count: () => D.compet.length,
+    render({ v, h }) { const L = D.compet, row = x => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(`${x.c} ${x.m}. What does it mean for our ${x.dep} business?`)}"><i class="dot dot--${x.lv}"></i><span><b>${esc(x.c)}</b> ${esc(x.m)}</span>${tag(t('bh.tag.' + x.tag), x.lv)}</div>`;
+      if (v === 's') return finBig(t('bh.moves'), L.length, `<span class="muted">${esc(L[0].c)} · ${t('bh.tag.' + L[0].tag)}</span>`);
+      if (v === 'wide' || h <= 2) return `<div class="arls">${row(L[0])}</div>`;
+      return `<div class="cmp"><span class="tms__by">${ico('sparkles', 12)}${t('bh.scanned', { n: 214 })}</span><div class="arls">${L.slice(0, Math.max(1, Math.min(3, Math.floor((bodyH(h) - 70) / 41)))).map(row).join('')}</div>${arLink(t('bh.respond'), 'ask-open', ' data-q="Given this week\'s competitor moves, what should we do?"')}</div>`; } },
+
+  boardKpis: { group: 'exec', icon: 'shield', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 5],
+    count: () => t('bh.toBoard', { n: D.board.days }),
+    render({ v, w, h }) { const K = D.board.kpis, ok = K.filter(x => x[2] === 'ok').length;
+      if (v === 's') return finBig(t('bh.toBoard', { n: D.board.days }), t('bh.onPromise', { n: ok, t: K.length }), `<span class="big__f">${K.map(x => dot(x[2])).join('')}</span>`);
+      const tile = ([l, val, st, note]) => `<button class="bkt bkt--${st}" data-act="ask-open" data-q="${esc(`Board KPI ${l}: ${val}, ${note}. What will the board ask?`)}" title="${esc(note)}"><small>${l}</small><b>${val}</b><em>${note}</em></button>`;
+      const n = v === 'wide' || w >= 8 ? 6 : w >= 6 ? 3 : 2;
+      return `<div class="bk6" style="--n:${n}">${K.map(tile).join('')}</div>${v === 'wide' || bodyH(h) < 250 ? '' : arLink(`${t('bh.onPromise', { n: ok, t: K.length })} · ${t('bh.pack')}`, 'ask-open', ' data-q="Prepare me for the board: which KPIs are off promise and why?"')}`; } },
+
   /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
   deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'XL', min: [3, 2], max: [12, 7],
     count: () => t('fin.nBehind', { n: FIN.ds.filter(d => d.st === 'bad').length }),
@@ -1145,12 +1198,14 @@ const W = {
 
   pipeline: { group: 'exec', icon: 'chart', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
     ctl: () => finChip(),
-    render({ v, h }) { const d = finSel(), sc = d ? d.p / FIN.T.p : 1, st = D.fin.stages.map(([k, u, pr]) => ({ k, u: u * sc, wv: u * pr * sc })), Wt = st.reduce((a, x) => a + x.wv, 0), U = st.reduce((a, x) => a + x.u, 0), gap = d ? d.gap : FIN.T.gap, cov = gap > 0 ? Wt / gap : 9;
-      if (v === 's') return finBig(t('fin.pipeW'), fM(Wt), `<span class="muted">${t('fin.weightedOf', { u: fM(U) })}</span>`);
-      const head = `<div class="rev-h"><strong>${fM(Wt)}</strong><span class="muted">${t('fin.weightedOf', { u: fM(U) })}</span>${tag(cov >= 5 ? '5×+ ' + t('fin.cov') : cov.toFixed(2) + '× ' + t('fin.cov'), cov >= 1.2 ? 'ok' : cov >= 1 ? 'warn' : 'bad')}</div>`;
-      if (v === 'wide') return head;
-      const mx = Math.max(...st.map(x => x.u));
-      return `${head}<ul class="stg">${st.map(x => `<li><button data-act="ask-open" data-q="Which ${t('fin.st.' + x.k).toLowerCase()} deals matter most${d ? ' in ' + esc(d.n) : ''}?"><span>${t('fin.st.' + x.k)}</span><i class="stg__t"><b class="stg__u" style="width:${(x.u / mx * 100).toFixed(1)}%"></b><b class="stg__w" style="width:${(x.wv / mx * 100).toFixed(1)}%"></b></i><em>${fM(x.wv)}<small> / ${fM(x.u)}</small></em></button></li>`).join('')}</ul>${h >= 4 ? `<div class="fx-key" style="margin-top:auto"><span><i></i>${t('fin.pipeW')}</span><span><i style="background:var(--tile2)"></i>${t('fin.total')}</span><small>AED M</small></div>` : ''}`; } },
+    render({ v, h }) { /* Option 2 · coverage first: is the weighted pipeline enough to close the gap? Stages shrink to chips */
+      const d = finSel(), sc = d ? d.p / FIN.T.p : 1, st = D.fin.stages.map(([k, u, pr]) => ({ k, u: u * sc, wv: u * pr * sc })), Wt = st.reduce((a, x) => a + x.wv, 0), gap = d ? d.gap : FIN.T.gap, cov = gap > 0 ? Wt / gap : 9;
+      const col = cov >= 1.2 ? 'var(--accent)' : cov >= 1 ? 'var(--warn)' : 'var(--bad)', lab = cov >= 5 ? '5×+' : cov.toFixed(2) + '×';
+      if (v === 's') return finBig(t('fin.cov'), lab, `<span class="muted">${t('fin.pipeW')} ${fM(Wt)}</span>`);
+      const g = arcGauge(cov, 2, col, lab, 1.2), sub = `<p>${t('bh.covers', { g: fM(gap) })}</p>`;
+      const chips = `<div class="archips" style="justify-content:center">${st.map(x => `<button data-act="ask-open" data-q="Which ${t('fin.st.' + x.k).toLowerCase()} deals matter most${d ? ' in ' + esc(d.n) : ''}?">${t('fin.st.' + x.k)} <b>${fM(x.wv)}</b></button>`).join('')}</div>`;
+      if (v === 'wide' || h <= 2) return `<div class="cvg-w">${g}<div class="cvg" style="align-items:flex-start">${sub}</div></div>`;
+      return `<div class="cvg">${g}${sub}</div>${chips}`; } },
 
   backlog: { group: 'exec', icon: 'calendar', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
     render({ v, h }) { const B = D.fin.backlog, tot = B.reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0), n90 = B.slice(0, 3).reduce((a, [, x]) => a + x[0] + x[1] + x[2], 0), C = ['var(--c1)', 'var(--c2)', 'var(--c5)'];
@@ -1210,10 +1265,11 @@ const W = {
       if (view === 'viz') { const segs = D.depts.map((x, i) => ({ l: x[0], v: x[1], c: cs[i], t: Math.round(x[1] / tot * 100) + '%' })); if (v === 's') return vz(`<div class="big"><small>${t('w.people')}</small><strong>${p.hc}</strong>${spark(p.s, 140, 30)}</div>`);
         if (v === 'wide') return vz(miniDonut(segs, `<b>${p.hc.replace(',', '')}</b>`));
         return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${p.hc}</b><small>${t('total')}</small>` })}${legend(segs.slice(0, h >= 4 ? 6 : 4))}</div>`, 'vz--col'); }
-      if (v === 's') return `<div class="big"><small>Headcount</small><strong>${p.hc}</strong>${dl(p.d, 1, 1)}${spark(p.s, 140, 30)}</div>`;
-      const stats = `<div class="sts sts--${w >= 6 ? 4 : 2}"><div class="st st--static st--hi"><span class="st__v">${p.hc}</span><span class="st__l">Headcount</span></div><div class="st st--static"><span class="st__v">${p.hires}</span><span class="st__l">Hires YTD</span></div>${w >= 6 || h >= 4 ? `<div class="st st--static"><span class="st__v">${p.attr}</span><span class="st__l">Attrition</span></div><div class="st st--static"><span class="st__v">${p.roles}</span><span class="st__l">Open roles</span></div>` : ''}</div>`;
-      if (v === 'wide') return stats;
-      return stats + `<div class="sec sec--grow">${hbars(D.depts.slice(0, Math.max(2, CAP(h, 32, 164))).map((x, i) => ({ l: x[0], v: x[1], c: cs[i] })))}</div>`; } },
+      /* Option 3 · hiring funnel: how fast open roles are being filled */
+      if (v === 's') return finBig(t('bh.openRoles'), D.hiring[0][1], `<span class="muted">${p.hc} · ${p.hires} hires YTD</span>`);
+      const fn = `<div class="hfn">${D.hiring.map(([k, n], i) => `${i ? '<i>›</i>' : ''}<button data-act="ask-open" data-q="Show the ${t('bh.stage.' + k).toLowerCase()} in hiring"><b>${n}</b><span>${t('bh.stage.' + k)}</span></button>`).join('')}</div>`;
+      if (v === 'wide') return fn;
+      return `<div class="arb"><strong>${p.hc}</strong><small>people · ${p.hires} hires YTD · ${p.attr} attrition</small></div>${fn}<p class="arsub" style="margin:0">${t('bh.hireSub')}</p>`; } },
 
   customers: { group: 'people', icon: 'building', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.accounts.length + ' ' + t('atRisk').toLowerCase(),
@@ -1288,7 +1344,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['revenue', 4, 4], ['people', 4, 4], ['competitive', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1304,7 +1360,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'pulse', 'revenue', 'customers', 'people'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
+const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing', 'runrate', 'pipeline', 'backlog', 'cash', 'rpe', 'revenue', 'people', 'competitive', 'customers'], watch: ['alerts', 'budget', 'risks', 'projects', 'insights', 'docs'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'watch';
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -1358,7 +1414,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout5.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout6.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1516,10 +1572,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout5.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout6.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout5.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout6.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1703,7 +1759,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout5.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout6.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
