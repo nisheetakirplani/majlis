@@ -241,6 +241,22 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .tkr input:checked~.tkr__m b{text-decoration:line-through;color:var(--ink3)}
 .tkf{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding:2px 4px 0;flex:none;font:500 12.5px/1 var(--font);color:var(--ink3);min-width:0}.tkf>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tkf .arl{margin:0;align-self:auto}
 
+/* Daily brief · Option 2 · Stories: one insight at a time, auto-advancing */
+.bs__h{display:flex;align-items:center;gap:8px;flex:none}
+.bs__pg{display:flex;gap:5px;flex:1;min-width:0}.bs__pg i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden;position:relative}.bs__pg i b{position:absolute;inset:0;width:0;background:#fff;border-radius:2px}[dir=rtl] .bs__pg i b{inset:0 0 0 auto}
+.bs__pg i.is-done b{width:100%}.bs__pg i.is-on b{animation:bsFill 5s linear forwards}.hero__brief:hover .bs__pg i.is-on b,.hero__brief.is-paused .bs__pg i.is-on b{animation-play-state:paused}@keyframes bsFill{to{width:100%}}
+.bs__sc{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:99px;font:600 12px/1 var(--font);background:color-mix(in srgb,var(--sc) 18%,transparent);color:var(--sc);white-space:nowrap;flex:none}.bs__sc i{width:7px;height:7px;border-radius:50%;background:var(--sc)}
+.hero__brief .bs__ic{width:32px;padding:0;justify-content:center;flex:none}
+.bs__st{position:relative;display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;animation:bsIn .35s ease}@keyframes bsIn{from{opacity:0;transform:translateY(6px)}}
+.bs__st small{font:600 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--sk)}
+.bs__big{font:600 54px/1 var(--font);letter-spacing:-.035em;color:var(--sk);margin-top:6px;white-space:nowrap}
+.bs__st p{margin:0;font:400 14px/1.45 var(--font);color:rgba(255,255,255,.78);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bs__a{display:flex;align-items:center;gap:8px;margin-top:auto;position:relative;z-index:2}.bs__a .btn--sm{height:34px}.bs__n{margin-inline-start:auto;font:600 12px/1 var(--font);color:rgba(255,255,255,.55)}
+.bs__nav{position:absolute;top:56px;bottom:62px;width:38%;z-index:1;background:none;border:0;cursor:pointer}.bs__nav--p{inset-inline-start:0}.bs__nav--n{inset-inline-end:0}
+.hero__brief .btn--y{background:var(--hi);color:var(--hi-ink)}.hero__brief .btn--y:hover{filter:brightness(1.05);background:var(--hi)}
+@media (max-width:1280px){.bs__big{font-size:44px}}
+@media (prefers-reduced-motion:reduce){.bs__st{animation:none}.bs__pg i.is-on b{animation:none;width:100%}}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -1146,18 +1162,34 @@ function pinsChanged() { savePins(); renderHero(); renderPins(); }
 /* health score · 100 − 4×watch items − 5×high risks − 3×delayed projects − open decisions (80 on the demo data) */
 function briefScore() { return Math.max(0, Math.min(100, 100 - 4 * D.brief.watch.length - 5 * D.risks.filter(x => x.lv === 'bad').length - 3 * D.projects.filter(x => x.r === 'late').length - S.openDecisions().length)); }
 const ASK_CARDS = [['trend', 'What changed since Monday?'], ['calendar', 'Prep me for today'], ['mail', 'Draft urgent replies'], ['flag', 'Where are we behind plan?']];
+/* stories for the Daily brief; the third follows your decisions, so signing the board pack moves it on */
+S.story = { i: 0, tm: null };
+function briefStories() { const ask = (q, l, y) => `<button class="btn btn--sm ${y ? 'btn--y' : 'btn--ghost'}" data-act="ask-open" data-q="${esc(q)}">${l}</button>`;
+  const board = S.decisions.find(d => d.id === 3), nx = S.openDecisions()[0];
+  const next = board && board.st === 'open' ? { big: '14:45', p: 'Sign the Q3 board pack. The CFO and General Counsel have already reviewed it.', act: `<button class="btn btn--sm btn--y" data-act="decision" data-do="approved" data-id="3">${ico('check', 13)}${t('q.signNow')}</button>${ask('What should I check in the board pack?', t('q.ask'))}` }
+    : nx ? { big: '✓', p: `Board pack signed. Next up: ${nx.title.charAt(0).toLowerCase() + nx.title.slice(1)}, ${nx.meta.split('·')[1]?.trim() || ''}.`, act: `<button class="btn btn--sm btn--y" data-act="decision" data-do="approved" data-id="${nx.id}">${ico('check', 13)}${t('approve')}</button>${ask(nx.title + ': what should I know?', t('q.ask'))}` }
+    : { big: '✓', p: 'Nothing is waiting on you. All decisions are cleared for today.', act: ask('What should I focus on this afternoon?', t('br.focus'), true) };
+  return [{ k: t('goodWell'), c: 'var(--hi)', big: '+8.4%', p: 'Revenue is ahead of plan, driven by GCC enterprise renewals.', act: ask('Why is revenue 8.4% ahead of plan?', t('br.whyUp'), true) },
+    { k: t('watch'), c: '#f5b73c', big: '41%', p: 'Top-5 customers now carry 41% of revenue, up from 36% last quarter.', act: ask('How do we reduce top-5 customer concentration?', t('br.reduce'), true) },
+    { k: t('doNext'), c: '#fff', ...next }]; }
+function renderBrief() { const el = $('#heroBrief'); if (!el) return; el.innerHTML = HERO.brief() + `<span class="pin">${ico('lock', 12)}${t('pinned')}</span>`; storyTimer(); }
+function storyTimer() { clearTimeout(S.story.tm); if (S.story.paused || matchMedia('(prefers-reduced-motion: reduce)').matches) return; S.story.tm = setTimeout(() => { S.story.i = (S.story.i + 1) % 3; renderBrief(); }, 5000); }
+_m(TX.en, { br: { nOf: '{i} of {n}', prev: 'Previous story', next: 'Next story', whyUp: 'Why is revenue up?', reduce: 'How do we reduce it?', focus: 'What next?' } });
+_m(TX.ar, { br: { nOf: '{i} من {n}', prev: 'القصة السابقة', next: 'القصة التالية', whyUp: 'لماذا ارتفع الإيراد؟', reduce: 'كيف نخفّضها؟', focus: 'ما التالي؟' } });
 const HERO = {
   ask() { return `<div class="ask__top">${orb('orb--md')}<div class="ask__t"><h2>${t('ask')}</h2><p>${t('askSub')}</p></div>${pinsHTML()}</div>
     <label class="ask__in"><input data-ask-input placeholder="${t('askPh')}" aria-label="${t('ask')}"><button class="ic-btn" data-act="mic" aria-label="Voice">${ico('mic', 18)}</button><button class="ic-btn ic-btn--accent" data-act="ask-send" aria-label="${t('send')}">${ico('arrowRight', 18)}</button></label>
     <div class="ask__sq">${todayHTML()}</div>`; },
-  brief() { const b = D.brief, sc = briefScore(), st = sc >= 80 ? ['healthy', 'var(--hi)'] : sc >= 65 ? ['steady', '#f5b73c'] : ['pressure', '#ff7a6b'];
-    const R = 44, C = 2 * Math.PI * R, todo = S.openDecisions().length, signed = S.decisions.some(d => d.id === 3 && d.st === 'approved');
-    const tile = (tone, v, l, full, q, done) => `<button class="bt${done ? ' is-done' : ''}" style="--tc:${tone}" data-act="ask-open" data-q="${esc(q)}" title="${esc(full)}"><b>${v}</b><small>${esc(l)}</small></button>`;
-    return `<div class="brief__h"><b>${t('w.brief')}</b><span class="brief__a"><button class="btn btn--ghost btn--sm" data-act="brief-play" title="${S.playing ? t('playing') : t('listen')}">${ico(S.playing ? 'pause' : 'play', 13)}<span class="brief__ll">${S.playing ? t('playing') : t('listen')}</span></button><button class="btn btn--ghost btn--sm btn--sq" data-act="ask-open" data-q="Give me the full daily brief" title="${t('fullBrief')}" aria-label="${t('fullBrief')}">${ico('arrowUR', 14)}</button></span></div>
-    ${S.playing ? '<i class="prog"><b></b></i>' : ''}
-    <div class="br__body" title="${esc(b.head)}"><div class="ring" style="--rc:${st[1]}" role="img" aria-label="${t('br.score')} ${sc}/100 · ${t('br.' + st[0])}"><svg viewBox="0 0 104 104" width="104" height="104"><circle class="ring__bg" cx="52" cy="52" r="${R}"/><circle class="ring__fg" cx="52" cy="52" r="${R}" stroke-dasharray="${(C * sc / 100).toFixed(1)} ${C.toFixed(1)}"/></svg><span class="ring__c"><b>${sc}</b><small>${t('br.' + st[0])}</small></span></div>
-    <ul class="br__lg"><li class="lg-g"><i></i><b>${b.good.length}</b>${t('br.good')}</li><li class="lg-w"><i></i><b>${b.watch.length}</b>${t('br.watch')}</li><li class="lg-n"><i></i><b>${todo}</b>${t('br.todo')}</li></ul></div>
-    <div class="br__tiles">${tile('var(--hi)', '+8.4%', t('br.rev'), b.good[0], 'Why is revenue 8.4% ahead of plan?')}${tile('#f5b73c', '41%', t('br.top5'), b.watch[0], 'How do we reduce top-5 customer concentration?')}${signed ? tile('var(--hi)', '✓', t('br.signed'), t('br.boardDone'), 'Summarise the signed Q3 board pack', true) : tile('#fff', '14:45', t('br.board'), b.next[0], 'What do I need to know before signing the Q3 board pack?')}</div>`; },
+  /* Daily brief · Option 2 · Stories: Going well → Watch → Do next, one big number each, built from live state */
+  brief() { const sc = briefScore(), st = sc >= 80 ? ['healthy', 'var(--hi)'] : sc >= 65 ? ['steady', '#f5b73c'] : ['pressure', '#ff7a6b'], S3 = briefStories(), i = S.story.i % S3.length, x = S3[i];
+    return `<div class="bs__h"><div class="bs__pg" aria-hidden="true">${S3.map((_, k) => `<i class="${k < i ? 'is-done' : k === i ? 'is-on' : ''}"><b></b></i>`).join('')}</div>
+      <span class="bs__sc" style="--sc:${st[1]}" title="${t('br.score')} ${sc}/100"><i></i>${sc} · ${t('br.' + st[0])}</span>
+      <button class="btn btn--ghost btn--sm bs__ic" data-act="brief-play" title="${S.playing ? t('playing') : t('listen')}" aria-label="${S.playing ? t('playing') : t('listen')}">${ico(S.playing ? 'pause' : 'play', 13)}</button>
+      <button class="btn btn--ghost btn--sm bs__ic" data-act="ask-open" data-q="Give me the full daily brief" title="${t('fullBrief')}" aria-label="${t('fullBrief')}">${ico('arrowUR', 14)}</button></div>
+      ${S.playing ? '<i class="prog"><b></b></i>' : ''}
+      <div class="bs__st" style="--sk:${x.c}" aria-live="polite"><small>${x.k}</small><div class="bs__big">${x.big}</div><p>${esc(x.p)}</p>
+        <div class="bs__a">${x.act}<span class="bs__n">${t('br.nOf', { i: i + 1, n: S3.length })}</span></div></div>
+      <button class="bs__nav bs__nav--p" data-act="story" data-d="-1" aria-label="${t('br.prev')}"></button><button class="bs__nav bs__nav--n" data-act="story" data-d="1" aria-label="${t('br.next')}"></button>`; },
 };
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
@@ -1376,7 +1408,7 @@ function renderHello() { const pg = PAGES[PAGE], open = S.openDecisions().length
   $('#hello').innerHTML = `<div class="hello__l"><small>${new Date().toLocaleDateString(LANG === 'ar' ? 'ar-AE' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}<span class="sync"><i class="live"></i>${t('syncedN', { m: window.__sync || 2, n: connected() })}</span></small><h1>${greeting()}, ${name}</h1></div>
   `; }
 function renderHero() { const inp = $('input[data-ask-input]', $('#heroAsk')), keep = inp ? inp.value : '', foc = inp && document.activeElement === inp;
-  $('#heroAsk').innerHTML = HERO.ask() + `<span class="pin">${ico('lock', 12)}${t('pinned')}</span>`; $('#heroBrief').innerHTML = HERO.brief() + `<span class="pin">${ico('lock', 12)}${t('pinned')}</span>`;
+  $('#heroAsk').innerHTML = HERO.ask() + `<span class="pin">${ico('lock', 12)}${t('pinned')}</span>`; renderBrief();
   const n = $('input[data-ask-input]', $('#heroAsk')); if (n && keep) { n.value = keep; if (foc) n.focus(); } }
 function renderTop() { $('#q').placeholder = t('search'); const eb = $('#btnEdit'); eb.innerHTML = `${ico(EDIT ? 'check' : 'edit', 16)}<span>${EDIT ? t('done') : t('customize')}</span>`; eb.title = t('customize'); $('#btnTheme').innerHTML = ico(root.dataset.theme === 'dark' ? 'sun' : 'moon', 18); $('#btnTheme').title = t('theme');
   $('#btnLang').firstChild.textContent = LANG === 'ar' ? 'EN' : 'ع'; $('#btnLang').title = t('language'); $('#btnNotif').title = t('notifications'); const un = S.notifs.filter(n => n.unread).length, b = $('#nbadge'); b.textContent = un; b.hidden = !un;
@@ -1467,6 +1499,8 @@ const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
     toast(t('toastRemoved', { w: t('w.' + ty) }), t('undo'), () => { Grid.undo(); afterState([]); }); },
 };
 $('#dAdd').onclick = () => PAL.show(true);
+{ const hb = $('#heroBrief'); const pause = on => { S.story.paused = on; hb.classList.toggle('is-paused', on); if (on) clearTimeout(S.story.tm); else storyTimer(); };
+  hb.addEventListener('mouseenter', () => pause(true)); hb.addEventListener('mouseleave', () => pause(false)); hb.addEventListener('focusin', () => pause(true)); hb.addEventListener('focusout', () => pause(false)); }
 $('#palQ').addEventListener('input', e => { PAL.q = e.target.value; PAL.sel = null; PAL.render(); });
 $('#palQ').addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); PAL.move(e.key === 'ArrowDown' ? 1 : -1); }
@@ -1551,6 +1585,7 @@ document.addEventListener('click', e => {
   else if (a === 'fin-dept') { const ns = [null, ...FIN.byGap.map(d => d.n)]; S.finDept = ns[(ns.indexOf(S.finDept || null) + 1) % ns.length]; Grid.refreshType('pipeline'); Grid.refreshType('runrate'); }
   else if (a === 'sort') { S.sort = S.sort === 'desc' ? 'asc' : 'desc'; Grid.refreshType('pulse'); }
   else if (a === 'view') { const w = b.closest('.w'); Grid.setView(w.dataset.id, b.dataset.v); }
+  else if (a === 'story') { S.story.i = (S.story.i + (+b.dataset.d) + 3) % 3; renderBrief(); }
   else if (a === 'brief-play') { S.playing = !S.playing; renderHero(); if (S.playing) setTimeout(() => { S.playing = false; renderHero(); }, 6000); }
   else if (a === 'prep') { openChat(from); chatSend('Prep me for: ' + b.dataset.title); }
   else if (a === 'hide') { const w = b.closest('.w'), it = Grid.items.find(i => i.id === w.dataset.id); Grid.remove(it.id); refreshCards(); toast(t('toastRemoved', { w: t('w.' + it.type) }), t('undo'), () => { Grid.undo(); refreshCards(); }); }
