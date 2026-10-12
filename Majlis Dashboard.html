@@ -975,7 +975,7 @@ const W = {
   /* AI row (pinned to the top row of Overview; rendered by HERO, not by the grid) */
   ask: { group: 'ai', icon: 'sparkles', pinned: true, sizes: { M: [8, 3] }, def: 'M', min: [8, 3], max: [8, 3], render: () => '' },
   brief: { group: 'ai', icon: 'zap', pinned: true, sizes: { M: [4, 3] }, def: 'M', min: [4, 3], max: [4, 3], render: () => '' },
-  insights: { group: 'ai', icon: 'bulb', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+  insights: { group: 'ai', pageOnly: true, icon: 'bulb', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     render({ v, w, h, view }) { const I = D.insights;
       if (view === 'viz') { if (v === 's') return vz(`<div class="big"><small>${t('w.insights')}</small><strong>${I.length}</strong>${spark(I[0].s2, 140, 30)}</div>`);
         if (v === 'wide') return vz(`<div class="insg insg--row">${I.slice(0, w >= 8 ? 4 : 3).map(x => `<button class="insc insc--min" data-act="ask-open" data-q="Why: ${esc(x.t)}"><b>${x.v}</b><small>${esc(x.t)}</small></button>`).join('')}</div>`);
@@ -1092,7 +1092,7 @@ const W = {
       const k = Math.max(1, Math.min(op.length, 3, Math.floor((bodyH(h) - 92) / 41)));
       return `${bar}${lg}<div class="arls">${op.slice(0, k).map(row).join('')}</div>${link}`; } },
 
-  projects: { group: 'work', icon: 'layout', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+  projects: { group: 'work', pageOnly: true, icon: 'layout', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.projects.length,
     render({ v, w, h, view }) { const p = D.projects, ok = Math.round(p.filter(x => x.r === 'ok').length / p.length * 100);
       if (view === 'viz') { const segs = [['ok', t('onTrack')], ['risk', t('atRisk')], ['late', t('delayed')]].map(([k, l]) => ({ l, v: p.filter(x => x.r === k).length, c: rag[k][2] }));
@@ -1121,7 +1121,7 @@ const W = {
       const prev = hidden.filter(x => !x.done), names = prev.slice(0, 2).map(x => x.sh || x.tx);
       return `<div class="tkl" style="gap:0">${html}</div>${prev.length ? `<div class="tkf"><span>${esc(names.join(' · '))}${prev.length > 2 ? ' +' + (prev.length - 2) : ''}</span>${arLink(t('q.allTasks'), 'ask-open', ' data-q="Show all my tasks"')}</div>` : ''}`; } },
 
-  docs: { group: 'docs', icon: 'folder', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+  docs: { group: 'docs', pageOnly: true, icon: 'folder', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.docs.length,
     render({ v, w, h, view }) { const d = D.docs;
       if (view === 'viz') { const segs = D.docTypes.map(([l, n, c]) => ({ l, v: n, c, t: n + '%' })); if (v === 's') return vz(`<div class="big"><small>${t('w.docs')}</small><strong>${d.length}</strong>${capsules(D.docVol, D.dow, { hi: 3 }).replace('class="caps"', 'class="caps caps--mini"')}</div>`);
@@ -1131,7 +1131,7 @@ const W = {
       if (w >= 6 && h >= 5) return `<ul class="docg">${d.slice(0, w >= 9 ? 5 : 4).map(x => `<li><button class="doc" data-act="ask-open" data-q="Summarise ${esc(x.n)}"><span class="doc__p">${ico(x.ic, 22)}</span><b>${esc(x.n)}</b><small>${esc(x.m)}</small><time>${x.a}</time></button></li>`).join('')}</ul>`;
       return `<ul class="rcl">${d.slice(0, CAP(h, 58)).map(x => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="Summarise ${esc(x.n)}"><i class="ic-c ic-c--n">${ico(x.ic, 16)}</i><span class="rc__m"><b>${esc(x.n)}</b><small>${esc(x.m)}</small></span><time>${x.a}</time></button></li>`).join('')}</ul>`; } },
 
-  risks: { group: 'finance', icon: 'alert', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
+  risks: { group: 'finance', pageOnly: true, icon: 'alert', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.risks.filter(x => x.lv === 'bad').length + ' ' + t('high'),
     render({ v, w, h, view }) { const r = D.risks, hi = r.filter(x => x.lv === 'bad').length;
       const heat = sz => { const cells = []; for (let i = 3; i >= 1; i--) for (let p = 1; p <= 3; p++) { const here = r.filter(x => x.i === i && x.p === p); cells.push(`<div class="hm hm--${i * p >= 6 ? 'bad' : i * p >= 3 ? 'warn' : 'ok'}">${here.map(x => `<b title="${esc(x.n)}">${r.indexOf(x) + 1}</b>`).join('')}</div>`); } return `<div class="heat ${sz}"><span class="heat__y">Impact</span>${cells.join('')}<span class="heat__x">Likelihood</span></div>`; };
@@ -1684,7 +1684,7 @@ _m(TX.ar, { pal: { add: 'إضافة أداة', ph: 'ابحث عن أداة…', 
   other: 'أدوات أخرى', kMove: 'تنقّل', kAdd: 'إضافة', kKeep: 'إضافة مع الإبقاء مفتوحًا', kClose: 'إغلاق' } });
 const palSec = ty => SEC_ORDER.find(k => SECS[k].includes(ty)) || 'other';
 const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
-  types: () => Object.keys(W).filter(k => !W[k].pinned),
+  types: () => Object.keys(W).filter(k => !W[k].pinned && !W[k].pageOnly), /* page-only widgets stay on their own pages */
   onDash: ty => Grid.items.filter(i => i.type === ty).length,
   list() { const toks = this.q.toLowerCase().split(/\s+/).filter(Boolean);
     return [...SEC_ORDER, 'other'].flatMap(sk => this.types().filter(ty => palSec(ty) === sk)).filter(ty => {
@@ -1696,7 +1696,7 @@ const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
     else if (EDIT) $('#dAdd')?.focus(); },
   render() { const L = this.list(); if (!L.includes(this.sel)) this.sel = L[0] || null;
     const cnt = k => this.types().filter(ty => k === 'all' || (k === 'on' ? this.onDash(ty) : palSec(ty) === k)).length;
-    $('#palChips').innerHTML = ['all', ...SEC_ORDER, 'other', 'on'].map(k => `<button data-pf="${k}" class="${this.f === k ? 'is-on' : ''}">${SEC_ORDER.includes(k) ? `<i class="dot dot--${secHealth(k).lv}"></i>` : ''}${k === 'all' ? t('pal.all') : k === 'on' ? ico('check', 12) + t('pal.onDash') : k === 'other' ? t('pal.other') : t('sec.' + k)}<em>${cnt(k)}</em></button>`).join('');
+    $('#palChips').innerHTML = ['all', ...SEC_ORDER, 'other', 'on'].filter(k => k !== 'other' || cnt('other')).map(k => `<button data-pf="${k}" class="${this.f === k ? 'is-on' : ''}">${SEC_ORDER.includes(k) ? `<i class="dot dot--${secHealth(k).lv}"></i>` : ''}${k === 'all' ? t('pal.all') : k === 'on' ? ico('check', 12) + t('pal.onDash') : k === 'other' ? t('pal.other') : t('sec.' + k)}<em>${cnt(k)}</em></button>`).join('');
     let last = '';
     $('#palList').innerHTML = L.length ? L.map(ty => { const sk = palSec(ty), n = this.onDash(ty), hd = sk !== last ? (last = sk, `<div class="pal__g" role="presentation">${sk === 'other' ? '' : `<i class="dot dot--${secHealth(sk).lv}"></i>`}${sk === 'other' ? t('pal.other') : t('sec.' + sk)}</div>`) : '';
       return `${hd}<button class="pal__r${ty === this.sel ? ' is-sel' : ''}" role="option" id="po-${ty}" aria-selected="${ty === this.sel}" data-pt="${ty}"><span class="pal__ic">${ico(W[ty].icon, 17)}</span><span class="pal__m"><b>${this.hl(t('w.' + ty))}</b><small>${this.hl(t('wd.' + ty))}</small></span>${n ? `<span class="pal__on">${ico('check', 12)}${t('pal.onDash')}${n > 1 ? ' ×' + n : ''}</span>` : ''}</button>`; }).join('')
