@@ -418,7 +418,7 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
   </div>
 </div>
 <aside id="drawer" class="drawer" aria-label="Widgets">
-  <div class="drawer__h"><div class="drawer__t"><b id="dTitle">Widgets</b><button id="dAdd" class="btn btn--sm" aria-haspopup="dialog"></button><span class="seg" id="dPresets"></span></div>
+  <div class="drawer__h"><div class="drawer__t"><b id="dTitle">Widgets</b><button id="dAdd" class="btn btn--sm" aria-haspopup="dialog"></button></div>
     <div class="drawer__a"><button id="dAuto" class="chipb chipb--tog is-on" aria-pressed="true"></button><button id="dUndo" class="ic-btn" aria-label="Undo"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
       <button id="dRedo" class="ic-btn" aria-label="Redo"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg></button>
       <button id="dReset" class="btn btn--ghost btn--sm"><span>Reset layout</span></button><button id="dDone" class="btn btn--dark btn--sm"><span>Done</span></button></div></div>
@@ -482,7 +482,7 @@ const TX = {
     w: { ask: 'Ask Majlis', brief: 'Daily brief', pulse: 'Company pulse', revenue: 'Revenue & cash', calendar: 'Today', inbox: 'Priority inbox', teams: 'Teams activity', decisions: 'Decisions', projects: 'Projects', risks: 'Risks to watch', docs: 'Documents', people: 'People', customers: 'Customers', tasks: 'My tasks', clocks: 'World clocks' },
     wd: { ask: 'Chat or talk to Majlis about your company', brief: 'AI summary of what matters today', pulse: 'Revenue, runway, headcount and NPS', revenue: 'Revenue and cash trend with periods', calendar: 'Meetings from Outlook and Teams', inbox: 'Emails that need you', teams: 'Channel activity and mentions', decisions: 'Approvals waiting on you', projects: 'Health of strategic projects', risks: 'Top risks and heat map', docs: 'Files changing across SharePoint and OneDrive', people: 'Headcount, hiring and attrition', customers: 'NPS and accounts at risk', tasks: 'Your checklist for today', clocks: 'Time in your key locations' },
     sizes: { S: 'S', M: 'M', L: 'L', XL: 'XL' }, langName: 'English', toastAdded: '{w} added', toastRemoved: '{w} hidden', toastReset: 'Layout reset', toastPreset: '{p} layout applied', archived: 'Archived', undone: 'Undone', connected: 'sources connected',
-    presets: { default: 'Executive', focus: 'Focus', minimal: 'Minimal' }, dragToAdd: 'Drag to the dashboard or tap Add', nothing: 'Nothing here' },
+    dragToAdd: 'Drag to the dashboard or tap Add', nothing: 'Nothing here' },
   ar: { search: 'ابحث في الأدوات والأشخاص والمستندات…', customize: 'تخصيص', done: 'تم', theme: 'تبديل المظهر', language: 'اللغة', notifications: 'الإشعارات', markRead: 'تحديد الكل كمقروء',
     goodMorning: 'صباح الخير', goodAfternoon: 'مساء الخير', goodEvening: 'مساء الخير', synced: 'آخر مزامنة منذ {m} د · {n} مصادر', summary: '{d} قرارات بانتظارك · {mt} اجتماعات اليوم · الإيرادات {r} عن الخطة',
     editHint: 'وضع التخصيص — اسحب الأدوات لإعادة الترتيب، واسحب الزاوية لتغيير الحجم، واضغط − للإخفاء.', widgets: 'الأدوات', undo: 'تراجع', redo: 'إعادة', reset: 'إعادة الضبط', layouts: 'التخطيطات', add: 'إضافة', added: 'تمت الإضافة', remove: 'إزالة', onDash: 'في اللوحة', hide: 'إخفاء',
@@ -492,7 +492,7 @@ const TX = {
     w: { ask: 'اسأل مجلس', brief: 'الموجز اليومي', pulse: 'نبض الشركة', revenue: 'الإيرادات والنقد', calendar: 'اليوم', inbox: 'البريد المهم', teams: 'نشاط Teams', decisions: 'القرارات', projects: 'المشاريع', risks: 'مخاطر للمراقبة', docs: 'المستندات', people: 'الموظفون', customers: 'العملاء', tasks: 'مهامي', clocks: 'ساعات العالم' },
     wd: { ask: 'تحدّث مع مجلس عن شركتك', brief: 'ملخص ذكي لما يهمك اليوم', pulse: 'الإيرادات والسيولة والموظفون ومؤشر الرضا', revenue: 'اتجاه الإيرادات والنقد', calendar: 'اجتماعات Outlook وTeams', inbox: 'رسائل تحتاج إليك', teams: 'نشاط القنوات والإشارات', decisions: 'موافقات بانتظارك', projects: 'صحة المشاريع الاستراتيجية', risks: 'أهم المخاطر وخريطتها', docs: 'ملفات تتغير في SharePoint وOneDrive', people: 'الموظفون والتوظيف والاستقالات', customers: 'مؤشر الرضا والحسابات المعرضة للخطر', tasks: 'قائمة مهامك اليوم', clocks: 'التوقيت في مواقعك الرئيسية' },
     sizes: { S: 'ص', M: 'م', L: 'ك', XL: 'ك+' }, langName: 'العربية', toastAdded: 'تمت إضافة {w}', toastRemoved: 'تم إخفاء {w}', toastReset: 'تمت إعادة ضبط التخطيط', toastPreset: 'تم تطبيق تخطيط {p}', archived: 'تمت الأرشفة', undone: 'تم التراجع', connected: 'مصادر متصلة',
-    presets: { default: 'تنفيذي', focus: 'تركيز', minimal: 'بسيط' }, dragToAdd: 'اسحبها إلى اللوحة أو اضغط إضافة', nothing: 'لا يوجد شيء' },
+    dragToAdd: 'اسحبها إلى اللوحة أو اضغط إضافة', nothing: 'لا يوجد شيء' },
 };
 let LANG = store.get('lang', 'en'); const t = (k, v) => { let s = k.split('.').reduce((o, p) => o && o[p], TX[LANG]) ?? k.split('.').reduce((o, p) => o && o[p], TX.en) ?? k; if (v) for (const x in v) s = s.replace('{' + x + '}', v[x]); return s; };
 
@@ -998,8 +998,6 @@ const HERO = {
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
   default: [['decisions', 4, 4], ['inbox', 4, 4], ['deals', 4, 4], ['calendar', 8, 4], ['teams', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 6, 4], ['pipeline', 6, 4], ['backlog', 4, 4], ['cash', 4, 4], ['rpe', 4, 4], ['pulse', 8, 4], ['revenue', 4, 4], ['alerts', 6, 4], ['budget', 6, 4], ['risks', 6, 3], ['projects', 6, 3]],
-  focus: [['decisions', 4, 4], ['calendar', 4, 4], ['tasks', 4, 4], ['inbox', 6, 3], ['clocks', 6, 2]],
-  minimal: [['pulse', 8, 4], ['calendar', 4, 4], ['inbox', 4, 3], ['decisions', 4, 3], ['projects', 4, 3]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1229,7 +1227,7 @@ function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === 
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
 function layoutFor(p) { const saved = store.get('layout3.' + p, null); return saved && saved.length ? saved : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
-  $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special; $('#dPresets').hidden = !pg.hero;
+  $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout3.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
@@ -1255,7 +1253,7 @@ function card(type) { const d = W[type], k = catSize[type] || d.def, n = Grid.it
     <div class="cc__f"><div class="cc__m"><b>${t('w.' + type)}</b><small>${t('wd.' + type)}</small></div><div class="cc__a"><span class="cc__sz">${Object.keys(d.sizes).map(s => `<button data-act="cat-size" data-k="${s}" title="${d.sizes[s][0]}×${d.sizes[s][1]}" class="${s === k ? 'is-on' : ''}">${t('sizes.' + s)}</button>`).join('')}</span><button class="btn btn--dark btn--sm" data-act="cat-add">${ico('plus', 14)}${t('add')}</button>${n ? `<button class="btn btn--ghost btn--sm" data-act="cat-remove" title="${t('remove')}">${ico('minus', 14)}</button>` : ''}</div></div></div>`; }
 let tabsSpy = false;
 function buildDrawer() { const keep = $('#cat')?.scrollTop || 0;
-  $('#dTitle').textContent = t('widgets'); $('#dPresets').innerHTML = Object.keys(PRESETS).map(p => `<button data-act="preset" data-p="${p}">${t('presets.' + p)}</button>`).join('');
+  $('#dTitle').textContent = t('widgets');
   $('#dUndo').title = t('undo'); $('#dRedo').title = t('redo'); $('#dReset span').textContent = t('reset'); $('#dUndo').disabled = !Grid.canUndo(); $('#dRedo').disabled = !Grid.canRedo(); $('#dDone span').textContent = t('done');
   $('#dAuto').innerHTML = `${ico('grid2', 13)}${t('autofit')}`; $('#dAuto').classList.toggle('is-on', Grid.auto); $('#dAuto').setAttribute('aria-pressed', String(Grid.auto));
   $('#dAdd').innerHTML = `${ico('plus', 15)}${t('pal.add')}<kbd>⌘K</kbd>`; if (PAL.open) PAL.render();
@@ -1392,7 +1390,6 @@ document.addEventListener('click', e => {
   else if (a === 'cat-add') { const type = b.closest('.cc').dataset.type, n = Grid.add(type, null, sizeOf(type, catSize[type])); toast(t('toastAdded', { w: t('w.' + type) })); refreshCards(); setTimeout(() => flash(n.id), 120); }
   else if (a === 'cat-remove') { const type = b.closest('.cc').dataset.type, its = Grid.items.filter(i => i.type === type); Grid.remove(its.at(-1).id); refreshCards(); toast(t('toastRemoved', { w: t('w.' + type) }), t('undo'), () => { Grid.undo(); refreshCards(); }); }
   else if (a === 'tab') { const g = b.dataset.g; $$('#tabs button').forEach(x => x.classList.toggle('is-on', x === b)); const sc = $('#cat'); tabsSpy = true; if (g === 'all') sc.scrollTo({ top: 0, behavior: 'smooth' }); else sc.scrollTo({ top: $('#cg-' + g).offsetTop - 4, behavior: 'smooth' }); setTimeout(() => tabsSpy = false, 600); }
-  else if (a === 'preset') { Grid.reset(PRESETS[b.dataset.p]); toast(t('toastPreset', { p: t('presets.' + b.dataset.p) })); refreshCards(); }
   else if (a === 'notif') { const n = S.notifs.find(x => x.id === id); n.unread = false; renderNotifs(); renderTop(); $('#notifPop').hidden = true; showWidget(n.w); }
   else if (a === 'nav') setPage(b.dataset.page);
   else if (a === 'logout') toast(t('signedOut'));
