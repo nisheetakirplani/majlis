@@ -1407,7 +1407,7 @@ const W = {
       return `<ul class="rcl">${ac.slice(0, CAP(h, 58)).map(a => `<li class="rc"><button class="rc__b" data-act="ask-open" data-q="What is happening with ${esc(a.n)}?"><i class="ic-c ic-c--n">${ico('building', 16)}</i><span class="rc__m"><b>${a.n}</b><small>${esc(a.why)}</small></span>${tag(a.arr, 'warn')}</button></li>`).join('')}</ul>`; } },
 
   /* Utilities */
-  clocks: { group: 'utils', icon: 'clock', viz: true, sizes: { S: [3, 2], M: [4, 4], L: [6, 3], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 4],
+  clocks: { group: 'utils', icon: 'clock', sizes: { S: [3, 2], M: [4, 4], L: [6, 3], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 4],
     render({ v, w, h, view }) { const c = D.clocks;
       if (view === 'viz') { const sz = v === 'tall' ? 70 : 62, cols = v === 'tall' || v === 's' ? 2 : w >= 6 ? 4 : 3, rows = Math.max(1, Math.floor((bodyH(h) + 8) / (sz + 26))), n = Math.min(4, cols * rows); return vz(`<div class="anr" style="--n:${cols}">${c.slice(0, n).map(x => `<div class="an-w">${analog(x.tz, sz)}<small>${x.c}</small></div>`).join('')}</div>`); }
       /* World clocks · Option 3 · sun dial: a day/night dial per city, the local time and the part of the day */
@@ -1433,8 +1433,6 @@ const TXT = {
   calendar({ h }) { const now = nowMin(), ms = D.meetings, left = ms.filter(m => toM(m.e) > now), nx = left[0];
     return txView(h, nx ? `${left.length} meetings left today · next <b>${esc(nx.title)}</b> at ${nx.s}` : t('cal.endT'), ms.map(m => { const past = toM(m.e) <= now, live = toM(m.s) <= now && !past;
       return [esc(m.title), `${m.s}–${m.e}`, { lv: live ? 'bad' : past ? '' : 'ok', sub: `${esc(m.where)}${past ? ' · done' : live ? ' · now' : ''}`, c: past ? 'var(--ink3)' : '', q: t('cal.brief', { x: m.title }) }]; })); },
-  clocks({ h }) { const base = tzParts('Asia/Dubai').hour;
-    return txView(h, '', D.clocks.map(x => { const p = tzParts(x.tz), off = ((p.hour - base + 36) % 24) - 12; return [x.c, `<span data-clock="${x.tz}">--:--</span>`, { sub: `${t('sd.' + dayPart(p.hour))}${off ? ` · ${off > 0 ? '+' : ''}${off}h vs Dubai` : ''}` }]; })); },
   pulse({ h }) { const k = D.kp[S.period], hc = D.kpis.find(x => x.id === 'hc'), V = [k[0], k[1], { l: hc.label, v: hc.val, d: hc.delta.replace(/^\+/, ''), up: hc.up, good: 1 }, k[2]];
     return txView(h, `${t('period.' + S.period)} · <b>${V.filter(x => x.good).length} of 4</b> vitals healthy`, V.map(x => [esc(x.l), esc(x.v), { lv: x.good ? 'ok' : 'warn', sub: `${x.up ? '▲' : '▼'} ${esc(x.d)}`, q: `Explain the change in ${x.l.toLowerCase()}` }])); },
   boardKpis({ h }) { const K = D.board.kpis, ok = K.filter(x => x[2] === 'ok').length;
