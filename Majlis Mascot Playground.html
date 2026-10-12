@@ -634,7 +634,7 @@ const INTERACTIONS = [
     const k = target ? 7 : 2, dmp = target ? 4 : 3;
     if (target){ tx = target.x; ty = target.y; m.lookAt = target; m.eyeScale = 1.12; }
     s.vx += ((tx-m.x)*k - s.vx*dmp)*dt; s.vy += ((ty-m.y)*k - s.vy*dmp)*dt;
-    m.x = clamp(m.x+s.vx*dt, R*1.3, c.w-R*1.3); m.y = clamp(m.y+s.vy*dt, R*1.3, c.h-R*1.5);
+    const mg = R*1.5*m.scale; m.x = clamp(m.x+s.vx*dt, mg, c.w-mg); m.y = clamp(m.y+s.vy*dt, mg, c.h-mg-R*0.2);
     m.rot = clamp(s.vx/(R*50),-0.25,0.25);
     if (target && best < R*0.45){
       s.food.splice(s.food.indexOf(target),1); m.addDot(target.x,target.y); m.addDot(target.x,target.y);

@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Majlis Mascot Picks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:'Host Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bg:#eef1ec; --card-s:#fff; --line:#dfe6df; --stage:#f4f9f1;
+  --ink:#1c2420; --ink2:#56615b; --ink3:#8b958f;
+  --accent:#0b825a; --accent-ink:#064933; --hi:#d3ee9a; --hi-ink:#27360d;
+  --is-dark:0; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b100e; --card-s:#1b2420; --line:#26322c; --stage:#111915;
+    --ink:#eef3f0; --ink2:#aab5af; --ink3:#76827c;
+    --accent:#3ed598; --accent-ink:#bff3dc; --hi:#c4e78f; --hi-ink:#1d2a0a;
+    --is-dark:1; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b100e; --card-s:#1b2420; --line:#26322c; --stage:#111915;
+  --ink:#eef3f0; --ink2:#aab5af; --ink3:#76827c;
+  --accent:#3ed598; --accent-ink:#bff3dc; --hi:#c4e78f; --hi-ink:#1d2a0a;
+  --is-dark:1; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 24px 64px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:0}
+.sub{color:var(--ink2);margin:6px 0 0;max-width:640px}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.seg{display:flex;background:var(--card-s);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button,.chip{font:500 13px var(--font);color:var(--ink2);background:none;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;transition:background .2s,color .2s}
+.seg button:hover,.chip:hover{color:var(--ink)}
+.seg button[aria-pressed="true"],.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.chip{background:var(--bg);padding:6px 11px;font-size:12.5px}
+.chip.primary{background:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip.primary{color:#062a1c}
+.tog{display:flex;align-items:center;gap:8px;font:500 13px var(--font);color:var(--ink2);background:var(--card-s);border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 8px;cursor:pointer}
+.tog i{width:26px;height:16px;border-radius:99px;background:var(--line);position:relative;transition:background .2s}
+.tog i::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--card-s);box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .2s}
+.tog[aria-pressed="true"] i{background:var(--accent)}
+.tog[aria-pressed="true"] i::after{transform:translateX(10px)}
+nav.jump{display:flex;gap:8px;margin:4px 0 22px;flex-wrap:wrap}
+nav.jump a{font-size:13px;color:var(--ink2);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--card-s)}
+nav.jump a:hover{color:var(--ink)}
+section{margin-bottom:36px;scroll-margin-top:16px}
+.sec-h{display:flex;align-items:baseline;gap:10px;margin:0 0 12px}
+.sec-h h2{margin:0;font-size:20px;letter-spacing:-.01em}
+.sec-h span{color:var(--ink3);font-size:13px}
+.grid{display:grid;gap:14px}
+.grid.expr{grid-template-columns:repeat(auto-fill,minmax(176px,1fr))}
+.grid.int{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:760px){.grid.int{grid-template-columns:1fr}}
+.card{background:var(--card-s);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.cv{position:relative;background:var(--stage)}
+.expr .cv{aspect-ratio:1/1}
+.int .cv{height:400px}
+.cv canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cv.grab canvas{cursor:grab;touch-action:none}
+.cv.grab canvas:active{cursor:grabbing}
+.cv.tap canvas{cursor:pointer}
+.cv.touch canvas{touch-action:none}
+.ctrl{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px 0;align-items:center}
+.ctrl input[type=text],.ctrl input[type=password]{flex:1 1 140px;min-width:0;font:400 14px var(--font);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 12px;outline:none}
+.ctrl input:focus{border-color:var(--accent)}
+.ctrl input[type=range]{flex:1 1 160px;accent-color:var(--accent)}
+.ctrl .status{font-size:12px;color:var(--ink3)}
+.meta{padding:10px 14px 14px;margin-top:auto}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.meta h3{margin:0;font-size:15px;font-weight:600}
+.meta .n{font-size:12px;color:var(--ink3);font-weight:600}
+.meta p{margin:3px 0 0;color:var(--ink2);font-size:12.5px;line-height:1.4}
+.int .meta h3{font-size:16px}
+footer{color:var(--ink3);font-size:12px}
+@media (max-width:560px){
+  .wrap{padding:18px 16px 48px}
+  h1{font-size:24px}
+  .grid.expr{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .int .cv{height:280px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Majlis mascot picks</h1>
+      <p class="sub">The four shortlisted behaviours: Thinking, Falls asleep, Feed me and Gravity. Every card is live: it blinks, breathes and watches your cursor.</p>
+    </div>
+    <div class="bar">
+      <span class="lbl">Palette</span><div class="seg" id="palettes"></div>
+      <button class="tog" id="theme" aria-pressed="false"><i></i>Dark</button>
+    </div>
+  </header>
+
+  <section id="picks">
+    <div class="grid int" id="gridInt"></div>
+  </section>
+
+  <footer>Drawn live on canvas from the reference artwork's ingredients: a collision‑free ring of dots and two pill eyes. Nothing here is a video or image.</footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+const TAU = Math.PI*2, EW = 0.155, EH = 0.38, ESP = 0.2;
+const FONT = '"Host Grotesk", system-ui, sans-serif';
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const lerp = (a,b,t) => a+(b-a)*t;
+const rand = (a,b) => a+Math.random()*(b-a);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const hex = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const mix = (a,b,t) => { const x=hex(a), y=hex(b); return '#'+x.map((v,i)=>Math.round(lerp(v,y[i],t)).toString(16).padStart(2,'0')).join(''); };
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const every = (c,key,iv,t) => { if (t >= (c.s[key]||0)){ c.s[key] = t+iv; return true; } return false; };
+
+/* ---------- palettes / theme ---------- */
+const PALETTES = [
+  {id:'forest', name:'Forest', dots:['#0f5a45','#1f7a5e','#3a9a7c','#6cc0a2','#b5ddca'], accent:['#a9b84b','#c9d97a','#a7b8ab'], eye:['#1d5c45','#052c1d']},
+  {id:'mint',   name:'Mint',   dots:['#06523d','#0f8a67','#22a882','#5fd0a0','#b8ecd6'], accent:['#86e3b5','#c7f2dd','#9fd9bf'], eye:['#0a4a36','#043526']},
+  {id:'majlis', name:'Majlis', dots:['#143a2d','#0b825a','#2fb3b3','#7fcfa8','#c4e78f'], accent:['#8b6fd9','#d3ee9a','#b9c3bd'], eye:['#1a4a39','#0a2a1f']},
+];
+const G = { palette:PALETTES[0], dark:false, C:null, px:-9999, py:-9999, lastMove:-99, speech:0, level:0 };
+function refreshColors(){
+  const cs = getComputedStyle(document.documentElement);
+  G.dark = cs.getPropertyValue('--is-dark').trim()==='1';
+  const p = G.palette, bg = G.dark ? '#111915' : '#f4f9f1';
+  const dots = G.dark ? p.dots.map((c,i)=> i<3 ? mix(c,'#ffffff',0.18+i*0.06) : mix(c,bg,0.25)) : p.dots;
+  G.C = {
+    dots, accent: G.dark ? p.accent.map(c=>mix(c,bg,0.15)) : p.accent,
+    eye: G.dark ? ['#f2fff8','#bff3dc'] : p.eye,
+    shadow: G.dark ? '0,0,0' : '20,70,50',
+    ink: cs.getPropertyValue('--ink').trim(), inkBg: cs.getPropertyValue('--card-s').trim(),
+    ink2: cs.getPropertyValue('--ink2').trim(),
+    heart: G.dark ? '#ff8fa8' : '#e0587a', hot:'#e2531f',
+  };
+}
+
+/* ---------- the character: one shared dot layout ---------- */
+function mkDot(x,y,s,tt){
+  let tone;
+  if (Math.random() < 0.12+0.55*tt) tone = 3 + (Math.random()<tt ? 1 : 0); else tone = Math.floor(Math.random()*3);
+  const ca = Math.random()*TAU, cr = Math.sqrt(Math.random());
+  return {hx:x, hy:y, s, tone, acc: Math.random()<0.03 ? Math.floor(Math.random()*3) : -1,
+    al: 1-0.5*tt*Math.random(), ph:Math.random()*TAU, f:0.5+Math.random()*1.2,
+    cv: Math.random()<0.5, cvx:Math.cos(ca)*cr*0.56, cvy:Math.sin(ca)*cr*0.42+0.02,
+    kx:Math.sin(ca*3.1), ky:Math.cos(ca*1.7), stack:Math.random(),
+    x:NaN, y:NaN, vx:0, vy:0, shx:null, shy:null, dal:1, ds:1, col:'#000'};
+}
+function genRing(n){
+  const pts = []; let tries = 0; const gap = 0.024;
+  while (pts.length < n && tries++ < 16000){
+    const g = (Math.random()+Math.random()+Math.random()-1.5)/1.5;
+    const r = 1 + g*0.4, a = Math.random()*TAU, tt = clamp(Math.abs(r-1)/0.4,0,1);
+    const s = lerp(0.07,0.024,Math.pow(tt,1.3))*(0.62+0.5*Math.random());
+    const x = Math.cos(a)*r, y = Math.sin(a)*r;
+    let ok = true;
+    for (const q of pts){ const dx=q.hx-x, dy=q.hy-y, mm=q.s+s+gap; if (dx*dx+dy*dy < mm*mm){ ok=false; break; } }
+    if (ok) pts.push(mkDot(x,y,s,tt));
+  }
+  return pts;
+}
+const TEMPLATE = genRing(175);
+const cloneDots = () => TEMPLATE.map(p => ({...p}));
+
+/* ---------- shapes the dots can morph into ---------- */
+function heartPath(ctx,s){
+  ctx.beginPath(); ctx.moveTo(0,s*0.35);
+  ctx.bezierCurveTo(-s*1.1,-s*0.35,-s*0.45,-s*1.05,0,-s*0.45);
+  ctx.bezierCurveTo(s*0.45,-s*1.05,s*1.1,-s*0.35,0,s*0.35); ctx.closePath();
+}
+function starPath(ctx,R,r,n){
+  ctx.beginPath();
+  for (let i=0;i<n*2;i++){ const a=-Math.PI/2+i*Math.PI/n, d=i%2?r:R; i?ctx.lineTo(Math.cos(a)*d,Math.sin(a)*d):ctx.moveTo(Math.cos(a)*d,Math.sin(a)*d); }
+  ctx.closePath();
+}
+function sparkPath(ctx,s){
+  ctx.beginPath(); ctx.moveTo(0,-s); ctx.quadraticCurveTo(0,0,s,0); ctx.quadraticCurveTo(0,0,0,s);
+  ctx.quadraticCurveTo(0,0,-s,0); ctx.quadraticCurveTo(0,0,0,-s); ctx.closePath();
+}
+const SHAPE_CACHE = {};
+function shapePoints(name, n){
+  const key = name+'|'+n; if (SHAPE_CACHE[key]) return SHAPE_CACHE[key];
+  const S = 240, cv = document.createElement('canvas'); cv.width = cv.height = S;
+  const x = cv.getContext('2d', {willReadFrequently:true});
+  x.translate(S/2,S/2); x.fillStyle = x.strokeStyle = '#000'; x.lineCap = x.lineJoin = 'round';
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  const font = w => `800 ${w}px ${FONT}`;
+  switch (name){
+    case 'heart': x.translate(0,24); x.scale(1.25,1.25); heartPath(x,82); x.fill(); break;
+    case 'star': starPath(x,112,48,5); x.fill(); break;
+    case 'check': x.lineWidth = 38; x.beginPath(); x.moveTo(-76,4); x.lineTo(-24,56); x.lineTo(80,-60); x.stroke(); break;
+    case 'question': x.font = font(240); x.fillText('?',0,14); break;
+    case 'bang': x.font = font(240); x.fillText('!',0,14); break;
+    case 'hi': x.font = font(160); x.fillText('Hi',0,10); break;
+    case 'smile': x.lineWidth = 22; x.beginPath(); x.arc(0,0,104,0,TAU); x.stroke();
+      x.lineWidth = 24; x.beginPath(); x.arc(0,6,60,0.18*Math.PI,0.82*Math.PI); x.stroke(); break;
+  }
+  const d = x.getImageData(0,0,S,S).data, cand = [];
+  for (let yy=0;yy<S;yy+=2) for (let xx=0;xx<S;xx+=2) if (d[(yy*S+xx)*4+3] > 128) cand.push([xx,yy]);
+  for (let i=cand.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [cand[i],cand[j]]=[cand[j],cand[i]]; }
+  let md = Math.sqrt(cand.length*4/n)*0.8, picked = [];
+  for (let attempt=0; attempt<6 && picked.length<n; attempt++){
+    picked = [];
+    for (const c of cand){
+      let ok = true;
+      for (const q of picked){ const dx=q[0]-c[0], dy=q[1]-c[1]; if (dx*dx+dy*dy < md*md){ ok=false; break; } }
+      if (ok){ picked.push(c); if (picked.length >= n) break; }
+    }
+    md *= 0.86;
+  }
+  while (picked.length < n) picked.push(cand[Math.floor(Math.random()*cand.length)] || [S/2,S/2]);
+  const out = picked.map(([px,py]) => ({x:(px-S/2)/(S/2)*1.42, y:(py-S/2)/(S/2)*1.42}));
+  out.sort((a,b) => Math.atan2(a.y,a.x) - Math.atan2(b.y,b.x));
+  return SHAPE_CACHE[key] = out;
+}
+
+/* ---------- eye drawing ---------- */
+function pill(ctx,w,h){ h = Math.max(h, w*0.22); const r = Math.min(w,h)/2; ctx.beginPath(); ctx.roundRect(-w/2,-h/2,w,h,r); ctx.fill(); }
+function lidPill(ctx,w,h,H,off,k,side){
+  ctx.save(); ctx.beginPath();
+  const y = x => off*H + k*side*x;
+  ctx.moveTo(-w*2, y(-w*2)); ctx.lineTo(w*2, y(w*2)); ctx.lineTo(w*2, H*2); ctx.lineTo(-w*2, H*2); ctx.closePath(); ctx.clip();
+  pill(ctx,w,h); ctx.restore();
+}
+function drawEye(ctx,e,side,u,h,open,t){
+  switch (e){
+    case 'surprised': pill(ctx,u*1.28,h*1.12*open); break;
+    case 'sad': ctx.translate(0,h*0.05); lidPill(ctx,u,h*open,h,-0.2,0.55,side); break;
+    case 'angry': lidPill(ctx,u,h*open,h,-0.2,-0.7,side); break;
+    case 'sleepy': lidPill(ctx,u,h*open,h,0.02,0.35,side); break;
+    case 'focus': lidPill(ctx,u,h*open,h,-0.22,0,side); break;
+    case 'happy': ctx.lineWidth=u*0.82; ctx.beginPath(); ctx.arc(0,h*0.14,u*0.95,Math.PI*1.15,Math.PI*1.85); ctx.stroke(); break;
+    case 'sleeping': ctx.lineWidth=u*0.7; ctx.beginPath(); ctx.arc(0,-h*0.12,u*0.95,Math.PI*0.15,Math.PI*0.85); ctx.stroke(); break;
+    case 'laugh': { ctx.lineWidth=u*0.72; const d=-side; ctx.beginPath(); ctx.moveTo(-0.45*u*d,-0.28*h); ctx.lineTo(0.45*u*d,0); ctx.lineTo(-0.45*u*d,0.28*h); ctx.stroke(); break; }
+    case 'love': { const b = 1+0.12*Math.max(0,Math.sin(t*8)); ctx.save(); ctx.translate(0,u*0.3); ctx.scale(b,b); heartPath(ctx,u*1.15); ctx.fill(); ctx.restore(); break; }
+    case 'star': { ctx.save(); ctx.rotate(Math.sin(t*3)*0.25); starPath(ctx,u*1.15,u*0.5,5); ctx.fill(); ctx.restore(); break; }
+    case 'wink': if (side===1){ ctx.lineWidth=u*0.82; ctx.beginPath(); ctx.arc(0,h*0.14,u*0.95,Math.PI*1.15,Math.PI*1.85); ctx.stroke(); } else pill(ctx,u,h*open); break;
+    case 'confused': if (side===-1) lidPill(ctx,u,h*0.82*open,h,-0.2,-0.5,side); else pill(ctx,u*1.1,h*1.08*open); break;
+    case 'dizzy': { ctx.lineWidth=u*0.3; ctx.beginPath(); const rot=t*7*side;
+      for (let a=0;a<=TAU*2.2;a+=0.2){ const r=u*0.05+a/(TAU*2.2)*u*0.95; const x=Math.cos(a+rot)*r, y=Math.sin(a+rot)*r; a?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+      ctx.stroke(); break; }
+    case 'ko': { ctx.lineWidth=u*0.5; const s=u*0.62; ctx.beginPath(); ctx.moveTo(-s,-s); ctx.lineTo(s,s); ctx.moveTo(s,-s); ctx.lineTo(-s,s); ctx.stroke(); break; }
+    default: pill(ctx,u,h*open);
+  }
+}
+const BLINKS = new Set(['neutral','surprised','sad','angry','sleepy','focus','wink','confused']);
+
+/* ---------- Mascot ---------- */
+class Mascot {
+  constructor(card){
+    this.card = card; this.pts = cloneDots(); this.base = this.pts.length;
+    this.x = 100; this.y = 100; this.cx = 100; this.cy = 100; this.R = 40; this.seed = Math.random()*10;
+    this.ox = 0; this.oy = 0; this.rot = 0; this.scale = 1; this.sxm = 1; this.sym = 1;
+    this.sq = 0; this.sqv = 0; this.jy = 0; this.jv = 0;
+    this.expr = 'neutral'; this.shown = 'neutral'; this.swap = 1;
+    this.look = {x:0,y:0}; this.gl = {x:0,y:0}; this.glanceAt = 0; this.lookAt = null; this.lookVec = null;
+    this.blinkAt = performance.now()/1000 + Math.random()*3; this.blinkT = -1; this.open = 1;
+    this.cover = 0; this.coverA = 0; this.blushT = 0; this.blush = 0;
+    this.shapeOn = false; this.shapeAmt = 0; this.keepEyes = false;
+    this.k = 0.12; this.damp = 0.78; this.mode = 'ring'; this.g = {x:0,y:1};
+    this.fx = null; this.repel = null; this.dim = 1; this.eyeScale = 1; this.eyeDy = 0; this.float = true;
+    this.o = {x:0,y:0,al:1,s:1,tone:0};
+  }
+  setExpr(e){ if (e !== this.expr){ this.expr = e; this.swap = 0; } }
+  jump(h){ if (reduceMotion) h *= 0.5; this.jv = this.R*Math.sqrt(90*h); this.sqv -= 3*h; }
+  burst(x,y,k=1){
+    if (!isFinite(x) || !isFinite(y)) return;
+    for (const p of this.pts){
+      if (!isFinite(p.x)) continue;
+      const dx=p.x-x, dy=p.y-y, d=Math.hypot(dx,dy)||1;
+      const f = this.R*0.09*k*(0.5+Math.random())*clamp(1.5-d/(this.R*2),0.3,1.5);
+      p.vx += dx/d*f; p.vy += dy/d*f;
+    }
+  }
+  setShape(name){
+    if (!name){ this.shapeOn = false; return; }
+    const pts = shapePoints(name, this.pts.length);
+    const order = this.pts.map((p,i)=>i).sort((a,b) => Math.atan2(this.pts[a].hy,this.pts[a].hx) - Math.atan2(this.pts[b].hy,this.pts[b].hx));
+    order.forEach((pi,k) => { this.pts[pi].shx = pts[k].x; this.pts[pi].shy = pts[k].y; });
+    this.shapeOn = true; this.keepEyes = name==='smile';
+  }
+  addDot(px,py){
+    const a = Math.random()*TAU, r = 1+(Math.random()*2-1)*0.32;
+    const d = mkDot(Math.cos(a)*r, Math.sin(a)*r, rand(0.03,0.055), 0.3);
+    d.x = px; d.y = py; this.pts.push(d);
+  }
+  update(t,dt){
+    const f = clamp(dt*60,0.2,3), R = this.R;
+    if (this.swap < 1){ this.swap = Math.min(1, this.swap+dt/0.2); if (this.swap >= 0.5) this.shown = this.expr; }
+    if (this.jv !== 0 || this.jy > 0){
+      this.jv -= R*45*dt; this.jy += this.jv*dt;
+      if (this.jy <= 0){ this.jy = 0; if (this.jv < -R*2) this.sqv += Math.min(5,-this.jv/(R*5)); this.jv = 0; }
+    }
+    this.sqv += (-this.sq*260 - this.sqv*16)*dt; this.sq += this.sqv*dt;
+    const ease = q => 1-Math.pow(q,f);
+    this.shapeAmt = lerp(this.shapeAmt, this.shapeOn?1:0, ease(0.9));
+    this.coverA = lerp(this.coverA, this.cover, ease(0.84));
+    this.blush = lerp(this.blush, this.blushT, ease(0.9));
+
+    const cx = this.x+this.ox, cy = this.y+this.oy-this.jy + (this.float && !reduceMotion ? Math.sin(t*1.7+this.seed)*R*0.035 : 0);
+    this.cx = cx; this.cy = cy;
+    const sq = clamp(this.sq,-0.4,0.4);
+    const sx = (1+sq)*this.sxm, sy = (1-sq)*this.sym, sc = this.scale;
+    this._sx = sx; this._sy = sy;
+    const cr = Math.cos(this.rot), sr = Math.sin(this.rot);
+
+    // look
+    let lx = 0, ly = 0;
+    if (this.lookVec){ lx = this.lookVec.x; ly = this.lookVec.y; }
+    else if (this.lookAt){
+      const dx = this.lookAt.x-cx, dy = this.lookAt.y-cy, d = Math.hypot(dx,dy)||1, m = clamp(d/(R*2.5),0,1);
+      lx = dx/d*m*0.14; ly = dy/d*m*0.1;
+    } else {
+      if (t > this.glanceAt){
+        const still = Math.random()<0.4;
+        this.gl = {x: still?0:rand(-0.12,0.12), y: still?0:rand(-0.06,0.06)};
+        this.glanceAt = t+1+Math.random()*3;
+      }
+      lx = this.gl.x; ly = this.gl.y;
+    }
+    this.look.x = lerp(this.look.x, lx, ease(0.8)); this.look.y = lerp(this.look.y, ly, ease(0.8));
+
+    // blink
+    let open = 1;
+    if (this.blinkT < 0 && t > this.blinkAt) this.blinkT = 0;
+    if (this.blinkT >= 0){
+      this.blinkT += dt; const b = this.blinkT/0.15;
+      open = b < 1 ? Math.abs(1-2*b)*0.9+0.1 : 1;
+      if (b >= 1){ this.blinkT = -1; this.blinkAt = t + (Math.random()<0.2 ? 0.25 : 2+Math.random()*3.5); }
+    }
+    this.open = open;
+
+    // dots
+    const o = this.o, dots = G.C.dots, accs = G.C.accent, W = this.card.w, H = this.card.h;
+    const wob = reduceMotion ? 0.006 : 0.014;
+    for (const p of this.pts){
+      o.x = p.hx + Math.sin(t*p.f+p.ph)*wob; o.y = p.hy + Math.cos(t*p.f*1.1+p.ph*1.3)*wob;
+      o.al = p.al; o.s = p.s; o.tone = p.tone;
+      if (this.fx) this.fx(p,o,t);
+      if (this.coverA > 0.002 && p.cv){ o.x = lerp(o.x,p.cvx,this.coverA); o.y = lerp(o.y,p.cvy,this.coverA); }
+      if (this.shapeAmt > 0.002 && p.shx !== null){ o.x = lerp(o.x,p.shx,this.shapeAmt); o.y = lerp(o.y,p.shy,this.shapeAmt); o.s *= 1-0.22*this.shapeAmt; }
+      const rad = Math.max(0.5, o.s*R*sc);
+      if (this.mode === 'fall'){
+        p.vx += this.g.x*R*0.012*f; p.vy += this.g.y*R*0.012*f;
+        const dm = Math.pow(0.992,f); p.vx *= dm; p.vy *= dm;
+        p.x += p.vx*f; p.y += p.vy*f;
+        const floor = H - rad - p.stack*R*0.3 - 2, ceil = rad + 2, lw = rad + 2 + (this.g.x>0 ? 0 : p.stack*R*0.3), rw = W - rad - 2 - (this.g.x<0 ? p.stack*R*0.3 : 0);
+        if (p.y > floor){ p.y = floor; p.vy *= -0.3; p.vx *= 0.82; }
+        if (p.y < ceil){ p.y = ceil; p.vy *= -0.3; }
+        if (p.x < lw){ p.x = lw; p.vx *= -0.35; p.vy *= 0.9; }
+        if (p.x > rw){ p.x = rw; p.vx *= -0.35; p.vy *= 0.9; }
+      } else {
+        const X = o.x*R*sx*sc, Y = o.y*R*sy*sc;
+        const tx = cx + X*cr - Y*sr, ty = cy + X*sr + Y*cr;
+        if (isNaN(p.x)){ p.x = tx; p.y = ty; }
+        p.vx += (tx-p.x)*this.k*f; p.vy += (ty-p.y)*this.k*f;
+        if (this.repel){
+          const rp = this.repel, dx = p.x-rp.x, dy = p.y-rp.y, d2 = dx*dx+dy*dy;
+          if (d2 < rp.r*rp.r){ const d = Math.sqrt(d2)||1, q = 1-d/rp.r; p.vx += dx/d*q*q*rp.f*R*0.05*f; p.vy += dy/d*q*q*rp.f*R*0.05*f; }
+        }
+        const dm = Math.pow(this.damp,f); p.vx *= dm; p.vy *= dm;
+        p.x += p.vx*f; p.y += p.vy*f;
+      }
+      p.dal = clamp(o.al*this.dim,0,1); p.ds = rad;
+      p.col = p.acc >= 0 ? accs[p.acc] : dots[clamp(o.tone,0,4)];
+    }
+  }
+  draw(ctx,t){
+    const behind = this.coverA > 0.06;
+    if (behind) this.drawEyes(ctx,t);
+    for (const p of this.pts){
+      ctx.globalAlpha = p.dal; ctx.fillStyle = p.col;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.ds,0,TAU); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!behind) this.drawEyes(ctx,t);
+  }
+  drawEyes(ctx,t){
+    const a = 1 - this.shapeAmt*(this.keepEyes?0:1);
+    if (a < 0.02) return;
+    const R = this.R*this.scale, u = EW*R, h = EH*R*this.eyeScale, sp = ESP*R;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.translate(this.cx+this.look.x*R, this.cy+this.look.y*R+this.eyeDy*R);
+    ctx.rotate(this.rot); ctx.scale(this._sx,this._sy);
+    if (this.blush > 0.02){
+      ctx.fillStyle = G.C.heart; ctx.globalAlpha = a*this.blush*0.28;
+      for (const s of [-1,1]){ ctx.beginPath(); ctx.ellipse(s*sp*1.95, h*0.42, u*0.85, u*0.45, 0, 0, TAU); ctx.fill(); }
+      ctx.globalAlpha = a;
+    }
+    const gr = ctx.createLinearGradient(0,-h/2,0,h/2);
+    gr.addColorStop(0,G.C.eye[0]); gr.addColorStop(1,G.C.eye[1]);
+    ctx.fillStyle = gr; ctx.strokeStyle = gr; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const sw = this.swap < 1 ? Math.max(0.08, Math.abs(1-2*this.swap)) : 1;
+    const open = BLINKS.has(this.shown) ? this.open : 1;
+    for (const side of [-1,1]){
+      ctx.save(); ctx.translate(side*sp,0); ctx.scale(1,sw);
+      drawEye(ctx,this.shown,side,u,h,open,t);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+}
+
+/* ---------- Card: canvas + pointer + effects ---------- */
+const CARDS = [];
+class Card {
+  constructor(def, kind, num, grid){
+    this.def = def; this.kind = kind; this.s = {}; this.fx = []; this.bubble = null; this.visible = true;
+    const el = document.createElement('article'); el.className = 'card';
+    el.innerHTML = `<div class="cv ${def.cursor||''}"><canvas></canvas></div>`+
+      `<div class="meta"><div class="row"><h3>${def.name}</h3><span class="n">${String(num).padStart(2,'0')}</span></div><p class="hint">${def.hint}</p></div>`;
+    grid.appendChild(el);
+    this.el = el; this.cv = el.querySelector('canvas'); this.ctx = this.cv.getContext('2d');
+    this.hintEl = el.querySelector('.hint');
+    if (def.controls){ const c = document.createElement('div'); c.className = 'ctrl'; el.insertBefore(c, el.querySelector('.meta')); def.controls(this,c); }
+    this.p = {x:-1,y:-1,inside:false,down:false,vx:0,vy:0,speed:0,lastMove:0,_t:0};
+    this.m = new Mascot(this);
+    const cv = this.cv, P = this.p;
+    const loc = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+    cv.addEventListener('pointermove', e => {
+      const [x,y] = loc(e), now = performance.now()/1000;
+      if (P._t){ const d = Math.max(0.008, now-P._t); P.vx = lerp(P.vx,(x-P.x)/d,0.5); P.vy = lerp(P.vy,(y-P.y)/d,0.5); }
+      P.x = x; P.y = y; P._t = now; P.lastMove = now;
+    });
+    cv.addEventListener('pointerdown', e => {
+      const [x,y] = loc(e); P.x = x; P.y = y; P.down = true; P.vx = P.vy = 0; P._t = performance.now()/1000;
+      try { cv.setPointerCapture(e.pointerId); } catch(_){}
+      def.down && def.down(this, performance.now()/1000);
+    });
+    const up = () => { if (!P.down) return; P.down = false; def.up && def.up(this, performance.now()/1000); };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    CARDS.push(this);
+  }
+  resize(){
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    const w = this.cv.clientWidth, h = this.cv.clientHeight; if (!w || !h) return;
+    this.cv.width = Math.round(w*dpr); this.cv.height = Math.round(h*dpr);
+    const ow = this.w, oh = this.h;
+    this.w = w; this.h = h; this.dpr = dpr;
+    const m = this.m; m.R = Math.min(w,h)*(this.def.r||0.22);
+    if (!ow){ m.x = m.cx = w/2; m.y = m.cy = h*(this.def.cy||0.47); this.def.setup && this.def.setup(this); }
+    else { m.x *= w/ow; m.y *= h/oh; this.def.resized && this.def.resized(this); }
+  }
+  say(txt, dur=1.6){ const t = performance.now()/1000; this.bubble = {txt, born:t, until:t+dur}; }
+  spawn(kind,x,y,o={}){ const life = o.life||1.4; this.fx.push(Object.assign({kind,x,y,vx:0,vy:0,size:this.m.R*0.12},o,{life,max:life})); }
+  frame(t,dt){
+    if (!this.visible || !this.w) return;
+    const r = this.cv.getBoundingClientRect(), P = this.p, m = this.m;
+    P.inside = G.px>=r.left && G.px<=r.right && G.py>=r.top && G.py<=r.bottom;
+    if (P.inside || P.down){ P.x = G.px-r.left; P.y = G.py-r.top; }
+    if (t - P._t > 0.05){ P.vx *= 0.7; P.vy *= 0.7; }
+    P.speed = Math.hypot(P.vx,P.vy);
+    this.rect = r;
+    m.ox = m.oy = 0; m.rot = 0; m.fx = null; m.repel = null; m.lookVec = null; m.scale = 1; m.eyeScale = 1;
+    m.dim = 1; m.cover = 0; m.blushT = 0; m.sxm = m.sym = 1; m.eyeDy = 0; m.float = true;
+    m.lookAt = (G.px > -9000 && t - G.lastMove < 4) ? {x:G.px-r.left, y:G.py-r.top} : null;
+    m.gy = m.y + m.R*1.62;
+    this.def.update && this.def.update(this,t,dt);
+    this.s.wasIn = P.inside;
+    m.update(t,dt);
+
+    for (const f of this.fx){ f.life -= dt; f.x += f.vx*dt; f.y += f.vy*dt; if (f.kind==='tear') f.vy += m.R*5*dt; }
+    this.fx = this.fx.filter(f => f.life > 0);
+
+    const ctx = this.ctx;
+    ctx.setTransform(this.dpr,0,0,this.dpr,0,0);
+    ctx.clearRect(0,0,this.w,this.h);
+    if (this.def.shadow !== false) this.drawShadow(ctx);
+    this.def.drawBack && this.def.drawBack(this,ctx,t);
+    m.draw(ctx,t);
+    this.drawFx(ctx,t);
+    this.def.draw && this.def.draw(this,ctx,t);
+    this.drawBubble(ctx,t);
+  }
+  drawShadow(ctx){
+    const m = this.m, R = m.R, gy = m.gy;
+    if (gy > this.h + R) return;
+    const lift = Math.max(0, (gy - R*1.62) - m.cy), k = clamp(1 - lift/(R*2.5), 0.35, 1.1);
+    const g = ctx.createRadialGradient(m.cx, gy, 0, m.cx, gy, R*1.05*k);
+    const a = (G.dark ? 0.5 : 0.16)*k;
+    g.addColorStop(0,`rgba(${G.C.shadow},${a})`); g.addColorStop(1,`rgba(${G.C.shadow},0)`);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(m.cx, gy, R*1.05*k, R*0.13*k, 0, 0, TAU); ctx.fill();
+  }
+  drawFx(ctx,t){
+    for (const f of this.fx){
+      const a = clamp(f.life/f.max*1.6,0,1)*clamp((f.max-f.life)*8,0,1);
+      ctx.save(); ctx.globalAlpha = a; ctx.translate(f.x,f.y);
+      if (f.kind==='heart'){ ctx.fillStyle = G.C.heart; heartPath(ctx,f.size); ctx.fill(); }
+      else if (f.kind==='spark'){ ctx.fillStyle = G.C.dots[2]; ctx.rotate(t*2); sparkPath(ctx,f.size); ctx.fill(); }
+      else if (f.kind==='tear'){ ctx.fillStyle = G.C.dots[3]; ctx.beginPath(); ctx.arc(0,0,f.size*0.45,0,TAU); ctx.fill(); }
+      else { ctx.fillStyle = f.kind==='z' ? G.C.dots[2] : G.C.dots[1]; ctx.font = `700 ${f.size}px ${FONT}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(f.txt || 'z',0,0); }
+      ctx.restore();
+    }
+  }
+  drawBubble(ctx,t){
+    const b = this.bubble; if (!b || t > b.until) return;
+    const m = this.m, R = m.R, fs = clamp(R*0.24,11,15);
+    ctx.font = `600 ${fs}px ${FONT}`;
+    const tw = ctx.measureText(b.txt).width, bw = tw+fs*1.3, bh = fs+12;
+    let bx = m.cx + R*0.5, by = m.cy - R*1.45 - bh;
+    if (bx + bw > this.w - 6) bx = m.cx - R*0.5 - bw;
+    bx = clamp(bx,6,this.w-bw-6); by = clamp(by,6,this.h-bh-6);
+    const pop = clamp((t-b.born)/0.18,0,1), sc = 0.6+0.4*(1+2.7*Math.pow(pop-1,3)+1.7*Math.pow(pop-1,2));
+    ctx.save(); ctx.globalAlpha = clamp((b.until-t)/0.2,0,1);
+    ctx.translate(bx+bw/2, by+bh/2); ctx.scale(sc,sc);
+    ctx.fillStyle = G.C.ink; ctx.beginPath(); ctx.roundRect(-bw/2,-bh/2,bw,bh,bh/2); ctx.fill();
+    ctx.fillStyle = G.C.inkBg; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(b.txt,0,1);
+    ctx.restore();
+  }
+}
+
+/* ---------- reusable dot effects ---------- */
+const fxSag = k => (p,o) => { o.y += k*(1-(p.hy+1.4)/2.8); };
+const fxComet = (t,speed=2.6) => (p,o) => {
+  const r = t*0.8, c0 = Math.cos(r), s0 = Math.sin(r), x = o.x*c0-o.y*s0, y = o.x*s0+o.y*c0;
+  o.x = x; o.y = y;
+  const c = Math.pow((1+Math.cos(Math.atan2(y,x)-t*speed))/2,4);
+  o.al *= 0.28+0.72*c; o.s *= 0.85+0.35*c;
+};
+const fxSpin = a => { const c = Math.cos(a), s = Math.sin(a); return (p,o) => { const x=o.x*c-o.y*s; o.y=o.x*s+o.y*c; o.x=x; }; };
+function spawnZ(c){ const m = c.m; c.spawn('z', m.cx+m.R*0.75, m.cy-m.R*0.9, {vx:m.R*0.25, vy:-m.R*0.45, life:2, size:m.R*rand(0.2,0.32)}); }
+function spawnHeart(c,spread=1.2){ const m = c.m; c.spawn('heart', m.cx+rand(-1,1)*m.R*spread, m.cy-m.R*0.7, {vx:rand(-1,1)*m.R*0.3, vy:-m.R*rand(0.7,1.1), life:1.6, size:m.R*rand(0.08,0.14)}); }
+
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
+const near = (c, k=1.4) => c.p.inside && Math.hypot(c.p.x-c.m.cx, c.p.y-c.m.cy) < c.m.R*k;
+
+const INTERACTIONS = [
+{ name:'Shy watcher', hint:'Move around and it watches you. Get really close and it hides its eyes.',
+  update(c,t){
+    const m = c.m, P = c.p, d = P.inside ? Math.hypot(P.x-m.cx,P.y-m.cy) : 1e9, shy = d < m.R*1.2;
+    if (shy && !c.s.shy) c.say(pick(['Eep!','Too close!','Hi… hello…']),1.3);
+    c.s.shy = shy;
+    m.cover = shy ? 1 : 0; m.blushT = shy ? 1 : 0;
+    m.eyeScale = 1 + 0.18*clamp(1-d/(m.R*4),0,1);
+    m.setExpr(shy ? 'happy' : 'neutral');
+    if (shy){ m.lookVec = {x:clamp((P.x-m.cx)/m.R,-1,1)*0.06, y:0.05}; m.rot = -0.07; }
+  }},
+{ name:'Drag & throw', hint:'Grab it, fling it at the walls. Throw hard enough and it gets dizzy.', cursor:'grab', cy:0.55,
+  setup(c){ Object.assign(c.s,{vx:0,vy:0,drag:false,rot:0,dizzy:0}); c.m.k = 0.07; },
+  down(c){ const m=c.m; if (near(c,1.45)){ c.s.drag=true; c.s.offx=m.x-c.p.x; c.s.offy=m.y-c.p.y; c.say(pick(['Whoa!','Up we go!','Wheee']),1); } },
+  up(c){ if (c.s.drag){ c.s.drag=false; c.s.vx=clamp(c.p.vx,-4000,4000); c.s.vy=clamp(c.p.vy,-4000,4000); } },
+  update(c,t,dt){
+    const m=c.m, s=c.s, R=m.R, L=R*1.35, Rt=c.w-R*1.35, T=R*1.35, B=c.h-R*1.42;
+    m.float = false; m.gy = B + R*1.62;
+    if (s.drag){
+      m.x = clamp(c.p.x+s.offx,L,Rt); m.y = clamp(c.p.y+s.offy,T,B);
+    } else {
+      s.vy += R*24*dt; const drag = Math.pow(0.8,dt); s.vx *= drag; s.vy *= drag;
+      m.x += s.vx*dt; m.y += s.vy*dt; let hit = 0;
+      if (m.y > B){ m.y = B; if (Math.abs(s.vy) > R*2){ hit = Math.abs(s.vy); m.sqv += Math.min(6,hit/(R*5)); s.vy *= -0.5; } else s.vy = 0; s.vx *= 0.9; }
+      if (m.y < T){ m.y = T; hit = Math.abs(s.vy); m.sqv += Math.min(6,hit/(R*5)); s.vy *= -0.5; }
+      if (m.x < L){ m.x = L; hit = Math.max(hit,Math.abs(s.vx)); m.sqv -= Math.min(6,Math.abs(s.vx)/(R*5)); s.vx *= -0.55; }
+      if (m.x > Rt){ m.x = Rt; hit = Math.max(hit,Math.abs(s.vx)); m.sqv -= Math.min(6,Math.abs(s.vx)/(R*5)); s.vx *= -0.55; }
+      if (hit > R*26 && t > s.dizzy){ s.dizzy = t+2.2; c.say(pick(['Ow!','@_@','Bonk!']),1.2); }
+    }
+    const sp = Math.hypot(s.vx,s.vy);
+    m.setExpr(s.drag ? 'surprised' : t < s.dizzy ? 'dizzy' : sp > R*6 ? 'happy' : 'neutral');
+    s.rot = lerp(s.rot, s.drag ? clamp(c.p.vx/(R*40),-0.4,0.4) : clamp(s.vx/(R*60),-0.3,0.3), 0.15);
+    m.rot = s.rot;
+  }},
+{ name:'Pet & tickle', hint:'Stroke it slowly to pet it. Wiggle the cursor fast over it to tickle.', cursor:'touch',
+  setup(c){ c.s.pet = 0; c.s.tk = 0; },
+  update(c,t,dt){
+    const m=c.m, s=c.s, R=m.R, over = near(c,1.45);
+    if (over && c.p.speed > R*20) s.tk = Math.min(2, s.tk+dt*2.2);
+    else if (over && c.p.speed > R*0.5) s.pet = Math.min(3, s.pet+dt);
+    s.tk = Math.max(0, s.tk-dt*0.8); s.pet = Math.max(0, s.pet-dt*0.45);
+    if (over) m.repel = {x:c.p.x, y:c.p.y, r:R*0.65, f:0.9};
+    if (s.tk > 0.4){
+      m.setExpr('laugh'); m.oy = Math.sin(t*30)*R*0.05; m.rot = Math.sin(t*9)*0.08; m.blushT = 0.6;
+      if (!s.tickling){ c.say(pick(['That tickles!','Hehehe','Stop, haha!']),1.4); s.tickling = true; }
+      if (every(c,'he',0.32,t)) c.spawn('text', m.cx+rand(-1,1)*R, m.cy-R*1.2, {txt:pick(['he','hi','ha']), vy:-R*0.8, vx:rand(-1,1)*R*0.4, life:1, size:R*0.22});
+    } else if (s.pet > 0.6){
+      s.tickling = false;
+      m.setExpr('sleeping'); m.blushT = 0.8; m.scale = 1+0.02*Math.sin(t*2);
+      m.fx = (p,o) => { o.x += Math.sin(t*38+p.ph)*0.007; };
+      if (!s.petting){ c.say(pick(['Mmm…','Purrr','So nice']),1.4); s.petting = true; }
+      if (every(c,'ht',0.45,t)) spawnHeart(c);
+    } else { s.tickling = false; if (s.pet < 0.2) s.petting = false; m.setExpr('neutral'); }
+  }},
+{ name:'Poke', hint:'Click it. Then keep clicking and watch its mood go from curious to sulking.', cursor:'tap',
+  setup(c){ c.s.pokes = []; c.s.mood = 'calm'; },
+  down(c,t){
+    const m=c.m, s=c.s; if (!near(c,1.4)) return;
+    s.pokes = s.pokes.filter(x => x > t-4); s.pokes.push(t); s.last = t;
+    const n = s.pokes.length; m.burst(c.p.x,c.p.y,1); m.jump(0.12);
+    if (n <= 2){ s.mood = 'surprised'; c.say(pick(['Oh!','Hey!','Hm?']),1); }
+    else if (n <= 4){ s.mood = 'annoyed'; c.say(pick(['Stop it…','Seriously?','Please.']),1.2); }
+    else if (n <= 7){ s.mood = 'angry'; c.say(pick(['GRR!','Hey!!','Enough!']),1.2); }
+    else { s.mood = 'sulk'; c.say('Not talking to you.',2.4); }
+  },
+  update(c,t){
+    const m=c.m, s=c.s;
+    if (s.mood !== 'calm' && t - s.last > (s.mood==='sulk' ? 4.5 : 2.4)){
+      if (s.mood !== 'surprised') { c.say('…okay. Friends?',1.6); s.makeup = t+1.6; }
+      s.mood = 'calm'; s.pokes = [];
+    }
+    if (s.mood === 'surprised') m.setExpr('surprised');
+    else if (s.mood === 'annoyed') m.setExpr('focus');
+    else if (s.mood === 'angry'){ m.setExpr('angry'); m.ox = Math.sin(t*45)*m.R*0.035; m.blushT = 0.5; m.fx = (p,o) => { o.tone = Math.min(o.tone,2); }; }
+    else if (s.mood === 'sulk'){ m.setExpr('angry'); m.cover = 1; m.rot = -0.14; m.lookVec = {x:-0.12,y:0.02}; }
+    else m.setExpr(t < (s.makeup||0) ? 'happy' : 'neutral');
+  }},
+{ name:'Feed me', hint:'Click anywhere to drop a snack. It chases food and grows with every bite.', cursor:'tap', cy:0.5,
+  setup(c){ Object.assign(c.s,{food:[],vx:0,vy:0,eaten:0,grow:1,happy:0}); c.m.k = 0.1; },
+  down(c,t){
+    const s = c.s;
+    if (near(c,1.3)){ if (!s.food.length) c.say('Click anywhere to feed me!',1.6); return; }
+    if (s.food.length < 8){ s.food.push({x:c.p.x, y:c.p.y, born:t, ph:Math.random()*TAU}); c.spawn('spark',c.p.x,c.p.y,{life:0.5,size:c.m.R*0.12}); }
+  },
+  update(c,t,dt){
+    const m=c.m, s=c.s, R=m.R;
+    let tx = c.w/2, ty = c.h/2, target = null, best = 1e9;
+    for (const f of s.food){ const d = Math.hypot(f.x-m.x,f.y-m.y); if (d < best){ best = d; target = f; } }
+    const k = target ? 7 : 2, dmp = target ? 4 : 3;
+    if (target){ tx = target.x; ty = target.y; m.lookAt = target; m.eyeScale = 1.12; }
+    s.vx += ((tx-m.x)*k - s.vx*dmp)*dt; s.vy += ((ty-m.y)*k - s.vy*dmp)*dt;
+    const mg = R*1.5*m.scale; m.x = clamp(m.x+s.vx*dt, mg, c.w-mg); m.y = clamp(m.y+s.vy*dt, mg, c.h-mg-R*0.2);
+    m.rot = clamp(s.vx/(R*50),-0.25,0.25);
+    if (target && best < R*0.45){
+      s.food.splice(s.food.indexOf(target),1); m.addDot(target.x,target.y); m.addDot(target.x,target.y);
+      m.jump(0.1); s.happy = t+0.7; s.eaten++; s.grow = 1+0.03*s.eaten;
+      if (s.eaten === 1) c.say('Yum!',1);
+      if (s.eaten >= 10){ c.say('Burp! So full.',1.8); s.eaten = 0; s.grow = 1; m.pts.length = m.base; m.burst(m.cx,m.cy,1.2); }
+    }
+    s.gs = lerp(s.gs||1, s.grow, 0.1); m.scale = s.gs;
+    m.setExpr(t < s.happy ? 'happy' : 'neutral');
+  },
+  drawBack(c,ctx,t){
+    for (const f of c.s.food){
+      const r = c.m.R*0.075, y = f.y + Math.sin(t*3+f.ph)*r*0.6, pop = clamp((t-f.born)/0.2,0,1);
+      ctx.fillStyle = G.C.accent[0]; ctx.globalAlpha = 0.25; ctx.beginPath(); ctx.arc(f.x,y,r*2*pop,0,TAU); ctx.fill();
+      ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(f.x,y,r*pop,0,TAU); ctx.fill();
+    }
+  }},
+{ name:'Shape‑shifter', hint:'The dots regroup into symbols and spring back. Pick one or let it cycle.',
+  controls(c,el){
+    const shapes = [['ring','Ring'],['heart','Heart'],['star','Star'],['check','Check'],['question','?'],['bang','!'],['hi','Hi'],['smile','Smile']];
+    c.s.btns = shapes.map(([id,label]) => { const b = document.createElement('button'); b.className='chip'; b.textContent=label; b.dataset.id=id;
+      b.onclick = () => { c.s.auto = false; autoB.setAttribute('aria-pressed',false); c.s.apply(id); }; el.appendChild(b); return b; });
+    const autoB = document.createElement('button'); autoB.className='chip'; autoB.textContent='Auto'; autoB.setAttribute('aria-pressed',true);
+    autoB.onclick = () => { c.s.auto = !c.s.auto; autoB.setAttribute('aria-pressed',c.s.auto); };
+    el.appendChild(autoB);
+    c.s.list = shapes.map(s=>s[0]); c.s.auto = true; c.s.i = 0; c.s.next = 0;
+    c.s.apply = id => {
+      const m = c.m; m.setShape(id==='ring' ? null : id); m.burst(m.cx,m.cy,0.5);
+      m.setExpr(id==='ring' ? 'neutral' : 'happy');
+      c.s.btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.id===id));
+    };
+  },
+  update(c,t){
+    if (c.s.auto && t > c.s.next){ c.s.i = (c.s.i+1) % c.s.list.length; c.s.apply(c.s.list[c.s.i]); c.s.next = t+2.6; }
+  }},
+{ name:'Typing buddy', hint:'Type below. It follows your cursor, reacts to words like hi, love, haha or ?, and covers its eyes for passwords.',
+  r:0.24, cy:0.5,
+  controls(c,el){
+    el.innerHTML = '<input type="text" placeholder="Say something… try “hi” or “?”" aria-label="Message"><input type="password" placeholder="Password" aria-label="Password">';
+    const [txt,pw] = el.querySelectorAll('input');
+    c.s.txt = txt; c.s.pw = pw; c.s.mctx = document.createElement('canvas').getContext('2d');
+    txt.addEventListener('focus', () => { c.s.focus = 'text'; });
+    pw.addEventListener('focus', () => { c.s.focus = 'pass'; c.say(pick(["I won't look!","Eyes closed!"]),1.6); });
+    [txt,pw].forEach(i => i.addEventListener('blur', () => { c.s.focus = null; }));
+    txt.addEventListener('input', () => { c.m.jump(0.05); c.s.typed = performance.now()/1000; c.s.react(txt.value); });
+    pw.addEventListener('input', () => { c.m.jump(0.04); if (Math.random() < 0.18){ c.s.peek = performance.now()/1000+0.5; c.say('…just a peek',0.9); } });
+    const rules = [
+      [/(^|\W)(hi|hello|hey|salam|marhaba|yo)(\W|$)/,'happy','Hi there!'],
+      [/(love|<3|thank|thx|great|nice|awesome)/,'love','Aww!'],
+      [/(lol|haha|lmao|funny)/,'laugh','Haha!'],
+      [/(sad|sorry|bad|tired|sick)/,'sad','Oh no…'],
+      [/(angry|hate|ugh|annoying|mad)/,'angry','Grr!'],
+      [/(sleep|night|bye|zzz)/,'sleeping','Zzz…'],
+      [/(think|idea|maybe|hmm)/,'focus','Let me think…'],
+      [/(wow|omg|whoa)|!\s*$/,'surprised','Whoa!'],
+      [/\?\s*$/,'confused','Hmm?'],
+    ];
+    c.s.react = v => {
+      const s = v.toLowerCase(), hit = rules.find(r => r[0].test(s));
+      const e = hit ? hit[1] : null;
+      if (e && e !== c.s.reaction) c.say(hit[2],1.4);
+      c.s.reaction = e; c.s.until = performance.now()/1000 + 2.6;
+    };
+  },
+  update(c,t){
+    const m=c.m, s=c.s;
+    if (s.focus === 'pass'){
+      m.cover = t < (s.peek||0) ? 0.5 : 1; m.blushT = 0.7; m.setExpr(t < (s.peek||0) ? 'neutral' : 'happy');
+      if (t < (s.peek||0)) m.lookVec = {x:0,y:0.1};
+      return;
+    }
+    if (s.focus === 'text'){
+      const el = s.txt, cs = getComputedStyle(el); s.mctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const w = s.mctx.measureText(el.value.slice(0, el.selectionStart ?? el.value.length)).width;
+      const r = el.getBoundingClientRect();
+      const x = r.left + parseFloat(cs.paddingLeft) + clamp(w - el.scrollLeft, 0, r.width);
+      m.lookAt = {x: x - c.rect.left, y: r.top + r.height/2 - c.rect.top};
+    }
+    m.setExpr(s.reaction && t < s.until ? s.reaction : 'neutral');
+    if (s.reaction === 'love' && t < s.until && every(c,'h',0.4,t)) spawnHeart(c);
+    if (s.reaction === 'sleeping' && t < s.until && every(c,'z',0.8,t)) spawnZ(c);
+    if (s.reaction === 'laugh' && t < s.until) m.oy = Math.sin(t*28)*m.R*0.04;
+  }},
+{ name:'Voice listener', hint:'The ring becomes a live audio visualiser. Uses a simulated voice until you allow the microphone.',
+  controls(c,el){
+    el.innerHTML = '<button class="chip primary">Use microphone</button><span class="status">Simulated voice</span>';
+    const btn = el.querySelector('button'), st = el.querySelector('.status');
+    c.s.bins = new Float32Array(48); c.s.quiet = 0;
+    btn.onclick = async () => {
+      if (c.s.an){ c.s.stream.getTracks().forEach(tr=>tr.stop()); c.s.an = null; btn.textContent='Use microphone'; st.textContent='Simulated voice'; return; }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+        const ac = new (window.AudioContext||window.webkitAudioContext)(), an = ac.createAnalyser();
+        an.fftSize = 256; an.smoothingTimeConstant = 0.6; ac.createMediaStreamSource(stream).connect(an);
+        Object.assign(c.s,{an, stream, buf:new Uint8Array(an.frequencyBinCount)});
+        btn.textContent = 'Stop microphone'; st.textContent = 'Listening to your mic. Talk or clap!';
+        c.say("I'm all ears",1.4);
+      } catch(e){ st.textContent = 'Microphone unavailable here, so it stays on the simulated voice'; }
+    };
+  },
+  update(c,t,dt){
+    const m=c.m, s=c.s, b=s.bins;
+    if (s.an){ s.an.getByteFrequencyData(s.buf); for (let i=0;i<48;i++) b[i] = lerp(b[i], Math.pow(s.buf[i+2]/255,1.4), 0.5); }
+    else for (let i=0;i<48;i++) b[i] = lerp(b[i], G.speech*(0.3+0.7*Math.abs(Math.sin(i*0.45+t*7+Math.sin(t*3)*2)))*(1-i/70), 0.3);
+    let vol = 0; for (let i=0;i<48;i++) vol += b[i]; vol /= 48;
+    s.quiet = vol < 0.04 ? s.quiet+dt : 0;
+    m.fx = (p,o) => { const a = Math.abs(Math.atan2(o.x,-o.y))/Math.PI, v = b[Math.min(47,Math.floor(a*47))], k = 1+v*0.5; o.x *= k; o.y *= k; o.s *= 1+v*0.5; };
+    m.eyeScale = 1 + vol*0.6;
+    m.setExpr(s.quiet > 4 ? 'sleepy' : vol > 0.45 ? 'surprised' : 'neutral');
+  }},
+{ name:'Progress companion', hint:'Dots light up as a task progresses. At 100% it celebrates with a checkmark.',
+  shadow:false,
+  controls(c,el){
+    el.innerHTML = '<input type="range" min="0" max="100" value="35" aria-label="Progress"><button class="chip primary">Simulate upload</button>';
+    const [rng,btn] = el.children; c.s.rng = rng; c.s.v = 0.35; c.s.sv = 0.35;
+    rng.oninput = () => { c.s.sim = false; c.s.v = rng.value/100; };
+    btn.onclick = () => { c.s.v = 0; c.s.sv = 0; c.s.sim = true; c.s.done = false; c.m.setShape(null); };
+  },
+  update(c,t,dt){
+    const m=c.m, s=c.s;
+    if (s.sim){ s.v = Math.min(1, s.v + dt*(Math.random()<0.12 ? 0 : rand(0.05,0.32))); s.rng.value = Math.round(s.v*100); if (s.v >= 1) s.sim = false; }
+    s.sv = lerp(s.sv, s.v, 0.1);
+    if (s.sv > 0.995 && !s.done){ s.done = true; m.setShape('check'); m.jump(0.3); m.burst(m.cx,m.cy,0.8); c.say('Done!',1.4); s.unshape = t+1.8; }
+    if (s.v < 0.99){ s.done = false; if (s.unshape){ m.setShape(null); s.unshape = 0; } }
+    if (s.unshape && t > s.unshape){ m.setShape(null); s.unshape = 0; }
+    const v = s.sv;
+    m.fx = (p,o) => {
+      const fr = ((Math.atan2(p.hx,-p.hy)+TAU)%TAU)/TAU, d = v - fr;
+      if (d < 0){ o.al *= 0.2; o.tone = 4; } else if (d < 0.05) o.s *= 1.35;
+    };
+    const a = v*TAU; m.lookAt = {x:m.cx+Math.sin(a)*m.R, y:m.cy-Math.cos(a)*m.R};
+    m.setExpr(s.done ? 'happy' : s.sim ? 'focus' : 'neutral');
+  },
+  draw(c,ctx){
+    const m = c.m; ctx.fillStyle = G.C.ink2; ctx.font = `600 ${clamp(m.R*0.24,11,16)}px ${FONT}`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(Math.round(c.s.sv*100)+'%', m.x, m.y + m.R*1.65);
+  }},
+{ name:'Falls asleep', hint:'Leave the cursor still (or off this card) for a few seconds. Then wiggle to wake it.',
+  setup(c){ c.s.last = performance.now()/1000; c.s.state = 'awake'; },
+  update(c,t){
+    const m=c.m, s=c.s;
+    if (c.p.lastMove > s.last){
+      if (s.state === 'sleeping'){ m.jump(0.35); m.burst(m.cx,m.cy,1); c.say(pick(["I'm up! I'm up!","Wasn't sleeping!","Huh? What?"]),1.4); s.wake = t+1.2; }
+      s.last = c.p.lastMove;
+    }
+    const idle = t - s.last;
+    if (t < (s.wake||0)){ m.setExpr('surprised'); s.state = 'awake'; }
+    else if (idle < 3){ m.setExpr('neutral'); s.state = 'awake'; }
+    else if (idle < 5.5){ m.setExpr('sleepy'); m.rot = Math.sin(t*0.9)*0.06; s.state = 'drowsy'; m.lookVec = {x:0,y:0.05}; }
+    else {
+      m.setExpr('sleeping'); m.dim = 0.6; m.scale = 1+0.025*Math.sin(t*1.5); m.fx = fxSag(0.07); m.float = false; s.state = 'sleeping';
+      if (every(c,'z',1,t)) spawnZ(c);
+    }
+    const msg = s.state==='sleeping' ? 'Asleep. Move your cursor over it to wake it up.' : s.state==='drowsy' ? 'Getting drowsy…' : 'Leave the cursor still (or off this card) for a few seconds. Then wiggle to wake it.';
+    if (c.hintEl.textContent !== msg) c.hintEl.textContent = msg;
+  }},
+{ name:'Peekaboo', hint:'It hides below the edge and peeks out. Catch it with a click before it ducks.', cursor:'tap', shadow:false,
+  setup(c){ Object.assign(c.s,{x:c.w/2, mx:c.w/2, hide:0.3, y:c.h, caught:0}); },
+  down(c,t){ const s=c.s; if (near(c,1.35) && s.hide < 0.6 && t > s.caught){ s.caught = t+1.8; c.m.jump(0.35); c.say(pick(['You found me!','Caught!','Haha, again?']),1.6); } },
+  update(c,t){
+    const m=c.m, s=c.s, R=m.R, P=c.p; m.float = false;
+    let ty;
+    if (t < s.caught){ ty = c.h*0.5; m.setExpr('happy'); }
+    else {
+      let hideT;
+      if (P.inside){
+        const close = Math.abs(P.x-s.mx) < R*2.4 && P.y > c.h*0.3;
+        hideT = close ? 1 : 0;
+        if (close && s.hide > 0.92){ s.x = P.x < c.w/2 ? rand(c.w*0.62, c.w-R*1.4) : rand(R*1.4, c.w*0.38); }
+      } else hideT = 0.1;
+      s.hide = lerp(s.hide, hideT, hideT > s.hide ? 0.3 : 0.05);
+      ty = lerp(c.h - R*0.3, c.h + R*1.7, s.hide);
+      m.setExpr(s.hide > 0.4 ? 'surprised' : 'neutral');
+    }
+    s.mx = lerp(s.mx, s.x, s.hide > 0.8 ? 0.35 : 0.04);
+    s.y = lerp(s.y, ty, 0.18);
+    m.x = s.mx; m.y = s.y;
+  },
+  resized(c){ c.s.x = clamp(c.s.x, c.m.R*1.4, c.w-c.m.R*1.4); }},
+{ name:'Notifications', hint:'Send it a message: it jumps and shows a badge. Click it to mark as read.', cursor:'tap',
+  controls(c,el){
+    el.innerHTML = '<button class="chip primary">Send a message</button><button class="chip">Clear</button>';
+    const [send,clear] = el.children; c.s.n = 0;
+    send.onclick = () => {
+      const t = performance.now()/1000, m = c.m; c.s.n++; c.s.pop = t; m.jump(0.35); c.s.sur = t+0.6;
+      c.say(pick(['New message!',"You've got mail!",'Ping!']),1.3);
+    };
+    clear.onclick = () => { c.s.n = 0; };
+  },
+  down(c,t){ if (near(c,1.4) && c.s.n > 0){ c.s.n = 0; c.s.read = t+1.2; c.say('All caught up',1.3); c.m.jump(0.15); } },
+  update(c,t){
+    const m=c.m, s=c.s;
+    if (t < (s.sur||0)) m.setExpr('surprised');
+    else if (t < (s.read||0)) m.setExpr('happy');
+    else m.setExpr('neutral');
+    if (s.n > 0){
+      if (every(c,'att',3.2,t) && t > (s.sur||0)+1) m.jump(0.12);
+      if (Math.sin(t*1.3) > 0.4) m.lookVec = {x:0.11,y:-0.08};
+    }
+  },
+  draw(c,ctx,t){
+    if (!c.s.n) return;
+    const m=c.m, R=m.R, p = clamp((t-(c.s.pop||0))/0.25,0,1), sc = 1+0.4*Math.sin(p*Math.PI);
+    const x = m.cx + R*0.95, y = m.cy - R*0.95, r = R*0.26*sc;
+    ctx.fillStyle = G.C.hot; ctx.beginPath(); ctx.arc(x,y,r,0,TAU); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = `700 ${r*1.1}px ${FONT}`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(c.s.n > 9 ? '9+' : c.s.n, x, y+1);
+  }},
+{ name:'Assistant states', hint:'How it could behave inside the product while you chat with it.',
+  controls(c,el){
+    const st = [['idle','Idle'],['listening','Listening'],['thinking','Thinking'],['speaking','Speaking'],['done','Done']];
+    c.s.btns = st.map(([id,l]) => { const b=document.createElement('button'); b.className='chip'; b.textContent=l; b.dataset.id=id;
+      b.onclick = () => { c.s.auto=false; autoB.setAttribute('aria-pressed',false); c.s.set(id); }; el.appendChild(b); return b; });
+    const autoB = document.createElement('button'); autoB.className='chip'; autoB.textContent='Auto'; autoB.setAttribute('aria-pressed',true);
+    autoB.onclick = () => { c.s.auto=!c.s.auto; autoB.setAttribute('aria-pressed',c.s.auto); }; el.appendChild(autoB);
+    c.s.list = st.map(s=>s[0]); c.s.auto = true; c.s.i = 0; c.s.next = 0;
+    c.s.set = id => {
+      const t = performance.now()/1000; c.s.st = id; c.s.since = t;
+      c.s.btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.id===id));
+      if (id === 'done'){ c.m.setShape('check'); c.m.jump(0.25); c.s.unshape = t+1.6; } else c.m.setShape(null);
+    };
+  },
+  update(c,t){
+    const m=c.m, s=c.s;
+    if (s.auto && t > s.next){ s.i = (s.i+1)%s.list.length; s.set(s.list[s.i]); s.next = t+3.2; }
+    if (s.unshape && t > s.unshape){ m.setShape(null); s.unshape = 0; }
+    switch (s.st){
+      case 'listening': m.setExpr('neutral'); m.lookVec = {x:0,y:0}; m.eyeScale = 1.08+G.level*0.14;
+        m.fx = (p,o) => { const k = 1+G.level*0.13*(0.45+0.55*Math.sin(Math.atan2(p.hy,p.hx)*5+t*6+p.ph*0.4)); o.x *= k; o.y *= k; }; break;
+      case 'thinking': m.setExpr('focus'); m.lookVec = {x:0.1+Math.sin(t*3)*0.015, y:-0.09}; m.fx = fxComet(t); break;
+      case 'speaking': m.setExpr('neutral'); m.eyeScale = 1-G.speech*0.22; m.eyeDy = -G.speech*0.03;
+        m.fx = (p,o) => { const k = 1+G.speech*0.09*(0.5+0.5*Math.sin(Math.hypot(p.hx,p.hy)*9-t*11)); o.x *= k; o.y *= k; }; break;
+      case 'done': m.setExpr('happy'); break;
+      default: m.setExpr('neutral');
+    }
+  }},
+{ name:'Gravity', hint:'Click to drop all the dots. Move the cursor left or right to tilt the pile. Click again to reassemble.', cursor:'tap',
+  controls(c,el){ el.innerHTML = '<button class="chip primary">Drop</button>'; c.s.btn = el.firstChild; c.s.btn.onclick = () => c.s.toggle(); },
+  setup(c){
+    Object.assign(c.s,{drop:false, bx:c.w/2, by:c.m.y, bv:0});
+    c.s.toggle = () => {
+      const t = performance.now()/1000, m = c.m, s = c.s; s.drop = !s.drop; s.btn.textContent = s.drop ? 'Reassemble' : 'Drop';
+      if (s.drop){ m.mode = 'fall'; for (const p of m.pts){ p.vx += rand(-1,1)*m.R*0.03; p.vy -= rand(0,1)*m.R*0.04; } s.bv = -m.R*3; m.setExpr('surprised'); s.ko = t+0.5; c.say('Uh oh…',1.2); }
+      else { m.mode = 'ring'; s.happy = t+1.4; m.setExpr('surprised'); c.say('Ta‑da!',1.2); }
+    };
+  },
+  down(c){ c.s.toggle(); },
+  update(c,t,dt){
+    const m=c.m, s=c.s, R=m.R; m.float = false;
+    if (s.drop){
+      const tilt = c.p.inside ? clamp((c.p.x-c.w/2)/(c.w/2),-1,1) : 0;
+      m.g = {x:tilt*0.9, y:1};
+      s.bv += R*25*dt; s.by += s.bv*dt; const floor = c.h - R*0.28;
+      if (s.by > floor){ s.by = floor; s.bv *= -0.3; }
+      s.bx = clamp(s.bx + tilt*R*2.5*dt, R*0.6, c.w-R*0.6);
+      m.setExpr(t > s.ko ? 'ko' : 'surprised'); m.rot = 0.2;
+      m.gy = c.h + R*5;
+    } else {
+      s.bx = lerp(s.bx, c.w/2, 0.1); s.by = lerp(s.by, c.h*0.47, 0.1); s.bv = 0;
+      m.setExpr(t < (s.happy||0) ? (t < s.happy-0.8 ? 'surprised' : 'happy') : 'neutral');
+      m.gy = c.h*0.47 + R*1.62;
+    }
+    m.x = s.bx; m.y = s.by;
+  }},
+{ name:'Follower', hint:'It follows your cursor around the card and stops politely nearby. Stay still close by and it gets attached.',
+  setup(c){ Object.assign(c.s,{vx:0,vy:0,nearT:0}); c.m.k = 0.08; },
+  update(c,t,dt){
+    const m=c.m, s=c.s, R=m.R, P=c.p;
+    let tx = c.w/2, ty = c.h*0.47, d = 1e9;
+    if (P.inside){
+      d = Math.hypot(P.x-m.x,P.y-m.y);
+      if (d > R*1.9){ const ux=(P.x-m.x)/d, uy=(P.y-m.y)/d; tx = P.x-ux*R*1.9; ty = P.y-uy*R*1.9; } else { tx = m.x; ty = m.y; }
+    } else if (s.wasIn){ c.say(pick(['Come back!','Where are you going?']),1.4); s.sad = t+1.6; }
+    s.vx += ((tx-m.x)*10 - s.vx*4.5)*dt; s.vy += ((ty-m.y)*10 - s.vy*4.5)*dt;
+    m.x = clamp(m.x+s.vx*dt, R*1.4, c.w-R*1.4); m.y = clamp(m.y+s.vy*dt, R*1.4, c.h-R*1.7);
+    const sp = Math.hypot(s.vx,s.vy);
+    m.rot = clamp(s.vx/(R*30),-0.3,0.3); m.sxm = 1+clamp(sp/(R*80),0,0.12); m.sym = 1/m.sxm;
+    s.nearT = P.inside && d < R*2.4 && sp < R*0.8 ? s.nearT+dt : 0;
+    if (t < (s.sad||0)) m.setExpr('sad');
+    else if (s.nearT > 1.6){ m.setExpr('love'); if (every(c,'h',0.6,t)) spawnHeart(c); }
+    else m.setExpr(sp > R*4 ? 'happy' : 'neutral');
+  }},
+];
+
+/* =========================================================
+   EXPRESSIONS (hover each to make it act)
+   ========================================================= */
+const EXPRESSIONS = [
+{ name:'Neutral', hint:'Calm, blinking, watching you.', update(c){ c.m.setExpr('neutral'); } },
+{ name:'Happy', hint:'Hover: hops with joy.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr('happy'); m.float=false; if (m.jy===0 && m.jv===0 && every(c,'hop',i?0.05:1,t)) m.jump(i?0.3:0.14); } },
+{ name:'Laughing', hint:'Hover: cracks up.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('laugh'); m.float=false;
+  m.oy = Math.sin(t*(i?32:20))*R*(i?0.05:0.022); m.rot = Math.sin(t*2.4)*0.07;
+  if (every(c,'ha',i?0.3:1.1,t)) c.spawn('text', m.cx+rand(-0.8,0.8)*R, m.cy-R*1.25, {txt:pick(['ha','HA']), vy:-R*0.8, vx:rand(-1,1)*R*0.4, life:1, size:R*0.26}); } },
+{ name:'In love', hint:'Hover: heart beats faster.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr('love'); m.blushT=0.6;
+  const ph = (t*(i?1.8:1.2))%1, b = Math.exp(-Math.pow((ph-0.1)/0.045,2))+0.7*Math.exp(-Math.pow((ph-0.3)/0.05,2));
+  m.scale = 1+b*(i?0.1:0.05); if (every(c,'h',i?0.18:0.7,t)) spawnHeart(c); } },
+{ name:'Surprised', hint:'Hover: jumps out of its dots.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr('surprised'); m.scale=1.05;
+  if (i && !c.s.wasIn){ m.burst(m.cx,m.cy,1.3); m.jump(0.3); c.say('Oh!',1); } } },
+{ name:'Sad', hint:'Hover: the tears come.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('sad'); m.lookVec={x:0,y:0.06}; m.fx=fxSag(0.13); m.float=false;
+  m.oy = Math.sin(t*0.9)*R*0.015;
+  if (every(c,'tear',i?0.5:1.8,t)){ const side = Math.random()<0.5?-1:1; c.spawn('tear', m.cx+side*ESP*R, m.cy+EH*R*0.5, {vy:R*0.2, life:1.3, size:R*0.12}); } } },
+{ name:'Angry', hint:'Hover: shakes and bristles.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('angry'); m.blushT = i?0.8:0.3;
+  m.ox = Math.sin(t*47)*R*(i?0.045:0.012);
+  m.fx = (p,o) => { o.tone = Math.min(o.tone,2); if (i){ const k = 1+0.06*Math.sin(t*28+p.ph); o.x*=k; o.y*=k; } };
+  if (i && !c.s.wasIn) c.say('Hmph!',1.1); } },
+{ name:'Sleepy', hint:'Hover: tries to stay awake.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr(i?'neutral':'sleepy');
+  m.rot = Math.sin(t*0.7)*0.06; m.eyeScale = 0.9+0.1*Math.sin(t*0.8);
+  if (i && !c.s.wasIn) c.say('*yawn*',1.2); if (!i && every(c,'z',1.6,t)) spawnZ(c); } },
+{ name:'Asleep', hint:'Deep sleep. Hover won’t wake it.', update(c,t){ const m=c.m; m.setExpr('sleeping'); m.float=false;
+  m.scale = 1+0.025*Math.sin(t*1.5); m.dim = 0.62; m.fx = fxSag(0.06); if (every(c,'z',c.p.inside?0.5:1,t)) spawnZ(c); } },
+{ name:'Wink', hint:'Hover: winks at you.', update(c,t){ const m=c.m, i=c.p.inside;
+  const w = (t%2.6) < 0.5 || (i && (t%1) < 0.5);
+  m.setExpr(w?'wink':'neutral'); c.s.r = lerp(c.s.r||0, w?0.12:0, 0.15); m.rot = c.s.r; } },
+{ name:'Confused', hint:'Hover: really doesn’t get it.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('confused');
+  m.rot = Math.sin(t*1.3)*(i?0.18:0.1);
+  if (i) m.fx = (p,o) => { o.x += Math.sin(t*2+p.ph)*0.05; o.y += Math.cos(t*1.7+p.ph)*0.05; };
+  if (every(c,'q',i?0.6:1.4,t)) c.spawn('text', m.cx+R*rand(0.5,1), m.cy-R*1.1, {txt:'?', vy:-R*0.5, life:1.3, size:R*0.34}); } },
+{ name:'Dizzy', hint:'Hover: spins faster.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('dizzy'); m.float=false;
+  const sp = i?5:2.6; m.ox = Math.cos(t*sp)*R*0.07; m.oy = Math.sin(t*sp)*R*0.04; m.rot = Math.sin(t*sp)*0.08;
+  m.fx = fxSpin(t*(i?1.4:0.5)); } },
+{ name:'Knocked out', hint:'X_X, with stars circling its head.', update(c,t){ const m=c.m; m.setExpr('ko'); m.rot=0.16; m.float=false; m.dim=0.8;
+  m.fx = (p,o) => { o.x += p.kx*0.1; o.y += p.ky*0.08+0.05; }; },
+  draw(c,ctx,t){ const m=c.m, R=m.R; ctx.fillStyle = G.C.accent[0];
+    for (let k=0;k<3;k++){ const a = t*(c.p.inside?5:2.5)+k*TAU/3; ctx.save(); ctx.translate(m.cx+Math.cos(a)*R*0.75, m.cy-R*1.42+Math.sin(a)*R*0.16); sparkPath(ctx,R*0.11); ctx.fill(); ctx.restore(); } } },
+{ name:'Thinking', hint:'Hover: thinks harder.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr('focus');
+  m.lookVec = {x:0.1+Math.sin(t*3)*0.012, y:-0.09}; m.fx = fxComet(t, i?5:2.6); } },
+{ name:'Shy', hint:'Hover: hides completely.', update(c,t){ const m=c.m, i=c.p.inside; m.setExpr('happy');
+  m.cover = i?1:0.5; m.blushT = 0.9; m.lookVec = {x:-0.06,y:0.05}; m.rot = -0.08; } },
+{ name:'Starstruck', hint:'Hover: sparkles everywhere.', update(c,t){ const m=c.m, i=c.p.inside, R=m.R; m.setExpr('star');
+  m.fx = (p,o) => { o.s *= 0.75+0.5*(0.5+0.5*Math.sin(t*3*p.f+p.ph)); };
+  if (every(c,'sp',i?0.12:0.5,t)){ const a = Math.random()*TAU, r = R*rand(1.3,1.7); c.spawn('spark', m.cx+Math.cos(a)*r, m.cy+Math.sin(a)*r, {life:0.8, size:R*rand(0.07,0.13)}); } } },
+];
+
+/* ---------- build ---------- */
+const gi = document.getElementById('gridInt');
+const byName = (list,n) => list.find(d => d.name === n);
+const PICKS = [
+  Object.assign({}, byName(EXPRESSIONS,'Thinking'), {hint:'Eyes drift up while a bright sweep circles the ring. Hover to make it think harder.'}),
+  byName(INTERACTIONS,'Falls asleep'),
+  byName(INTERACTIONS,'Feed me'),
+  byName(INTERACTIONS,'Gravity'),
+];
+PICKS.forEach((d,i) => new Card(d,'int',i+1,gi));
+
+const segEl = document.getElementById('palettes');
+PALETTES.forEach(p => { const b = document.createElement('button'); b.textContent = p.name; b.setAttribute('aria-pressed', p===G.palette);
+  b.onclick = () => { G.palette = p; segEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x===b)); refreshColors(); }; segEl.appendChild(b); });
+const themeBtn = document.getElementById('theme');
+const syncTheme = () => { refreshColors(); themeBtn.setAttribute('aria-pressed', G.dark); };
+themeBtn.onclick = () => { document.documentElement.dataset.theme = G.dark ? 'light' : 'dark'; syncTheme(); };
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
+
+addEventListener('pointermove', e => { G.px = e.clientX; G.py = e.clientY; G.lastMove = performance.now()/1000; }, {passive:true});
+addEventListener('pointerdown', e => { G.px = e.clientX; G.py = e.clientY; G.lastMove = performance.now()/1000; }, {passive:true});
+document.documentElement.addEventListener('pointerleave', () => { G.px = G.py = -9999; });
+
+const ro = new ResizeObserver(es => es.forEach(en => { const c = CARDS.find(c => c.cv === en.target); c && c.resize(); }));
+const io = new IntersectionObserver(es => es.forEach(en => { const c = CARDS.find(c => c.cv === en.target); if (c) c.visible = en.isIntersecting; }), {rootMargin:'100px'});
+CARDS.forEach(c => { ro.observe(c.cv); io.observe(c.cv); });
+
+let last = performance.now(), lvlT = 0;
+function loop(ms){
+  const t = ms/1000, dt = Math.min(0.05,(ms-last)/1000); last = ms;
+  const syll = Math.max(0, Math.sin(t*13)*0.6 + Math.sin(t*7.3+1)*0.4);
+  G.speech = lerp(G.speech, clamp(syll*(Math.sin(t*0.9) > -0.55 ? 1 : 0.06),0,1), 0.35);
+  if (Math.random() < 0.08) lvlT = Math.random()*(Math.sin(t*0.7) > -0.3 ? 1 : 0.25);
+  G.level = lerp(G.level, lvlT, 0.12);
+  for (const c of CARDS) c.frame(t,dt);
+  requestAnimationFrame(loop);
+}
+refreshColors(); syncTheme();
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
