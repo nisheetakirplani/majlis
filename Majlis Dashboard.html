@@ -233,6 +233,14 @@ body.is-edit .edit-hint{display:flex;animation:fade .3s}@keyframes fade{from{opa
 .arthen{display:flex;flex-direction:column;min-width:0;min-height:0}.arthen>small{font-size:12px;color:rgba(255,255,255,.55);padding-bottom:2px}
 .arwq{display:flex;align-items:center;gap:18px;height:100%;min-width:0}.arwq .arf{gap:6px}.arwq .arbtns{margin-top:0;flex-wrap:nowrap;flex:none}
 
+/* My tasks · Option 1 · due buckets: tiles with title + when, overdue tag, later buckets collapse */
+.tkg{display:flex;align-items:center;justify-content:space-between;font:600 11px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);height:28px;padding:6px 4px 0;flex:none}.tkl>.tkg:first-child{height:22px;padding-top:0}.tkg em{font-style:normal;font-weight:500;letter-spacing:0}
+.tkl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.tkr{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 12px;border-radius:var(--rs);background:var(--tile);cursor:pointer;transition:background .15s;flex:none}.tkr:hover{background:var(--tile2)}
+.tkr__m{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}.tkr__m b{font:500 14px/18px var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tkr__m small{font-size:12px;line-height:15px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tkr input:checked~.tkr__m b{text-decoration:line-through;color:var(--ink3)}
+.tkf{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding:2px 4px 0;flex:none;font:500 12.5px/1 var(--font);color:var(--ink3);min-width:0}.tkf>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tkf .arl{margin:0;align-self:auto}
+
 /* ---------- bento grid + widget chrome ---------- */
 .grid{position:relative;width:100%;min-height:120px;transition:height .3s}
 .w{position:absolute;display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);min-width:0;overflow:hidden;transition:left .34s cubic-bezier(.2,.8,.2,1),top .34s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),box-shadow .2s,transform .2s,background .3s}
@@ -768,9 +776,9 @@ const DEC_X = { 1: { v: 38, d: 3, from: 'Omar K', wait: '2d' }, 2: { v: 6.2, d: 
 const decX = d => ({ ...d, ...DEC_X[d.id] });
 S.batch = { n: 8, v: 3.4, done: false }; S.decSort = 'due'; S.dealSort = 'value';
 /* tasks carry a day offset so they bucket into Overdue · Today · This week · Later */
-S.tasks = [{ id: 1, tx: 'Review Q3 board pack', d: 0, at: '14:45', done: false }, { id: 2, tx: 'Reply to investor update', d: -1, done: false }, { id: 3, tx: 'Approve travel budget', d: 0, at: '09:12', done: true },
-  { id: 7, tx: 'Read ERP cutover plan', d: 1, done: false }, { id: 6, tx: 'Call GIC on co-investment', d: 2, done: false }, { id: 4, tx: 'Prepare staff town hall notes', d: 3, done: false }, { id: 5, tx: 'Sign off Riyadh lease terms', d: 4, done: false },
-  { id: 12, tx: 'Review Kuwait pricing proposal', d: 9, done: false }, { id: 8, tx: 'Approve Q4 marketing plan', d: -2, done: true }, { id: 9, tx: 'Sign off Q3 forecast', d: -3, done: true }, { id: 10, tx: 'Board dinner seating plan', d: -1, done: true }, { id: 11, tx: '1:1s with direct reports', d: -2, done: true }];
+S.tasks = [{ id: 1, sh: 'Board pack', tx: 'Review Q3 board pack', d: 0, at: '14:45', done: false }, { id: 2, sh: 'Investor update', tx: 'Reply to investor update', d: -1, done: false }, { id: 3, sh: 'Travel budget', tx: 'Approve travel budget', d: 0, at: '09:12', done: true },
+  { id: 7, sh: 'ERP plan', tx: 'Read ERP cutover plan', d: 1, done: false }, { id: 6, sh: 'GIC call', tx: 'Call GIC on co-investment', d: 2, done: false }, { id: 4, sh: 'Town hall notes', tx: 'Prepare staff town hall notes', d: 3, done: false }, { id: 5, sh: 'Riyadh lease', tx: 'Sign off Riyadh lease terms', d: 4, done: false },
+  { id: 12, sh: 'Kuwait pricing', tx: 'Review Kuwait pricing proposal', d: 9, done: false }, { id: 8, tx: 'Approve Q4 marketing plan', d: -2, done: true }, { id: 9, tx: 'Sign off Q3 forecast', d: -3, done: true }, { id: 10, tx: 'Board dinner seating plan', d: -1, done: true }, { id: 11, tx: '1:1s with direct reports', d: -2, done: true }];
 D.deadlines = [{ n: 'Q3 VAT return', o: 'Finance · Fatima R', d: 3, st: 'In progress' }, { n: 'Audit committee pack', o: 'Finance · Amal R', d: 9, st: 'Not started' }, { n: 'AGM notice to shareholders', o: 'Legal · Hana S', d: 12, st: 'Draft ready' },
   { n: 'Economic substance notification', o: 'Legal', d: 18, st: 'Not started' }, { n: 'Trade licence renewal', o: 'Admin · Omar K', d: 26, st: 'Ready' }, { n: 'Corporate tax return', o: 'Finance', d: 41, st: 'Not started' }, { n: 'ADGM annual return', o: 'Legal', d: 55, st: 'Not started' }];
 const MON = { Nov: 1, Dec: 2, Jan: 3, Feb: 4 };
@@ -810,10 +818,10 @@ const DEAL_X = { 'MoI digital ID': ['MoI', 'Slipped'], 'Gulf Ports ERP': ['Gulf 
 const arTask = x => `<label class="chk"><input type="checkbox" data-act="task" data-id="${x.id}" ${x.done ? 'checked' : ''}><span class="chk__b">${ico('check', 12)}</span><span class="chk__t">${esc(x.tx)}</span><small${!x.done && x.d < 0 ? ' class="is-bad"' : ''}>${whenOf(x.d, x.at)}</small></label>`;
 _m(TX.en, { q: { signNow: 'Sign now', approveNow: 'Approve', markDone: 'Mark done', delegate: 'Delegate', ask: 'Ask', act: { reply: 'Draft reply', decide: 'Decide with Majlis', deal: 'Plan rescue', file: 'Check readiness' },
   nextL: 'Next', then: 'Then', moreW: '+{n} more', thenDl: 'Then {x} in {n}d', now: 'Now', batchA: 'Approve {n} small ones · AED {v}M', nMore: '{n} more', atRiskP: 'at risk · {p}% of pipeline',
-  needDecision: 'need a decision', needReply: 'need a reply', inboxL: '{r} replies · {f} FYI', moreTasks: '+{n} more this week', nextT: 'Next: {x}', allClear: 'Nothing waiting on you' } });
+  needDecision: 'need a decision', needReply: 'need a reply', inboxL: '{r} replies · {f} FYI', moreTasks: '+{n} more this week', nextT: 'Next: {x}', allClear: 'Nothing waiting on you', doneAt: 'Done {at}', wasYesterday: 'Was due yesterday', wasAgo: 'Was due {n} days ago', before: 'Before {at}', dueToday: 'Due today', dueOn: 'Due {d}', allTasks: 'All tasks' } });
 _m(TX.ar, { q: { signNow: 'وقّع الآن', approveNow: 'اعتماد', markDone: 'تم', delegate: 'تفويض', ask: 'اسأل', act: { reply: 'صياغة رد', decide: 'قرّر مع مجلس', deal: 'خطة إنقاذ', file: 'تحقق من الجاهزية' },
   nextL: 'التالي', then: 'ثم', moreW: '+{n} أخرى', thenDl: 'ثم {x} خلال {n} ي', now: 'الآن', batchA: 'اعتماد {n} صغيرة · {v} مليون', nMore: '{n} أخرى', atRiskP: 'معرّضة للخطر · {p}% من الصفقات',
-  needDecision: 'تحتاج قرارًا', needReply: 'تحتاج ردًا', inboxL: '{r} ردود · {f} للعلم', moreTasks: '+{n} أخرى هذا الأسبوع', nextT: 'التالي: {x}', allClear: 'لا شيء بانتظارك' } });
+  needDecision: 'تحتاج قرارًا', needReply: 'تحتاج ردًا', inboxL: '{r} ردود · {f} للعلم', moreTasks: '+{n} أخرى هذا الأسبوع', nextT: 'التالي: {x}', allClear: 'لا شيء بانتظارك', doneAt: 'أُنجزت {at}', wasYesterday: 'كانت مستحقة أمس', wasAgo: 'كانت مستحقة قبل {n} أيام', before: 'قبل {at}', dueToday: 'مستحقة اليوم', dueOn: 'مستحقة {d}', allTasks: 'كل المهام' } });
 
 /* ----------------------------------------------------------- the widgets */
 const W = {
@@ -924,12 +932,16 @@ const W = {
         if (v === 'wide') return vz(miniDonut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], `<b>${pct}%</b>`, 2));
         return vz(`<div class="vzrow">${donut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], { size: 112, sw: 14, center: `<b>${pct}%</b><small>${t('done')}</small>` })}${legend([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }])}</div>${h >= 5 ? capsules(D.taskWeek, D.dow.slice(0, 5), { hi: 1 }) : ''}`, 'vz--col'); }
       if (v === 's') return `<div class="big"><small>${t('w.tasks')}</small><strong>${ts.length - done} ${t('left')}</strong><span class="big__f"><i class="bar-s"><b style="width:${pct}%"></b></i><span class="muted">${done}/${ts.length}</span></span></div>`;
-      /* Option 1 · due buckets, direction A: count pills, then today's tasks as one-line rows */
-      const open = ts.filter(x => !x.done).sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99')), c = k => open.filter(x => bucketOf(x.d) === k).length;
-      const pills = `<div class="arpills">${[['overdue', 'bad'], ['today', 'warn'], ['week', '']].map(([k, l]) => `<div class="arpill${c(k) && l ? ' arpill--' + l : ''}"><b>${c(k)}</b><span>${t('q.' + k)}</span></div>`).join('')}</div>`;
-      if (v === 'wide' || bodyH(h) < 150) return pills;
-      const k = Math.max(1, Math.min(open.length, 3, Math.floor((bodyH(h) - 96) / 40)));
-      return `${pills}<div class="arls">${open.slice(0, k).map(arTask).join('')}</div>${open.length > k ? arLink(t('q.moreTasks', { n: open.length - k }), 'ask-open', ' data-q="Show all my tasks this week"') : ''}`; } },
+      /* Option 1 · due buckets: Overdue · Today · This week · Later. Today stays open; buckets that don't fit collapse to their header and a preview line */
+      const sub = x => x.done ? t('q.doneAt', { at: x.at || '' }).trim() : x.d < 0 ? (x.d === -1 ? t('q.wasYesterday') : t('q.wasAgo', { n: -x.d })) : x.d === 0 ? (x.at ? t('q.before', { at: x.at }) : t('q.dueToday')) : t('q.dueOn', { d: whenOf(x.d) });
+      const row = x => `<label class="chk tkr"><input type="checkbox" data-act="task" data-id="${x.id}" ${x.done ? 'checked' : ''}><span class="chk__b">${ico('check', 12)}</span><span class="tkr__m"><b>${esc(x.tx)}</b><small>${sub(x)}</small></span>${!x.done && x.d < 0 ? tag(t('q.inDays', { n: -x.d }), 'bad') : ''}</label>`;
+      const live = ts.filter(x => !(x.done && x.d < 0)), groups = BUCKETS.map(k => [k, live.filter(x => bucketOf(x.d) === k).sort((a, b) => a.done - b.done || a.d - b.d || (a.at || '99').localeCompare(b.at || '99'))]).filter(g => g[1].length);
+      const head = (k, n) => `<div class="tkg"><span>${t('q.' + k)}</span><em>${n}</em></div>`, budget = bodyH(h) - 24;
+      let html = '', used = 0; const hidden = [];
+      for (const [k, it] of groups) { const hh = used ? 28 : 22; if (used + hh > budget) { hidden.push(...it); continue; } html += head(k, it.length); used += hh; let rows = '';
+        for (const x of it) { if (used + 50 > budget) hidden.push(x); else { rows += row(x); used += 50; } } if (rows) html += `<div class="tkl">${rows}</div>`; }
+      const prev = hidden.filter(x => !x.done), names = prev.slice(0, 2).map(x => x.sh || x.tx);
+      return `<div class="tkl" style="gap:0">${html}</div>${prev.length ? `<div class="tkf"><span>${esc(names.join(' · '))}${prev.length > 2 ? ' +' + (prev.length - 2) : ''}</span>${arLink(t('q.allTasks'), 'ask-open', ' data-q="Show all my tasks"')}</div>` : ''}`; } },
 
   docs: { group: 'docs', icon: 'folder', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.docs.length,
