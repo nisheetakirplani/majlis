@@ -835,8 +835,8 @@ const finTiles = ks => `<div class="sts sts--${ks.length}">${ks.map(k => `<div c
 function bulRow(d) { const aed = S.finScale === 'aed', mx = aed ? Math.max(...FIN.ds.map(x => x.t)) : d.t, base = d.t / mx, f = x => (x / mx * 100).toFixed(1);
   return `<li><button class="bul__b bul--${d.st}" data-act="ask-open" data-q="Why is ${esc(d.n)} ${d.gap} short of target?" title="${esc(d.n)} · ${t('fin.ach')} ${d.a} · ${t('fin.com')} ${d.c} · ${t('fin.gap')} ${d.gap} · ${t('fin.pace')} ${fPct(d.pace)}"><span class="bul__n">${esc(d.n)}</span><span class="bul__t" style="--w:${(base * 100).toFixed(1)}%"><i class="bul__tg"></i><b class="bul__a" style="width:${f(d.a)}%"></b><b class="bul__c" style="inset-inline-start:${f(d.a)}%;width:${f(d.c)}%"></b><i class="bul__p" style="inset-inline-start:${(FIN.E * base * 100).toFixed(1)}%"></i></span><em class="bul__v">${d.gap > 0 ? '−' + d.gap : '✓'}</em></button></li>`; }
 _m(TX.en, { tabs: { exec: 'Executive finance' },
-  w: { deptScore: 'Department scorecard', landing: 'Year-end outlook · Option 1', runrate: 'Year-end outlook · Option 2', pipeline: 'Pipeline by stage', backlog: 'Backlog start timeline', budget: 'Budget vs actual', cash: 'Cash & runway', rpe: 'Revenue per employee', alerts: 'Variance alerts', deals: 'Deals at risk' },
-  wd: { deptScore: 'Each department against its target, biggest gap first', landing: 'Likely landing with a floor-to-best range', runrate: 'Cumulative revenue against plan, and the run-rate needed', pipeline: 'Weighted against total pipeline, by stage', backlog: 'When signed work starts turning into revenue', budget: 'Cost lines over or under budget', cash: 'Cash balance, runway and burn', rpe: 'Productivity by department against the company', alerts: 'Only what crossed a threshold', deals: 'Big deals that slipped or went quiet' },
+  w: { deptScore: 'Department scorecard', landing: 'Year-end outlook', pipeline: 'Pipeline by stage', backlog: 'Backlog start timeline', budget: 'Budget vs actual', cash: 'Cash & runway', rpe: 'Revenue per employee', alerts: 'Variance alerts', deals: 'Deals at risk' },
+  wd: { deptScore: 'Each department against its target, biggest gap first', landing: 'Likely landing with a floor-to-best range', pipeline: 'Weighted against total pipeline, by stage', backlog: 'When signed work starts turning into revenue', budget: 'Cost lines over or under budget', cash: 'Cash balance, runway and burn', rpe: 'Productivity by department against the company', alerts: 'Only what crossed a threshold', deals: 'Big deals that slipped or went quiet' },
   fin: { pct: '% target', aed: 'AED', nBehind: '{n} behind', behindPace: 'Behind pace', behind: 'Behind', watch: 'Watch', onPace: 'On pace', more: 'more', ach: 'Achieved', com: 'Committed', gap: 'Gap', pace: 'Pace', paceL: 'Pace line',
     target: 'Target', likely: 'Year-end landing', ofTarget: 'of target', floor: 'Floor', best: 'Best', pipeW: 'Weighted pipeline', landing: 'Landing', company: 'Company', allDepts: 'All departments', switch: 'Switch department',
     needWk: 'Needed / week', nowWk: 'Current / week', actual: 'Actual', plan: 'Plan', total: 'total', weightedOf: 'weighted of {u} total', cov: 'coverage',
@@ -845,8 +845,8 @@ _m(TX.en, { tabs: { exec: 'Executive finance' },
     cashL: 'Cash', runway: 'Runway', burn: 'Net burn / mo', mo: 'mo', decF: 'Dec forecast {n}', rpeL: 'Revenue per employee', perHead: 'per head, annualised', top: 'Top', low: 'Lowest',
     red: 'red', alertsL: 'Variance alerts', aPace: '{n} at {p} of pace', aPaceD: 'Gap {g} · coverage {c}×', atRisk: 'At risk', deals: 'deals', closes: 'closes {m}' } });
 _m(TX.ar, { tabs: { exec: 'المالية التنفيذية' },
-  w: { deptScore: 'أداء الأقسام', landing: 'توقعات نهاية العام · الخيار 1', runrate: 'توقعات نهاية العام · الخيار 2', pipeline: 'الصفقات حسب المرحلة', backlog: 'جدول بدء الأعمال الموقّعة', budget: 'الميزانية مقابل الفعلي', cash: 'النقد ومدة التشغيل', rpe: 'الإيراد لكل موظف', alerts: 'تنبيهات الانحراف', deals: 'صفقات معرّضة للخطر' },
-  wd: { deptScore: 'كل قسم مقابل هدفه، الأكبر فجوة أولًا', landing: 'التوقع المرجّح مع نطاق من الأدنى إلى الأفضل', runrate: 'الإيراد التراكمي مقابل الخطة والوتيرة المطلوبة', pipeline: 'المرجّح مقابل الإجمالي لكل مرحلة', backlog: 'متى تبدأ الأعمال الموقّعة بتحقيق الإيراد', budget: 'بنود التكلفة فوق الميزانية أو دونها', cash: 'رصيد النقد ومدة التشغيل والحرق', rpe: 'إنتاجية الأقسام مقابل الشركة', alerts: 'فقط ما تجاوز الحد', deals: 'صفقات كبيرة تأخرت أو توقفت' },
+  w: { deptScore: 'أداء الأقسام', landing: 'توقعات نهاية العام', pipeline: 'الصفقات حسب المرحلة', backlog: 'جدول بدء الأعمال الموقّعة', budget: 'الميزانية مقابل الفعلي', cash: 'النقد ومدة التشغيل', rpe: 'الإيراد لكل موظف', alerts: 'تنبيهات الانحراف', deals: 'صفقات معرّضة للخطر' },
+  wd: { deptScore: 'كل قسم مقابل هدفه، الأكبر فجوة أولًا', landing: 'التوقع المرجّح مع نطاق من الأدنى إلى الأفضل', pipeline: 'المرجّح مقابل الإجمالي لكل مرحلة', backlog: 'متى تبدأ الأعمال الموقّعة بتحقيق الإيراد', budget: 'بنود التكلفة فوق الميزانية أو دونها', cash: 'رصيد النقد ومدة التشغيل والحرق', rpe: 'إنتاجية الأقسام مقابل الشركة', alerts: 'فقط ما تجاوز الحد', deals: 'صفقات كبيرة تأخرت أو توقفت' },
   fin: { pct: '% من الهدف', aed: 'درهم', nBehind: '{n} متأخرة', behindPace: 'متأخرة عن الوتيرة', behind: 'متأخر', watch: 'للمراقبة', onPace: 'على الوتيرة', more: 'أخرى', ach: 'المحقق', com: 'الملتزم', gap: 'الفجوة', pace: 'الوتيرة', paceL: 'خط الوتيرة',
     target: 'الهدف', likely: 'توقع نهاية العام', ofTarget: 'من الهدف', floor: 'الأدنى', best: 'الأفضل', pipeW: 'الصفقات المرجّحة', landing: 'التوقع', company: 'الشركة', allDepts: 'كل الأقسام', switch: 'تبديل القسم',
     needWk: 'المطلوب / أسبوع', nowWk: 'الحالي / أسبوع', actual: 'الفعلي', plan: 'الخطة', total: 'إجمالي', weightedOf: 'مرجّح من {u} إجمالي', cov: 'تغطية',
@@ -956,21 +956,17 @@ _m(TX.ar, { w: { competitive: 'نبض المنافسين', boardKpis: 'مؤشر�
 /* ----------------------------------------------------------- Money · People & customers · Strategy & outside world · demo data */
 D.margin = { co: 22, plan: 24, depts: [['Licensing', 52], ['Cloud', 34], ['Enterprise', 24], ['Consulting', 18], ['Managed services', 16], ['SMB', 14], ['Digital', 12], ['Training', 10], ['Government', 9]] };
 D.wc = { dso: 52, dsoD: '+4', dpo: 38, dpoD: '−2', overdue: 15, aging: [['0–30', 42], ['31–60', 18], ['61–90', 9], ['90+', 6]], top: ['Ministry of Finance', 4.1, 94] };
-D.rel = [{ n: 'Khalid Al-Rashid', r: 'Board chair', g: 'board', last: '3 weeks ago', st: 'cold', note: 'Owes a call on the audit pick', av: 4 },
-  { n: 'GIC', r: 'Investor', g: 'investor', last: '2 days ago', st: 'owed', note: 'Waiting on your co-invest reply', av: 2 },
-  { n: 'Ministry of Finance', r: 'Top client', g: 'client', last: '5 weeks ago', st: 'cold', note: 'Renewal in 60 days', av: 0 },
-  { n: 'Jane Lowe', r: 'Audit chair', g: 'board', last: 'Monday', st: 'warm', note: 'Agreed Q3 sign-off plan', av: 1 }, { n: 'Emirates Group', r: 'Top client', g: 'client', last: 'Last week', st: 'warm', note: '', av: 3 }];
 D.media = { pos: 64, neu: 26, neg: 10, mentions: 1240, delta: '+18%', stories: [{ s: 'Gulf News', h: 'Majlis named a top GCC digital partner', lv: 'ok' }, { s: 'X / Twitter', h: 'Thread on Tuesday\'s portal outage is spreading', lv: 'bad' }, { s: 'Reuters', h: 'GCC IT spend to grow 9% in 2027', lv: 'n' }] };
 D.incidents = [{ live: true, n: 'Customer portal outage', sev: 'P1', since: '38 min', o: 'Omar K', st: 'Mitigating · 60% of users back', area: 'Operations' }, { live: false, n: 'Payments latency', sev: 'P2', since: 'resolved in 42 min', o: 'Omar K', area: 'Operations' }];
 const AVC = ['#0b825a', '#2a8fb0', '#8b6fd9', '#d0802a', '#c0567a'];
-_m(TX.en, { sec: { money: 'Money', people: 'People & customers', strategy: 'Strategy & outside world', rMoney: 'Coverage {c}× · DSO {d} days', rPeople: '{c} relationships going cold · {r} open roles', rPeopleOk: 'Relationships warm · {r} open roles', rStrat: '{i} live incident · {o} initiatives off track', rStratOk: 'No incidents · initiatives on track' },
-  w: { margin: 'Margin by department', workingCap: 'Working capital', relationships: 'Key relationships', initiatives: 'Strategic initiatives', media: 'Brand & media', incidents: 'Incidents' },
-  wd: { margin: 'Which departments earn and which burn, against the company average', workingCap: 'How fast work turns into cash: DSO, DPO and overdue', relationships: 'Board, investors and key clients: who is owed and who is going cold', initiatives: 'The year\'s big bets, worst first', media: 'What the press and social media say about us', incidents: 'Only live, serious issues: outages, cyber, legal, safety' },
+_m(TX.en, { sec: { money: 'Money', people: 'People & customers', strategy: 'Strategy & outside world', rMoney: 'Coverage {c}× · DSO {d} days', rPeople: '{c} accounts at risk · {r} open roles · {a} attrition', rStrat: '{i} live incident · {o} competitor threat', rStratOk: 'No incidents or competitor threats' },
+  w: { margin: 'Margin by department', workingCap: 'Working capital', media: 'Brand & media', incidents: 'Incidents' },
+  wd: { margin: 'Which departments earn and which burn, against the company average', workingCap: 'How fast work turns into cash: DSO, DPO and overdue', media: 'What the press and social media say about us', incidents: 'Only live, serious issues: outages, cyber, legal, safety' },
   ex: { coMargin: 'gross margin', vsPlan: '{d} pts vs plan', best: 'Best', avg: 'Company average', dso: 'DSO', dpo: 'DPO', overdue: 'Overdue', days: 'days', overdueRow: '{n} · AED {v}M · {d} days', cold: 'going cold', owed: 'Owed reply', coldT: 'Going cold', warm: 'Warm', board: 'Board', investor: 'Investors', client: 'Clients',
     onTrack: '{n} of {t} on track', next: 'Next: {x}', pos: 'positive', mentions: '{n} mentions · {d}', live: 'Live · {s} · {t}', resolved: 'Resolved today', calm: 'All clear', calmT: 'No live incidents', calmS: 'No outages, cyber, legal or safety issues', update: 'Get update', bridge: 'Join bridge', reach: 'Reach out' } });
-_m(TX.ar, { sec: { money: 'المال', people: 'الأفراد والعملاء', strategy: 'الاستراتيجية والعالم الخارجي', rMoney: 'التغطية {c}× · التحصيل {d} يومًا', rPeople: '{c} علاقات تبرد · {r} وظائف شاغرة', rPeopleOk: 'العلاقات جيدة · {r} وظائف شاغرة', rStrat: '{i} حادث مباشر · {o} مبادرات متعثرة', rStratOk: 'لا حوادث · المبادرات على المسار' },
-  w: { margin: 'الهامش حسب القسم', workingCap: 'رأس المال العامل', relationships: 'العلاقات الرئيسية', initiatives: 'المبادرات الاستراتيجية', media: 'العلامة والإعلام', incidents: 'الحوادث' },
-  wd: { margin: 'أي الأقسام تربح وأيها تستنزف مقارنة بمتوسط الشركة', workingCap: 'سرعة تحويل العمل إلى نقد', relationships: 'المجلس والمستثمرون وكبار العملاء', initiatives: 'رهانات العام الكبرى، الأضعف أولًا', media: 'ما تقوله الصحافة ووسائل التواصل عنا', incidents: 'المشكلات الجدية المباشرة فقط' },
+_m(TX.ar, { sec: { money: 'المال', people: 'الأفراد والعملاء', strategy: 'الاستراتيجية والعالم الخارجي', rMoney: 'التغطية {c}× · التحصيل {d} يومًا', rPeople: '{c} حسابات معرّضة للخطر · {r} وظائف شاغرة · دوران {a}', rStrat: '{i} حادث مباشر · {o} تهديد من المنافسين', rStratOk: 'لا حوادث ولا تهديدات' },
+  w: { margin: 'الهامش حسب القسم', workingCap: 'رأس المال العامل', media: 'العلامة والإعلام', incidents: 'الحوادث' },
+  wd: { margin: 'أي الأقسام تربح وأيها تستنزف مقارنة بمتوسط الشركة', workingCap: 'سرعة تحويل العمل إلى نقد', media: 'ما تقوله الصحافة ووسائل التواصل عنا', incidents: 'المشكلات الجدية المباشرة فقط' },
   ex: { coMargin: 'الهامش الإجمالي', vsPlan: '{d} نقطة مقابل الخطة', best: 'الأفضل', avg: 'متوسط الشركة', dso: 'أيام التحصيل', dpo: 'أيام السداد', overdue: 'متأخرات', days: 'يومًا', overdueRow: '{n} · {v} مليون · {d} يومًا', cold: 'تبرد', owed: 'بانتظار ردك', coldT: 'تبرد', warm: 'جيدة', board: 'المجلس', investor: 'المستثمرون', client: 'العملاء',
     onTrack: '{n} من {t} على المسار', next: 'التالي: {x}', pos: 'إيجابي', mentions: '{n} إشارة · {d}', live: 'مباشر · {s} · {t}', resolved: 'حُلّ اليوم', calm: 'لا شيء', calmT: 'لا حوادث مباشرة', calmS: 'لا انقطاعات أو مشكلات سيبرانية أو قانونية', update: 'آخر المستجدات', bridge: 'انضم للاجتماع', reach: 'تواصل' } });
 
@@ -1238,27 +1234,6 @@ const W = {
       const bar = `<div class="arbar">${C.aging.map(([l, x], i) => `<i style="flex:${x};background:${cols[i]}" title="${l} days · AED ${x}M"></i>`).join('')}</div><div class="arlg">${C.aging.map(([l, x], i) => `<span><i class="dot" style="background:${cols[i]}"></i>${l} <b>${x}</b></span>`).join('')}</div>`;
       return `${tiles}${bar}${bodyH(h) > 210 ? `<div class="arls" style="margin-top:auto"><div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="How do we collect from ${esc(C.top[0])}?"><i class="dot dot--bad"></i><span><b>${esc(C.top[0])}</b> · AED ${C.top[1]}M</span><em class="is-bad">${C.top[2]}d</em></div></div>` : ''}`; } },
 
-  relationships: { group: 'people', icon: 'users', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
-    count: () => D.rel.filter(r => r.st !== 'warm').length,
-    render({ v, w, h }) { const R = [...D.rel].sort((a, b) => ({ owed: 0, cold: 1, warm: 2 })[a.st] - ({ owed: 0, cold: 1, warm: 2 })[b.st]), cold = R.filter(r => r.st === 'cold').length, lv = { owed: 'warn', cold: 'bad', warm: 'ok' };
-      if (v === 's') return finBig(t('ex.cold'), cold, `<span class="muted">${esc(R[0].n)} · ${esc(R[0].r)}</span>`);
-      const head = `<div class="arb"><strong>${cold}</strong><small>${t('ex.cold')}</small></div>`;
-      const chips = `<div class="rl-c">${['board', 'investor', 'client'].map(g => `<span>${t('ex.' + g)} <b>${R.filter(r => r.g === g).length}</b></span>`).join('')}</div>`;
-      const row = r => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(`${r.n} (${r.r}): last contact ${r.last}. ${r.note}. How should I reach out?`)}"><span class="rl-av" style="background:${AVC[r.av % 5]}">${initials(r.n)}</span><span><b>${esc(r.n)}</b> · ${esc(r.last)}</span>${w >= 6 ? `<em>${esc(r.note)}</em>` : ''}${tag(t('ex.' + (r.st === 'owed' ? 'owed' : r.st === 'cold' ? 'coldT' : 'warm')), lv[r.st])}</div>`;
-      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div class="arls" style="flex:1;min-width:0">${row(R[0])}</div></div>`;
-      const k = Math.max(1, Math.min(3, Math.floor((bodyH(h) - 100) / 41)));
-      return `${head}${chips}<div class="arls">${R.slice(0, k).map(row).join('')}</div>${arLink(t('ex.reach'), 'ask-open', ' data-q="Who should I reach out to this week, and what should I say?"')}`; } },
-
-  initiatives: { group: 'work', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 7],
-    count: () => D.projects.length,
-    render({ v, h }) { const P = [...D.projects].sort((a, b) => ({ late: 0, risk: 1, ok: 2 })[a.r] - ({ late: 0, risk: 1, ok: 2 })[b.r] || a.p - b.p), ok = P.filter(x => x.r === 'ok').length, col = { late: 'var(--bad)', risk: 'var(--warn)', ok: 'var(--c1)' };
-      if (v === 's') return finBig(t('w.initiatives'), t('ex.onTrack', { n: ok, t: P.length }), `<span class="big__f">${P.map(x => dot(rag[x.r][1])).join('')}</span>`);
-      const head = `<div class="arb"><strong>${ok}/${P.length}</strong><small>${t('ex.onTrack', { n: ok, t: P.length }).replace(/^\d+ \S+ \d+ /, '')}</small></div>`;
-      const row = x => `<button class="ini" data-act="ask-open" data-q="Where is ${esc(x.n)} stuck, and what does ${esc(x.o)} need?" title="${esc(x.o)} · due ${x.due}"><span><i class="dot dot--${rag[x.r][1]}"></i><b>${esc(x.n)}</b></span><i><b style="width:${x.p}%;background:${col[x.r]}"></b></i><em>${x.p}%</em></button>`;
-      if (v === 'wide' || h <= 2) return `<div class="arw"><div>${head}</div><div style="flex:1;min-width:0">${row(P[0])}</div></div>`;
-      const k = Math.max(1, Math.min(4, Math.floor((bodyH(h) - 80) / 38)));
-      return `${head}<div class="arls">${P.slice(0, k).map(row).join('')}</div>${P.length > k ? arLink(`+${P.length - k} · ${t('ex.next', { x: P[0].n + ' · ' + P[0].due })}`, 'ask-open', ' data-q="Give me a status update on all strategic initiatives"') : ''}`; } },
-
   media: { group: 'exec', icon: 'message', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
     render({ v, h }) { const M = D.media;
       if (v === 's') return finBig(t('w.media'), M.pos + '%', `<span class="muted">${t('ex.pos')} · ${M.delta}</span>`);
@@ -1298,16 +1273,6 @@ const W = {
       const mx = Math.max(T.t, T.land), P = x => (x / mx * 100).toFixed(1); let acc = 0;
       const rows = [['fin.ach', T.a, 'b-a'], ['fin.com', T.c, 'b-c'], ['fin.pipeW', T.p, 'b-p']].map(([k, x, c]) => { const r = `<li><span>${t(k)}</span><i class="lb__t" title="${t('fin.target')} ${T.t}"><b class="${c}" style="inset-inline-start:${P(acc)}%;width:${P(x)}%"></b><u style="inset-inline-start:${P(T.t)}%"></u></i><em>${acc ? '+' : ''}${x}</em></li>`; acc += x; return r; }).join('');
       return `<div class="lnd">${head}${rng}${h >= 4 ? `<ul class="lb">${rows}<li class="is-t"><span>${t('fin.landing')}</span><i class="lb__t"><b class="b-t" style="inset-inline-start:0;width:${P(T.land)}%"></b><u style="inset-inline-start:${P(T.t)}%"></u></i><em>${T.land}</em></li></ul>` : ''}</div>`; } },
-
-  runrate: { group: 'exec', icon: 'trend', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
-    ctl: () => finChip(),
-    render({ v, h }) { const d = finSel(), sa = d ? d.a / FIN.T.a : 1, sp = d ? d.t / FIN.T.t : 1, A = D.fin.cumA.map(x => +(x * sa).toFixed(1)), P = D.fin.cumP.map(x => +(x * sp).toFixed(1));
-      const tg = d ? d.t : FIN.T.t, ach = A.at(-1), pace = ach / (tg * FIN.E), need = (tg - ach) / D.fin.wkLeft, now = ach / D.fin.wkGone;
-      if (v === 's') return finBig(`${t('fin.pace')} · ${esc(d ? d.n : t('fin.company'))}`, fPct(pace), spark(A, 140, 32));
-      const tiles = finTiles([{ v: fPct(pace), l: t('fin.pace'), c: pace < .95 ? 'var(--warn)' : '' }, { v: need.toFixed(1), l: t('fin.needWk'), c: need > now ? 'var(--bad)' : '' }, { v: now.toFixed(1), l: t('fin.nowWk') }]);
-      if (v === 'wide' || bodyH(h) < 230) return tiles;
-      const lg = `<div class="fx-key"><span><i></i>${t('fin.actual')}</span><span><i class="k-5"></i>${t('fin.plan')}</span><small>AED M</small></div>`;
-      return `${v === 'tall' ? '' : tiles}${lg}${areaChart([{ n: t('fin.actual'), v: A, c: 'var(--c1)' }, { n: t('fin.plan'), v: P, c: 'var(--c5)' }], D.fin.months)}${v === 'tall' ? `<p class="fx-foot">${t('fin.needWk')} <b>${need.toFixed(1)}</b> · ${t('fin.nowWk')} <b>${now.toFixed(1)}</b></p>` : ''}`; } },
 
   pipeline: { group: 'exec', icon: 'chart', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
     ctl: () => finChip(),
@@ -1443,7 +1408,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['runrate', 12, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 4, 4], ['customers', 4, 4], ['relationships', 4, 4], ['initiatives', 6, 4], ['incidents', 6, 4], ['competitive', 6, 4], ['media', 6, 4]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1459,7 +1424,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing', 'runrate'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'relationships', 'rpe'], strategy: ['initiatives', 'incidents', 'competitive', 'media'] };
+const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'health'; /* widgets from other pages land in Business health if added to Overview */
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -1478,8 +1443,8 @@ function secHealth(k) {
     if (!nx) return { lv: 'ok', n: 0, why: t('sec.rTodayDone') }; const gap = mins(nx.s) - cur;
     return { lv: gap <= 30 ? 'warn' : 'ok', n: left.length, why: gap <= 30 && gap >= 0 ? t('sec.rTodaySoon', { n: gap, x: nx.title }) : t('sec.rToday', { x: nx.title, s: nx.s }) }; }
   if (k === 'money') { const T = FIN.T; return { lv: T.cov < 1 || D.fin.cash.runway < 12 ? 'bad' : D.wc.dso > 45 || T.cov < 1.2 ? 'warn' : 'ok', n: 0, why: t('sec.rMoney', { c: T.cov.toFixed(2), d: D.wc.dso }) }; }
-  if (k === 'people') { const cold = D.rel.filter(r => r.st === 'cold').length, roles = D.hiring[0][1]; return { lv: cold ? 'warn' : 'ok', n: cold, why: cold ? t('sec.rPeople', { c: cold, r: roles }) : t('sec.rPeopleOk', { r: roles }) }; }
-  if (k === 'strategy') { const live = D.incidents.filter(x => x.live).length, off = D.projects.filter(p => p.r !== 'ok').length; return { lv: live ? 'bad' : off ? 'warn' : 'ok', n: live + off, why: live || off ? t('sec.rStrat', { i: live, o: off }) : t('sec.rStratOk') }; }
+  if (k === 'people') { const attr = parseFloat(D.people.attr), roles = D.hiring[0][1], risk = D.accounts.length; return { lv: attr >= 8 ? 'bad' : risk || roles > 15 ? 'warn' : 'ok', n: risk, why: t('sec.rPeople', { a: D.people.attr, r: roles, c: risk }) }; }
+  if (k === 'strategy') { const live = D.incidents.filter(x => x.live).length, thr = D.compet.filter(x => x.lv === 'bad').length; return { lv: live ? 'bad' : thr ? 'warn' : 'ok', n: live + thr, why: live || thr ? t('sec.rStrat', { i: live, o: thr }) : t('sec.rStratOk') }; }
   if (k === 'health') { const T = FIN.T; /* amber under 95% pace or 1.2× coverage, red when the landing misses target by 5%+ */
     return { lv: T.land < T.t * .95 ? 'bad' : T.pace < .95 || T.cov < 1.2 ? 'warn' : 'ok', n: FIN.ds.filter(d => d.st === 'bad').length, why: t('sec.rHealthF', { p: fPct(T.pace), l: T.land, t: T.t }) }; }
   const b = D.risks.filter(x => x.lv === 'bad').length, l = D.projects.filter(x => x.r === 'late').length, w = D.risks.filter(x => x.lv === 'warn').length + D.projects.filter(x => x.r === 'risk').length;
@@ -1516,7 +1481,7 @@ function pack(items, auto = true) {
 }
 
 const Grid = {
-  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout8.overview', hist: [], hi: -1, ph: null, drag: null,
+  el: null, items: [], els: new Map(), lay: new Map(), cw: 80, rtl: false, edit: false, auto: true, stack: false, key: 'layout9.overview', hist: [], hi: -1, ph: null, drag: null,
   init(el) { this.el = el; this.ph = document.createElement('div'); this.ph.className = 'ph'; this.ph.hidden = true; el.appendChild(this.ph);
     const measure = () => { const w = el.clientWidth; if (!w) return; this.cw = (w - (COLS - 1) * GAP) / COLS; this.layout(); };
     new ResizeObserver(measure).observe(el); measure();
@@ -1674,10 +1639,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout8.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+function layoutFor(p) { const saved = store.get('layout9.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
-  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout8.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
+  Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout9.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
 const sw = (on, act, extra = '') => `<button class="sw${on ? ' is-on' : ''}" role="switch" aria-checked="${!!on}" data-act="${act}" ${extra}><i></i></button>`;
 function renderSpecial() { const v = $('#view');
@@ -1841,7 +1806,7 @@ document.addEventListener('click', e => {
   else if (a === 'dec-batch') { S.batch.done = true; afterState(['decisions']); toast(t('q.batchDone', { n: S.batch.n, v: S.batch.v }), t('undo'), () => { S.batch.done = false; afterState(['decisions']); }); }
   else if (a === 'period') { S.period = b.dataset.p; Grid.refreshType('revenue'); Grid.refreshType('pulse'); refreshCards(); }
   else if (a === 'fin-scale') { S.finScale = b.dataset.s; Grid.refreshType('deptScore'); }
-  else if (a === 'fin-dept') { const ns = [null, ...FIN.byGap.map(d => d.n)]; S.finDept = ns[(ns.indexOf(S.finDept || null) + 1) % ns.length]; Grid.refreshType('pipeline'); Grid.refreshType('runrate'); }
+  else if (a === 'fin-dept') { const ns = [null, ...FIN.byGap.map(d => d.n)]; S.finDept = ns[(ns.indexOf(S.finDept || null) + 1) % ns.length]; Grid.refreshType('pipeline'); }
   else if (a === 'sort') { S.sort = S.sort === 'desc' ? 'asc' : 'desc'; Grid.refreshType('pulse'); }
   else if (a === 'view') { const w = b.closest('.w'); Grid.setView(w.dataset.id, b.dataset.v); }
   else if (a === 'story') { S.story.i = (S.story.i + (+b.dataset.d) + 3) % 3; renderBrief(); }
@@ -1862,7 +1827,7 @@ document.addEventListener('click', e => {
   else if (a === 'pref-auto') { setAuto(!Grid.auto); renderSpecial(); }
   else if (a === 'set-theme') setTheme(b.dataset.v);
   else if (a === 'set-lang') setLang(b.dataset.v);
-  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout8.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
+  else if (a === 'reset-all') { Object.keys(PAGES).forEach(k => localStorage.removeItem('majlis.dash.layout9.' + k)); if (!PAGES[PAGE].special) setPage(PAGE); toast(t('toastReset')); }
 });
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
