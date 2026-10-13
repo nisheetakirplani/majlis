@@ -533,6 +533,19 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 @media (max-width:1100px){.main{padding-inline:20px}.top{padding-inline:20px}.user__t{display:none}.user{padding-inline-end:5px}.chat{grid-template-columns:0 minmax(0,1fr)}.chat__rail{display:none}.chat__main{grid-column:2}}
 @media (max-width:900px){.hero{grid-template-columns:1fr}.app{grid-template-columns:minmax(0,1fr)}#btnMenu{display:inline-grid}.side{position:fixed;inset-block:0;inset-inline-start:0;width:264px;background:var(--pop);box-shadow:var(--shadow2);transform:translateX(-105%);transition:transform .3s;z-index:90}:root[dir="rtl"] .side{transform:translateX(105%)}body.side-open .side{transform:none}body.side-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:85}.app.is-collapsed .side__name,.app.is-collapsed .nav__i span,.app.is-collapsed .nav__new{display:initial}.app.is-collapsed .nav__i{justify-content:flex-start;padding:0 16px}#sideToggle{display:none}}
 @media (max-width:760px){.top{gap:8px;padding:12px 14px 10px}.search{flex:1 1 auto;min-width:0;height:44px;padding:0 12px}.top__r{gap:6px}.ic-btn{width:42px;height:42px}.user,#btnLang{display:none}.main{padding-inline:14px}.hchip{height:34px;padding:0 12px;font-size:13px}.qa{padding:10px;gap:9px;font-size:13px}.qa i{width:30px;height:30px}.hero__ask{padding:18px}.ask__in{height:54px}.ask__in input{font-size:15px}#btnEdit,.drawer{display:none!important}.edit-hint{display:none!important}.top__r .ic-btn--txt{display:none}.hello h1{font-size:28px;line-height:34px}.ask__chips{grid-template-columns:1fr 1fr}.chat__h{padding:14px 16px}.chat__src{display:none}.chat__t,.chat__f{padding-inline:16px}.chat__cards{grid-template-columns:1fr}.search{flex:1}.kbd,kbd{display:none}}
+/* graph views: treemap (Decisions, Teams), arrivals by hour (Priority inbox), progress battery (My tasks) */
+.tmap{flex:1;min-height:0;display:flex;gap:4px}.tmap--col{flex-direction:column}.tmap__r{display:flex;gap:4px;min-height:0}.tmap__c{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0}
+.tmt{border-radius:12px;padding:10px 11px;display:flex;flex-direction:column;justify-content:space-between;gap:4px;min-width:0;min-height:0;overflow:hidden;color:#fff;text-align:start;transition:filter .15s}.tmt:hover{filter:brightness(1.08)}.tmt--lt{color:#27360d}
+.tmt{container-type:size}.tmt b{flex:none;font:600 13px/1.2 var(--font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tmt em{font:600 20px/1 var(--font);font-style:normal;margin-top:auto}.tmt small{font:500 11.5px/1.3 var(--font);opacity:.88;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.w--v-s .arv{min-height:0}.arv{flex:1;min-height:60px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}.arv__c{display:flex;flex-direction:column;gap:6px;min-height:0}
+.arv__s{flex:1;display:flex;flex-direction:column-reverse;gap:3px;padding:3px;border-radius:10px;background:var(--tile);min-height:0}.arv__m{display:block;width:100%;border-radius:7px;flex:none;transition:filter .15s}.arv__m:hover{filter:brightness(1.1)}
+.arv__c em{font:500 11px/1 var(--font);font-style:normal;color:var(--ink3);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:clip}.arv__c.is-now em{color:var(--ink);font-weight:700}.arv__c.is-now .arv__s{box-shadow:inset 0 0 0 1.5px var(--line2)}
+.bat{display:flex;gap:3px;flex:1 1 34px;min-height:24px;max-height:72px}.bat i{flex:1;border-radius:6px;background:var(--tile2)}.bat i.d{background:var(--accent)}.bat i.o{background:var(--bad)}.w--v-s .bat{height:24px}
+.arb--xl strong{font-size:52px}.w--v-s .arb--xl strong,.w--v-wide .arb--xl strong{font-size:34px}
+.bfxs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:auto;flex:none}.bfx{display:flex;flex-direction:column;gap:2px;padding:10px 11px;border-radius:12px;background:var(--tile);min-width:0;text-align:start;transition:background .15s}.bfx:hover{background:var(--tile2)}
+.bfx small{font-size:11px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bfx b{font:600 17px/1.2 var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tmt--h{flex-direction:row;align-items:center;gap:10px}.tmt--h b{flex:1 1 auto;min-width:0;-webkit-line-clamp:1}.tmt--h em{margin:0;font-size:17px;flex:none}.tmt--h small{display:none}
+@container (max-height:70px){.tmt small{display:none}}@container (max-height:46px){.tmt em{display:none}}@container (max-width:84px){.tmt small{display:none}}
 /* ---------- microinteractions ---------- */
 /* numbers: count-up + change flash with a floating delta chip */
 .cu-up{animation:cuUp 1.4s ease}.cu-dn{animation:cuDn 1.4s ease}@keyframes cuUp{0%,35%{color:var(--accent)}}@keyframes cuDn{0%,35%{color:var(--bad)}}
@@ -757,7 +770,7 @@ _m(TX.en, {
   pinned: 'Pinned', pinnedNote: 'Pinned to the top row', viewData: 'Text view', viewViz: 'Graph view', collapse: 'Collapse sidebar', expand: 'Expand sidebar', autofit: 'Auto-fit', menu: 'Menu',
   askSub: 'Connected to Outlook, Teams, SharePoint and Excel', newChat: 'New chat', back: 'Back to dashboard', recent: 'Recent', chatHi: 'How can I help, {n}?', chatSub: 'Ask anything about your company. I read across your connected tools and show my working.', resume: 'Resume: {q}', fullBrief: 'Full brief', listen: 'Listen · 0:42', playing: 'Playing 0:42',
   goodWell: 'Going well', watch: 'Watch', doNext: 'Do next', user: 'Syed Hafeez', plan: 'Enterprise', signedOut: 'Signed out (demo)', editHint: 'Customize mode · drag to rearrange, drag a corner to resize, tap − to hide. Widgets snap to the bento grid and fill gaps automatically.',
-  decisionsNeed: '{d} decisions need you', meetingsToday: '{mt} meetings today', revVs: 'Revenue {r} vs plan', syncedN: 'Synced {m} min ago · {n} sources', syncedNow: 'Synced just now · {n} sources', syncing: 'Updating…', holdHint: 'Press and hold to sign',
+  decisionsNeed: '{d} decisions need you', meetingsToday: '{mt} meetings today', revVs: 'Revenue {r} vs plan', syncedN: 'Synced {m} min ago · {n} sources', syncedNow: 'Synced just now · {n} sources', syncing: 'Updating…', holdHint: 'Press and hold to sign', gv: { allClear: 'All clear: nothing waiting on you', waitingOn: 'waiting on you', waited: 'waited {w}', earlier: 'Older', now: 'Now', busiest: 'busiest at {h}', toDo: 'To do', weekDone: '{d} of {n} done', next: 'Next', oldest: 'oldest {n}d' },
   intro: { connected: 'Connected', lastSync: 'Last sync {m} min ago', connect: 'Connect', disconnect: 'Disconnect', soon: 'Not connected' }, st: { appearance: 'Appearance', theme: 'Theme', light: 'Light', dark: 'Dark', lang: 'Language', notifs: 'Notifications', digest: 'Daily brief at 08:00', alerts: 'Urgent decision alerts', layouts: 'Dashboards', resetAll: 'Reset all dashboards', account: 'Account' },
   of: 'of', left: 'left', high: 'high', free: 'Free', busy: 'Busy', meetingsL: 'Meetings', atRisk: 'At risk', onTrack: 'On track', delayed: 'Delayed', needsYou: 'needs you', unreadL: 'Unread', total: 'Total', done: 'Done', updated: 'updated', askWhy: 'Ask why',
 });
@@ -769,7 +782,7 @@ _m(TX.ar, {
   pinned: 'مثبّت', pinnedNote: 'مثبّت في الصف العلوي', viewData: 'عرض نصي', viewViz: 'عرض بياني', collapse: 'طيّ الشريط الجانبي', expand: 'توسيع الشريط الجانبي', autofit: 'ملاءمة تلقائية', menu: 'القائمة',
   askSub: 'متصل بـ Outlook وTeams وSharePoint وExcel', newChat: 'محادثة جديدة', back: 'العودة إلى اللوحة', recent: 'الأحدث', chatHi: 'كيف أساعدك يا {n}؟', chatSub: 'اسأل عن أي شيء في شركتك. أقرأ عبر أدواتك المتصلة وأعرض طريقة وصولي للإجابة.', resume: 'متابعة: {q}', fullBrief: 'الموجز الكامل', listen: 'استمع · 0:42', playing: 'يتم التشغيل 0:42',
   goodWell: 'يسير جيدًا', watch: 'للمراقبة', doNext: 'الخطوة التالية', user: 'سيد حافظ', plan: 'المؤسسات', signedOut: 'تم تسجيل الخروج (عرض)', editHint: 'وضع التخصيص · اسحب لإعادة الترتيب، واسحب الزاوية لتغيير الحجم، واضغط − للإخفاء. تلتصق الأدوات بالشبكة وتملأ الفراغات تلقائيًا.',
-  decisionsNeed: '{d} قرارات بانتظارك', meetingsToday: '{mt} اجتماعات اليوم', revVs: 'الإيرادات {r} عن الخطة', syncedN: 'آخر مزامنة منذ {m} د · {n} مصادر', syncedNow: 'تمت المزامنة الآن · {n} مصادر', syncing: 'جارٍ التحديث…', holdHint: 'اضغط مع الاستمرار للتوقيع',
+  decisionsNeed: '{d} قرارات بانتظارك', meetingsToday: '{mt} اجتماعات اليوم', revVs: 'الإيرادات {r} عن الخطة', syncedN: 'آخر مزامنة منذ {m} د · {n} مصادر', syncedNow: 'تمت المزامنة الآن · {n} مصادر', syncing: 'جارٍ التحديث…', holdHint: 'اضغط مع الاستمرار للتوقيع', gv: { allClear: 'لا شيء بانتظارك', waitingOn: 'بانتظارك', waited: 'انتظر {w}', earlier: 'سابقاً', now: 'الآن', busiest: 'الأكثر نشاطاً {h}', toDo: 'متبقية', weekDone: 'أُنجز {d} من {n}', next: 'التالي', oldest: 'الأقدم {n} ي' },
   intro: { connected: 'متصل', lastSync: 'آخر مزامنة منذ {m} د', connect: 'اتصال', disconnect: 'قطع الاتصال', soon: 'غير متصل' }, st: { appearance: 'المظهر', theme: 'السمة', light: 'فاتح', dark: 'داكن', lang: 'اللغة', notifs: 'الإشعارات', digest: 'الموجز اليومي عند 08:00', alerts: 'تنبيهات القرارات العاجلة', layouts: 'اللوحات', resetAll: 'إعادة ضبط كل اللوحات', account: 'الحساب' },
   of: 'من', left: 'متبقية', high: 'مرتفعة', free: 'متاح', busy: 'مشغول', meetingsL: 'اجتماعات', atRisk: 'معرّض للخطر', onTrack: 'على المسار', delayed: 'متأخر', needsYou: 'يحتاجك', unreadL: 'غير مقروء', total: 'الإجمالي', done: 'منجز', updated: 'محدّث', askWhy: 'اسأل لماذا',
 });
@@ -863,6 +876,13 @@ const mixData = () => S.sort === 'desc' ? D.mix : [...D.mix].reverse();
 const mixLegend = () => `<ul class="mixl">${[...D.mix].slice(0, 6).map(x => `<li><span>${x[0]}</span><b>${x[1]}%</b></li>`).join('')}</ul>`;
 const miniDonut = (segs, center, n = 3) => `<div class="vzrow vzrow--c">${donut(segs, { size: 62, sw: 9, center })}${legend(segs.slice(0, n))}</div>`;
 const vz = (inner, cls = '') => `<div class="vz ${cls}">${inner}</div>`;
+/* treemap tiles: solid colours that read with white text in both themes. 'auto' = biggest tile on the left, the rest stacked beside it */
+const TMC = { bad: '#c53030', warn: '#b7791f', ok: '#0b825a', teal: '#1f9a9a', purple: '#7a5fc8', lime: '#c4e78f' };
+function treemap(tiles, mode = 'auto', mini = false) { const tot = tiles.reduce((a, x) => a + x.w, 0) || 1;
+  const tile = (x, hz) => `<button class="tmt${x.c === TMC.lime ? ' tmt--lt' : ''}${hz === true ? ' tmt--h' : ''}" style="flex:${x.w.toFixed(2)} 1 0;background:${x.c}" data-act="ask-open" data-q="${esc(x.q)}" title="${esc(x.n + (x.sub ? ' · ' + x.sub : ''))}"><b>${esc(x.n)}</b>${mini ? '' : `${x.big ? `<em>${x.big}</em>` : ''}${x.sub ? `<small>${esc(x.sub)}</small>` : ''}`}</button>`;
+  if (mode === 'row' || tiles.length < 2) return `<div class="tmap">${tiles.map(x => tile(x, mode === 'row')).join('')}</div>`;
+  const [a, ...rest] = tiles, last = rest.length > 2 ? rest.pop() : null;
+  return `<div class="tmap tmap--col"><div class="tmap__r" style="flex:${(a.w + rest.reduce((s, x) => s + x.w, 0)).toFixed(2)} 1 0">${tile(a, false)}<div class="tmap__c" style="flex:${rest.reduce((s, x) => s + x.w, 0).toFixed(2)} 1 0">${rest.map(x => tile(x)).join('')}</div></div>${last ? `<div class="tmap__r" style="flex:${Math.max(last.w, tot * .16).toFixed(2)} 1 0">${tile(last, true)}</div>` : ''}</div>`; }
 const gaugeCell = (g, size) => `<div class="gg"><span class="gg__r">${ring(g.p, size, Math.max(6, size / 9), g.c)}<strong>${g.v}</strong></span><small>${g.l}</small></div>`;
 
 /* ----------------------------------------------------------- Executive finance · demo data (AED M, FY to date, 78% of the year gone)
@@ -1107,10 +1127,16 @@ const W = {
   inbox: { group: 'comms', icon: 'mail', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.mails.filter(m => m.tag !== 'FYI').length,
     render({ v, w, h, view }) { const ms = S.mails; if (!ms.length) return empty();
-      if (view === 'viz') { const segs = D.mailTypes.map(([l, n, c]) => ({ l, v: ms.filter(m => m.tag === l).length, c })); const tot = ms.length;
-        if (v === 's') return vz(donut(segs, { size: 74, sw: 11, center: `<b>${tot}</b>` }) + `<div class="vz__t"><b>${segs[0].v + segs[1].v}</b><small>${t('needsYou')}</small></div>`, 'vz--row');
-        if (v === 'wide') return vz(miniDonut(segs, `<b>${tot}</b>`));
-        return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${tot}</b><small>${t('total')}</small>` })}${legend(segs)}</div>${w >= 6 && h >= 5 ? capsules(D.mailVol, D.dow, { hi: 4 }) : ''}`, 'vz--col'); }
+      if (view === 'viz') { const now = new Date(), H = now.getHours(), n = v === 's' ? 5 : w >= 8 ? 10 : w >= 6 ? 8 : 6, TY = D.mailTypes.map(x => x[0]), TCOL = D.mailTypes.map(x => x[2]);
+        const ageH = a => /min/.test(a) ? parseFloat(a) / 60 : /h/.test(a) ? parseFloat(a) : 99, cols = Array.from({ length: n }, (_, i) => ({ h: H - (n - 1 - i), m: [] })), early = [];
+        ms.forEach(m => { const at = new Date(now - ageH(m.age) * 36e5), k = cols.findIndex(c => c.h === at.getHours() && ageH(m.age) < 24); (k >= 0 ? cols[k].m : early).push(m); });
+        cols.forEach(c => c.m.sort((a, b) => TY.indexOf(a.tag) - TY.indexOf(b.tag)));
+        const all = early.length ? [{ h: null, m: early }, ...cols.slice(1)] : cols, mx = Math.max(3, ...all.map(c => c.m.length)), busy = cols.reduce((a, c) => c.m.length > a.m.length ? c : a, cols[0]);
+        const lab = c => c.h == null ? t('gv.earlier') : c.h === H ? t('gv.now') : String((c.h + 24) % 24);
+        const bars = `<div class="arv">${all.map(c => `<div class="arv__c${c.h === H ? ' is-now' : ''}"><div class="arv__s">${c.m.map(m => `<button class="arv__m" data-act="mail-ask" data-id="${m.id}" title="${esc(m.from + ' · ' + m.subj + ' · ' + m.age)}" style="height:${(100 / mx - 2).toFixed(1)}%;background:${TCOL[TY.indexOf(m.tag)] || 'var(--c5)'}"></button>`).join('')}</div><em>${lab(c)}</em></div>`).join('')}</div>`;
+        const need = ms.filter(m => m.tag !== 'FYI').length, lg = `<div class="arlg">${D.mailTypes.map(([l, , c]) => `<span><i class="dot" style="background:${c}"></i>${l} <b>${ms.filter(m => m.tag === l).length}</b></span>`).join('')}</div>`;
+        const head = `<div class="arb"><strong>${need}</strong><small>${t('needsYou')}${busy.m.length ? ' · ' + t('gv.busiest', { h: String((busy.h + 24) % 24).padStart(2, '0') + ':00' }) : ''}</small></div>`;
+        if (v === 's') return `<div class="arb"><strong>${need}</strong><small>${t('needsYou')}</small></div>${bars}`; if (v === 'wide') return `<div class="arw"><div>${head}</div>${bars}</div>`; return `${head}${bars}${lg}`; }
       if (v === 's') return `<div class="big"><small>${t('needsYou')}</small><strong>${S.mails.filter(m => m.tag !== 'FYI').length}</strong><span class="big__f">${avatars(ms.map(m => m.from), 4)}<span class="muted">${ms[0].age}</span></span></div>`;
       /* direction A: how many need a decision, then the asks as one-line rows */
       const asks = ms.filter(m => m.lv !== 'ok').sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)), nd = ms.filter(m => m.lv === 'bad').length, nr = ms.filter(m => m.lv === 'warn').length, nf = ms.filter(m => m.lv === 'ok').length;
@@ -1123,7 +1149,9 @@ const W = {
   teams: { group: 'comms', icon: 'message', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => D.channels.reduce((a, x) => a + x.u, 0),
     render({ v, w, h, view }) { const c = D.channels, tot = c.reduce((a, x) => a + x.u, 0);
-      if (view === 'viz') { const hb = hbars(c.map((x, i) => ({ l: '#' + x.n, v: x.u, c: ['var(--c1)', 'var(--c2)', 'var(--c4)', 'var(--c3)'][i % 4] }))); if (v === 's') return vz(`<div class="big"><small>${t('unreadL')}</small><strong>${tot}</strong></div>${hbars(c.slice(0, 2).map(x => ({ l: '#' + x.n.slice(0, 6), v: x.u })))}`, 'vz--col'); if (v === 'wide') return vz(hbars(c.slice(0, 2).map((x, i) => ({ l: '#' + x.n, v: x.u, c: ['var(--c1)', 'var(--c2)'][i] }))), 'vz--col'); return vz(hb + (h >= 5 ? capsules([4, 7, 5, 9, 6, 3, 8], D.dow, { hi: 3 }) : ''), 'vz--col'); }
+      if (view === 'viz') { const pal = [TMC.ok, TMC.lime, TMC.teal, TMC.purple, TMC.warn], srt = [...c].sort((a, b) => b.u - a.u);
+        const tiles = srt.map((x, i) => ({ w: x.u, c: pal[i % pal.length], n: `#${x.n} · ${x.u}`, sub: `“${x.m}” — ${x.who}`, q: `What is happening in #${x.n}?` }));
+        return treemap(tiles, v === 'wide' || v === 's' ? 'row' : 'auto', v === 's'); }
       /* Teams · Option 3 · AI summary: what the company is talking about, in three sentences */
       const hot = c.find(x => /customer|incident/.test(x.n)) || c[0], up = c.find(x => /sales/.test(x.n)) || c[1], mentions = 3, read = 412, chans = 28;
       if (v === 's') return finBig(t('tm.by'), `${mentions} ${t('tm.mentions')}`, `<span class="muted">${read} · ${chans}</span>`);
@@ -1137,10 +1165,13 @@ const W = {
   decisions: { group: 'work', icon: 'tasks', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.openDecisions().length,
     render({ v, w, h, view }) { const all = S.decisions, open = S.openDecisions(), ap = all.filter(d => d.st === 'approved').length, rj = all.filter(d => d.st === 'rejected').length;
-      if (view === 'viz') { const segs = [{ l: t('open'), v: open.length, c: 'var(--c1)' }, { l: t('approved'), v: ap, c: 'var(--c3)' }, { l: t('rejected'), v: rj, c: 'var(--bad)' }];
-        if (v === 's') return vz(donut(segs, { size: 74, sw: 11, center: `<b>${open.length}</b>` }) + `<div class="vz__t"><b>${all.length}</b><small>${t('total')}</small></div>`, 'vz--row');
-        if (v === 'wide') return vz(miniDonut(segs, `<b>${open.length}</b>`));
-        return vz(`<div class="vzrow">${donut(segs, { size: h >= 4 ? 128 : 104, sw: 15, center: `<b>${open.length}</b><small>${t('open')}</small>` })}${legend(segs)}</div>${h >= 5 ? `<div class="chips">${open.map(d => `<span class="chip chip--s">${esc(d.meta.split('·')[1] || d.meta)}</span>`).join('')}</div>` : ''}`, 'vz--col'); }
+      if (view === 'viz') { const op = all.map(decX).filter(d => d.st === 'open'), tot = op.reduce((a, d) => a + (d.v || 0), 0);
+        if (!op.length) return vz(`<div class="vz__t" style="text-align:center"><b>✓</b><small>${t('gv.allClear')}</small></div>`, 'vz--c');
+        const col = d => d.d <= 0 ? TMC.bad : d.d <= 6 ? TMC.warn : TMC.ok, mx = Math.max(...op.map(d => d.v || 0), 1);
+        const tiles = op.map(d => ({ w: Math.max(d.v || 0, mx * .22), c: col(d), q: `${d.title}: what should I know before deciding?`, n: d.title, big: d.v ? fmtV(d.v) : '', sub: whenOf(d.d, d.at) + (d.wait ? ' · ' + t('gv.waited', { w: d.wait }) : '') }));
+        const head = `<div class="arb"><strong>AED ${fmtV(tot)}</strong><small>${t('gv.waitingOn')}</small></div>`;
+        if (v === 's') return `${head}${treemap(tiles, 'row', true)}`;
+        return `${head}${treemap(tiles, v === 'wide' ? 'row' : 'auto')}`; }
       if (v === 's') return `<div class="big"><small>${t('w.decisions')}</small><strong>${open.length}</strong><span class="big__f"><i class="bar-s"><b style="width:${all.length ? (all.length - open.length) / all.length * 100 : 0}%"></b></i><span class="muted">${all.length - open.length}/${all.length}</span></span></div>`;
       /* Option 1 · triage, direction A: a due-bucket bar, then 2–3 one-line decisions, small approvals batched */
       const X = all.map(decX), op = X.filter(d => d.st === 'open').sort((a, b) => BUCKETS.indexOf(bucketOf(a.d)) - BUCKETS.indexOf(bucketOf(b.d)) || (b.v || 0) - (a.v || 0)), tot = op.reduce((a, d) => a + (d.v || 0), 0);
@@ -1168,9 +1199,14 @@ const W = {
   tasks: { group: 'work', icon: 'check', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.tasks.filter(x => !x.done).length,
     render({ v, w, h, view }) { const ts = S.tasks, done = ts.filter(x => x.done).length, pct = Math.round(done / ts.length * 100);
-      if (view === 'viz') { if (v === 's') return vz(`<div class="gg gg--r">${ring(pct, 66, 8, 'var(--c1)')}<strong>${pct}%</strong></div><div class="vz__t"><b>${ts.length - done}</b><small>${t('left')}</small></div>`, 'vz--row');
-        if (v === 'wide') return vz(miniDonut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], `<b>${pct}%</b>`, 2));
-        return vz(`<div class="vzrow">${donut([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }], { size: 112, sw: 14, center: `<b>${pct}%</b><small>${t('done')}</small>` })}${legend([{ l: t('done'), v: done, c: 'var(--c1)' }, { l: t('left'), v: ts.length - done, c: 'var(--c5)' }])}</div>${h >= 5 ? capsules(D.taskWeek, D.dow.slice(0, 5), { hi: 1 }) : ''}`, 'vz--col'); }
+      if (view === 'viz') { const od = ts.filter(x => !x.done && x.d < 0), todo = ts.filter(x => !x.done && x.d >= 0), today = ts.filter(x => !x.done && x.d === 0), nx = [...od, ...today, ...todo].sort((a, b) => a.d - b.d || (a.at || '99').localeCompare(b.at || '99'))[0];
+        const bat = `<div class="bat" role="img" aria-label="${done} / ${ts.length}">${[...ts.filter(x => x.done).map(() => 'd'), ...od.map(() => 'o'), ...todo.map(() => '')].map(c => `<i class="${c}"></i>`).join('')}</div>`;
+        const lg = `<div class="arlg"><span><i class="dot" style="background:var(--accent)"></i>${t('done')} <b>${done}</b></span><span><i class="dot" style="background:var(--bad)"></i>${t('q.overdue')} <b>${od.length}</b></span><span><i class="dot" style="background:var(--tile2)"></i>${t('gv.toDo')} <b>${todo.length}</b></span></div>`;
+        const head = `<div class="arb arb--xl"><strong>${pct}%</strong><small>${t('gv.weekDone', { d: done, n: ts.length })}</small></div>`;
+        const fx = (l, val, sub, q) => `<button class="bfx" data-act="ask-open" data-q="${esc(q)}"><small>${l}</small><b>${val}</b><small>${sub}</small></button>`;
+        const facts = `<div class="bfxs">${fx(t('q.today'), today.length, t('left'), 'What is left for me today?')}${nx ? fx(t('gv.next'), nx.at || whenOf(nx.d), esc(nx.sh || nx.tx), `Help me with: ${nx.tx}`) : ''}${fx(t('q.overdue'), od.length, od.length ? t('gv.oldest', { n: -Math.min(...od.map(x => x.d)) }) : '✓', 'What is overdue and how do I clear it?')}</div>`;
+        if (v === 's') return `<div class="arb arb--xl"><strong>${pct}%</strong></div>${bat}`; if (v === 'wide') return `<div class="arw"><div>${head}</div><div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0">${bat}${lg}</div></div>`;
+        return `${head}${bat}${lg}${bodyH(h) >= 200 ? facts : ''}`; }
       if (v === 's') return `<div class="big"><small>${t('w.tasks')}</small><strong>${ts.length - done} ${t('left')}</strong><span class="big__f"><i class="bar-s"><b style="width:${pct}%"></b></i><span class="muted">${done}/${ts.length}</span></span></div>`;
       /* Option 1 · due buckets: Overdue · Today · This week · Later. Today stays open; buckets that don't fit collapse to their header and a preview line */
       const sub = x => x.done ? t('q.doneAt', { at: x.at || '' }).trim() : x.d < 0 ? (x.d === -1 ? t('q.wasYesterday') : t('q.wasAgo', { n: -x.d })) : x.d === 0 ? (x.at ? t('q.before', { at: x.at }) : t('q.dueToday')) : t('q.dueOn', { d: whenOf(x.d) });
