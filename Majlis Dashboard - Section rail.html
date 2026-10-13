@@ -547,9 +547,9 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 .tmt--h{flex-direction:row;align-items:center;gap:10px}.tmt--h b{flex:1 1 auto;min-width:0;-webkit-line-clamp:1}.tmt--h em{margin:0;font-size:17px;flex:none}.tmt--h small{display:none}
 @container (max-height:70px){.tmt small{display:none}}@container (max-height:46px){.tmt em{display:none}}@container (max-width:84px){.tmt small{display:none}}
 /* ---------- Section rail (this file only): the tab bar becomes a slim column of health dots fixed to the side ---------- */
-#secbar.secbar{position:fixed;top:50%;inset-inline-end:12px;transform:translateY(-50%);margin:0;padding:5px 3px;border-radius:99px;background:var(--card);border:1px solid var(--cardline);box-shadow:var(--shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:36}
+#secbar.secbar{position:fixed;top:50%;inset-inline-end:12px;transform:translateY(-50%);margin:0;padding:5px;border-radius:99px;background:color-mix(in srgb,var(--card-s) 38%,transparent);border:1px solid color-mix(in srgb,var(--card-s) 70%,transparent);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.5);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);z-index:36}
 #secbar .secbar__in{display:block;padding:0;border:0;background:none;box-shadow:none;border-radius:0}#secbar .secbar__arr{display:none!important}
-#secbar .secbar__s{display:flex;flex-direction:column;gap:3px;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important}
+#secbar .secbar__s{display:flex;flex-direction:column;gap:3px;padding:4px 3px;border-radius:99px;background:var(--card-s);box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important}
 #secbar .sect{position:relative;width:32px;height:32px;padding:0;justify-content:center;border-radius:50%;background:none!important;color:var(--ink2);transition:background .2s,color .2s}
 #secbar .sect:hover{background:var(--tile)!important;color:var(--ink)}
 #secbar .sect.is-on{background:var(--dark)!important;color:var(--dark-ink)}
@@ -559,8 +559,8 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 #secbar .sect>span b{font:600 13px/1 var(--font)}#secbar .sect>span small{font:500 11.5px/1.2 var(--font);opacity:.7}
 :root[dir="rtl"] #secbar .sect>span{transform:translate(-6px,-50%)}
 #secbar .sect:hover>span,#secbar .sect:focus-visible>span,#secbar.is-peek .sect.is-on>span{opacity:1;transform:translate(0,-50%)}
-.main{padding-inline-end:76px!important}
-@media (max-width:760px){.main{padding-inline-end:46px!important}#secbar.secbar{inset-inline-end:4px;padding:4px 2px}#secbar .sect{width:26px;height:26px}#secbar .sect svg{width:14px;height:14px}#secbar .sect>span small{display:none}}
+.main{padding-inline-end:86px!important}
+@media (max-width:760px){.main{padding-inline-end:52px!important}#secbar.secbar{inset-inline-end:4px;padding:3px}#secbar .secbar__s{padding:3px 2px}#secbar .sect{width:26px;height:26px}#secbar .sect svg{width:14px;height:14px}#secbar .sect>span small{display:none}}
 @media (prefers-reduced-motion:reduce){#secbar .sect>span{transition:none}}
 /* ---------- microinteractions ---------- */
 /* numbers: count-up + change flash with a floating delta chip */
@@ -579,6 +579,7 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 .vt{position:relative}.vt button{position:relative;z-index:1}.vt button.is-on{background:transparent!important;box-shadow:none!important}
 .vt::before{content:"";position:absolute;top:3px;bottom:3px;inset-inline-start:3px;width:28px;border-radius:99px;background:var(--card-s);box-shadow:0 1px 3px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .vt:has(button:last-child.is-on)::before{transform:translateX(calc(100% + 2px))}:root[dir="rtl"] .vt:has(button:last-child.is-on)::before{transform:translateX(calc(-100% - 2px))}
+#secbar .secbar__s{}:root[data-theme="dark"] #secbar .secbar__s{background:#1b2420}:root[data-theme="dark"] #secbar.secbar{box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08)}
 :root[data-theme="dark"] .vt::before{background:rgba(255,255,255,.14)}.w--hi .vt::before{background:#fff}
 @container w (max-width:300px){.vt::before{width:24px}}
 .w__b.mi-out{opacity:0;transform:translateY(-4px);transition:opacity .14s,transform .14s}
