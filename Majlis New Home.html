@@ -677,6 +677,99 @@ body.is-edit .w__go{display:none}
 #btnApps[aria-expanded="true"],#btnUser[aria-expanded="true"]{box-shadow:0 0 0 3px var(--accent-soft)}
 .pop--me{width:260px;inset-inline-end:0;padding:8px}.me__h{display:flex;align-items:center;gap:10px;padding:8px 8px 12px;border-bottom:1px solid var(--line);margin-bottom:6px}.me__h b{display:block;font:600 14px/1.2 var(--font)}.me__h small{font-size:12px;color:var(--ink3)}
 .pop--me button{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:10px;font:500 13.5px/1 var(--font);color:var(--ink2)}.pop--me button:hover{background:var(--tile);color:var(--ink)}.pop--me button em{margin-inline-start:auto;font:500 12px/1 var(--font);font-style:normal;color:var(--ink3)}.pop--me hr{margin:6px 4px}
+/* ===== Majlis mascot: animation states (from Majlis_Mascot_Animations), driven by what the product is doing ===== */
+:root{--spd:1}.orb{--s:52px}.orb--sm{--s:28px}.orb--md{--s:48px}.orb--lg{--s:64px}.orb--xl{--s:92px}.logo .orb{--s:30px}.home__glow .orb{--s:96px}.nlogo .orb{--s:34px}
+.orb .fx{position:absolute;pointer-events:none}.orb .eyes{transition:transform .25s ease-out}
+/* 02 look around */
+.st-look .eyes{animation:m-look calc(6s/var(--spd)) ease-in-out infinite}
+@keyframes m-look{0%,18%,100%{transform:translate(0,0)}24%,40%{transform:translate(-9%,-2%)}46%,62%{transform:translate(9%,-2%)}68%,80%{transform:translate(0,4%)}}
+
+/* 03 follow cursor — JS moves .eyes */
+.st-follow .eyes{transition:transform .12s ease-out}
+
+/* 04 listening */
+.st-listen{animation:m-breathe calc(1.1s/var(--spd)) ease-in-out infinite}
+.st-listen .eyes b{animation:m-listenEye calc(1.1s/var(--spd)) ease-in-out infinite}
+@keyframes m-listenEye{50%{transform:scaleY(1.18)}}
+.st-listen::before,.st-listen::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #3ed598;animation:m-ripple calc(1.8s/var(--spd)) ease-out infinite;pointer-events:none}
+.st-listen::after{animation-delay:calc(.9s/var(--spd))}
+@keyframes m-ripple{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
+
+/* 05 thinking */
+.st-think .eyes{animation:m-thinkLook calc(3s/var(--spd)) ease-in-out infinite}
+@keyframes m-thinkLook{0%,100%{transform:translate(6%,-7%)}50%{transform:translate(-4%,-7%)}}
+.st-think .eyes b{animation:m-blink calc(2.2s/var(--spd)) infinite}
+.st-think .sat{position:absolute;inset:-14%;border-radius:50%;animation:m-spin calc(2.4s/var(--spd)) linear infinite}
+.st-think .sat i{position:absolute;top:0;left:50%;width:9%;height:9%;margin-left:-4.5%;border-radius:50%;background:#3ed598;box-shadow:0 0 10px #3ed598}
+.st-think .sat i:nth-child(2){top:auto;bottom:0;background:#c4e78f;box-shadow:0 0 10px #c4e78f;width:6%;height:6%;margin-left:-3%}
+@keyframes m-spin{to{transform:rotate(360deg)}}
+
+/* 06 speaking — JS drives --a (0..1) from a fake audio level */
+.st-speak{--a:0;animation:none;transform:scale(calc(1 + var(--a)*.05))}
+.st-speak .eyes b{animation:none;transform:scaleY(calc(1 - var(--a)*.35))}
+.orb .wave{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:4px;height:22px}
+.orb .wave i{display:block;width:4px;border-radius:2px;background:var(--accent);height:20%;transition:height .08s}
+
+/* 07 happy / success */
+.st-happy{animation:m-hop calc(1.6s/var(--spd)) cubic-bezier(.3,.7,.4,1) infinite}
+.st-happy .eyes b{animation:none;width:16%;height:13%;background:none;border:calc(var(--s)*.035) solid var(--eye);border-bottom:0;border-radius:99px 99px 0 0;transform:translateY(-20%)}
+@keyframes m-hop{0%,60%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.08,.92)}25%{transform:translateY(-16%) scale(.96,1.05)}40%{transform:translateY(0) scale(1.06,.94)}50%{transform:translateY(0) scale(1)}}
+.orb .spark{position:absolute;width:10px;height:10px;background:#c4e78f;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:m-spark calc(1.6s/var(--spd)) ease-out infinite;opacity:0}
+.orb .spark.a{top:6%;left:4%}.spark.b{top:0;right:8%;animation-delay:calc(.15s/var(--spd))}.spark.c{bottom:14%;right:0;animation-delay:calc(.3s/var(--spd))}
+@keyframes m-spark{20%{opacity:1;transform:scale(1.2) rotate(20deg)}60%,100%{opacity:0;transform:scale(.4) rotate(90deg)}}
+
+/* 08 greeting wink */
+.st-wink{animation:m-tilt calc(3.2s/var(--spd)) ease-in-out infinite}
+.st-wink .eyes b{animation:none}
+.st-wink .eyes b:last-child{animation:m-wink calc(3.2s/var(--spd)) ease-in-out infinite}
+@keyframes m-wink{0%,30%,55%,100%{transform:scaleY(1)}38%,47%{transform:scaleY(.12)}}
+@keyframes m-tilt{0%,25%,60%,100%{transform:rotate(0)}35%,50%{transform:rotate(-10deg)}}
+
+/* 09 attention / notify */
+.st-notify{animation:m-nudge calc(2.6s/var(--spd)) ease-in-out infinite}
+.st-notify .eyes b{animation:m-wide calc(2.6s/var(--spd)) ease-in-out infinite}
+@keyframes m-nudge{0%,55%,100%{transform:translateY(0) rotate(0)}60%{transform:translateY(-8%) rotate(-6deg)}66%{transform:translateY(-8%) rotate(6deg)}72%{transform:translateY(-4%) rotate(-3deg)}78%{transform:translateY(0) rotate(0)}}
+@keyframes m-wide{0%,55%,85%,100%{transform:scaleY(1)}62%,78%{transform:scale(1.15,1.2)}}
+.orb .badge{position:absolute;top:2%;right:2%;min-width:26%;height:26%;padding:0 6%;border-radius:99px;background:#e2531f;color:#fff;font:700 calc(var(--s)*.14)/1 var(--font);display:grid;place-items:center;box-shadow:0 0 0 3px var(--bg);animation:m-pop calc(2.6s/var(--spd)) ease-in-out infinite}
+@keyframes m-pop{0%,55%,85%,100%{transform:scale(1)}62%{transform:scale(1.25)}}
+
+/* 10 sleeping / offline */
+.st-sleep{animation:m-breathe calc(7s/var(--spd)) ease-in-out infinite;filter:saturate(.35) brightness(.95)}
+.st-sleep .eyes{transform:translateY(8%)}
+.st-sleep .eyes b{animation:none;height:4%;width:14%;border-radius:99px}
+.orb .zz{position:absolute;top:-2%;right:-6%;font:600 calc(var(--s)*.16)/1 var(--font);color:var(--ink3)}
+.orb .zz i{position:absolute;font-style:normal;opacity:0;animation:m-z calc(3s/var(--spd)) ease-out infinite}.zz i:nth-child(2){animation-delay:calc(1s/var(--spd));font-size:.75em}.zz i:nth-child(3){animation-delay:calc(2s/var(--spd));font-size:.55em}
+@keyframes m-z{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(60%,-180%)}}
+
+/* 11 confused / error */
+.st-oops{animation:m-shake calc(2.4s/var(--spd)) ease-in-out infinite}
+.st-oops .eyes{transform:rotate(-8deg)}
+.st-oops .eyes b{animation:none}.st-oops .eyes b:first-child{height:18%}.st-oops .eyes b:last-child{height:30%}
+@keyframes m-shake{0%,50%,100%{transform:translateX(0)}56%{transform:translateX(-6%)}62%{transform:translateX(6%)}68%{transform:translateX(-4%)}74%{transform:translateX(3%)}80%{transform:translateX(0)}}
+.orb .q{position:absolute;top:-6%;right:2%;font:700 calc(var(--s)*.2)/1 var(--font);color:#f5b73c;animation:m-qbob calc(2.4s/var(--spd)) ease-in-out infinite}
+@keyframes m-qbob{50%{transform:translateY(-12%) rotate(12deg)}}
+
+/* 12 working / loading sheen */
+.st-load{overflow:hidden}
+.st-load::after{content:"";position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.55) 82%,transparent 92%);animation:m-spin calc(1.4s/var(--spd)) linear infinite;mix-blend-mode:soft-light}
+.st-load .eyes b{animation:m-scan calc(1.4s/var(--spd)) ease-in-out infinite}
+.st-load .eyes b:last-child{animation-delay:calc(.15s/var(--spd))}
+@keyframes m-scan{0%,100%{transform:translateY(-14%) scaleY(.75)}50%{transform:translateY(14%) scaleY(.75)}}
+
+/* 13 hover squish */
+.st-hover{animation:none;transition:transform .35s cubic-bezier(.3,1.6,.5,1);cursor:pointer}
+.st-hover:hover{transform:scale(1.08,.92)}
+.st-hover:hover .eyes b{animation:none;transform:scaleY(.15)}
+.st-hover:active{transform:scale(.9,1.1)}
+
+/* 14 drop into chat — the hero orb lands where the chat opens */
+.st-drop{animation:m-drop calc(2.8s/var(--spd)) cubic-bezier(.5,0,.3,1) infinite}
+@keyframes m-drop{0%,15%{transform:translateY(-34%) scale(.6);opacity:0}30%{transform:translateY(0) scale(1.08,.9);opacity:1}38%{transform:scale(.96,1.04)}46%,80%{transform:scale(1)}92%,100%{transform:scale(.6);opacity:0}}
+
+
+.logo .orb,.nlogo .orb{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}.side__brand:hover .logo .orb,.nlogo:hover .orb{animation:none;transform:scale(1.08,.92)}.side__brand:hover .logo .orb .eyes b,.nlogo:hover .orb .eyes b{animation:none;transform:scaleY(.15)}.side__brand:active .logo .orb,.nlogo:active .orb{transform:scale(.9,1.1)}
+.orb .badge{box-shadow:0 0 0 2px var(--card-s,#fff)}
+@media (prefers-reduced-motion:reduce){.orb,.orb *,.orb::before,.orb::after,.orb .fx,.orb .fx *{animation:none!important;transition:none!important}}
 /* ---------- microinteractions ---------- */
 /* numbers: count-up + change flash with a floating delta chip */
 .cu-up{animation:cuUp 1.4s ease}.cu-dn{animation:cuDn 1.4s ease}@keyframes cuUp{0%,35%{color:var(--accent)}}@keyframes cuDn{0%,35%{color:var(--bad)}}
@@ -1963,8 +2056,8 @@ const TRACE = { T: 7.2, lanes: [
   run(q, ask) { cancelAnimationFrame(this.raf); this.q = q; this.t = 0; this.paused = false; let t0 = performance.now(), asked = !ask; const rm = matchMedia('(prefers-reduced-motion: reduce)').matches; let sig = '', bsig = '';
     const paint = () => { const k = this.lanes.map(l => this.t >= l.e ? 2 : this.t >= l.s ? 1 : 0).join('') + Math.floor(this.t * 8) + this.paused;
       if (this.open && k !== sig) { sig = k; $('#trace').innerHTML = this.html(this.t); }
-      const bi = this.SEG.findIndex(x => this.t < x[1]) + '|' + this.lanes.filter(l => l.c && this.t >= l.s && this.t < l.e).length + '|' + this.paused, tb = $(`[data-m="${this.mid}"] [data-tb]`);
-      if (tb && bi !== bsig) { bsig = bi; tb.innerHTML = this.badge(this.t, this.paused); } };
+      const bi = this.SEG.findIndex(x => this.t < x[1]) + '|' + this.lanes.filter(l => l.c && this.t >= l.s && this.t < l.e).length + '|' + this.paused, tb = $$(`[data-m="${this.mid}"] [data-tb]`);
+      if (tb.length && bi !== bsig) { bsig = bi; tb.forEach(x => x.innerHTML = this.badge(this.t, this.paused)); } };
     return new Promise(res => { const f = now => { this.t = Math.min(this.T, (now - t0) / 1000); if (rm && asked) this.t = this.T;
       if (!asked && this.t >= .8) { asked = true; this.t = .8; this.paused = true; paint(); const p0 = performance.now();
         ask().then(() => { this.paused = false; t0 += performance.now() - p0; this.raf = requestAnimationFrame(f); }); return; }
@@ -1982,7 +2075,7 @@ const CQ = {
 };
 const cqPlan = q => { const s = q.toLowerCase(); return /compar|\bvs\b|versus|variance|against|forecast/.test(s) ? ['madlib', 'depth'] : /brief|prep|board|summar|report|pack/.test(s) ? ['rank', 'depth'] : ['scope', 'depth']; };
 function clarify(id, keys) { const out = []; let i = 0;
-  return new Promise(res => { const next = () => { const host = $(`[data-m="${id}"] [data-cq]`); if (i >= keys.length || !host) { if (host) host.innerHTML = ''; return res(out); }
+  return new Promise(res => { const next = () => { const host = $(`${thr()} [data-m="${id}"] [data-cq]`); if (i >= keys.length || !host) { if (host) host.innerHTML = ''; return res(out); }
     const k = keys[i], c = CQ[k]; host.innerHTML = `<div class="cq" data-k="${k}"><div class="cq__h"><b>${t(c.q)}</b><span class="cq__pg">${t('cq.of', { i: i + 1, n: keys.length })}</span><button class="cq__sk" data-skip>${t('cq.skip')}</button></div>${c.ui()}<div class="cq__ft"><span>${t('cq.using', { x: t(c.def) })}</span><span class="bar"><i></i></span></div></div>`;
     const el = $('.cq', host); let tm = setTimeout(() => done(t(c.def)), matchMedia('(prefers-reduced-motion: reduce)').matches ? 20000 : 8000);
     const hold = () => { clearTimeout(tm); el.classList.add('is-held'); };
@@ -1995,8 +2088,8 @@ function clarify(id, keys) { const out = []; let i = 0;
     next(); }); }
 async function chatSend(q, opts = {}) { q = (q || '').trim(); if (!q) { if (opts.open) openChat(opts.from); return; }
   S.lastQ = q; if (!S.hist.includes(q)) S.hist.unshift(q); S.chat.push({ html: msgUser(q) }); const fresh = S.chat.length === 1, id = 'm' + Date.now(), th = { html: msgBot(`<div data-tb>${TRACE.badge(0, false)}</div><div data-cq></div>`, id) }; S.chat.push(th); syncChat(); if (opts.open) openChat(opts.from); renderHero();
-  $('#chatTitle').textContent = q; TRACE.mid = id; TRACE.show(innerWidth > 1100); let got = [];
-  await TRACE.run(q, fresh ? () => clarify(id, cqPlan(q)).then(a => { got = a; }) : null);
+  MASCOT.msg[id] = 'think'; $('#chatTitle').textContent = q; TRACE.mid = id; TRACE.show(innerWidth > 1100); let got = [];
+  await TRACE.run(q, fresh ? () => { MASCOT.msg[id] = 'notify:?'; return clarify(id, cqPlan(q)).then(a => { got = a; MASCOT.msg[id] = 'think'; }); } : null); delete MASCOT.msg[id];
   const [h, src] = answer(q); th.html = msgBot((got.length ? `<span class="cq-got">✓ ${got.map(esc).join(' · ')}</span>` : '') + h + `<button class="trc__lnk" data-trc-open>${ico('list', 14)}${t('trc.how')}</button>`, id, src); syncChat(); }
 function syncChat() { const p = $('#chatThread'); if (!p) return;
   p.innerHTML = S.chat.length ? `<div class="chat__col">${S.chat.map(m => m.html).join('')}</div>` : `<div class="chat__empty">${orb('orb--xl')}<h2>${t('chatHi', { n: LANG === 'ar' ? 'سيد' : 'Syed' })}</h2><p>${t('chatSub')}</p><div class="chat__cards">${ASK_CARDS.map(([ic, q]) => `<button class="qa qa--l" data-act="ask-open" data-q="${q}"><i>${ico(ic, 18)}</i><span>${q}</span></button>`).join('')}</div></div>`;
@@ -2004,11 +2097,12 @@ function syncChat() { const p = $('#chatThread'); if (!p) return;
 function renderHist() { $('#chatHist').innerHTML = S.hist.slice(0, 7).map(h => `<li><button data-act="ask-open" data-q="${esc(h)}">${ico('message', 14)}<span>${esc(h)}</span></button></li>`).join(''); }
 function openChat(from) { const c = $('#chat'); if (EDIT) setEdit(false); CHAT_OPEN = true; const el = from || $('#heroAsk'), r = el && !el.closest('[hidden]') ? el.getBoundingClientRect() : null, vw = innerWidth, vh = innerHeight;
   const ok = r && r.width && r.bottom > 0 && r.top < vh; const [t0, r0, b0, l0] = ok ? [Math.max(0, r.top), Math.max(0, vw - r.right), Math.max(0, vh - r.bottom), Math.max(0, r.left)] : [vh * .4, vw * .3, vh * .4, vw * .3];
-  c.style.setProperty('--cp', `inset(${t0}px ${r0}px ${b0}px ${l0}px round 16px)`); c.setAttribute('aria-hidden', 'false'); void c.offsetWidth; c.classList.add('is-open'); document.body.classList.add('is-chat'); syncChat(); setTimeout(() => $('#chatIn').focus(), 420); }
+  c.style.setProperty('--cp', `inset(${t0}px ${r0}px ${b0}px ${l0}px round 16px)`); c.setAttribute('aria-hidden', 'false'); void c.offsetWidth; c.classList.add('is-open'); MASCOT.flash('drop', 1300, ['head']); document.body.classList.add('is-chat'); syncChat(); setTimeout(() => $('#chatIn').focus(), 420); }
 function closeChat() { if (!CHAT_OPEN) return; CHAT_OPEN = false; const c = $('#chat'), el = $('#heroAsk'), r = el && !$('#hero').hidden ? el.getBoundingClientRect() : null, vw = innerWidth, vh = innerHeight;
   if (r && r.width && r.bottom > 0 && r.top < vh) c.style.setProperty('--cp', `inset(${Math.max(0, r.top)}px ${Math.max(0, vw - r.right)}px ${Math.max(0, vh - r.bottom)}px ${Math.max(0, r.left)}px round 16px)`); c.classList.remove('is-open'); c.setAttribute('aria-hidden', 'true'); document.body.classList.remove('is-chat'); renderHero(); }
 /* ===== new home: docked Ask panel ===== */
 const homeOn = () => innerWidth > 1100;
+const thr = () => CHAT_OPEN || !homeOn() ? '#chatThread' : '#homeThread'; /* the thread the person is looking at */
 function renderHome() { const el = $('#home'); if (!el) return; const now = new Date(), loc = LANG === 'ar' ? 'ar-AE' : 'en-GB', n = S.openDecisions().length;
   $('#homeHi').textContent = `${greeting()}, ${LANG === 'ar' ? 'سيد' : 'Syed'}`; $('#homeSub').textContent = t('home.sub', { n });
   $('#homeD').innerHTML = `${now.toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'short' })}<small>${now.toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit' })} · Dubai</small>`;
@@ -2017,7 +2111,23 @@ function renderHome() { const el = $('#home'); if (!el) return; const now = new 
   renderHomeThread(); }
 function renderHomeThread() { const p = $('#homeThread'); if (!p) return; const has = S.chat.length > 0; $('#home').classList.toggle('has-chat', has); $('#homeA').hidden = !has; $('#homeD').hidden = has;
   p.innerHTML = has ? `<div class="chat__col">${S.chat.map(m => m.html).join('')}</div>` : `<div class="home__idle"><span class="home__glow">${orb()}</span><h3>${t('home.ready')}</h3><p>${t('home.wait')}</p></div>`; p.scrollTop = p.scrollHeight; }
-const homeSend = q => { q = (q || '').trim(); if (!q) return; $('#homeIn').value = ''; chatSend(q); };
+const homeSend = q => { q = (q || '').trim(); if (!q) { MASCOT.flash('oops', 1800, ['home']); return; } $('#homeIn').value = ''; chatSend(q); };
+/* ===== Majlis mascot controller: each orb slot rests in a mood; product events override it for a moment ===== */
+const MFX = { think: '<span class="sat fx"><i></i><i></i></span>', speak: '<span class="wave fx">' + '<i></i>'.repeat(9) + '</span>', happy: '<i class="spark a fx"></i><i class="spark b fx"></i><i class="spark c fx"></i>', notify: '<span class="badge fx">{b}</span>', sleep: '<span class="zz fx"><i>z</i><i>z</i><i>z</i></span>', oops: '<span class="q fx">?</span>' };
+const MASCOT = { SEL: { hero: '#heroAsk .ask__top .orb', home: '#homeThread .home__idle .orb', empty: '.chat__empty .orb', head: '.chat__h .orb' }, rest: { hero: 'look', home: 'follow', empty: 'follow', head: 'idle' }, over: {}, msg: {}, tm: {},
+  flash(k, ms, slots = ['hero', 'home']) { slots.forEach(s => { this.over[s] = k; clearTimeout(this.tm[s]); if (ms) this.tm[s] = setTimeout(() => { if (this.over[s] === k) delete this.over[s]; }, ms); }); },
+  clear(slots) { slots.forEach(s => { clearTimeout(this.tm[s]); delete this.over[s]; }); } };
+function mApply(el, k) { if (el.dataset.mood === k) return; el.dataset.mood = k; el.className = el.className.replace(/\bst-\S+/g, '').replace(/\s+/g, ' ').trim(); el.querySelectorAll('.fx').forEach(x => x.remove()); el.style.removeProperty('--a'); const ey = el.querySelector('.eyes'); if (ey) ey.style.transform = '';
+  const [kk, bd] = k.split(':'); if (kk !== 'idle') { el.classList.add('st-' + kk); if (MFX[kk]) el.insertAdjacentHTML('beforeend', MFX[kk].replace('{b}', bd || '!')); } }
+let mPx = innerWidth / 2, mPy = innerHeight / 2, mTick = 0; addEventListener('pointermove', e => { mPx = e.clientX; mPy = e.clientY; }, { passive: true });
+(function mLoop() { mTick++; const off = typeof connected === 'function' && connected() === 0, rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (const s in MASCOT.SEL) $$(MASCOT.SEL[s]).forEach(el => mApply(el, off && s !== 'head' ? 'sleep' : MASCOT.over[s] || MASCOT.rest[s]));
+  for (const id in MASCOT.msg) $$(`[data-m="${id}"] > .orb`).forEach(el => mApply(el, MASCOT.msg[id]));
+  if (!rm) { $$('.orb.st-follow').forEach(o => { const r = o.getBoundingClientRect(); if (!r.width) return; const dx = mPx - r.left - r.width / 2, dy = mPy - r.top - r.height / 2, d = Math.hypot(dx, dy) || 1, m = Math.min(1, d / 300); o.querySelector('.eyes').style.transform = `translate(${(dx / d * m * 10).toFixed(2)}%, ${(dy / d * m * 8).toFixed(2)}%)`; });
+    $$('.orb.st-speak').forEach(o => { const lvl = Math.max(0, Math.sin(mTick / 4) * .5 + Math.sin(mTick / 1.7) * .35 + Math.random() * .35); o.style.setProperty('--a', Math.min(1, lvl).toFixed(2)); o.querySelectorAll('.wave i').forEach((b, i) => b.style.height = (20 + Math.abs(Math.sin(mTick / 3 + i)) * 60 * lvl + Math.random() * 20) + '%'); }); }
+  requestAnimationFrame(mLoop); })();
+addEventListener('load', () => MASCOT.flash('wink', 2600));
+document.addEventListener('pointerover', e => { const a = e.target.closest?.('#heroAsk'); MASCOT.rest.hero = a ? 'follow' : 'look'; }, { passive: true });
 let listening = false, voiceStop = false;
 /* voice · tiny equaliser: the mic turns lime with four bars that move with the voice, a "● Listening · 0:03" chip floats above it,
    and a soft two-note chime plays as listening starts (rising) and stops (falling) */
@@ -2031,10 +2141,10 @@ function vqStart(btn) { if (!btn) return () => {}; btn.classList.add('is-vq'); b
   raf = requestAnimationFrame(f);
   return () => { cancelAnimationFrame(raf); btn.classList.remove('is-vq'); btn.setAttribute('aria-label', 'Voice'); $$('.vq, .vchip', btn).forEach(x => x.remove()); }; }
 async function voice(input) { if (listening) { voiceStop = true; return; } listening = true; voiceStop = false; const phrase = 'What changed across the company since Monday?';
-  const btn = input.id === 'chatIn' ? $('#chatMic') : input.id === 'homeIn' ? $('#homeMic') : input.closest('.ask__in')?.querySelector('[data-act="mic"]'), done = vqStart(btn); chime('start');
+  const btn = input.id === 'chatIn' ? $('#chatMic') : input.id === 'homeIn' ? $('#homeMic') : input.closest('.ask__in')?.querySelector('[data-act="mic"]'), done = vqStart(btn); chime('start'); MASCOT.flash('listen', 0, ['hero', 'home', 'head']);
   document.body.classList.add('is-listening'); input.value = ''; input.placeholder = t('listening');
   for (const w of phrase.split(' ')) { if (voiceStop) break; input.value += (input.value ? ' ' : '') + w; await sleep(190); } await sleep(300);
-  chime('stop'); done(); document.body.classList.remove('is-listening'); input.placeholder = t('askPh'); listening = false; voiceStop = false; return input.value; }
+  chime('stop'); done(); MASCOT.clear(['hero', 'home', 'head']); document.body.classList.remove('is-listening'); input.placeholder = t('askPh'); listening = false; voiceStop = false; return input.value; }
 
 /* ---------- header, hero, greeting ---------- */
 const greeting = () => { const h = new Date().getHours(); return t(h < 12 ? 'goodMorning' : h < 18 ? 'goodAfternoon' : 'goodEvening'); };
@@ -2217,12 +2327,12 @@ document.addEventListener('click', e => {
   else if (a === 'mail-reply') { const m = S.mails.find(x => x.id === id); openChat(from); chatSend('Draft a reply: ' + m.subj); }
   else if (a === 'mail-archive') { const i = S.mails.findIndex(x => x.id === id), m = S.mails.splice(i, 1)[0]; afterState(['inbox']); toast(t('archived'), t('undo'), () => { S.mails.splice(i, 0, m); afterState(['inbox']); }); }
   else if (a === 'mail-snooze') { const i = S.mails.findIndex(x => x.id === id), m = S.mails.splice(i, 1)[0]; S.mails.push(m); afterState(['inbox']); toast(t('snooze') + ' · 1 h'); }
-  else if (a === 'decision') { if (b.dataset.hold && !b._held) { holdHint(b); return; } const d = S.decisions.find(x => x.id === id), prev = d.st, go = () => { d.st = b.dataset.do; afterState(['decisions']); toast(t(d.st) + ': ' + d.title, t('undo'), () => { d.st = prev; afterState(['decisions']); if (CHAT_OPEN) syncChat(); }); if (CHAT_OPEN) syncChat(); };
+  else if (a === 'decision') { if (b.dataset.hold && !b._held) { holdHint(b); return; } const d = S.decisions.find(x => x.id === id), prev = d.st, go = () => { d.st = b.dataset.do; if (d.st === 'approved') MASCOT.flash('happy', 2600); afterState(['decisions']); toast(t(d.st) + ': ' + d.title, t('undo'), () => { d.st = prev; afterState(['decisions']); if (CHAT_OPEN) syncChat(); }); if (CHAT_OPEN) syncChat(); };
     if (b.closest('#chatThread') || RM()) return go(); if (b._miBusy) return; b._miBusy = true; b.classList.add('mi-ok'); setTimeout(() => MI.fold(b.closest('.arr, .rc, .tkr')), 260); setTimeout(go, 560); }
-  else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; if (!b.checked || RM()) { afterState(['tasks']); return; } b.closest('.chk')?.classList.add('mi-tick'); clearTimeout(S._tickT); S._tickT = setTimeout(() => flipRows(() => afterState(['tasks'])), 620); }
-  else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (!x || b._miBusy) return; const go = () => { x.done = true; afterState(['tasks']); toast(t('done') + ': ' + x.tx, t('undo'), () => { x.done = false; afterState(['tasks']); }); };
+  else if (a === 'task') { const x = S.tasks.find(y => y.id === id); x.done = b.checked; if (b.checked) MASCOT.flash('happy', 2600); if (!b.checked || RM()) { afterState(['tasks']); return; } b.closest('.chk')?.classList.add('mi-tick'); clearTimeout(S._tickT); S._tickT = setTimeout(() => flipRows(() => afterState(['tasks'])), 620); }
+  else if (a === 'task-done') { const x = S.tasks.find(y => y.id === id); if (!x || b._miBusy) return; const go = () => { x.done = true; MASCOT.flash('happy', 2600); afterState(['tasks']); toast(t('done') + ': ' + x.tx, t('undo'), () => { x.done = false; afterState(['tasks']); }); };
     if (RM()) return go(); b._miBusy = true; b.classList.add('mi-ok'); setTimeout(go, 480); }
-  else if (a === 'sync-now') { if (MI.sync === 'spin') return; MI.sync = 'spin'; renderHello(); $$('.w', Grid.el).forEach(w => w.classList.add('mi-sk'));
+  else if (a === 'sync-now') { if (MI.sync === 'spin') return; MI.sync = 'spin'; MASCOT.flash('load', 1100); setTimeout(() => MASCOT.flash('notify:2', 2600), 1150); renderHello(); $$('.w', Grid.el).forEach(w => w.classList.add('mi-sk'));
     setTimeout(() => { liveTick(); MI.sync = 'fresh'; window.__sync = 0; $$('.w.mi-sk').forEach(w => w.classList.remove('mi-sk')); afterState(['revenue', 'pulse', 'boardKpis', 'media', 'cash', 'pipeline', 'landing']); setTimeout(() => { MI.sync = null; renderHello(); }, 3500); }, RM() ? 0 : 1100); }
   else if (a === 'cal-step') { const { i } = calState(); S.calSel = Math.max(0, Math.min(D.meetings.length, i + (+b.dataset.d))); Grid.refreshType('calendar'); $('.w[data-type="calendar"] .cal__nx, .w[data-type="calendar"] [data-act="cal-now"]')?.focus(); }
   else if (a === 'cal-sel') { S.calSel = +b.dataset.i; Grid.refreshType('calendar'); }
@@ -2240,7 +2350,7 @@ document.addEventListener('click', e => {
   else if (a === 'view') { const w = b.closest('.w'), v = b.dataset.v; if (w.dataset.view === v) return; $$('.vt button', w).forEach(x => x.classList.toggle('is-on', x === b));
     if (RM()) return Grid.setView(w.dataset.id, v); $('.w__b', w)?.classList.add('mi-out'); setTimeout(() => { Grid.setView(w.dataset.id, v); const nb = $('.w__b', w); if (nb) { MI.rise(nb); if (v === 'viz') MI.grow(nb); } }, 150); }
   else if (a === 'story') { S.story.i = (S.story.i + (+b.dataset.d) + 3) % 3; renderBrief(); }
-  else if (a === 'brief-play') { S.playing = !S.playing; renderHero(); if (S.playing) setTimeout(() => { S.playing = false; renderHero(); }, 6000); }
+  else if (a === 'brief-play') { S.playing = !S.playing; if (S.playing) MASCOT.flash('speak', 6000); else MASCOT.clear(['hero', 'home']); renderHero(); if (S.playing) setTimeout(() => { S.playing = false; renderHero(); }, 6000); }
   else if (a === 'prep') { openChat(from); chatSend('Prep me for: ' + b.dataset.title); }
   else if (a === 'hide') { const w = b.closest('.w'), it = Grid.items.find(i => i.id === w.dataset.id); Grid.remove(it.id); refreshCards(); toast(t('toastRemoved', { w: t('w.' + it.type) }), t('undo'), () => { Grid.undo(); refreshCards(); }); }
   else if (a === 'size') { const w = b.closest('.w'); Grid.setSize(w.dataset.id, b.dataset.k); refreshCards(); }
