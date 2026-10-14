@@ -624,7 +624,7 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 @media (max-width:620px){.cq1{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.tb__sp,.tb__l.is-shim,.tb__s i.a,.cq,.cq__ft .bar i{animation:none}}
 /* ===== Majlis mascot: animation states (from Majlis_Mascot_Animations), driven by what the product is doing ===== */
-:root{--spd:1}.orb{--s:52px}.orb--sm{--s:28px}.orb--md{--s:48px}.orb--lg{--s:64px}.orb--xl{--s:92px}.logo .orb{--s:30px}.home__glow .orb{--s:96px}.nlogo .orb{--s:34px}
+:root{--spd:1}.orb{--s:52px}.orb--sm{--s:28px}.orb--md{--s:48px}.orb--lg{--s:64px}.orb--xl{--s:92px}.logo .orb{--s:30px}.home__glow .orb{--s:96px}
 .orb .fx{position:absolute;pointer-events:none}.orb .eyes{transition:transform .25s ease-out}
 /* 02 look around */
 .st-look .eyes{animation:m-look calc(6s/var(--spd)) ease-in-out infinite}
@@ -713,7 +713,7 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 @keyframes m-drop{0%,15%{transform:translateY(-34%) scale(.6);opacity:0}30%{transform:translateY(0) scale(1.08,.9);opacity:1}38%{transform:scale(.96,1.04)}46%,80%{transform:scale(1)}92%,100%{transform:scale(.6);opacity:0}}
 
 
-.logo .orb,.nlogo .orb{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}.side__brand:hover .logo .orb,.nlogo:hover .orb{animation:none;transform:scale(1.08,.92)}.side__brand:hover .logo .orb .eyes b,.nlogo:hover .orb .eyes b{animation:none;transform:scaleY(.15)}.side__brand:active .logo .orb,.nlogo:active .orb{transform:scale(.9,1.1)}
+.logo .orb{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}.side__brand:hover .logo .orb{animation:none;transform:scale(1.08,.92)}.side__brand:hover .logo .orb .eyes b,.nlogo:hover .orb .eyes b{animation:none;transform:scaleY(.15)}.side__brand:active .logo .orb,.nlogo:active .orb{transform:scale(.9,1.1)}
 .orb .badge{box-shadow:0 0 0 2px var(--card-s,#fff)}
 @media (prefers-reduced-motion:reduce){.orb,.orb *,.orb::before,.orb::after,.orb .fx,.orb .fx *{animation:none!important;transition:none!important}}
 /* ---------- microinteractions ---------- */
@@ -778,19 +778,7 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 @container w (max-width:300px){.big strong{font-size:23px;line-height:27px}.seg button{padding:6px 9px}.vt button{width:24px}}
 
 
-/* ===== one line of navigation: no page sidebar on wide screens; pages live in a launcher beside the profile ===== */
-.nh-only{display:none}
-@media (min-width:1101px){
-  .nh-only{display:inline-flex}.side{display:none!important}.app,.app.is-collapsed{grid-template-columns:minmax(0,1fr)!important;--sw:0px}
-  .nlogo{flex:none;width:46px;height:46px;border-radius:50%;background:var(--dark);display:grid;place-items:center;box-shadow:var(--shadow)}.nlogo .orb{width:32px;height:32px}
-}
-.pop--apps{width:320px;inset-inline-end:-6px;padding:10px}.apps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-.apps button{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px;border-radius:14px;font:600 12px/1.15 var(--font);color:var(--ink2);text-align:center;transition:background .15s,color .15s}.apps button:hover{background:var(--tile);color:var(--ink)}
-.apps button.is-on{background:var(--accent-soft);color:var(--accent-ink);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--accent) 45%,transparent)}.apps i{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--tile);font-style:normal}.apps button.is-on i{background:var(--card-s)}
-.apps em{position:absolute;top:8px;inset-inline-end:8px;font:700 9px/1 var(--font);padding:3px 6px;border-radius:99px;background:var(--hi);color:var(--hi-ink);font-style:normal}
-#btnApps[aria-expanded="true"],#btnUser[aria-expanded="true"]{box-shadow:0 0 0 3px var(--accent-soft)}
-.pop--me{width:260px;inset-inline-end:0;padding:8px}.me__h{display:flex;align-items:center;gap:10px;padding:8px 8px 12px;border-bottom:1px solid var(--line);margin-bottom:6px}.me__h b{display:block;font:600 14px/1.2 var(--font)}.me__h small{font-size:12px;color:var(--ink3)}
-.pop--me button{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:10px;font:500 13.5px/1 var(--font);color:var(--ink2)}.pop--me button:hover{background:var(--tile);color:var(--ink)}.pop--me button em{margin-inline-start:auto;font:500 12px/1 var(--font);font-style:normal;color:var(--ink3)}.pop--me hr{margin:6px 4px}
+.chat.is-empty .chat__h>.orb,.chat.is-empty #chatTitle{display:none}.chat.is-empty #chatTrace{margin-inline-start:auto}
 /* chat page, empty: Claude-style start — greeting with the mascot, one big composer, scope and depth, three starting points, jump back in */
 .chat__empty.ce{max-width:680px;width:100%;margin:14vh auto 0;align-items:stretch;gap:0;text-align:start;padding-bottom:24px}
 .ce__hi{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}.ce__hi .orb{--s:52px;width:52px;height:52px;flex:none}.ce__hi h2{margin:0;font:500 34px/1.1 var(--font);letter-spacing:-.025em;text-wrap:balance}
@@ -885,7 +873,7 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
     <nav class="nav" id="navB" aria-label="Account"></nav>
   </aside>
   <div class="stage">
-    <header class="top"><button class="nlogo nh-only" data-act="nav" data-page="overview" aria-label="Majlis · Overview"><span class="orb orb--sm"><i class="eyes"><b></b><b></b></i></span></button>
+    <header class="top">
       <button id="btnMenu" class="ic-btn" aria-label="Menu"></button>
       <section id="hello" class="hello"></section>
       <div class="search" id="search" hidden><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" autocomplete="off" aria-label="Search" aria-controls="sres"><kbd>⌘K</kbd><div class="sres" id="sres" role="listbox" hidden></div></div>
@@ -893,10 +881,9 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
         <button id="btnEdit" class="btn btn--dark" aria-pressed="false"><span>Customize</span></button>
         <button id="btnTheme" class="ic-btn" hidden aria-label="Switch theme"></button>
         <button id="btnLang" class="ic-btn ic-btn--txt" hidden aria-label="Language"><span>ع</span></button>
-        <span class="pop-wrap nh-only"><button id="btnApps" class="ic-btn" aria-label="Pages" aria-haspopup="true" aria-expanded="false"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6" cy="6" r="1.7"/><circle cx="12" cy="6" r="1.7"/><circle cx="18" cy="6" r="1.7"/><circle cx="6" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18" cy="12" r="1.7"/><circle cx="6" cy="18" r="1.7"/><circle cx="12" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/></svg></button><div class="pop pop--apps" id="appsPop" hidden><div class="pop__h"><b id="appsH">Go to</b></div><div class="apps" id="appsGrid"></div></div></span>
         <span class="pop-wrap"><button id="btnNotif" class="ic-btn" aria-label="Notifications"><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 0 0 4 0"/></svg><i class="badge-dot" id="nbadge" hidden></i></button>
           <div class="pop" id="notifPop" hidden><div class="pop__h" id="notifHead"><b>Notifications</b><button id="markRead" class="link">Mark all as read</button></div><ul id="notifList"></ul></div></span>
-        <span class="pop-wrap"><button class="user" id="btnUser" aria-label="Account" aria-haspopup="true" aria-expanded="false"><span class="avatar">SH</span><span class="user__t"><b id="userName">Syed Hafeez</b><small id="userPlan">Enterprise</small></span></button><div class="pop pop--me" id="mePop" hidden></div></span>
+        <button class="user" id="btnUser" aria-label="Account"><span class="avatar">SH</span><span class="user__t"><b id="userName">Syed Hafeez</b><small id="userPlan">Enterprise</small></span></button>
       </div>
     </header>
     <main id="main" class="main">
@@ -2286,16 +2273,15 @@ function agtPick(k) { AGT.cur = k; AGT.recent = [k, ...AGT.recent.filter(x => x 
   document.addEventListener('click', e => { const b = e.target.closest('[data-agt]'); if (b) { e.preventDefault(); e.stopPropagation(); agtOpen(b); return; } if (!e.target.closest('#agtPop')) agtClose(); }, true);
   addEventListener('resize', agtPlace); addEventListener('scroll', agtPlace, true); agtSync(); })();
 /* chat page, empty: Claude-style start */
-let CE_PICK = null; const CE = { sc: store.get('ceSc', 0), dp: store.get('ceDp', 0) };
+let CE_PICK = null;
 function chatEmpty(p) { const H = TX[LANG].ce || TX.en.ce;
   p.innerHTML = `<div class="chat__empty ce"><div class="ce__hi">${orb()}<h2>${t('ce.hello')}</h2></div><div data-slot></div>
     <span class="ce__lbl">${AGT.cur === 'peer' ? t('pb.next') : AGT.cur === 'memory' ? t('im.next') : t('ce.next')}</span><div class="ce__now">${(AGT.cur === 'peer' ? (TX[LANG].pb || TX.en.pb).now : AGT.cur === 'memory' ? (TX[LANG].im || TX.en.im).now : H.now).map(([tm, q, k]) => `<button type="button" data-ce-q="${esc(q)}"><time>${esc(tm)}</time><span>${esc(q)}</span><small>${esc(k)}</small></button>`).join('')}</div></div>`;
-  $('#cePk').innerHTML = `<button type="button" class="pk" data-ce="sc">${ico('layout', 14)}<b>${esc(H.sc[CE.sc])}</b>${ico('chevDown', 13)}</button><button type="button" class="pk" data-ce="dp">${esc(H.dp[CE.dp])}${ico('chevDown', 13)}</button>`;
+  $('#cePk').innerHTML = '';
   $('[data-slot]', p).replaceWith($('#chatIn').closest('.ask__in')); $('#cePk').prepend($('#chatAgt')); }
-const ceSend = q => { q = (q || '').trim(); if (!q) return; const H = TX[LANG].ce || TX.en.ce; $('#chatIn').value = ''; if (!S.chat.length) CE_PICK = { sc: CE.sc, got: [...(CE.sc ? [H.sc[CE.sc]] : []), H.dp[CE.dp]] }; chatSend(q); };
+const ceSend = q => { q = (q || '').trim(); if (!q) return; $('#chatIn').value = ''; chatSend(q); };
 $('#chatThread').addEventListener('click', e => { const b = e.target.closest('[data-ce],[data-ce-q]'); if (!b) return; const H = TX[LANG].ce || TX.en.ce, inp = $('#chatIn');
   if (b.dataset.ceQ) { ceSend(b.dataset.ceQ); return; }
-  const k = b.dataset.ce; if (k === 'sc' || k === 'dp') { CE[k] = (CE[k] + 1) % H[k].length; store.set(k === 'sc' ? 'ceSc' : 'ceDp', CE[k]); syncChat(); return; }
 });
 function renderHist() { $('#chatHist').innerHTML = S.hist.slice(0, 7).map(h => `<li><button data-act="ask-open" data-q="${esc(h)}">${ico('message', 14)}<span>${esc(h)}</span></button></li>`).join(''); }
 function openChat(from) { const c = $('#chat'); if (EDIT) setEdit(false); CHAT_OPEN = true; const el = from || $('#heroAsk'), r = el && !el.closest('[hidden]') ? el.getBoundingClientRect() : null, vw = innerWidth, vh = innerHeight;
@@ -2357,15 +2343,7 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 /* ---------- sidebar + pages ---------- */
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
-  $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; renderApps(); }
-/* one-line navigation: page launcher (⋮⋮ beside the bell) and the profile menu */
-const navOn = () => innerWidth > 1100;
-function renderApps() { const g = $('#appsGrid'); if (!g) return; $('#appsH').textContent = t('appsGo'); $('#btnApps').setAttribute('aria-label', t('appsGo'));
-  g.innerHTML = Object.entries(PAGES).filter(([, p]) => !p.bottom).map(([k, p]) => `<button class="${PAGE === k ? 'is-on' : ''}" data-act="nav" data-page="${k}"><i>${ico(p.icon, 20)}</i><span>${t('nav.' + k)}</span>${p.isNew ? `<em>${t('nav.new')}</em>` : ''}</button>`).join('');
-  $('#mePop').innerHTML = `<div class="me__h"><span class="avatar">SH</span><div><b>${LANG === 'ar' ? 'سيد حافظ' : 'Syed Hafeez'}</b><small>${t('plan') !== 'plan' ? t('plan') : 'Enterprise'}</small></div></div>
-    <button data-act="nav" data-page="settings">${ico('settings', 17)}${t('nav.settings')}</button><button data-me="theme">${ico(root.dataset.theme === 'dark' ? 'sun' : 'moon', 17)}${t('theme')}<em>${root.dataset.theme === 'dark' ? t('meDark') : t('meLight')}</em></button><button data-me="lang">${ico('globe', 17)}${t('meLang')}<em>${LANG === 'ar' ? 'العربية' : 'English'}</em></button><hr><button data-act="logout">${ico('logout', 17)}${t('nav.logout')}</button>`; }
-const popToggle = (btn, pop, on) => { on = on ?? pop.hidden; pop.hidden = !on; btn.setAttribute('aria-expanded', on); };
-const closeNhPops = () => { [['#btnApps', '#appsPop'], ['#btnUser', '#mePop']].forEach(([b, p]) => $(p) && popToggle($(b), $(p), false)); };
+  $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
 function layoutFor(p) { const saved = store.get('layout10.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
@@ -2598,11 +2576,7 @@ function liveTick() { const bump = (o, k, d) => { if (o && typeof o[k] === 'stri
   Object.values(D.kp || {}).forEach(arr => { bump(arr[0], 'v', 2); bump(arr[2], 'v', 1); }); if (D.media) { D.media.mentions = (D.media.mentions || 0) + 37; if (typeof D.media.pos === 'number') D.media.pos += 1; } }
 function setAuto(on) { Grid.setAuto(on); store.set('auto', on); if ($('#dAuto')) { $('#dAuto').classList.toggle('is-on', on); $('#dAuto').setAttribute('aria-pressed', String(on)); } }
 $('#markRead').onclick = () => { S.notifs.forEach(n => n.unread = false); renderNotifs(); renderTop(); };
-$('#btnEdit').onclick = () => setEdit(!EDIT); $('#editDone').onclick = () => setEdit(false); $('#dDone').onclick = () => setEdit(false); $('#btnTheme').onclick = toggleTheme; $('#btnLang').onclick = toggleLang; $('#btnUser').onclick = e => { if (!navOn()) return setPage('settings'); e.stopPropagation(); renderApps(); popToggle($('#btnApps'), $('#appsPop'), false); popToggle($('#btnUser'), $('#mePop')); };
-$('#btnApps').onclick = e => { e.stopPropagation(); renderApps(); popToggle($('#btnUser'), $('#mePop'), false); popToggle($('#btnApps'), $('#appsPop')); };
-document.addEventListener('click', e => { const me = e.target.closest('[data-me]'); if (me) { if (me.dataset.me === 'theme') toggleTheme(); else toggleLang(); renderApps(); return; }
-  if (e.target.closest('[data-act="nav"], [data-act="logout"]') || !e.target.closest('#appsPop, #mePop')) closeNhPops(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNhPops(); });
+$('#btnEdit').onclick = () => setEdit(!EDIT); $('#editDone').onclick = () => setEdit(false); $('#dDone').onclick = () => setEdit(false); $('#btnTheme').onclick = toggleTheme; $('#btnLang').onclick = toggleLang; $('#btnUser').onclick = () => setPage('settings');
 $('#btnNotif').onclick = () => { const p = $('#notifPop'); p.hidden = !p.hidden; };
 $('#dUndo').onclick = () => { Grid.undo(); refreshCards(); }; $('#dRedo').onclick = () => { Grid.redo(); refreshCards(); }; $('#dReset').onclick = resetLayout; $('#dAuto').onclick = () => setAuto(!Grid.auto);
 $('#sideToggle').onclick = toggleSide; $('#btnMenu').onclick = () => document.body.classList.toggle('side-open'); $('#scrim').onclick = () => document.body.classList.remove('side-open');
