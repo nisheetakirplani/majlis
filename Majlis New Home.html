@@ -509,7 +509,7 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 .grid--stack .w{transition:none}.grid--stack .w__rm,.grid--stack .w__sz,.grid--stack .w__rs{display:none!important}
 /* top bar: greeting replaces search; theme + language switches removed */
 .search[hidden],#btnTheme[hidden],#btnLang[hidden]{display:none!important}
-.top .hello{flex:1 1 auto;min-width:0;padding:0;align-items:center;flex-wrap:nowrap}.top .hello__l{flex:none}.hstat small{white-space:nowrap}#btnEdit span,.user__t{display:none}#btnEdit{width:48px;padding:0}.user{padding-inline-end:5px}
+.top .hello{flex:1 1 auto;min-width:0;padding:0;align-items:center;flex-wrap:nowrap}.top .hello__l{min-width:0}
 .top .hello h1{font:600 28px/34px var(--font);letter-spacing:-.025em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top .hello__l p{font-size:13.5px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top .hello__l small{margin-bottom:2px}.top .hello>.sync{margin-inline-start:auto;flex:none}.main{padding-top:14px}
 @media (max-width:1100px){.top .hello>.sync{display:none}}
@@ -652,7 +652,6 @@ blockquote{margin:0;padding:12px 16px;border-radius:var(--rs);background:var(--t
 /* greeting row with two headline stats (reference 2) */
 .hstat{display:flex;gap:30px;margin-inline-start:auto;align-items:flex-end}.hstat button{display:flex;flex-direction:column;gap:4px;text-align:start}.hstat small{font:500 12.5px/1 var(--font);color:var(--ink3)}.hstat b{display:flex;align-items:flex-start;gap:4px;font:600 34px/1 var(--font);letter-spacing:-.025em}.hstat b .i{color:var(--ink3);margin-top:2px}.hstat button:hover b .i{color:var(--accent)}
 @media (max-width:1100px){.hstat{display:none}}
-@media (min-width:1101px) and (max-width:1620px){.hstat{gap:20px}.hstat b{font-size:26px}.top .hello .sync{display:none}.top .hello{flex-wrap:nowrap}.top .hello__l{flex:none}.hstat small{white-space:nowrap}#btnEdit span,.user__t{display:none}#btnEdit{width:48px;padding:0}.user{padding-inline-end:5px}.top .hello h1{white-space:nowrap;font-size:29px;line-height:36px}}
 /* widgets in the style of reference 2: soft outer card, title + subtitle, round buttons, content on an inner white card */
 .w{padding:12px;border-radius:26px;background:color-mix(in srgb,var(--card-s) 48%,transparent)}.w .w__in{gap:10px}
 .w__h{padding:4px 6px 0;min-height:40px}.w__tt{display:flex;flex-direction:column;min-width:0}.w__tt b{font:600 16px/1.2 var(--font)}.w__tt small{font:400 11.5px/1.3 var(--font);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2315,7 +2314,7 @@ $('#homeExp').onclick = () => openChat($('#home')); $('#homeNew').onclick = () =
 $('#homeChips').addEventListener('click', e => { const b = e.target.closest('[data-home-q]'); if (b) chatSend(b.dataset.homeQ); });
 /* new home: greeting row carries two headline stats */
 const __renderHello = renderHello; renderHello = function () { __renderHello(); const pg = PAGES[PAGE]; if (!pg.hero || !homeOn()) return;
-  $('#hello').insertAdjacentHTML('beforeend', `<div class="hstat"><button data-act="ask-open" data-q="Which decisions are waiting on me?"><small>${t('home.st1')}</small><b>${S.openDecisions().length}${ico('arrowUR', 18)}</b></button><button data-act="ask-open" data-q="Explain the change in revenue"><small>${t('home.st2')}</small><b>+8.4%${ico('arrowUR', 18)}</b></button></div>`); renderHome(); };
+  renderHome(); };
 addEventListener('resize', () => renderHello());
 const setMini = on => { $('#chat').classList.toggle('is-mini', on); $('#chatFold').setAttribute('aria-pressed', on); $('#chatFold').setAttribute('aria-label', t(on ? 'chatExpand' : 'chatCollapse')); store.set('chatMini', on); };
 $('#chatFold').onclick = () => setMini(!$('#chat').classList.contains('is-mini')); setMini(!!store.get('chatMini', false));
