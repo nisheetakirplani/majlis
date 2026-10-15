@@ -865,6 +865,19 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 .v3g{display:flex;align-items:center;gap:10px;margin:6px 4px 12px}.v3g h2{margin:0;font:600 19px/1.2 var(--font);letter-spacing:-.01em}.v3g small{color:var(--ink3);font-size:13px}
 @media (max-width:1100px){.v3h__t{font-size:32px}}
 @media (max-width:760px){.v3h__md button+button,.v3h__r .ic-btn[aria-label="Add a file"],.v3g small{display:none}.v3h__in{padding:14px 10px 10px 16px}.v3h{padding:32px 16px 22px;gap:16px}.v3h__t{font-size:26px}.v3h__chips{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.v3h__chips button{flex:none}}
+/* split ask hero */
+.v3h{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center;gap:32px;padding:40px 40px 40px}
+.v3h__l{display:flex;flex-direction:column;gap:16px;min-width:0}.v3h__d{font:500 13px/1 var(--font);color:var(--ink3)}.v3h .v3h__t{text-align:start;font-size:38px}
+.v3h .v3h__in{max-width:none}.v3h__f{position:relative;display:block}.v3h__f input{position:relative;z-index:1;width:100%}
+.v3rot{position:absolute;top:0;inset-inline-start:0;z-index:2;display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:2px 0;font:400 16px/1.3 var(--font);color:var(--ink3);text-align:start;transition:opacity .26s,transform .26s,color .15s}.v3rot span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v3rot kbd{display:inline-grid;place-items:center;height:22px;padding:0 6px;border-radius:6px;background:var(--tile);font:600 11px/1 var(--font);color:var(--ink3);opacity:0;transition:opacity .15s}
+.v3rot:hover{color:var(--ink)}.v3rot:hover span{text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:4px}.v3rot:hover kbd{opacity:1}.v3rot.out{opacity:0;transform:translateY(-6px)}.v3rot.hide{display:none}
+.v3h__rt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.v3nu{display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:24px;background:var(--dark);color:var(--dark-ink);box-shadow:var(--shadow)}.v3nu__k{display:flex;align-items:center;gap:8px;font:600 11px/1 var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--hi)}.v3nu__k i{width:7px;height:7px;border-radius:50%;background:var(--hi);animation:v3pl 1.6s infinite}@keyframes v3pl{50%{opacity:.3}}
+.v3nu__cd{display:flex;align-items:baseline;gap:8px}.v3nu__cd b{font:600 36px/1 var(--font);letter-spacing:-.02em}.v3nu__cd small{font-size:13px;opacity:.7}.v3nu h4{margin:0;font:600 22px/1.15 var(--font);letter-spacing:-.01em}.v3nu p{margin:0;font-size:13px;opacity:.75;line-height:1.45}
+.v3nu__a{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.v3nu__b{height:36px;padding:0 15px;border-radius:99px;background:rgba(255,255,255,.12);color:inherit;font:600 13px/1 var(--font)}.v3nu__b:hover{background:rgba(255,255,255,.2)}.v3nu__b.y{background:var(--hi);color:var(--hi-ink)}:root[data-theme="dark"] .v3nu__b:not(.y){background:rgba(0,0,0,.08)}
+.v3nu__mini{display:flex;flex-direction:column;gap:2px;padding:2px}.v3nu__mini button{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font:500 13.5px/1.3 var(--font);text-align:start}.v3nu__mini button:hover{background:color-mix(in srgb,var(--card-s) 70%,transparent)}.v3nu__mini time{font:600 12.5px/1 var(--font);color:var(--ink3);min-width:42px}.v3nu__mini span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v3nu__mini em{font-style:normal;font:600 12.5px/1 var(--font);color:var(--accent)}
+@media (max-width:1100px){.v3h{grid-template-columns:1fr;gap:20px;padding:28px}}
+@media (max-width:760px){.v3h{padding:24px 16px}.v3h .v3h__t{font-size:26px}.v3rot{font-size:15px}.v3rot span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.v3h__f{min-height:42px}}
 </style>
 
 <div class="app" id="app">
@@ -2565,16 +2578,39 @@ function v3Ghost() { const O = S.openDecisions(), sg = O.find(d => DEC_X[d.id] &
     return sg ? [`What do I need to know before signing the ${what}?`, x.at ? `due ${x.at}` : 'due today'] : [`Should I approve ${what}?`, x.v ? `AED ${x.v}M · waiting ${x.wait}` : `waiting ${x.wait || 'on you'}`]; }
   const now = new Date(), cur = now.getHours() * 60 + now.getMinutes(), nx = D.meetings.find(m => mins(m.s) >= cur);
   return nx ? [`Prepare me for ${nx.title}`, `at ${nx.s}`] : ['What changed since yesterday?', 'daily recap']; }
-function renderV3() { const h = $('#v3hero'); if (!h) return; const nm = LANG === 'ar' ? 'سيد' : 'Syed';
-  h.innerHTML = `<h1 class="v3h__t">${LANG === 'ar' ? `كيف أساعدك اليوم يا <span>${nm}</span>؟` : `How can I help you today, <span>${nm}</span>?`}</h1>
-    <label class="v3h__in"><input id="v3In" autocomplete="off" placeholder="${esc(v3Ghost()[0])}"><span class="v3h__r"><span class="v3h__md"><button type="button" class="on">${ico('message', 15)}Ask</button><button type="button" data-q="Find the latest board pack">${ico('search', 15)}Find</button></span><span class="sp"></span><button type="button" class="ic-btn" aria-label="Add a file">${ico('plus', 19)}</button><button type="button" class="ic-btn" id="v3Mic" aria-label="Voice">${ico('mic', 18)}</button><button type="button" class="ic-btn ic-btn--accent" id="v3Send" aria-label="Send">${ico('arrowRight', 18)}</button></span></label>
-    <button type="button" class="v3gh" id="v3Gh"><kbd>Tab</kbd><span>to ask</span><b>“${esc(v3Ghost()[0])}”</b><small>· ${esc(v3Ghost()[1])}</small></button>`; }
+/* hero, split: greeting + input on the left (real questions rotate inside the field; tap one to ask it), the most urgent item on the right as a big Next-up card */
+const V3 = { i: 0, tm: 0, ct: 0 };
+function v3Prompts() { const now = new Date(), cur = now.getHours() * 60 + now.getMinutes(), nx = D.meetings.find(m => mins(m.s) >= cur), O = S.openDecisions(), low = x => x.charAt(0).toLowerCase() + x.slice(1), P = [v3Ghost()[0]];
+  O.filter(d => !(DEC_X[d.id] || {}).sign).slice(0, 1).forEach(d => P.push(`Should I approve ${low(d.title).replace(/^approve /, '')}?`));
+  if (nx) P.push(`Prepare me for ${nx.title} at ${nx.s}`);
+  P.push('Who has waited longest for a reply from me?', 'Why is revenue ahead of plan?', 'How much revenue is exposed to the KSA price cut?'); return [...new Set(P)]; }
+function v3Next() { const O = S.openDecisions(), sg = O.find(d => DEC_X[d.id] && DEC_X[d.id].sign), d = sg || O.find(d => DEC_X[d.id] && DEC_X[d.id].v) || O[0];
+  const now = new Date(), cur = now.getHours() * 60 + now.getMinutes(), M = D.meetings.filter(m => mins(m.s) >= cur);
+  if (!d) return M[0] ? { k: 'meet', at: M[0].s, title: M[0].title, sub: M[0].where || '', q: `Prepare me for ${M[0].title}`, rest: M.slice(1, 3) } : null;
+  const x = DEC_X[d.id] || {}, left = x.at ? mins(x.at) - cur : null;
+  return { k: 'dec', d, x, at: x.at, left, title: d.title, sub: [(d.detail || '').replace(/\.$/, ''), x.from ? `${x.from} has waited ${x.wait}` : ''].filter(Boolean).join(' · '), q: sg ? v3Ghost()[0] : `Brief me on ${low1(d.title)}`, rest: M.slice(0, 2) }; }
+const low1 = x => x.charAt(0).toLowerCase() + x.slice(1);
+const v3Left = n => n == null ? '' : n <= 0 ? 'Due now' : n < 60 ? `${n}m` : `${Math.floor(n / 60)}h ${String(n % 60).padStart(2, '0')}m`;
+function renderV3() { const h = $('#v3hero'); if (!h) return; const old = $('#v3In'), keep = old ? old.value : '', foc = old && document.activeElement === old, rv = old && $('#v3Rot') ? $('#v3Rot').dataset.q : null, nm = LANG === 'ar' ? 'سيد' : 'Syed', N = v3Next(), P = v3Prompts(); V3.i = V3.i % P.length;
+  const dt = new Date().toLocaleDateString(LANG === 'ar' ? 'ar-AE' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  h.innerHTML = `<div class="v3h__l"><small class="v3h__d">${dt} · Dubai</small><h1 class="v3h__t">${LANG === 'ar' ? `كيف أساعدك اليوم يا <span>${nm}</span>؟` : `How can I help you today, <span>${nm}</span>?`}</h1>
+      <label class="v3h__in"><span class="v3h__f"><input id="v3In" autocomplete="off" aria-label="${esc(t('home.ph'))}"><button type="button" class="v3rot" id="v3Rot" data-q="${esc(P[V3.i])}" title="Tap to ask"><span>${esc(P[V3.i])}</span><kbd>↵</kbd></button></span>
+        <span class="v3h__r"><span class="sp"></span><button type="button" class="ic-btn" aria-label="Add a file">${ico('plus', 19)}</button><button type="button" class="ic-btn" id="v3Mic" aria-label="Voice">${ico('mic', 18)}</button><button type="button" class="ic-btn ic-btn--accent" id="v3Send" aria-label="Send">${ico('arrowRight', 18)}</button></span></label></div>
+    <div class="v3h__rt">${N ? `<div class="v3nu"><span class="v3nu__k"><i></i>Next up</span>${N.at ? `<div class="v3nu__cd"><b data-v3left>${v3Left(N.left)}</b><small>${N.left > 0 ? 'until ' + N.at : N.at ? 'was due ' + N.at : ''}</small></div>` : ''}<h4>${esc(N.title)}</h4><p>${esc(N.sub)}</p>
+      <div class="v3nu__a">${N.k === 'dec' ? `<button class="v3nu__b y" data-act="decision" data-do="approved" data-id="${N.d.id}"${N.x.sign ? ' data-hold="1"' : ''}>${N.x.sign ? 'Sign now' : 'Approve'}</button>` : ''}<button class="v3nu__b" data-q="${esc(N.q)}">Brief me first</button></div></div>
+      <div class="v3nu__mini">${N.rest.map(m => `<button type="button" data-q="${esc('Prepare me for ' + m.title)}"><time>${m.s}</time><span>${esc(m.title)}</span><em>Prep →</em></button>`).join('')}</div>` : ''}</div>`;
+  const inp = $('#v3In'); if (keep) { inp.value = keep; $('#v3Rot').classList.add('hide'); } if (foc) { inp.focus(); inp.setSelectionRange(keep.length, keep.length); } if (rv && P.includes(rv)) { V3.i = P.indexOf(rv); $('#v3Rot').dataset.q = rv; $('#v3Rot span').textContent = rv; }
+  if (!V3.tm) v3Rotate(); }
+function v3Rotate() { clearInterval(V3.tm); V3.tm = setInterval(() => { const b = $('#v3Rot'), inp = $('#v3In'); if (!b || inp.value || b.matches(':hover')) return; const P = v3Prompts(); V3.i = (V3.i + 1) % P.length;
+  b.classList.add('out'); setTimeout(() => { b.dataset.q = P[V3.i]; $('span', b).textContent = P[V3.i]; b.classList.remove('out'); }, 260); }, 3600); }
+clearInterval(V3.ct); V3.ct = setInterval(() => { const el = $('[data-v3left]'), N = el && v3Next(); if (N) el.textContent = v3Left(N.left); }, 30000);
+document.addEventListener('input', e => { if (e.target.id === 'v3In') $('#v3Rot')?.classList.toggle('hide', !!e.target.value); });
+document.addEventListener('click', e => { if (e.target.closest('[data-act="decision"]') && e.target.closest('#v3hero')) setTimeout(renderV3, 400); });
 function renderRec() { const r = $('#sideRec'); if (!r) return; r.innerHTML = `<h4>${t('recent')}</h4>` + S.hist.slice(0, 6).map((h, i) => `<button type="button" class="${i < 1 ? 'is-new' : ''}" data-q="${esc(h)}" title="${esc(h)}">${ico('message', 14)}<span>${esc(h)}</span></button>`).join(''); }
 const v3Send = () => { const v = $('#v3In').value.trim(); if (!v) return $('#v3In').focus(); $('#v3In').value = ''; chatSend(v, { open: true, from: $('#v3hero .v3h__in') }); };
 document.addEventListener('click', e => { if (e.target.closest('#v3Send')) return v3Send(); if (e.target.closest('#v3Mic')) return voice($('#v3In')).then(v => { if (v) { $('#v3In').value = v; v3Send(); } });
   const q = e.target.closest('#v3hero [data-q], #sideRec [data-q]'); if (q) { e.preventDefault(); chatSend(q.dataset.q, { open: true, from: q }); } });
-document.addEventListener('keydown', e => { if (e.target.id !== 'v3In') return; if (e.key === 'Enter') { e.preventDefault(); v3Send(); } else if (e.key === 'Tab' && !e.target.value) { e.preventDefault(); e.target.value = v3Ghost()[0]; } });
-document.addEventListener('click', e => { if (!e.target.closest('#v3Gh')) return; const i = $('#v3In'); if (!i.value) i.value = v3Ghost()[0]; v3Send(); });
+document.addEventListener('keydown', e => { if (e.target.id !== 'v3In') return; if (e.key === 'Enter') { e.preventDefault(); if (!e.target.value && $('#v3Rot')) e.target.value = $('#v3Rot').dataset.q; v3Send(); } else if (e.key === 'Tab' && !e.target.value && $('#v3Rot')) { e.preventDefault(); e.target.value = $('#v3Rot').dataset.q; $('#v3Rot').classList.add('hide'); } });
 $('#sideNew').onclick = () => { if (S.chat.length) $('#chatNew').click(); openChat($('#sideNew')); };
 const __v3Hist = renderHist; renderHist = function () { __v3Hist(); renderRec(); };
 const __v3Hello = renderHello; renderHello = function () { __v3Hello(); renderV3(); renderRec(); $('#sideNew span').textContent = t('newChat'); };
