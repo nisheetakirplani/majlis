@@ -883,6 +883,13 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 .pal__r{padding:7px 10px}.pal__r .pal__ic{width:30px;height:30px}
 .pal__sec{display:inline-flex;vertical-align:1px;margin-inline-end:8px;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:99px;background:color-mix(in srgb,var(--card-s) 85%,transparent);font:600 11px/1 var(--font);color:var(--ink2);box-shadow:0 1px 4px rgba(0,0,0,.06)}.pal__sec .dot{width:7px;height:7px}
 .pal__sz p{margin:0;flex:1;min-width:0;font-size:13px;color:var(--ink2)}
+
+/* Inbox & decisions: tabs in the header, drafts list */
+.seg--tri button{display:inline-flex;align-items:center;gap:6px}.seg--tri em{font-style:normal;min-width:18px;height:18px;padding:0 5px;border-radius:99px;display:inline-grid;place-items:center;font:700 10.5px/1 var(--font);background:var(--line);color:var(--ink2)}.seg--tri button.is-on em{background:var(--hi);color:var(--hi-ink)}
+.tri-dr{display:flex;flex-direction:column;gap:2px;flex:1;min-height:0;overflow:auto}.tri-d{display:flex;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid var(--line)}.tri-d:first-child{border-top:0}
+.tri-di{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,#8b6fd9 16%,transparent);color:#7a5cd0}:root[data-theme="dark"] .tri-di{color:#b49cf5}
+.tri-dm{flex:1;min-width:0}.tri-dm b{display:block;font:600 13.5px/1.3 var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tri-dm small{display:block;font-size:12px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tri-f{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3)}.tri-f .link{margin-inline-start:auto;font:600 12.5px/1 var(--font);color:var(--accent)}
 </style>
 
 <div class="app" id="app">
@@ -979,8 +986,8 @@ const TX = {
     ask: 'Ask Majlis', askPh: 'Ask about your company…', send: 'Send', listening: 'Listening…', thinking: 'Thinking…', recent: 'Recent', actions: 'Actions', noResults: 'No results. Press Enter to ask Majlis.', askAbout: 'Ask Majlis: “{q}”',
     approve: 'Approve', reject: 'Reject', approved: 'Approved', rejected: 'Rejected', delegate: 'Delegate', reply: 'Reply', archive: 'Archive', snooze: 'Snooze', prep: 'Prep me', open: 'open', allClear: 'All clear', unread: 'unread', meetings: 'meetings', next: 'Next', now: 'Now', in: 'in', min: 'min', h: 'h',
     tabs: { all: 'All', ai: 'AI & Insights', overview: 'Overview', comms: 'Communication', work: 'Work', docs: 'Documents', finance: 'Finance & Risk', people: 'People & Customers', utils: 'Utilities' },
-    w: { ask: 'Ask Majlis', brief: 'Daily brief', pulse: 'Company pulse', revenue: 'Revenue & cash', calendar: 'Today', inbox: 'Priority inbox', teams: 'Teams activity', decisions: 'Decisions', projects: 'Projects', risks: 'Risks to watch', docs: 'Documents', people: 'People', customers: 'Customers', tasks: 'My tasks', clocks: 'World clocks' },
-    wd: { ask: 'Chat or talk to Majlis about your company', brief: 'AI summary of what matters today', pulse: 'Revenue, runway, headcount and NPS', revenue: 'Revenue and cash trend with periods', calendar: 'Meetings from Outlook and Teams', inbox: 'Emails that need you', teams: 'Channel activity and mentions', decisions: 'Approvals waiting on you', projects: 'Health of strategic projects', risks: 'Top risks and heat map', docs: 'Files changing across SharePoint and OneDrive', people: 'Headcount, hiring and attrition', customers: 'NPS and accounts at risk', tasks: 'Your checklist for today', clocks: 'Time in your key locations' },
+    w: { triage: 'Inbox & decisions', ask: 'Ask Majlis', brief: 'Daily brief', pulse: 'Company pulse', revenue: 'Revenue & cash', calendar: 'Today', inbox: 'Priority inbox', teams: 'Teams activity', decisions: 'Decisions', projects: 'Projects', risks: 'Risks to watch', docs: 'Documents', people: 'People', customers: 'Customers', tasks: 'My tasks', clocks: 'World clocks' },
+    wd: { triage: 'Decisions, priority emails and drafted replies', ask: 'Chat or talk to Majlis about your company', brief: 'AI summary of what matters today', pulse: 'Revenue, runway, headcount and NPS', revenue: 'Revenue and cash trend with periods', calendar: 'Meetings from Outlook and Teams', inbox: 'Emails that need you', teams: 'Channel activity and mentions', decisions: 'Approvals waiting on you', projects: 'Health of strategic projects', risks: 'Top risks and heat map', docs: 'Files changing across SharePoint and OneDrive', people: 'Headcount, hiring and attrition', customers: 'NPS and accounts at risk', tasks: 'Your checklist for today', clocks: 'Time in your key locations' },
     sizes: { S: 'S', M: 'M', L: 'L', XL: 'XL' }, langName: 'English', toastAdded: '{w} added', toastRemoved: '{w} hidden', toastReset: 'Layout reset', toastPreset: '{p} layout applied', archived: 'Archived', undone: 'Undone', connected: 'sources connected',
     dragToAdd: 'Drag to the dashboard or tap Add', nothing: 'Nothing here' },
   ar: { search: 'ابحث في الأدوات والأشخاص والمستندات…', customize: 'تخصيص', done: 'تم', theme: 'تبديل المظهر', language: 'اللغة', notifications: 'الإشعارات', markRead: 'تحديد الكل كمقروء',
@@ -989,8 +996,8 @@ const TX = {
     ask: 'اسأل مجلس', askPh: 'اسأل عن شركتك…', send: 'إرسال', listening: 'أستمع…', thinking: 'أفكر…', recent: 'الأحدث', actions: 'إجراءات', noResults: 'لا نتائج. اضغط Enter لسؤال مجلس.', askAbout: 'اسأل مجلس: «{q}»',
     approve: 'موافقة', reject: 'رفض', approved: 'تمت الموافقة', rejected: 'تم الرفض', delegate: 'تفويض', reply: 'رد', archive: 'أرشفة', snooze: 'تأجيل', prep: 'جهّزني', open: 'مفتوحة', allClear: 'لا شيء معلّق', unread: 'غير مقروءة', meetings: 'اجتماعات', next: 'التالي', now: 'الآن', in: 'خلال', min: 'د', h: 'س',
     tabs: { all: 'الكل', ai: 'الذكاء الاصطناعي', overview: 'نظرة عامة', comms: 'التواصل', work: 'العمل', docs: 'المستندات', finance: 'المالية والمخاطر', people: 'الأفراد والعملاء', utils: 'أدوات مساعدة' },
-    w: { ask: 'اسأل مجلس', brief: 'الموجز اليومي', pulse: 'نبض الشركة', revenue: 'الإيرادات والنقد', calendar: 'اليوم', inbox: 'البريد المهم', teams: 'نشاط Teams', decisions: 'القرارات', projects: 'المشاريع', risks: 'مخاطر للمراقبة', docs: 'المستندات', people: 'الموظفون', customers: 'العملاء', tasks: 'مهامي', clocks: 'ساعات العالم' },
-    wd: { ask: 'تحدّث مع مجلس عن شركتك', brief: 'ملخص ذكي لما يهمك اليوم', pulse: 'الإيرادات والسيولة والموظفون ومؤشر الرضا', revenue: 'اتجاه الإيرادات والنقد', calendar: 'اجتماعات Outlook وTeams', inbox: 'رسائل تحتاج إليك', teams: 'نشاط القنوات والإشارات', decisions: 'موافقات بانتظارك', projects: 'صحة المشاريع الاستراتيجية', risks: 'أهم المخاطر وخريطتها', docs: 'ملفات تتغير في SharePoint وOneDrive', people: 'الموظفون والتوظيف والاستقالات', customers: 'مؤشر الرضا والحسابات المعرضة للخطر', tasks: 'قائمة مهامك اليوم', clocks: 'التوقيت في مواقعك الرئيسية' },
+    w: { triage: 'البريد والقرارات', ask: 'اسأل مجلس', brief: 'الموجز اليومي', pulse: 'نبض الشركة', revenue: 'الإيرادات والنقد', calendar: 'اليوم', inbox: 'البريد المهم', teams: 'نشاط Teams', decisions: 'القرارات', projects: 'المشاريع', risks: 'مخاطر للمراقبة', docs: 'المستندات', people: 'الموظفون', customers: 'العملاء', tasks: 'مهامي', clocks: 'ساعات العالم' },
+    wd: { triage: 'القرارات والبريد المهم والردود المسودة', ask: 'تحدّث مع مجلس عن شركتك', brief: 'ملخص ذكي لما يهمك اليوم', pulse: 'الإيرادات والسيولة والموظفون ومؤشر الرضا', revenue: 'اتجاه الإيرادات والنقد', calendar: 'اجتماعات Outlook وTeams', inbox: 'رسائل تحتاج إليك', teams: 'نشاط القنوات والإشارات', decisions: 'موافقات بانتظارك', projects: 'صحة المشاريع الاستراتيجية', risks: 'أهم المخاطر وخريطتها', docs: 'ملفات تتغير في SharePoint وOneDrive', people: 'الموظفون والتوظيف والاستقالات', customers: 'مؤشر الرضا والحسابات المعرضة للخطر', tasks: 'قائمة مهامك اليوم', clocks: 'التوقيت في مواقعك الرئيسية' },
     sizes: { S: 'ص', M: 'م', L: 'ك', XL: 'ك+' }, langName: 'العربية', toastAdded: 'تمت إضافة {w}', toastRemoved: 'تم إخفاء {w}', toastReset: 'تمت إعادة ضبط التخطيط', toastPreset: 'تم تطبيق تخطيط {p}', archived: 'تمت الأرشفة', undone: 'تم التراجع', connected: 'مصادر متصلة',
     dragToAdd: 'اسحبها إلى اللوحة أو اضغط إضافة', nothing: 'لا يوجد شيء' },
 };
@@ -1222,6 +1229,7 @@ _m(TX.en, { sec: { rHealthF: 'Pace {p} · landing {l} of {t}' } }); _m(TX.ar, { 
 const dayIn = d => { const x = new Date(); x.setDate(x.getDate() + d); return x; };
 const BUCKETS = ['overdue', 'today', 'week', 'later'], bucketOf = d => d < 0 ? 'overdue' : d === 0 ? 'today' : d <= 6 ? 'week' : 'later';
 const whenOf = (d, at) => d < 0 ? t('q.overdueBy', { n: -d }) : d === 0 ? (at || t('q.today')) : d === 1 ? t('q.tomorrow') : dayIn(d).toLocaleDateString(LANG === 'ar' ? 'ar' : 'en-GB', { weekday: 'short', day: 'numeric' });
+const DRAFTS0 = [{ id: 1, to: 'Amal Rahman', subj: 'Re: Revised Q3 forecast', body: 'Thanks, Amal. Please proceed with the revised forecast and confirm the two accruals by Thursday.' }, { id: 2, to: 'Fatima R', subj: 'Re: KSA logistics re-tender', body: 'Go ahead with the re-tender; keep the shortlist to three suppliers.' }];
 const DEC_X = { 1: { v: 38, d: 3, from: 'Omar K', wait: '2d' }, 2: { v: 6.2, d: 4, from: 'Procurement', wait: '1d' }, 3: { v: null, d: 0, at: '14:45', from: 'Fatima R', wait: '2d', sign: true }, 4: { v: 12.3, d: 8, from: 'Real estate', wait: '4h' } };
 const decX = d => ({ ...d, ...DEC_X[d.id] });
 S.batch = { n: 8, v: 3.4, done: false }; S.decSort = 'due'; S.dealSort = 'value';
@@ -1441,6 +1449,17 @@ const W = {
       return `<div class="tms"><span class="tms__by">${ico('sparkles', 12)}${t('tm.by')}</span>${p1}${p2}<p class="tms__m">${t('tm.meta', { m: mentions, r: read, c: chans })}</p>${acts}</div>`; } },
 
   /* Work */
+  /* one widget for what needs Syed: Decisions · Inbox · Drafts (replies Majlis has drafted) — reuses the two widgets' own views */
+  triage: { group: 'work', icon: 'mail', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 7],
+    count: () => S.openDecisions().length + S.mails.filter(m => m.tag !== 'FYI').length + S.drafts.length,
+    ctl: () => { const k = S.triTab || 'dec', n = { dec: S.openDecisions().length, mail: S.mails.length, dr: S.drafts.length };
+      return `<span class="seg seg--tri" role="tablist">${['dec', 'mail', 'dr'].map(x => `<button role="tab" aria-selected="${x === k}" class="${x === k ? 'is-on' : ''}" data-act="tri-tab" data-k="${x}">${t('tri.' + x)}<em>${n[x]}</em></button>`).join('')}</span>`; },
+    render(ctx) { const k = S.triTab || 'dec';
+      if (k === 'dec') return W.decisions.render(ctx); if (k === 'mail') return W.inbox.render(ctx);
+      if (!S.drafts.length) return `<div class="big"><small>${t('tri.dr')}</small><strong>0</strong><span class="big__f"><span class="muted">${t('tri.none')}</span></span></div>`;
+      if (ctx.v === 's') return `<div class="big"><small>${t('tri.ready')}</small><strong>${S.drafts.length}</strong><span class="big__f">${avatars(S.drafts.map(d => d.to), 3)}</span></div>`;
+      return `<div class="tri-dr">${S.drafts.map(d => `<div class="tri-d"><span class="tri-di">${ico('edit', 14)}</span><span class="tri-dm"><b>${esc(d.to)} · ${esc(d.subj)}</b><small>${esc(d.body)}</small></span><button class="btn btn--ghost btn--sm" data-act="draft-edit" data-id="${d.id}">${t('tri.edit')}</button><button class="btn btn--dark btn--sm" data-act="draft-send" data-id="${d.id}">${t('tri.send')}</button></div>`).join('')}</div>
+        <div class="tri-f"><span>${t('tri.by')}</span>${S.drafts.length > 1 ? `<button class="link" data-act="draft-all">${t('tri.all')} →</button>` : ''}</div>`; } },
   decisions: { group: 'work', icon: 'tasks', viz: true, sizes: { S: [3, 2], M: [4, 3], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
     count: () => S.openDecisions().length,
     render({ v, w, h, view }) { const all = S.decisions, open = S.openDecisions(), ap = all.filter(d => d.st === 'approved').length, rj = all.filter(d => d.st === 'rejected').length;
@@ -1830,7 +1849,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['decisions', 6, 4], ['deals', 6, 4], ['inbox', 6, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['triage', 8, 4], ['deals', 4, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1846,7 +1865,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
+const SECS = { needs: ['queue', 'deadlines', 'triage', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'health'; /* widgets from other pages land in Business health if added to Overview */
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -2048,7 +2067,7 @@ function wInner(type, w, h, view) { const d = W[type], v = VARIANT(w, h), ctx = 
 const root = document.documentElement, main = $('#main'), app = $('#app');
 let EDIT = false, CHAT_OPEN = false, PAGE = 'overview', drawerDrag = null;
 const sizeOf = (type, k) => W[type].sizes[k || W[type].def];
-S.hist = [...D.history]; S.integ = D.integrations.map(x => ({ ...x }));
+S.hist = [...D.history]; S.drafts = DRAFTS0.map(x => ({ ...x })); S.triTab = store.get('triTab', 'dec'); S.integ = D.integrations.map(x => ({ ...x }));
 const connected = () => S.integ.filter(x => x.on).length;
 
 /* ---------- toasts ---------- */
@@ -2388,7 +2407,9 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-function layoutFor(p) { const saved = store.get('layout10.' + p, null); const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+function layoutFor(p) { let saved = store.get('layout10.' + p, null);
+  if (p === 'overview' && saved && !store.get('triMig', false)) { const i = saved.findIndex(x => x.type === 'decisions' || x.type === 'inbox'); if (i >= 0 && !saved.some(x => x.type === 'triage')) { saved[i] = { ...saved[i], type: 'triage', w: Math.max(saved[i].w, 6) }; saved = saved.filter((x, j) => j === i || (x.type !== 'decisions' && x.type !== 'inbox')); } store.set('triMig', true); }
+  const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
@@ -2427,6 +2448,8 @@ function buildDrawer() { const keep = $('#cat')?.scrollTop || 0;
   $('#cat').scrollTop = keep; }
 function refreshCards() { if (EDIT) buildDrawer(); else if (PAL.open) PAL.render(); }
 /* ----------------------------------------------------------- Customize · command palette (⌘K). Search, filter by health section, preview, pick a size, add. */
+_m(TX.en, { tri: { dec: 'Decisions', mail: 'Inbox', dr: 'Drafts', none: 'No drafts waiting', ready: 'Drafts ready', edit: 'Edit', send: 'Send', by: 'Drafted by Majlis from your inbox', all: 'Send all', sent: 'Reply sent to {w}', sentN: '{n} replies sent' } });
+_m(TX.ar, { tri: { dec: 'القرارات', mail: 'البريد', dr: 'المسودات', none: 'لا توجد مسودات', ready: 'مسودات جاهزة', edit: 'تعديل', send: 'إرسال', by: 'صاغها مجلس من بريدك', all: 'إرسال الكل', sent: 'تم إرسال الرد إلى {w}', sentN: 'تم إرسال {n} ردود' } });
 _m(TX.en, { pal: { add: 'Add widget', ph: 'Search widgets…', all: 'All', onDash: 'On dashboard', none: 'No widgets match “{q}”', goes: 'Goes to', size: 'Size', addB: 'Add', canAdd: '{n} not on your dashboard', canAdd1: '1 not on your dashboard', allOn: 'Everything is already on your dashboard', showOn: 'Show added ({n})', hideOn: 'Hide added', addRow: 'Add', remove: 'Remove', added: '{w} added to {s}',
   other: 'Other widgets', kMove: 'move', kAdd: 'add', kKeep: 'add and keep open', kClose: 'close' } });
 _m(TX.ar, { pal: { add: 'إضافة أداة', ph: 'ابحث عن أداة…', all: 'الكل', onDash: 'على اللوحة', none: 'لا توجد أدوات تطابق «{q}»', goes: 'تُضاف إلى', size: 'الحجم', addB: 'إضافة', canAdd: '{n} غير موجودة على لوحتك', canAdd1: 'أداة واحدة غير موجودة على لوحتك', allOn: 'كل الأدوات موجودة على لوحتك', showOn: 'عرض المضافة ({n})', hideOn: 'إخفاء المضافة', addRow: 'إضافة', remove: 'إزالة', added: 'تمت إضافة {w} إلى {s}',
@@ -2532,7 +2555,7 @@ function tickClocks() { const now = new Date(), loc = LANG === 'ar' ? 'ar-AE' : 
   $$('[data-analog]').forEach(el => { const p = tzParts(el.dataset.analog), h = (p.hour % 12) + p.minute / 60; $('[data-hand="h"]', el).setAttribute('transform', `rotate(${h * 30} 50 50)`); $('[data-hand="m"]', el).setAttribute('transform', `rotate(${p.minute * 6} 50 50)`); }); }
 
 /* ---------- global actions ---------- */
-function afterState(types) { for (const ty of new Set([...types, 'queue'])) Grid.refreshType(ty); /* My queue merges every source */ renderHello(); renderHero(); refreshCards(); Grid.drawHeads(); SecBar.render(); }
+function afterState(types) { for (const ty of new Set([...types, 'queue', 'triage'])) Grid.refreshType(ty); /* My queue merges every source */ renderHello(); renderHero(); refreshCards(); Grid.drawHeads(); SecBar.render(); }
 document.addEventListener('click', e => {
   if (e.target.closest('[data-close-chat]')) { closeChat(); return; }
   const b = e.target.closest('[data-act]'); if (!b) return; const a = b.dataset.act, id = +b.dataset.id, from = b.closest('.w, .qa, .hero__ask') || null;
@@ -2556,6 +2579,10 @@ document.addEventListener('click', e => {
   else if (a === 'cal-join') { toast(t('cal.joining', { x: D.meetings[+b.dataset.i].title })); }
   else if (a === 'inv-accept') { const g = S.inv.find(x => x.g === b.dataset.g), i = S.inv.indexOf(g); S.inv.splice(i, 1); afterState(['invites']); toast(t('inv.accepted', { n: g.n }), t('undo'), () => { S.inv.splice(i, 0, g); afterState(['invites']); }); }
   else if (a === 'inv-fix') { const c = D.invites.clash; openChat(from); chatSend(`${c.a} at ${c.at} clashes with ${c.b} at ${c.bt}. What should I move?`); }
+  else if (a === 'tri-tab') { S.triTab = b.dataset.k; store.set('triTab', S.triTab); Grid.refreshType('triage'); }
+  else if (a === 'draft-send') { const i = S.drafts.findIndex(x => x.id === id), d = S.drafts.splice(i, 1)[0]; afterState(['triage']); toast(t('tri.sent', { w: d.to }), t('undo'), () => { S.drafts.splice(i, 0, d); afterState(['triage']); }); }
+  else if (a === 'draft-all') { const all = S.drafts.splice(0); afterState(['triage']); toast(t('tri.sentN', { n: all.length }), t('undo'), () => { S.drafts.push(...all); afterState(['triage']); }); }
+  else if (a === 'draft-edit') { const d = S.drafts.find(x => x.id === id); if (d) chatSend(`Edit my draft reply to ${d.to}: “${d.body}”`, { open: true, from: b }); }
   else if (a === 'dec-sort') { S.decSort = b.dataset.s; Grid.refreshType('decisions'); }
   else if (a === 'deal-sort') { S.dealSort = b.dataset.s; Grid.refreshType('deals'); }
   else if (a === 'dec-batch') { S.batch.done = true; afterState(['decisions']); toast(t('q.batchDone', { n: S.batch.n, v: S.batch.v }), t('undo'), () => { S.batch.done = false; afterState(['decisions']); }); }
