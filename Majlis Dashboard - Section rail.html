@@ -874,6 +874,15 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 .im-sl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}.im-sl>small{font-size:12px;color:var(--ink3);margin-inline-end:2px}.im-sch{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 4px;border-radius:99px;background:var(--tile);font:500 12px/1 var(--font);color:var(--ink2);transition:background .15s}.im-sch b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--card-s);color:var(--accent);font:700 10.5px/1 var(--font)}.im-sch:hover,.im-sch.on{background:var(--accent-soft);color:var(--accent-ink)}.im-slr{margin-inline-start:auto;font-size:11.5px;color:var(--ink3)}
 .im-anc{display:flex;align-items:center;gap:10px;margin-top:8px;padding:9px 12px;border-radius:12px;background:var(--card-s);border:1px solid var(--line)}.im-anc[hidden]{display:none}.im-anc>i{color:var(--ink3);display:grid;font-style:normal}.im-anc span{flex:1;min-width:0}.im-anc b{display:block;font:600 13px/1.25 var(--font)}.im-anc small{font-size:11.5px;color:var(--ink3)}.im-anc .pb-f{margin:0}.im-anc .link{font:600 12px/1 var(--font);color:var(--accent)}.im-anc.flash{animation:imFlash 1.4s ease}
 @media (max-width:760px){.im-strip>span{display:none}.im-strip{white-space:nowrap}.im-f3{grid-template-columns:1fr 1fr}.im-f3>div:nth-child(3){grid-column:1/-1;border-inline-start:0;border-top:1px solid var(--line)}.im-ba{grid-template-columns:1fr}.im-ba>i{transform:rotate(90deg);justify-self:center}.im-slr{display:none}}
+
+/* add-widget picker, lighter: only addable widgets by default, one-line rows, quiet preview */
+.pal__lw{display:flex;flex-direction:column;min-height:0;min-width:0}.pal__lw .pal__l{flex:1;min-height:0}
+.pal__tog{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line);font:500 12.5px/1 var(--font);color:var(--ink3);flex:none}.pal__tog[hidden]{display:none}.pal__tog button{height:28px;padding:0 12px;border-radius:99px;border:1px solid var(--line);font:600 12px/1 var(--font);color:var(--ink2)}.pal__tog button:hover{border-color:var(--accent);color:var(--accent)}
+.pal__tk{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);flex:none}.pal__r.is-sel .pal__tk{background:rgba(255,255,255,.6);color:var(--hi-ink)}
+.pal__ad{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:99px;border:1px solid var(--line);font:600 12px/1 var(--font);color:var(--ink2);flex:none;transition:border-color .15s,color .15s}.pal__ad:hover{border-color:var(--accent);color:var(--accent)}.pal__r.is-sel .pal__ad{background:var(--dark);border-color:var(--dark);color:var(--dark-ink)}
+.pal__r{padding:7px 10px}.pal__r .pal__ic{width:30px;height:30px}
+.pal__sec{display:inline-flex;vertical-align:1px;margin-inline-end:8px;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:99px;background:color-mix(in srgb,var(--card-s) 85%,transparent);font:600 11px/1 var(--font);color:var(--ink2);box-shadow:0 1px 4px rgba(0,0,0,.06)}.pal__sec .dot{width:7px;height:7px}
+.pal__sz p{margin:0;flex:1;min-width:0;font-size:13px;color:var(--ink2)}
 </style>
 
 <div class="app" id="app">
@@ -929,7 +938,7 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 <aside class="trc" id="trace" aria-label="Reasoning trace" hidden></aside>
 </section>
 <div id="scrim" class="scrim"></div>
-<div id="pal" class="pal" hidden><div class="pal__box" role="dialog" aria-modal="true" aria-labelledby="palQ"><label class="pal__in"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="palQ" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="palList" aria-autocomplete="list"><kbd>esc</kbd></label><div class="pal__chips" id="palChips"></div><div class="pal__b"><div class="pal__l" id="palList" role="listbox"></div><aside class="pal__pv" id="palPv" aria-live="polite"></aside></div><footer class="pal__f" id="palF"></footer></div></div>
+<div id="pal" class="pal" hidden><div class="pal__box" role="dialog" aria-modal="true" aria-labelledby="palQ"><label class="pal__in"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="palQ" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="palList" aria-autocomplete="list"><kbd>esc</kbd></label><div class="pal__chips" id="palChips"></div><div class="pal__b"><div class="pal__lw"><div class="pal__tog" id="palTog" hidden></div><div class="pal__l" id="palList" role="listbox"></div></div><aside class="pal__pv" id="palPv" aria-live="polite"></aside></div><footer class="pal__f" id="palF"></footer></div></div>
 <div id="toasts" class="toasts" aria-live="polite"></div>
 
 <script>
@@ -2418,17 +2427,18 @@ function buildDrawer() { const keep = $('#cat')?.scrollTop || 0;
   $('#cat').scrollTop = keep; }
 function refreshCards() { if (EDIT) buildDrawer(); else if (PAL.open) PAL.render(); }
 /* ----------------------------------------------------------- Customize · command palette (⌘K). Search, filter by health section, preview, pick a size, add. */
-_m(TX.en, { pal: { add: 'Add widget', ph: 'Search widgets…', all: 'All', onDash: 'On dashboard', none: 'No widgets match “{q}”', goes: 'Goes to', size: 'Size', addB: 'Add', remove: 'Remove', added: '{w} added to {s}',
+_m(TX.en, { pal: { add: 'Add widget', ph: 'Search widgets…', all: 'All', onDash: 'On dashboard', none: 'No widgets match “{q}”', goes: 'Goes to', size: 'Size', addB: 'Add', canAdd: '{n} not on your dashboard', canAdd1: '1 not on your dashboard', allOn: 'Everything is already on your dashboard', showOn: 'Show added ({n})', hideOn: 'Hide added', addRow: 'Add', remove: 'Remove', added: '{w} added to {s}',
   other: 'Other widgets', kMove: 'move', kAdd: 'add', kKeep: 'add and keep open', kClose: 'close' } });
-_m(TX.ar, { pal: { add: 'إضافة أداة', ph: 'ابحث عن أداة…', all: 'الكل', onDash: 'على اللوحة', none: 'لا توجد أدوات تطابق «{q}»', goes: 'تُضاف إلى', size: 'الحجم', addB: 'إضافة', remove: 'إزالة', added: 'تمت إضافة {w} إلى {s}',
+_m(TX.ar, { pal: { add: 'إضافة أداة', ph: 'ابحث عن أداة…', all: 'الكل', onDash: 'على اللوحة', none: 'لا توجد أدوات تطابق «{q}»', goes: 'تُضاف إلى', size: 'الحجم', addB: 'إضافة', canAdd: '{n} غير موجودة على لوحتك', canAdd1: 'أداة واحدة غير موجودة على لوحتك', allOn: 'كل الأدوات موجودة على لوحتك', showOn: 'عرض المضافة ({n})', hideOn: 'إخفاء المضافة', addRow: 'إضافة', remove: 'إزالة', added: 'تمت إضافة {w} إلى {s}',
   other: 'أدوات أخرى', kMove: 'تنقّل', kAdd: 'إضافة', kKeep: 'إضافة مع الإبقاء مفتوحًا', kClose: 'إغلاق' } });
 const palSec = ty => SEC_ORDER.find(k => SECS[k].includes(ty)) || 'other';
-const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
+const PAL = { open: false, q: '', f: 'all', sel: null, size: {}, showOn: false,
+  hideOn() { return !this.showOn && !this.q.trim() && this.f !== 'on'; },
   types: () => Object.keys(W).filter(k => !W[k].pinned && !W[k].pageOnly), /* page-only widgets stay on their own pages */
   onDash: ty => Grid.items.filter(i => i.type === ty).length,
   list() { const toks = this.q.toLowerCase().split(/\s+/).filter(Boolean);
     return [...SEC_ORDER, 'other'].flatMap(sk => this.types().filter(ty => palSec(ty) === sk)).filter(ty => {
-      if (this.f === 'on' ? !this.onDash(ty) : this.f !== 'all' && palSec(ty) !== this.f) return false;
+      if (this.f === 'on' ? !this.onDash(ty) : this.f !== 'all' && palSec(ty) !== this.f) return false; if (this.hideOn() && this.onDash(ty)) return false;
       const hay = [t('w.' + ty), t('wd.' + ty), t('sec.' + secOf(ty)), t('tabs.' + W[ty].group), TX.en.w[ty], TX.en.wd[ty], ty].join(' ').toLowerCase(); /* English names stay searchable in Arabic */ return toks.every(x => hay.includes(x)); }); },
   hl(txt) { const toks = this.q.trim().split(/\s+/).filter(Boolean).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')); const e = esc(txt); return toks.length ? e.replace(new RegExp('(' + toks.join('|') + ')', 'gi'), '<mark>$1</mark>') : e; },
   show(on) { this.open = on; $('#pal').hidden = !on; document.body.style.overflow = on ? 'hidden' : '';
@@ -2439,16 +2449,17 @@ const PAL = { open: false, q: '', f: 'all', sel: null, size: {},
     $('#palChips').innerHTML = ['all', ...SEC_ORDER, 'other', 'on'].filter(k => k !== 'other' || cnt('other')).map(k => `<button data-pf="${k}" class="${this.f === k ? 'is-on' : ''}">${SEC_ORDER.includes(k) ? `<i class="dot dot--${secHealth(k).lv}"></i>` : ''}${k === 'all' ? t('pal.all') : k === 'on' ? ico('check', 12) + t('pal.onDash') : k === 'other' ? t('pal.other') : t('sec.' + k)}<em>${cnt(k)}</em></button>`).join('');
     let last = '';
     $('#palList').innerHTML = L.length ? L.map(ty => { const sk = palSec(ty), n = this.onDash(ty), hd = sk !== last ? (last = sk, `<div class="pal__g" role="presentation">${sk === 'other' ? '' : `<i class="dot dot--${secHealth(sk).lv}"></i>`}${sk === 'other' ? t('pal.other') : t('sec.' + sk)}</div>`) : '';
-      return `${hd}<button class="pal__r${ty === this.sel ? ' is-sel' : ''}" role="option" id="po-${ty}" aria-selected="${ty === this.sel}" data-pt="${ty}"><span class="pal__ic">${ico(W[ty].icon, 17)}</span><span class="pal__m"><b>${this.hl(t('w.' + ty))}</b><small>${this.hl(t('wd.' + ty))}</small></span>${n ? `<span class="pal__on">${ico('check', 12)}${t('pal.onDash')}${n > 1 ? ' ×' + n : ''}</span>` : ''}</button>`; }).join('')
-      : `<p class="pal__none">${t('pal.none', { q: esc(this.q) })}</p>`;
+      return `${hd}<button class="pal__r${ty === this.sel ? ' is-sel' : ''}" role="option" id="po-${ty}" aria-selected="${ty === this.sel}" data-pt="${ty}"><span class="pal__ic">${ico(W[ty].icon, 17)}</span><span class="pal__m" title="${esc(t('wd.' + ty))}"><b>${this.hl(t('w.' + ty))}</b></span>${n ? `<span class="pal__tk" title="${esc(t('pal.onDash'))}${n > 1 ? ' ×' + n : ''}">${ico('check', 12)}</span>` : `<span class="pal__ad" data-padd="${ty}">${ico('plus', 12)}${t('pal.addRow')}</span>`}</button>`; }).join('')
+      : this.q.trim() ? `<p class="pal__none">${t('pal.none', { q: esc(this.q) })}</p>` : `<p class="pal__none">${t('pal.allOn')}</p>`;
+    { const tot = this.types().filter(ty => this.f === 'all' || this.f === 'on' || palSec(ty) === this.f), off = tot.filter(ty => !this.onDash(ty)).length, on = tot.length - off;
+      $('#palTog').hidden = !!this.q.trim() || this.f === 'on' || !on; $('#palTog').innerHTML = `<span>${off === 1 ? t('pal.canAdd1') : t('pal.canAdd', { n: off })}</span><button type="button" data-ptog>${this.showOn ? t('pal.hideOn') : t('pal.showOn', { n: on })}</button>`; }
     $('#palQ').setAttribute('aria-activedescendant', this.sel ? 'po-' + this.sel : '');
     $('#palF').innerHTML = `<span><kbd>↑</kbd><kbd>↓</kbd>${t('pal.kMove')}</span><span><kbd>↵</kbd>${t('pal.kAdd')}</span><span><kbd>⇧</kbd><kbd>↵</kbd>${t('pal.kKeep')}</span><span><kbd>esc</kbd>${t('pal.kClose')}</span>`;
     this.preview(); $('.pal__r.is-sel')?.scrollIntoView({ block: 'nearest' }); },
   preview() { const ty = this.sel, el = $('#palPv'); if (!ty) { el.innerHTML = ''; return; } const d = W[ty], k = this.size[ty] || d.def, sk = secOf(ty), n = this.onDash(ty);
     const [w, h] = d.sizes[k], pw = w * 80 + (w - 1) * GAP, ph = h * ROW + (h - 1) * GAP, sc = Math.min(384 / pw, 236 / ph), r = wInner(ty, w, h, d.defView || 'data');
-    el.innerHTML = `<div class="pal__sh"><div style="position:relative;flex:none;width:${(pw * sc).toFixed(0)}px;height:${(ph * sc).toFixed(0)}px"><div class="pal__sc" style="width:${pw}px;height:${ph}px;transform:scale(${sc.toFixed(3)})"><article class="w w--v-${r.v}${r.hi ? ' w--hi' : ''}" style="width:${pw}px;height:${ph}px;position:relative"><div class="w__in">${r.html}</div></article></div></div></div><h3>${t('w.' + ty)}</h3><p>${t('wd.' + ty)}</p>
-      <span class="pal__to">${t('pal.goes')} <i class="dot dot--${secHealth(sk).lv}"></i><b>${t('sec.' + sk)}</b></span>
-      <div class="pal__sz">${t('pal.size')}<span class="seg">${Object.keys(d.sizes).map(s => `<button data-ps="${s}" class="${s === k ? 'is-on' : ''}" title="${d.sizes[s][0]}×${d.sizes[s][1]}">${t('sizes.' + s)}</button>`).join('')}</span></div>
+    el.innerHTML = `<div class="pal__sh"><div style="position:relative;flex:none;width:${(pw * sc).toFixed(0)}px;height:${(ph * sc).toFixed(0)}px"><div class="pal__sc" style="width:${pw}px;height:${ph}px;transform:scale(${sc.toFixed(3)})"><article class="w w--v-${r.v}${r.hi ? ' w--hi' : ''}" style="width:${pw}px;height:${ph}px;position:relative"><div class="w__in">${r.html}</div></article></div></div></div>
+      <div class="pal__sz"><p><span class="pal__sec" title="${esc(t('pal.goes') + ' ' + t('sec.' + sk))}"><i class="dot dot--${secHealth(sk).lv}"></i>${t('sec.' + sk)}</span>${t('wd.' + ty)}</p><span class="seg">${Object.keys(d.sizes).map(s => `<button data-ps="${s}" class="${s === k ? 'is-on' : ''}" title="${d.sizes[s][0]}×${d.sizes[s][1]}">${t('sizes.' + s)}</button>`).join('')}</span></div>
       <div class="pal__act">${n ? `<button class="btn btn--ghost btn--sm" data-pa="remove">${ico('minus', 14)}${t('pal.remove')}</button>` : ''}<button class="btn btn--dark btn--sm" data-pa="add">${ico('plus', 14)}${t('pal.addB')}<kbd>↵</kbd></button></div>`; },
   move(dx) { const L = this.list(); if (!L.length) return; this.sel = L[(L.indexOf(this.sel) + dx + L.length) % L.length]; this.render(); },
   add(keep) { const ty = this.sel; if (!ty) return; const src = $('#pal .pal__sh .w')?.getBoundingClientRect(); const n = Grid.add(ty, null, sizeOf(ty, this.size[ty])); toast(t('pal.added', { w: t('w.' + ty), s: t('sec.' + secOf(ty)) })); afterState([]);
@@ -2465,7 +2476,7 @@ $('#palQ').addEventListener('keydown', e => {
   else if (e.key === 'Enter') { e.preventDefault(); PAL.add(e.shiftKey); }
   else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (PAL.q) { PAL.q = e.target.value = ''; PAL.render(); } else PAL.show(false); } });
 $('#pal').addEventListener('mousedown', e => { if (e.target === e.currentTarget) PAL.show(false); });
-$('#pal').addEventListener('click', e => { const r = e.target.closest('[data-pt]'), f = e.target.closest('[data-pf]'), sz = e.target.closest('[data-ps]'), a = e.target.closest('[data-pa]');
+$('#pal').addEventListener('click', e => { const ad = e.target.closest('[data-padd]'), tg = e.target.closest('[data-ptog]'); if (ad) { e.stopPropagation(); PAL.sel = ad.dataset.padd; PAL.add(e.shiftKey); return; } if (tg) { PAL.showOn = !PAL.showOn; PAL.sel = null; PAL.render(); return; } const r = e.target.closest('[data-pt]'), f = e.target.closest('[data-pf]'), sz = e.target.closest('[data-ps]'), a = e.target.closest('[data-pa]');
   if (r) { if (PAL.sel === r.dataset.pt && e.detail > 1) PAL.add(false); else { PAL.sel = r.dataset.pt; PAL.render(); } }
   else if (f) { PAL.f = f.dataset.pf; PAL.sel = null; PAL.render(); }
   else if (sz) { PAL.size[PAL.sel] = sz.dataset.ps; PAL.preview(); }
