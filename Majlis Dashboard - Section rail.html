@@ -914,13 +914,13 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 .yt3--sm{gap:6px}.yt3--sm>div{padding:7px 9px}.yt3--sm strong{font-size:14.5px}.yt3--sm small{font-size:10.5px}
 .yt3__st{display:flex;gap:2px;height:6px;margin-top:3px}.yt3__st b{height:100%;background:var(--c1)}.yt3__st b:first-child{border-radius:3px 0 0 3px}.yt3__st b:last-child{border-radius:0 3px 3px 0}[dir=rtl] .yt3__st b:first-child{border-radius:0 3px 3px 0}[dir=rtl] .yt3__st b:last-child{border-radius:3px 0 0 3px}
 .yt__s1{opacity:1}.yt__s2{opacity:.68}.yt__s3{opacity:.45}.yt__s4{opacity:.26}
-.yt{display:flex;flex-direction:column;gap:1px;flex:none}.yt__r,.yt__ax{display:grid;grid-template-columns:minmax(64px,124px) minmax(0,1fr) 38px;gap:12px;align-items:center;padding:2px 8px}
+.yt{display:flex;flex-direction:column;gap:1px;flex:1 1 auto;min-height:60px;overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain}.yt>.yt__r{flex:none}.yt.is-sc:not(.at-end){-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent)}.yt__r,.yt__ax{display:grid;grid-template-columns:minmax(64px,124px) minmax(0,1fr) 38px;gap:12px;align-items:center;padding:2px 8px}
 .yt__r{min-height:29px;border-radius:10px;font-size:13px;text-align:start;transition:background .15s}.yt__r:hover{background:var(--tile)}.yt__r>span{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .yt__t{position:relative;height:14px}.yt__t::before{content:"";position:absolute;inset-inline-start:50%;top:-6px;bottom:-6px;width:1px;background:var(--line2)}.yt__t b{position:absolute;top:0;bottom:0;animation:ytIn .5s cubic-bezier(.2,.8,.2,1) both}.yt__t b.up{transform-origin:left}.yt__t b.dn{transform-origin:right}[dir=rtl] .yt__t b.up{transform-origin:right}[dir=rtl] .yt__t b.dn{transform-origin:left}@keyframes ytIn{from{transform:scaleX(0)}}@media (prefers-reduced-motion:reduce){.yt__t b{animation:none}}.yt__t b.up{inset-inline-start:50%;background:var(--c1);border-radius:0 4px 4px 0}.yt__t b.dn{inset-inline-end:50%;background:var(--bad);border-radius:4px 0 0 4px}
 [dir=rtl] .yt__t b.up{border-radius:4px 0 0 4px}[dir=rtl] .yt__t b.dn{border-radius:0 4px 4px 0}
 .yt__r em{font:600 13px/1 var(--font);font-style:normal;text-align:end;color:var(--ink3)}.yt__r em.up{color:var(--c1)}.yt__r em.dn{color:var(--bad)}
 .yt__ax{font-size:11px;color:var(--ink3);flex:none;padding-block:0}.yt__ax div{display:flex;justify-content:space-between}
-.yt__n{margin:auto 0 0;padding:8px 12px;border-radius:12px;background:var(--tile);font-size:12.5px;color:var(--ink2);flex:none}.yt__n b{font-weight:600;color:var(--ink)}
+.yt__n{margin:0;padding:8px 12px;border-radius:12px;background:var(--tile);font-size:12.5px;color:var(--ink2);flex:none}.yt__n b{font-weight:600;color:var(--ink)}
 
 /* Draft reply popup */
 .ml{position:fixed;inset:0;z-index:75;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,24,20,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:palIn .18s ease-out}.ml[hidden]{display:none}
@@ -1839,13 +1839,13 @@ const W = {
       const head = `<div class="yt__h"><strong>AED ${T.land}M</strong><span>${t('yt.ifW')}</span>${tg}</div>`;
       if (v === 'wide' || h <= 2) return tiles;
       if (h <= 3) return `${tiles}${head}`;
-      const roomN = h >= 6 && w >= 6, k = Math.max(2, Math.min(ds.length, Math.floor((bodyH(h) - (sm ? 150 : 74) - (sm ? 70 : 116) - (roomN ? 56 : 0)) / 30)));
-      const shown = [...ds].sort((x, y) => Math.abs(y.lv) - Math.abs(x.lv)).slice(0, k).sort((x, y) => y.lv - x.lv), mx = Math.max(...ds.map(d => Math.abs(d.lv)), 1);
+      const roomN = h >= 6 && w >= 6; /* every department is listed; the list scrolls inside the widget */
+      const shown = [...ds].sort((x, y) => y.lv - x.lv), mx = Math.max(...ds.map(d => Math.abs(d.lv)), 1);
       const row = d => `<button class="yt__r" data-act="ask-open" data-q="${esc(`Why will ${d.n} land ${d.lv >= 0 ? d.lv + 'M above' : -d.lv + 'M below'} its target?`)}" title="${esc(d.n)} · ${t('yt.exp')} ${d.a + d.c + d.p} · ${t('fin.target')} ${d.t}"><span>${esc(d.n)}</span><i class="yt__t">${d.lv ? `<b class="${d.lv > 0 ? 'up' : 'dn'}" style="width:${(Math.abs(d.lv) / mx * 50).toFixed(1)}%"></b>` : ''}</i><em class="${d.lv > 0 ? 'up' : d.lv < 0 ? 'dn' : ''}">${d.lv > 0 ? '+' : d.lv < 0 ? '−' : ''}${Math.abs(d.lv)}</em></button>`;
       const worst = [...ds].sort((x, y) => x.lv - y.lv)[0], pos = ds.filter(d => d.lv > 0).sort((x, y) => y.lv - x.lv).slice(0, 2);
       const note = roomN && sh > 0 && worst.lv < 0 ? `<p class="yt__n">${t('yt.note', { p: pos.map(d => d.n).join(t('yt.and')), w: worst.n, w2: worst.n })}</p>` : '';
-      const more = ds.length > k ? `<button class="fx-more" data-act="ask-open" data-q="Show every department's expected finish against target">+${ds.length - k} ${t('fin.more')}${ico('arrowRight', 13)}</button>` : '';
-      return `${tiles}${head}<div class="yt__ax"><span></span><div><span>← ${t(w < 6 ? 'yt.belowS' : 'yt.below')}</span><span>${t(w < 6 ? 'yt.aboveS' : 'yt.above')} →</span></div><span></span></div><div class="yt">${shown.map(row).join('')}</div>${more}${note}`; } },
+      return `${tiles}${head}<div class="yt__ax"><span></span><div><span>← ${t(w < 6 ? 'yt.belowS' : 'yt.below')}</span><span>${t(w < 6 ? 'yt.aboveS' : 'yt.above')} →</span></div><span></span></div><div class="yt">${shown.map(row).join('')}</div>${note}`; },
+    after(el) { const y = $('.yt', el); if (!y) return; const f = () => { y.classList.toggle('is-sc', y.scrollHeight > y.clientHeight + 1); y.classList.toggle('at-end', y.scrollTop + y.clientHeight >= y.scrollHeight - 2); }; y.onscroll = f; f(); } },
 
   landing: { group: 'exec', icon: 'flag', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 3] }, def: 'M', min: [3, 2], max: [12, 6],
     render({ v, h }) { const T = FIN.T, df = T.land - T.t;
