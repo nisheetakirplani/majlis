@@ -1022,7 +1022,7 @@ const D = {
   tasks: [{ id: 1, tx: 'Review Q3 board pack', due: 'Today', done: false }, { id: 2, tx: 'Reply to investor update', due: 'Today', done: false }, { id: 3, tx: 'Approve travel budget', due: 'Today', done: true }, { id: 4, tx: 'Prepare staff town hall notes', due: 'Thu', done: false }, { id: 5, tx: 'Sign off Riyadh lease terms', due: 'Fri', done: false }],
   clocks: [{ c: 'Dubai', tz: 'Asia/Dubai' }, { c: 'London', tz: 'Europe/London' }, { c: 'New York', tz: 'America/New_York' }, { c: 'Singapore', tz: 'Asia/Singapore' }],
   brief: { head: 'The business is healthy, with two items needing you today.', good: ['Revenue is 8.4% ahead of plan', 'Cash runway extended to 14.2 months', 'Payments incident resolved in 42 minutes'], watch: ['Top-5 customers are 41% of revenue', 'Product launch is behind by two weeks'], next: ['Sign the Q3 board pack by 14:45', 'Reply to Legal on the indemnity clause', 'Review the escalation before 14:30'] },
-  notifs: [{ id: 1, ic: 'alert', tx: 'Legal flagged the indemnity clause in the supplier contract', a: '8 min', unread: true, w: 'inbox' }, { id: 2, ic: 'check', tx: 'Fatima R uploaded the final Q3 board pack', a: '24 min', unread: true, w: 'docs' }, { id: 3, ic: 'message', tx: '#customer-success: Top-5 account flagged at risk', a: '1 h', unread: true, w: 'teams' }, { id: 4, ic: 'calendar', tx: 'Customer escalation review moved to 14:30', a: '2 h', unread: false, w: 'calendar' }, { id: 5, ic: 'trend', tx: 'Q3 revenue crossed plan by 8%', a: 'Yesterday', unread: false, w: 'pulse' }],
+  notifs: [{ id: 1, ic: 'alert', tx: 'Legal flagged the indemnity clause in the supplier contract', a: '8 min', unread: true, w: 'inbox' }, { id: 2, ic: 'check', tx: 'Fatima R uploaded the final Q3 board pack', a: '24 min', unread: true, w: 'docs' }, { id: 3, ic: 'message', tx: '#customer-success: Top-5 account flagged at risk', a: '1 h', unread: true, w: 'customers' }, { id: 4, ic: 'calendar', tx: 'Customer escalation review moved to 14:30', a: '2 h', unread: false, w: 'calendar' }, { id: 5, ic: 'trend', tx: 'Q3 revenue crossed plan by 8%', a: 'Yesterday', unread: false, w: 'pulse' }],
 };
 const initials = n => n.split(' ').map(w => w[0]).join('').slice(0, 2);
 const avatars = (names, max = 3) => `<span class="avs">${names.slice(0, max).map((n, i) => `<i class="av av--${i % 5}" title="${esc(n)}">${initials(n)}</i>`).join('')}</span>`;
@@ -1849,15 +1849,15 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['queue', 8, 4], ['deadlines', 4, 4], ['triage', 8, 4], ['deals', 4, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['teams', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
+  default: [['queue', 8, 4], ['deadlines', 4, 4], ['triage', 8, 4], ['deals', 4, 4], ['tasks', 6, 4], ['calendar', 8, 4], ['invites', 4, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 4], ['landing', 4, 4], ['pipeline', 4, 4], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
-  documents: { icon: 'file', layout: [['docs', 8, 5], ['inbox', 4, 5], ['tasks', 4, 4], ['teams', 4, 4], ['insights', 4, 4]] },
+  documents: { icon: 'file', layout: [['docs', 8, 5], ['inbox', 4, 5], ['tasks', 4, 4], ['insights', 4, 4]] },
   analytics: { icon: 'chart', isNew: true, layout: [['revenue', 8, 4], ['pulse', 4, 4], ['risks', 6, 4], ['customers', 6, 4], ['people', 4, 3], ['projects', 8, 3]] },
   insights: { icon: 'bulb', layout: [['insights', 6, 4], ['revenue', 6, 4], ['risks', 6, 3], ['customers', 6, 3], ['calendar', 4, 4]] },
   plans: { icon: 'flag', layout: [['projects', 8, 4], ['decisions', 4, 4], ['tasks', 4, 4], ['calendar', 4, 4], ['risks', 4, 4]] },
-  team: { icon: 'users', sep: true, layout: [['people', 8, 4], ['teams', 4, 4], ['customers', 6, 4], ['calendar', 6, 4]] },
+  team: { icon: 'users', sep: true, layout: [['people', 8, 4], ['customers', 4, 4], ['calendar', 6, 4]] },
   integrations: { icon: 'plug', special: true },
   settings: { icon: 'settings', special: true, bottom: true },
 };
@@ -1865,7 +1865,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['queue', 'deadlines', 'triage', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'teams', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
+const SECS = { needs: ['queue', 'deadlines', 'triage', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'invites', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore', 'landing'], money: ['pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'health'; /* widgets from other pages land in Business health if added to Overview */
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -2407,9 +2407,10 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
+const RETIRED = ['teams']; /* removed from the dashboard */
 function layoutFor(p) { let saved = store.get('layout10.' + p, null);
   if (p === 'overview' && saved && !store.get('triMig', false)) { const i = saved.findIndex(x => x.type === 'decisions' || x.type === 'inbox'); if (i >= 0 && !saved.some(x => x.type === 'triage')) { saved[i] = { ...saved[i], type: 'triage', w: Math.max(saved[i].w, 6) }; saved = saved.filter((x, j) => j === i || (x.type !== 'decisions' && x.type !== 'inbox')); } store.set('triMig', true); }
-  const ok = (saved || []).filter(i => W[i.type]); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+  const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
@@ -2457,7 +2458,7 @@ _m(TX.ar, { pal: { add: 'إضافة أداة', ph: 'ابحث عن أداة…', 
 const palSec = ty => SEC_ORDER.find(k => SECS[k].includes(ty)) || 'other';
 const PAL = { open: false, q: '', f: 'all', sel: null, size: {}, showOn: false,
   hideOn() { return !this.showOn && !this.q.trim() && this.f !== 'on'; },
-  types: () => Object.keys(W).filter(k => !W[k].pinned && !W[k].pageOnly), /* page-only widgets stay on their own pages */
+  types: () => Object.keys(W).filter(k => !W[k].pinned && !W[k].pageOnly && !RETIRED.includes(k)), /* page-only widgets stay on their own pages */
   onDash: ty => Grid.items.filter(i => i.type === ty).length,
   list() { const toks = this.q.toLowerCase().split(/\s+/).filter(Boolean);
     return [...SEC_ORDER, 'other'].flatMap(sk => this.types().filter(ty => palSec(ty) === sk)).filter(ty => {
