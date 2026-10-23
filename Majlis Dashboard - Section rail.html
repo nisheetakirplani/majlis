@@ -2443,9 +2443,10 @@ const RETIRED = ['teams', 'inbox', 'decisions', 'queue', 'tasks']; /* removed (T
 const MERGED = { inbox: 'mail', decisions: 'dec' }, INTO = { inbox: 'triage', decisions: 'triage', queue: 'myday', tasks: 'myday' };
 function layoutFor(p) { let saved = store.get('layout10.' + p, null);
   for (const to of ['triage', 'myday']) if (saved && saved.some(x => INTO[x.type] === to)) { const i = saved.findIndex(x => INTO[x.type] === to); if (!saved.some(x => x.type === to)) saved[i] = { ...saved[i], type: to, w: Math.max(saved[i].w, 6), h: Math.max(saved[i].h, to === 'myday' ? 5 : saved[i].h) }; saved = saved.filter(x => INTO[x.type] !== to); }
+  if (saved && !store.get('mdH', false)) { const md = saved.find(x => x.type === 'myday'), dl = saved.find(x => x.type === 'deadlines'); if (md && dl && dl.h < md.h) { dl.h = md.h; store.set('layout10.' + p, saved); } } /* Deadlines sits beside My day: match its height once */
   const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(pageLayout(p)); }
 const pageLayout = p => PAGES[p].layout.map(r => INTO[r[0]] ? [INTO[r[0]], Math.max(r[1], 6), INTO[r[0]] === 'myday' ? Math.max(r[2], 5) : r[2]] : r).filter((r, i, A) => !['triage', 'myday'].includes(r[0]) || A.findIndex(x => x[0] === r[0]) === i);
-function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
+function setPage(p) { if (p === 'overview' || !p) setTimeout(() => store.set('mdH', true), 0); if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
