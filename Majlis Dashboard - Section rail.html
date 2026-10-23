@@ -1953,7 +1953,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['myday', 8, 5], ['deadlines', 4, 5], ['triage', 8, 4], ['deals', 4, 4], ['calendar', 8, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 6], ['backlog', 4, 4], ['cash', 4, 4], ['revenue', 4, 4], ['margin', 4, 4], ['workingCap', 4, 4], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
+  default: [['myday', 8, 5], ['deadlines', 4, 5], ['triage', 8, 4], ['deals', 4, 4], ['calendar', 8, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 6], ['people', 6, 4], ['customers', 6, 4], ['incidents', 4, 4], ['competitive', 4, 4], ['media', 4, 4]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -1969,7 +1969,7 @@ const mkItems = list => list.map(([type, w, h], i) => ({ id: type + '-' + (i + 1
 
 /* Health tabs · Overview groups widgets by the question an executive asks, not by data source.
    Each section reports a status (ok / warn / bad), an optional count, and a one-line reason. */
-const SECS = { needs: ['myday', 'queue', 'deadlines', 'triage', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore'], money: ['backlog', 'cash', 'revenue', 'margin', 'workingCap'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
+const SECS = { needs: ['myday', 'queue', 'deadlines', 'triage', 'decisions', 'deals', 'inbox', 'tasks'], today: ['calendar', 'clocks', 'trips'], health: ['pulse', 'boardKpis', 'deptScore'], people: ['people', 'customers', 'rpe'], strategy: ['incidents', 'competitive', 'media'] };
 const SEC_ORDER = Object.keys(SECS), secOf = type => SEC_ORDER.find(k => SECS[k].includes(type)) || 'health'; /* widgets from other pages land in Business health if added to Overview */
 const sortSec = items => items.map((it, i) => [it, i]).sort((a, b) => SEC_ORDER.indexOf(secOf(a[0].type)) - SEC_ORDER.indexOf(secOf(b[0].type)) || a[1] - b[1]).map(x => x[0]);
 _m(TX.en, { sec: { needs: 'Action required', today: 'Schedule', health: 'Business health', watch: 'Risk & exposure', nav: 'Dashboard sections', more: 'More sections', prev: 'Previous sections',
@@ -2512,14 +2512,14 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-const RETIRED = ['teams', 'inbox', 'decisions', 'queue', 'tasks', 'invites', 'landing', 'pipeline']; /* removed (Teams) or merged into Inbox & decisions / My day / Schedule / Year target */
+const RETIRED = ['teams', 'inbox', 'decisions', 'queue', 'tasks', 'invites', 'landing', 'pipeline', 'backlog', 'cash', 'revenue', 'margin', 'workingCap']; /* removed (Teams, Financials) or merged into Inbox & decisions / My day / Schedule / Year target */
 const MERGED = { inbox: 'mail', decisions: 'dec' }, INTO = { inbox: 'triage', decisions: 'triage', queue: 'myday', tasks: 'myday', invites: 'calendar', landing: 'deptScore', pipeline: 'deptScore' }, HMIN = { myday: 5, deptScore: 6 };
 function layoutFor(p) { let saved = store.get('layout10.' + p, null);
   for (const to of new Set(Object.values(INTO))) if (saved && saved.some(x => INTO[x.type] === to)) { const i = saved.findIndex(x => INTO[x.type] === to); if (!saved.some(x => x.type === to)) saved[i] = { ...saved[i], type: to, w: Math.max(saved[i].w, 6), h: Math.max(saved[i].h, HMIN[to] || saved[i].h) }; saved = saved.filter(x => INTO[x.type] !== to); }
   if (saved && !store.get('ytH2', false)) { const ds = saved.find(x => x.type === 'deptScore'); if (ds && ds.h < 6) { ds.h = 6; store.set('layout10.' + p, saved); } } /* Year target needs a row more than the old scorecard */
   if (saved && !store.get('mdH', false)) { const md = saved.find(x => x.type === 'myday'), dl = saved.find(x => x.type === 'deadlines'); if (md && dl && dl.h < md.h) { dl.h = md.h; store.set('layout10.' + p, saved); } } /* Deadlines sits beside My day: match its height once */
   const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(pageLayout(p)); }
-const pageLayout = p => PAGES[p].layout.map(r => INTO[r[0]] ? [INTO[r[0]], Math.max(r[1], 6), Math.max(r[2], HMIN[INTO[r[0]]] || r[2])] : r).filter((r, i, A) => !Object.values(INTO).includes(r[0]) || A.findIndex(x => x[0] === r[0]) === i);
+const pageLayout = p => PAGES[p].layout.filter(r => !RETIRED.includes(r[0]) || INTO[r[0]]).map(r => INTO[r[0]] ? [INTO[r[0]], Math.max(r[1], 6), Math.max(r[2], HMIN[INTO[r[0]]] || r[2])] : r).filter((r, i, A) => !Object.values(INTO).includes(r[0]) || A.findIndex(x => x[0] === r[0]) === i);
 function setPage(p) { if (p === 'overview' || !p) setTimeout(() => { store.set('mdH', true); store.set('ytH2', true); }, 0); if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
