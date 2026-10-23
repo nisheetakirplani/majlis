@@ -903,6 +903,14 @@ body.is-edit .w.is-dragging{transform:rotate(-1.2deg) scale(1.03);box-shadow:0 2
 .mdchk{display:inline-flex;align-items:center;gap:7px;font:600 12px/1 var(--font);color:var(--ink3);flex:none}.mdchk i{width:12px;height:12px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--accent);animation:mdspin .8s linear infinite}@keyframes mdspin{to{transform:rotate(360deg)}}
 .mdstat{display:flex;flex-direction:column;gap:3px;margin:0 4px 8px 41px;padding:10px 12px;border-radius:12px;background:var(--tile);font-size:12.5px;line-height:1.4;animation:mdIn .3s ease;flex:none}.mdstat b{font-weight:600;color:var(--ink)}.mdstat span{color:var(--ink2)}.mdstat small{display:inline-flex;align-items:center;gap:5px;margin-top:2px;font-size:11px;color:var(--ink3)}@keyframes mdIn{from{opacity:0;transform:translateY(-4px)}}
 .mdnone{margin:0;padding:8px 4px;font-size:12.5px;color:var(--ink3)}
+
+/* Board KPIs graph view */
+.bkf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex:none}.bkf--sm{grid-template-columns:1fr 1fr;gap:4px}.bkf--sm>div{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:6px 9px;border-radius:10px}.bkf--sm small{font-size:11px;flex:none}.bkf--sm b{font-size:12.5px;min-width:0}.bkf>div{padding:7px 10px;border-radius:12px;background:var(--tile);min-width:0}.bkf small{display:block;font-size:11px;color:var(--ink3)}.bkf b{display:block;font:600 14px/1.25 var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bkf--ok{color:var(--accent)}.bkf--bad{color:var(--bad)}
+.bkc{position:relative;flex:1;min-height:0;margin-top:8px}.bkc svg{display:block;overflow:visible}.bkg{stroke:var(--line);stroke-width:1}.bkx{font:500 10.5px/1 var(--font);fill:var(--ink3)}.bkp{stroke:var(--ink2);stroke-width:1.5;stroke-dasharray:4 4}.bkpl{fill:var(--ink2);paint-order:stroke;stroke:var(--card-s);stroke-width:4px}
+.bkl{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}.bkd{fill:var(--accent);stroke:var(--card-s);stroke-width:2}.bkh{stroke:var(--ink3);stroke-width:1}.bkhd{fill:var(--accent);stroke:var(--card-s);stroke-width:2}.bkhd.off{fill:var(--bad)}
+.bkt2{position:absolute;pointer-events:none;padding:7px 10px;border-radius:10px;background:var(--dark);color:var(--dark-ink);font:500 12px/1.35 var(--font);white-space:nowrap;transform:translate(-50%,-118%);opacity:0;transition:opacity .1s;z-index:2}.bkt2 b{display:block;font-weight:700}.bkt2 small{opacity:.75}
+.bksel{position:relative;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 8px 0 10px;border-radius:10px;background:var(--card-s);border:1px solid var(--line);font:600 12.5px/1 var(--font);color:var(--ink);pointer-events:auto}.bksel:hover{border-color:var(--accent)}.bksel select{appearance:none;-webkit-appearance:none;border:0;background:none;font:inherit;color:inherit;padding:0 14px 0 0;margin-inline-end:-14px;cursor:pointer;outline:none}.bksel svg{pointer-events:none;color:var(--ink3)}.bksel .dot{width:7px;height:7px}
+.w[data-type="boardKpis"] .w__ctl{gap:6px;flex-wrap:nowrap;align-items:center;justify-content:space-between;margin-bottom:6px}.w[data-type="boardKpis"] .w__ctl .seg button{padding-inline:8px}.w[data-type="boardKpis"] .w__c{gap:6px}
 </style>
 
 <div class="app" id="app">
@@ -1327,6 +1335,17 @@ const arcGauge = (val, max, col, label, mark) => { const f = Math.max(0, Math.mi
   return `<svg viewBox="0 -14 120 84" role="img" aria-label="${label}"><path d="M14 58 A46 46 0 0 1 106 58" fill="none" stroke="var(--tile2)" stroke-width="11" stroke-linecap="round"/>${f > 0 ? `<path d="M14 58 A46 46 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}" fill="none" stroke="${col}" stroke-width="11" stroke-linecap="round"/>` : ''}${tick}<text x="60" y="52" text-anchor="middle" style="font:600 21px var(--font);fill:var(--ink)">${label}</text><text x="14" y="69" text-anchor="middle" style="font:500 6px var(--font);fill:var(--ink3)">0×</text><text x="106" y="69" text-anchor="middle" style="font:500 6px var(--font);fill:var(--ink3)">${max}×</text></svg>`; };
 D.hiring = [['open', 21], ['interview', 14], ['offer', 5], ['joined', 3]];
 D.compet = [{ c: 'G42', m: 'won a federal cloud deal worth ~AED 90M', lv: 'bad', tag: 'threat', dep: 'Cloud', exp: 'Puts AED 22M of our Cloud pipeline at risk in the same ministry.', act: 'Brief the Cloud team' }, { c: 'Accenture ME', m: 'is hiring 40 consultants in Riyadh', lv: 'warn', tag: 'watch', dep: 'Consulting', exp: 'We have 3 KSA bids due in Q4 against them.', act: 'Check our KSA bench' }, { c: 'Oracle', m: 'raised GCC licence prices 9%', lv: 'ok', tag: 'opportunity', dep: 'Licensing', exp: '12 Oracle renewals in our base could switch to us.', act: 'Offer a switch deal' }];
+/* Board KPI history for the graph view (sample): value as of each day / month / quarter, the board promise, and whether higher is better */
+const BKS = (() => { const rnd = s => () => (s = (s * 9301 + 49297) % 233280) / 233280, ser = (a, b, n, nz, sd, dip) => { const r = rnd(sd); return Array.from({ length: n }, (_, i) => { const t = i / (n - 1); return +(a + (b - a) * t + (i && i < n - 1 ? (r() - .5) * nz : 0) - (dip && Math.abs(t - dip[0]) < .15 ? dip[1] : 0)).toFixed(2); }); };
+  return { Revenue: { u: v => `AED ${Math.round(v)}M`, pr: 400, pl: 'Promised 400M', hi: 1, Q: ser(340, 412, 8, 6, 3), M: ser(371, 412, 12, 7, 5), D: ser(398, 412, 30, 4, 7) },
+    EBITDA: { u: v => v.toFixed(1) + '%', pr: 20, pl: 'Promised 20%', hi: 1, Q: ser(16.1, 18.2, 8, .5, 11), M: ser(17.2, 18.2, 12, .6, 13), D: ser(17.9, 18.2, 30, .3, 17) },
+    Cash: { u: v => `AED ${Math.round(v)}M`, pr: 70, pl: 'Floor 70M', hi: 1, Q: ser(66, 78, 8, 4, 19, [.5, 6]), M: ser(71, 78, 12, 3, 23, [.4, 4]), D: ser(75, 78, 30, 2, 29) },
+    NPS: { u: v => String(Math.round(v)), pr: 50, pl: 'Promised 50', hi: 1, Q: ser(38, 47, 8, 2, 31), M: ser(42, 47, 12, 2, 37), D: ser(45, 47, 30, 1.5, 41) },
+    Headcount: { u: v => Math.round(v).toLocaleString('en'), pr: 1260, pl: 'Plan 1,260', hi: 0, Q: ser(1120, 1248, 8, 10, 43), M: ser(1190, 1248, 12, 8, 47), D: ser(1236, 1248, 30, 3, 53) },
+    Risk: { u: v => Math.round(v) + ' high', pr: 0, pl: 'Promised none', hi: 0, step: 1, Q: [2, 3, 2, 1, 2, 1, 0, 1], M: [1, 1, 2, 2, 1, 0, 0, 1, 1, 0, 1, 1], D: Array.from({ length: 30 }, (_, i) => i < 9 ? 0 : 1) } }; })();
+const bkLabels = (P, n) => P === 'D' ? Array.from({ length: n }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - (n - 1 - i)); return d.getDate() + ' ' + d.toLocaleString(LANG === 'ar' ? 'ar' : 'en', { month: 'short' }); })
+  : P === 'M' ? Array.from({ length: n }, (_, i) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - (n - 1 - i)); return d.toLocaleString(LANG === 'ar' ? 'ar' : 'en', { month: 'short' }); })
+  : Array.from({ length: n }, (_, i) => { const d = new Date(), q0 = Math.floor(d.getMonth() / 3) + d.getFullYear() * 4 - 1 - (n - 1 - i); return `Q${q0 % 4 + 1} ${String(Math.floor(q0 / 4)).slice(2)}`; });
 D.board = { days: 18, kpis: [['Revenue', 'AED 412M', 'ok', 'On promise · 400M'], ['EBITDA', '18.2%', 'warn', 'Promised 20%'], ['Cash', 'AED 78M', 'ok', 'Above 70M floor'], ['NPS', '47', 'warn', 'Promised 50'], ['Headcount', '1,248', 'ok', 'Within plan'], ['Risk', '1 high', 'bad', 'Promised none']] };
 _m(TX.en, { w: { competitive: 'Competitive pulse', boardKpis: 'Board KPIs' }, wd: { competitive: 'Competitor moves this week, summarised by Majlis', boardKpis: 'The six numbers the board will ask about, against what was promised' },
   bh: { aim: 'aim', cashIn: 'Cash in {c}M · collection rate {r}%', covers: 'Weighted pipeline against the <b>{g}M</b> gap', stage: { open: 'Open', interview: 'Interview', offer: 'Offers', joined: 'Joined' }, people: 'people · {h} hires YTD · {a} attrition', conv: 'Conversion from the previous stage', hireSub: 'Avg. <b>54 days</b> to hire · <b>3 senior</b> roles open 90+ days', openRoles: 'open roles',
@@ -1639,9 +1658,24 @@ const W = {
     count: () => t('bh.toBoard', { n: D.board.days }),
     render({ v, w, h }) { const K = D.board.kpis, ok = K.filter(x => x[2] === 'ok').length;
       if (v === 's') return finBig(t('bh.toBoard', { n: D.board.days }), t('bh.onPromise', { n: ok, t: K.length }), `<span class="big__f">${K.map(x => dot(x[2])).join('')}</span>`);
-      const tile = ([l, val, st, note]) => `<button class="bkt bkt--${st}" data-act="ask-open" data-q="${esc(`Board KPI ${l}: ${val}, ${note}. What will the board ask?`)}" title="${esc(note)}"><small>${l}</small><b>${val}</b><em>${note}</em></button>`;
-      const n = v === 'wide' || w >= 8 ? 6 : w >= 6 ? 3 : 2;
-      return `<div class="bk6" style="--n:${n}">${K.map(tile).join('')}</div>${v === 'wide' || bodyH(h) < 250 ? '' : arLink(`${t('bh.onPromise', { n: ok, t: K.length })} · ${t('bh.pack')}`, 'ask-open', ' data-q="Prepare me for the board: which KPIs are off promise and why?"')}`; } },
+      /* graph view: one KPI at a time over day / month / quarter, with four quick facts and the board promise as a dashed line */
+      const key = S.bkM || 'Revenue', P = S.bkP || 'Q', m = BKS[key], v0 = m[P], n0 = v0.length, L = bkLabels(P, n0), ok1 = x => m.hi ? x >= m.pr : x <= m.pr;
+      const best = m.hi ? Math.max(...v0) : Math.min(...v0), worst = m.hi ? Math.min(...v0) : Math.max(...v0), dl = v0.at(-1) - v0[0], good = m.hi ? dl >= 0 : dl <= 0;
+      const chg = m.step ? (dl > 0 ? '+' : '') + Math.round(dl) : (dl >= 0 ? '+' : '') + (dl / v0[0] * 100).toFixed(1) + '%';
+      const facts = `<div class="bkf${w < 6 ? ' bkf--sm' : ''}">${[[t('bk.now'), m.u(v0.at(-1)), ok1(v0.at(-1)) ? 'ok' : 'bad'], [t('bk.chg'), `${dl >= 0 ? '▲' : '▼'} ${chg}`, good ? 'ok' : 'bad'], [t('bk.best'), m.u(best), ''], [t('bk.worst'), m.u(worst), '']].map(([l, val, c]) => `<div><small>${l}</small><b class="${c ? 'bkf--' + c : ''}">${val}</b></div>`).join('')}</div>`;
+      const Wp = Math.max(240, w * 80 + (w - 1) * GAP - 36), Hp = Math.max(96, bodyH(h) - (w < 6 ? 136 : 80)), pr = 8, pt = 14, pb = 22;
+      const all = [...v0, m.pr], mn0 = Math.min(...all), mx0 = Math.max(...all), pad = (mx0 - mn0) * .14 || 1, mn = m.step ? 0 : mn0 - pad, mx = mx0 + pad;
+      const pl = Math.max(...[mn, (mn + mx) / 2, mx].map(x => m.u(x).length)) * 6.2 + 12;
+      const X = i => pl + i * (Wp - pl - pr) / (n0 - 1), Y = x => pt + (1 - (x - mn) / (mx - mn)) * (Hp - pt - pb), every = Math.ceil(n0 / (w < 6 ? 4 : 6));
+      let g = [mn, (mn + mx) / 2, mx].map(tk => `<line x1="${pl}" x2="${Wp - pr}" y1="${Y(tk)}" y2="${Y(tk)}" class="bkg"/><text x="${pl - 6}" y="${Y(tk) + 3}" text-anchor="end" class="bkx">${m.u(tk)}</text>`).join('')
+        + L.map((l, i) => (i % every === 0 && n0 - 1 - i >= every * .7) || i === n0 - 1 ? `<text x="${X(i)}" y="${Hp - 5}" text-anchor="${i === n0 - 1 ? 'end' : i ? 'middle' : 'start'}" class="bkx">${l}</text>` : '').join('');
+      g += `<line x1="${pl}" x2="${Wp - pr}" y1="${Y(m.pr)}" y2="${Y(m.pr)}" class="bkp"/><text x="${pl + 6}" y="${Y(m.pr) - 5}" class="bkx bkpl">${m.pl}</text>`;
+      g += `<polyline points="${v0.map((x, i) => `${X(i).toFixed(1)},${Y(x).toFixed(1)}`).join(' ')}" class="bkl"/><circle cx="${X(n0 - 1)}" cy="${Y(v0.at(-1))}" r="4.5" class="bkd"/>`;
+      g += `<line class="bkh" x1="0" x2="0" y1="${pt}" y2="${Hp - pb}" opacity="0"/><circle class="bkhd" r="5" opacity="0"/><rect class="bkhit" x="${pl}" y="0" width="${Wp - pl - pr}" height="${Hp}" fill="transparent"/>`;
+      const data = esc(JSON.stringify({ x: v0.map((_, i) => +X(i).toFixed(1)), y: v0.map(x => +Y(x).toFixed(1)), v: v0.map(m.u), ok: v0.map(ok1), l: L, W: Wp, H: Hp }));
+      return `${facts}<div class="bkc" data-bk="${data}"><svg viewBox="0 0 ${Wp} ${Hp}" width="100%" height="${Hp}" role="img" aria-label="${esc(key + ' over the ' + t('bk.per.' + P))}">${g}</svg><div class="bkt2"></div></div>`; },
+    ctl: ({ view }) => { if (view !== 'viz') return ''; const key = S.bkM || 'Revenue', P = S.bkP || 'Q', st = Object.fromEntries(D.board.kpis.map(k => [k[0], k[2]]));
+      return `<label class="bksel"><i class="dot dot--${st[key]}"></i><select data-bk-m aria-label="${t('bk.pick')}">${Object.keys(BKS).map(k => `<option value="${k}"${k === key ? ' selected' : ''}>${k}</option>`).join('')}</select>${ico('chevDown', 14)}</label><span class="seg">${['D', 'M', 'Q'].map(k => `<button class="${P === k ? 'is-on' : ''}" data-act="bk-p" data-k="${k}">${t('bk.' + k)}</button>`).join('')}</span>`; } },
 
   /* Money · People & customers · Strategy & outside world */
   margin: { group: 'exec', icon: 'pie', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 7],
@@ -2098,7 +2132,7 @@ function wInner(type, w, h, view) { const d = W[type], v = VARIANT(w, h), ctx = 
 const root = document.documentElement, main = $('#main'), app = $('#app');
 let EDIT = false, CHAT_OPEN = false, PAGE = 'overview', drawerDrag = null;
 const sizeOf = (type, k) => W[type].sizes[k || W[type].def];
-S.hist = [...D.history]; S.mdPer = store.get('mdPer', 'w');
+S.hist = [...D.history]; S.bkM = store.get('bkM', 'Revenue'); S.bkP = store.get('bkP', 'Q'); S.mdPer = store.get('mdPer', 'w');
 S.incoming = [{ id: 1, who: 'Fatima R', what: 'Board pack v4 (final)', d: 1, st: 'ok' }, { id: 2, who: 'Legal team', what: 'Supplier contract redline', d: -1, st: 'late', stat: ['Draft is in SharePoint, about 80% done. Last edited 2 h ago by Khalid (Legal).', 'Khalid expects to send it today by 15:00.', 'SharePoint · Legal / Contracts · Teams chat'] }, { id: 3, who: 'Amal Rahman', what: 'Q4 budget draft', d: 0, st: 'in' }, { id: 4, who: 'Omar Khalid', what: 'FY27 hiring plan v3', d: 4, st: 'ok' }, { id: 5, who: 'Sara Nasser', what: 'Investor letter draft', d: 11, st: 'ok' }, { id: 6, who: 'Strategy office', what: 'FY27 strategy deck', d: 18, st: 'ok' }, { id: 7, who: 'Internal audit', what: 'Q3 audit report', d: 20, st: 'late', stat: ['Fieldwork is done; the report is with the CFO’s office for review.', 'New estimate: 14 Nov, two days after the planned date.', 'Planner · Audit plan · Outlook'] }]; S.drafts = DRAFTS0.map(x => ({ ...x })); S.triTab = store.get('triTab', 'dec'); S.integ = D.integrations.map(x => ({ ...x }));
 const connected = () => S.integ.filter(x => x.on).length;
 
@@ -2484,6 +2518,8 @@ function buildDrawer() { const keep = $('#cat')?.scrollTop || 0;
   $('#cat').scrollTop = keep; }
 function refreshCards() { if (EDIT) buildDrawer(); else if (PAL.open) PAL.render(); }
 /* ----------------------------------------------------------- Customize · command palette (⌘K). Search, filter by health section, preview, pick a size, add. */
+_m(TX.en, { bk: { now: 'Now', chg: 'Change', best: 'Best', worst: 'Worst', D: 'Day', M: 'Month', Q: 'Quarter', pick: 'Choose a KPI', on: 'on promise', off: 'off promise', per: { D: 'last 30 days', M: 'last 12 months', Q: 'last 8 quarters' } } });
+_m(TX.ar, { bk: { now: 'الآن', chg: 'التغيّر', best: 'الأفضل', worst: 'الأسوأ', D: 'يوم', M: 'شهر', Q: 'ربع', pick: 'اختر مؤشراً', on: 'ضمن الوعد', off: 'خارج الوعد', per: { D: 'آخر 30 يوماً', M: 'آخر 12 شهراً', Q: 'آخر 8 أرباع' } } });
 _m(TX.en, { md: { w: 'This week', m: 'This month', restW: 'Rest of this week', restM: 'Rest of this month', coming: 'Coming to you', due: 'due {d}', review: 'Review', status: 'Get status', checking: 'Checking…', checked: 'checked just now', none: 'Nothing expected in this period', st: { ok: 'On track', late: 'Late', in: 'Submitted' } } });
 _m(TX.ar, { md: { w: 'هذا الأسبوع', m: 'هذا الشهر', restW: 'بقية الأسبوع', restM: 'بقية الشهر', coming: 'قادم إليك', due: 'موعده {d}', review: 'مراجعة', status: 'معرفة الحالة', checking: 'جارٍ التحقق…', checked: 'تم التحقق الآن', none: 'لا شيء متوقع في هذه الفترة', st: { ok: 'في الموعد', late: 'متأخر', in: 'تم التسليم' } } });
 _m(TX.en, { tri: { dec: 'Decisions', mail: 'Inbox', dr: 'Drafts', none: 'No drafts waiting', ready: 'Drafts ready', edit: 'Edit', send: 'Send', by: 'Drafted by Majlis from your inbox', all: 'Send all', sent: 'Reply sent to {w}', sentN: '{n} replies sent' } });
@@ -2617,6 +2653,7 @@ document.addEventListener('click', e => {
   else if (a === 'cal-join') { toast(t('cal.joining', { x: D.meetings[+b.dataset.i].title })); }
   else if (a === 'inv-accept') { const g = S.inv.find(x => x.g === b.dataset.g), i = S.inv.indexOf(g); S.inv.splice(i, 1); afterState(['invites']); toast(t('inv.accepted', { n: g.n }), t('undo'), () => { S.inv.splice(i, 0, g); afterState(['invites']); }); }
   else if (a === 'inv-fix') { const c = D.invites.clash; openChat(from); chatSend(`${c.a} at ${c.at} clashes with ${c.b} at ${c.bt}. What should I move?`); }
+  else if (a === 'bk-p') { S.bkP = b.dataset.k; store.set('bkP', S.bkP); Grid.refreshType('boardKpis'); }
   else if (a === 'md-per') { S.mdPer = b.dataset.k; store.set('mdPer', S.mdPer); Grid.refreshType('myday'); }
   else if (a === 'md-status') { const y = S.incoming.find(z => z.id === id); if (!y || y.chk) return; y.chk = 'run'; Grid.refreshType('myday'); setTimeout(() => { y.chk = 'ok'; Grid.refreshType('myday'); }, RM() ? 0 : 1400); }
   else if (a === 'tri-tab') { S.triTab = b.dataset.k; store.set('triTab', S.triTab); Grid.refreshType('triage'); }
@@ -2767,6 +2804,15 @@ $('#chatPin').innerHTML = ico('pin', 18); $('#chatPin').onclick = () => { const 
   $('#sres').hidden = true; $('#notifPop').hidden = true;
 })();
 
+
+/* Board KPIs graph: metric picker + hover readout */
+document.addEventListener('change', e => { const s = e.target.closest('[data-bk-m]'); if (!s) return; S.bkM = s.value; store.set('bkM', S.bkM); Grid.refreshType('boardKpis'); });
+document.addEventListener('pointermove', e => { const c = e.target.closest?.('.bkc'); if (!c) return; const svg = $('svg', c), tip = $('.bkt2', c), hit = e.target.closest('.bkhit');
+  if (!hit) { tip.style.opacity = 0; $('.bkh', svg).setAttribute('opacity', 0); $('.bkhd', svg).setAttribute('opacity', 0); return; }
+  const d = c._d || (c._d = JSON.parse(c.dataset.bk)), r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * d.W; let i = 0; d.x.forEach((px, j) => { if (Math.abs(px - x) < Math.abs(d.x[i] - x)) i = j; });
+  const h = $('.bkh', svg), dt = $('.bkhd', svg); h.setAttribute('x1', d.x[i]); h.setAttribute('x2', d.x[i]); h.setAttribute('opacity', 1); dt.setAttribute('cx', d.x[i]); dt.setAttribute('cy', d.y[i]); dt.setAttribute('opacity', 1); dt.classList.toggle('off', !d.ok[i]);
+  tip.innerHTML = `<b>${d.v[i]}</b><small>${esc(d.l[i])} · ${d.ok[i] ? '✓ ' + t('bk.on') : '✕ ' + t('bk.off')}</small>`; tip.style.left = d.x[i] / d.W * r.width + 'px'; tip.style.top = d.y[i] / d.H * r.height + 'px'; tip.style.opacity = 1; });
+document.addEventListener('pointerleave', e => { if (e.target.closest?.('.bkc')) $('.bkt2', e.target.closest('.bkc')).style.opacity = 0; }, true);
 </script>
 
 </body></html>
