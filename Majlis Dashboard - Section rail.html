@@ -2407,10 +2407,12 @@ function renderNotifs() { $('#notifList').innerHTML = S.notifs.map(n => `<li><bu
 function renderNav() { const mk = ([k, pg]) => `<button class="nav__i${PAGE === k ? ' is-on' : ''}" data-act="nav" data-page="${k}" title="${t('nav.' + k)}">${ico(pg.icon, 20)}<span>${t('nav.' + k)}</span>${pg.isNew ? `<em class="nav__new">${t('nav.new')}</em>` : ''}</button>`;
   const E = Object.entries(PAGES); $('#nav').innerHTML = E.filter(([, p]) => !p.bottom).map(e => (e[1].sep ? '<hr>' : '') + mk(e)).join('');
   $('#navB').innerHTML = E.filter(([, p]) => p.bottom).map(mk).join('') + `<button class="nav__i" data-act="logout" title="${t('nav.logout')}">${ico('logout', 20)}<span>${t('nav.logout')}</span></button>`; }
-const RETIRED = ['teams']; /* removed from the dashboard */
+const RETIRED = ['teams', 'inbox', 'decisions']; /* removed (Teams) or merged into Inbox & decisions */
+const MERGED = { inbox: 'mail', decisions: 'dec' };
 function layoutFor(p) { let saved = store.get('layout10.' + p, null);
-  if (p === 'overview' && saved && !store.get('triMig', false)) { const i = saved.findIndex(x => x.type === 'decisions' || x.type === 'inbox'); if (i >= 0 && !saved.some(x => x.type === 'triage')) { saved[i] = { ...saved[i], type: 'triage', w: Math.max(saved[i].w, 6) }; saved = saved.filter((x, j) => j === i || (x.type !== 'decisions' && x.type !== 'inbox')); } store.set('triMig', true); }
-  const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(PAGES[p].layout); }
+  if (saved && saved.some(x => MERGED[x.type])) { const i = saved.findIndex(x => MERGED[x.type]); if (!saved.some(x => x.type === 'triage')) saved[i] = { ...saved[i], type: 'triage', w: Math.max(saved[i].w, 6) }; saved = saved.filter(x => !MERGED[x.type]); }
+  const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(pageLayout(p)); }
+const pageLayout = p => PAGES[p].layout.map(r => MERGED[r[0]] ? ['triage', Math.max(r[1], 6), r[2]] : r).filter((r, i, A) => r[0] !== 'triage' || A.findIndex(x => x[0] === 'triage') === i);
 function setPage(p) { if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
@@ -2523,7 +2525,7 @@ const PEOPLE = ['Amal Rahman', 'Omar Khalid', 'Sara Mansour', 'Fatima Rashid', '
 let sel = 0, results = [];
 function searchIndex(q) { const s = q.toLowerCase().trim(), m = x => !s || x.toLowerCase().includes(s);
   const pgs = Object.keys(PAGES).filter(k => m(t('nav.' + k))).slice(0, 4).map(k => ({ g: t('pages'), ic: PAGES[k].icon, t: t('nav.' + k), sub: t('pageS.' + k) || t('pageS.overview'), a: () => setPage(k) }));
-  const wds = Object.keys(W).filter(k => !W[k].pinned && (m(t('w.' + k)) || m(t('wd.' + k)))).slice(0, 4).map(k => ({ g: 'Widgets', ic: W[k].icon, t: t('w.' + k), sub: t('wd.' + k), a: () => showWidget(k) }));
+  const wds = Object.keys(W).filter(k => !W[k].pinned && !RETIRED.includes(k) && (m(t('w.' + k)) || m(t('wd.' + k)))).slice(0, 4).map(k => ({ g: 'Widgets', ic: W[k].icon, t: t('w.' + k), sub: t('wd.' + k), a: () => showWidget(k) }));
   const cmds = [['edit', t('customize'), () => setEdit(!EDIT)], [root.dataset.theme === 'dark' ? 'sun' : 'moon', t('theme'), toggleTheme], ['globe', t('language') + ' · ' + (LANG === 'ar' ? 'English' : 'العربية'), toggleLang], ['reset', t('reset'), resetLayout]].filter(c => m(c[1])).map(c => ({ g: t('actions'), ic: c[0], t: c[1], a: c[2] }));
   const ask = (txt) => () => { openChat(); chatSend(txt); };
   const mt = D.meetings.filter(x => m(x.title)).slice(0, 3).map(x => ({ g: 'Meetings', ic: 'calendar', t: x.title, sub: `${x.s} · ${x.where}`, a: ask('Prep me for: ' + x.title) }));
@@ -2539,7 +2541,7 @@ $('#q').addEventListener('focus', () => { sel = 0; renderSearch(); }); $('#q').a
 $('#q').addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); sel = (sel + 1) % results.length; renderSearch(); $('.is-sel')?.scrollIntoView({ block: 'nearest' }); } else if (e.key === 'ArrowUp') { e.preventDefault(); sel = (sel - 1 + results.length) % results.length; renderSearch(); $('.is-sel')?.scrollIntoView({ block: 'nearest' }); } else if (e.key === 'Enter') { e.preventDefault(); runSearch(sel); } else if (e.key === 'Escape') { $('#sres').hidden = true; $('#q').blur(); } });
 $('#sres').addEventListener('pointerdown', e => { const b = e.target.closest('.sres__i'); if (b) { e.preventDefault(); runSearch(+b.dataset.i); } });
 document.addEventListener('pointerdown', e => { if (!e.target.closest('#search')) $('#sres').hidden = true; if (!e.target.closest('.pop-wrap')) $('#notifPop').hidden = true; });
-function showWidget(type) { if (PAGES[PAGE].special) setPage('overview'); const it = Grid.items.find(i => i.type === type); if (!it) { const n = Grid.add(type); refreshCards(); toast(t('toastAdded', { w: t('w.' + type) })); setTimeout(() => flash(n.id), 150); } else flash(it.id); }
+function showWidget(type) { if (MERGED[type]) { S.triTab = MERGED[type]; store.set('triTab', S.triTab); type = 'triage'; if (Grid.items.some(i => i.type === 'triage')) Grid.refreshType('triage'); } if (PAGES[PAGE].special) setPage('overview'); const it = Grid.items.find(i => i.type === type); if (!it) { const n = Grid.add(type); refreshCards(); toast(t('toastAdded', { w: t('w.' + type) })); setTimeout(() => flash(n.id), 150); } else flash(it.id); }
 function flash(id) { const el = Grid.els.get(id); if (!el) return; el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
 
 /* ---------- theme / language / layout ---------- */
@@ -2548,7 +2550,7 @@ function setTheme(d) { root.dataset.theme = d; store.set('theme', d); renderTop(
 function toggleLang() { setLang(LANG === 'ar' ? 'en' : 'ar'); }
 function setLang(l) { LANG = l; store.set('lang', LANG); applyLang(); }
 function applyLang() { root.lang = LANG; root.dir = LANG === 'ar' ? 'rtl' : 'ltr'; Grid.rtl = LANG === 'ar'; renderTop(); renderNav(); renderHello(); renderHero(); renderNotifs(); Grid.layout(); Grid.refreshAll(true); if (EDIT) buildDrawer(); if (PAGES[PAGE].special) renderSpecial(); syncChat(); tickClocks(); }
-function resetLayout() { if (PAGES[PAGE].special) return; Grid.reset(PAGES[PAGE].layout); toast(t('toastReset')); refreshCards(); }
+function resetLayout() { if (PAGES[PAGE].special) return; Grid.reset(pageLayout(PAGE)); toast(t('toastReset')); refreshCards(); }
 function tzParts(tz) { const p = {}; try { new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: 'numeric', hour12: false, timeZone: tz }).formatToParts(new Date()).forEach(x => p[x.type] = +x.value); } catch (e) {} return p; }
 function tickClocks() { const now = new Date(), loc = LANG === 'ar' ? 'ar-AE' : 'en-GB';
   $$('[data-clock]').forEach(el => { try { el.textContent = new Intl.DateTimeFormat(loc, { hour: '2-digit', minute: '2-digit', timeZone: el.dataset.clock }).format(now); } catch (e) {} });
