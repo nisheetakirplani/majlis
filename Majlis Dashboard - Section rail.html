@@ -1755,7 +1755,8 @@ const W = {
       return `${pop}${card}${ctrl}`; },
     after(el) { const it = Grid.items.find(x => x.id === el.dataset.id), c = $('.nw', el), b = $('.nw__b', el); if (!it || !c || !b) return;
       c.style.flex = 'none'; const need = c.offsetHeight + 12 + b.offsetHeight; c.style.flex = '';
-      const xh = Math.max(0, Math.ceil((need - bodyH(it.h)) / (ROW + GAP))); if (xh !== (it._xh || 0)) { it._xh = xh; requestAnimationFrame(() => Grid.layout()); } } },
+      const xh = Math.max(0, Math.ceil((need - bodyH(it.h)) / (ROW + GAP))), inc = Grid.items.find(x => x.type === 'incidents'), ixh = inc && !Grid.stack ? Math.max(0, it.h + xh - inc.h) : 0; /* Incidents sits beside News: keep the pair the same height */
+      let ch = xh !== (it._xh || 0); it._xh = xh; if (inc && ixh !== (inc._xh || 0)) { inc._xh = ixh; ch = true; } if (ch) requestAnimationFrame(() => Grid.layout()); } },
 
   competitive: { group: 'exec', icon: 'eye', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
     count: () => D.compet.length,
