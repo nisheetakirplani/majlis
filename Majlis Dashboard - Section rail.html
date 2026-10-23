@@ -1735,7 +1735,7 @@ const W = {
 
   /* Business health · new widgets */
   /* News & market · one story at a time: carousel (10 s, pause), a country switch for what it means for us there, interests behind "For you" */
-  news: { group: 'exec', icon: 'globe', sizes: { S: [3, 2], M: [6, 4], L: [8, 4], XL: [12, 4] }, def: 'L', min: [4, 3], max: [12, 5],
+  news: { group: 'exec', icon: 'globe', sizes: { S: [4, 3], M: [6, 3], L: [8, 3], XL: [12, 3] }, def: 'L', min: [4, 3], max: [12, 5],
     count: () => nwList().length,
     ctl: () => `<button class="nw-fy${S.nwEdit ? ' is-on' : ''}" data-act="nw-edit" aria-expanded="${!!S.nwEdit}"><i>✦</i>${t('nw.forYou')} · ${S.nwInt.length}</button>`,
     render({ v, w }) { const L = nwList();
@@ -1752,7 +1752,10 @@ const W = {
         return `<div class="nw__l${on ? ' is-on' : ''}"${on ? '' : ' aria-hidden="true"'}><div class="nw__top">${eyOf(x)}<span class="nw-a">${x.tag ? '' : esc(x.s) + ' · '}${x.a}</span>${sm ? (on ? fy : '<span class="nw-fy nw-fy--in">✦</span>') : ''}</div><h4 class="nw__h">${esc(x.h)}</h4><p class="nw__p">${dl}${esc(txt)}</p></div>`; };
       const card = `<article class="nw${n.tag ? ' nw--' + n.tag : ''}"><div class="nw__st">${L.map(layer).join('')}</div><i class="nw__pr${S.nwPause ? ' is-paused' : ''}" key="${i}" style="animation-duration:${NW_MS}ms"></i></article>`;
       const ctrl = `<div class="nw__b"><a class="btn btn--dark btn--sm" href="https://www.google.com/search?q=${encodeURIComponent(n.h)}" target="_blank" rel="noopener">${ico('arrowUR', 14)}${t('nw.read')}</a><span class="nw__n">${i + 1} / ${L.length}</span><span class="nw__ar"><button class="btn btn--ghost btn--sm nw__ic" data-act="nw-step" data-d="-1" aria-label="${t('nw.prev')}">${ico('chevL', 15)}</button><button class="btn btn--ghost btn--sm nw__ic" data-act="nw-pause" aria-label="${S.nwPause ? t('nw.play') : t('nw.pause')}" title="${S.nwPause ? t('nw.play') : t('nw.pause')}">${ico(S.nwPause ? 'play' : 'pause', 13)}</button><button class="btn btn--ghost btn--sm nw__ic" data-act="nw-step" data-d="1" aria-label="${t('nw.next')}">${ico('chevR', 15)}</button></span></div>`;
-      return `${pop}${card}${ctrl}`; } },
+      return `${pop}${card}${ctrl}`; },
+    after(el) { const it = Grid.items.find(x => x.id === el.dataset.id), c = $('.nw', el), b = $('.nw__b', el); if (!it || !c || !b) return;
+      c.style.flex = 'none'; const need = c.offsetHeight + 12 + b.offsetHeight; c.style.flex = '';
+      const xh = Math.max(0, Math.ceil((need - bodyH(it.h)) / (ROW + GAP))); if (xh !== (it._xh || 0)) { it._xh = xh; requestAnimationFrame(() => Grid.layout()); } } },
 
   competitive: { group: 'exec', icon: 'eye', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'M', min: [3, 2], max: [12, 6],
     count: () => D.compet.length,
@@ -1817,14 +1820,14 @@ const W = {
       const st = [...M.stories].sort((a, b) => (a.lv === 'bad' ? 0 : 1) - (b.lv === 'bad' ? 0 : 1)), k = Math.max(1, Math.min(3, Math.floor((bodyH(h) - 96) / 41)));
       return `${head}${bar}<div class="arls">${st.slice(0, k).map(x => `<div class="arr" role="button" tabindex="0" data-act="ask-open" data-q="${esc(`${x.s}: ${x.h}. Should we respond?`)}"><i class="dot dot--${x.lv === 'n' ? 'ok' : x.lv}" ${x.lv === 'n' ? 'style="background:var(--c5)"' : ''}></i><span><b>${esc(x.s)}</b> · ${esc(x.h)}</span></div>`).join('')}</div>`; } },
 
-  incidents: { group: 'work', icon: 'alert', sizes: { S: [3, 2], M: [4, 4], L: [6, 4], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
+  incidents: { group: 'work', icon: 'alert', sizes: { S: [3, 2], M: [4, 3], L: [6, 3], XL: [8, 4] }, def: 'L', min: [3, 2], max: [12, 6],
     count: () => D.incidents.filter(x => x.live).length || null,
     render({ v, h }) { const live = D.incidents.filter(x => x.live), done = D.incidents.filter(x => !x.live), x = live[0];
       if (v === 's') return x ? finBig(t('ex.live', { s: x.sev, t: x.since }), esc(x.n), `<span class="muted">${esc(x.o)}</span>`) : finBig(t('ex.calm'), t('ex.calmT'), '');
       const card = x ? `<div class="inc"><small>${t('ex.live', { s: x.sev, t: x.since })}</small><h4>${esc(x.n)}</h4><p>${esc(x.st)} · ${esc(x.o)}</p></div>` : `<div class="inc inc--calm"><small>${t('ex.calm')}</small><h4>${t('ex.calmT')}</h4><p>${t('ex.calmS')}</p></div>`;
       if (v === 'wide' || h <= 2) return `<div class="arw">${card}</div>`;
       const btns = x ? `<div class="cph__b"><button class="btn btn--dark btn--sm" data-act="ask-open" data-q="${esc(`Give me the latest on the ${x.n}: impact, cause and ETA`)}">${t('ex.update')}</button><button class="btn btn--ghost btn--sm" data-act="ask-open" data-q="${esc(`Who is on the ${x.n} bridge call, and should I join?`)}">${t('ex.bridge')}</button></div>` : '';
-      return `${card}${btns}${done.length && bodyH(h) > 200 ? `<div class="arls" style="margin-top:auto">${done.slice(0, 2).map(d => `<div class="arr"><i class="dot dot--ok"></i><span><b>${esc(d.n)}</b> · ${esc(d.since)}</span><em>${t('ex.resolved')}</em></div>`).join('')}</div>` : ''}`; } },
+      return `${card}${btns}${done.length && bodyH(h) >= 160 ? `<div class="arls" style="margin-top:auto">${done.slice(0, bodyH(h) > 200 ? 2 : 1).map(d => `<div class="arr"><i class="dot dot--ok"></i><span><b>${esc(d.n)}</b> · ${esc(d.since)}</span><em>${t('ex.resolved')}</em></div>`).join('')}</div>` : ''}`; } },
 
   /* Executive finance · department targets, outlook, pipeline, cost, cash and exceptions */
   deptScore: { group: 'exec', icon: 'bars', sizes: { S: [3, 2], M: [4, 5], L: [6, 6], XL: [8, 6] }, def: 'XL', min: [3, 2], max: [12, 8],
@@ -2046,7 +2049,7 @@ const HERO = {
 
 /* ----------------------------------------------------------- pages (sidebar) + layouts. Lists are ordered: the grid auto-packs them. */
 const PRESETS = {
-  default: [['myday', 8, 5], ['deadlines', 4, 5], ['triage', 8, 4], ['deals', 4, 4], ['calendar', 8, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 6], ['people', 6, 5], ['customers', 6, 5], ['news', 8, 4], ['incidents', 4, 4]],
+  default: [['myday', 8, 5], ['deadlines', 4, 5], ['triage', 8, 4], ['deals', 4, 4], ['calendar', 8, 4], ['clocks', 4, 4], ['trips', 4, 4], ['pulse', 8, 4], ['boardKpis', 4, 4], ['deptScore', 8, 6], ['people', 6, 5], ['customers', 6, 5], ['news', 8, 3], ['incidents', 4, 3]],
 };
 const PAGES = {
   overview: { icon: 'grid2', hero: true, layout: PRESETS.default },
@@ -2152,7 +2155,7 @@ function pack(items, auto = true) {
   const free = (x, y, w, h) => { for (let j = y; j < y + h; j++) { const r = row(j); for (let i = x; i < x + w; i++) if (r[i]) return false; } return true; };
   const mark = (x, y, w, h, v) => { for (let j = y; j < y + h; j++) { const r = row(j); for (let i = x; i < x + w; i++) r[i] = v; } };
   const pos = new Map(), list = [];
-  items.forEach((it, n) => { const w = Math.min(it.w, COLS), h = it.h; let done = false;
+  items.forEach((it, n) => { const w = Math.min(it.w, COLS), h = it.h + (it._xh || 0); let done = false; /* _xh: rows a widget adds when its content needs them at this width */
     for (let y = 0; !done && y < 80; y++) for (let x = 0; x + w <= COLS; x++) if (free(x, y, w, h)) { const p = { id: it.id, x, y, w, h, n: n + 1, it }; pos.set(it.id, p); list.push(p); mark(x, y, w, h, n + 1);
       if (auto) { /* a gap to the right that is narrower than any widget can be is absorbed straight away */
         let e = COLS; for (let j = y; j < y + h; j++) { let k = 0; while (x + w + k < COLS && !row(j)[x + w + k]) k++; e = Math.min(e, k); }
@@ -2183,7 +2186,7 @@ const Grid = {
   packSec(items) { const HDR = 44, SG = 30, pos = new Map(), heads = []; let top = 0;
     for (const k of SEC_ORDER) { const grp = items.filter(i => secOf(i.type) === k); if (!grp.length) continue; if (heads.length) top += SG;
       heads.push({ k, top }); const oy = top + HDR; let rows = 0;
-      if (this.stack) { for (const it of grp) { const h = Math.max(it.h, 3); pos.set(it.id, { id: it.id, x: 0, y: rows, w: COLS, h, it, oy }); rows += h; } }
+      if (this.stack) { for (const it of grp) { const h = Math.max(it.h + (it._xh || 0), 3); pos.set(it.id, { id: it.id, x: 0, y: rows, w: COLS, h, it, oy }); rows += h; } }
       else for (const [id, p] of pack(grp, this.auto)) { p.oy = oy; pos.set(id, p); rows = Math.max(rows, p.y + p.h); }
       top = oy + rows * (ROW + GAP) - GAP; }
     return { pos, heads, total: top }; },
@@ -2194,7 +2197,7 @@ const Grid = {
         if (was && was !== h.lv) $('.hdot', el).classList.add('is-ping'); if (why0 && why0 !== h.why) $('small', el).classList.add('is-new'); } }
     for (const [k, el] of this.headEls) if (!keep.has(k)) { el.remove(); this.headEls.delete(k); } },
   compute() { if (this.sec) { this.items = sortSec(this.items); const r = this.packSec(this.items); this.heads = r.heads; this.total = r.total; return this.lay = r.pos; } this.heads = [];
-    if (this.stack) { let y = 0; this.lay = new Map(); for (const it of this.items) { const h = Math.max(it.h, 3); this.lay.set(it.id, { id: it.id, x: 0, y, w: COLS, h, it }); y += h; } } else this.lay = pack(this.items, this.auto); return this.lay; },
+    if (this.stack) { let y = 0; this.lay = new Map(); for (const it of this.items) { const h = Math.max(it.h + (it._xh || 0), 3); this.lay.set(it.id, { id: it.id, x: 0, y, w: COLS, h, it }); y += h; } } else this.lay = pack(this.items, this.auto); return this.lay; },
   layout() { this.stack = this.el.clientWidth < 760; this.el.classList.toggle('grid--stack', this.stack); this.compute(); let maxY = 0;
     for (const it of this.items) { const p = this.lay.get(it.id), el = this.els.get(it.id); if (!p || !el) continue; maxY = Math.max(maxY, p.y + p.h); if (!(this.drag && this.drag.kind === 'move' && this.drag.it === it)) this.place(el, p); this.refresh(it, true); }
     this.drawHeads(); this.el.style.height = (this.sec ? this.total : maxY ? maxY * (ROW + GAP) - GAP : 0) + (this.edit ? 30 : 0) + 'px'; this.onLayout && this.onLayout(); },
@@ -2637,12 +2640,13 @@ const RETIRED = ['teams', 'inbox', 'decisions', 'queue', 'tasks', 'invites', 'la
 const MERGED = { inbox: 'mail', decisions: 'dec' }, INTO = { inbox: 'triage', decisions: 'triage', queue: 'myday', tasks: 'myday', invites: 'calendar', landing: 'deptScore', pipeline: 'deptScore', rpe: 'people', competitive: 'news', media: 'news' }, HMIN = { myday: 5, deptScore: 6, people: 5 };
 function layoutFor(p) { let saved = store.get('layout10.' + p, null);
   for (const to of new Set(Object.values(INTO))) if (saved && saved.some(x => INTO[x.type] === to)) { const i = saved.findIndex(x => INTO[x.type] === to); if (!saved.some(x => x.type === to)) saved[i] = { ...saved[i], type: to, w: Math.max(saved[i].w, 6), h: Math.max(saved[i].h, HMIN[to] || saved[i].h) }; saved = saved.filter(x => INTO[x.type] !== to); }
+  if (saved && !store.get('nwH', false)) { let ch = 0; for (const x of saved) if (['news', 'incidents'].includes(x.type) && x.h === 4) { x.h = 3; ch = 1; } if (ch) store.set('layout10.' + p, saved); }
   if (saved && !store.get('pcH', false)) { let ch = 0; for (const x of saved) if (['people', 'customers'].includes(x.type) && (x.w < 6 || x.h < 5)) { x.w = Math.max(x.w, 6); x.h = Math.max(x.h, 5); ch = 1; } if (ch) store.set('layout10.' + p, saved); }
   if (saved && !store.get('ytH2', false)) { const ds = saved.find(x => x.type === 'deptScore'); if (ds && ds.h < 6) { ds.h = 6; store.set('layout10.' + p, saved); } } /* Year target needs a row more than the old scorecard */
   if (saved && !store.get('mdH', false)) { const md = saved.find(x => x.type === 'myday'), dl = saved.find(x => x.type === 'deadlines'); if (md && dl && dl.h < md.h) { dl.h = md.h; store.set('layout10.' + p, saved); } } /* Deadlines sits beside My day: match its height once */
   const ok = (saved || []).filter(i => W[i.type] && !RETIRED.includes(i.type)); /* drop widgets that no longer exist */ return ok.length ? ok : mkItems(pageLayout(p)); }
 const pageLayout = p => PAGES[p].layout.filter(r => !RETIRED.includes(r[0]) || INTO[r[0]]).map(r => INTO[r[0]] ? [INTO[r[0]], Math.max(r[1], 6), Math.max(r[2], HMIN[INTO[r[0]]] || r[2])] : r).filter((r, i, A) => !Object.values(INTO).includes(r[0]) || A.findIndex(x => x[0] === r[0]) === i);
-function setPage(p) { if (p === 'overview' || !p) setTimeout(() => { store.set('mdH', true); store.set('ytH2', true); store.set('pcH', true); }, 0); if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
+function setPage(p) { if (p === 'overview' || !p) setTimeout(() => { store.set('mdH', true); store.set('ytH2', true); store.set('pcH', true); store.set('nwH', true); }, 0); if (!PAGES[p]) p = 'overview'; const pg = PAGES[p]; PAGE = p; store.set('page', p); document.body.dataset.page = p;
   $('#hero').hidden = !pg.hero; $('#grid').hidden = !!pg.special; $('#view').hidden = !pg.special; $('#btnEdit').hidden = !!pg.special;
   Grid.sec = !!pg.hero; if (pg.special) { if (EDIT) setEdit(false); renderSpecial(); Grid.heads = []; SecBar.render(); } else { Grid.key = 'layout10.' + p; Grid.setItems(layoutFor(p)); Grid.resetHistory(); if (EDIT) { buildDrawer(); setTimeout(() => Grid.layout(), 30); } }
   renderNav(); renderHello(); document.body.classList.remove('side-open'); scrollTo(0, 0); }
