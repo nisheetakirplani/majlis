@@ -1,0 +1,3165 @@
+{
+  "color": {
+    "bg": {
+      "default": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-bg-default)"
+            }
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{neutral.50}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-bg-subtle)"
+            }
+          }
+        }
+      }
+    },
+    "surface": {
+      "default": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-default)"
+            }
+          }
+        }
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-raised)"
+            }
+          }
+        }
+      },
+      "glass": {
+        "$type": "color",
+        "$value": "{white-alpha.60}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-glass)"
+            }
+          }
+        }
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{white-alpha.8}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-on-dark)"
+            }
+          }
+        }
+      },
+      "on-dark-hover": {
+        "$type": "color",
+        "$value": "{white-alpha.12}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-on-dark-hover)"
+            }
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{neutral.900}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-inverse)"
+            }
+          }
+        }
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{neutral.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-muted)"
+            }
+          }
+        }
+      },
+      "glass-strong": {
+        "$type": "color",
+        "$value": "{white-alpha.40}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-glass-strong)"
+            }
+          }
+        }
+      },
+      "backdrop": {
+        "$type": "color",
+        "$value": "{base.black}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-backdrop)"
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-strong)"
+            }
+          }
+        }
+      },
+      "inverse-soft": {
+        "$type": "color",
+        "$value": "{neutral.800}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-inverse-soft)"
+            }
+          }
+        }
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.900}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-primary)"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-secondary)"
+            }
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-disabled)"
+            }
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-inverse)"
+            }
+          }
+        }
+      },
+      "link": {
+        "$type": "color",
+        "$value": "{brand.primary.700}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-link)"
+            }
+          }
+        }
+      },
+      "link-hover": {
+        "$type": "color",
+        "$value": "{brand.primary.800}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-link-hover)"
+            }
+          }
+        }
+      },
+      "on-dark-secondary": {
+        "$type": "color",
+        "$value": "{white-alpha.60}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-on-dark-secondary)"
+            }
+          }
+        }
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{brand.primary.700}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-brand)"
+            }
+          }
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-tertiary)"
+            }
+          }
+        }
+      },
+      "emphasis": {
+        "$type": "color",
+        "$value": "{neutral.800}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-emphasis)"
+            }
+          }
+        }
+      },
+      "brand-strong": {
+        "$type": "color",
+        "$value": "{brand.primary.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-brand-strong)"
+            }
+          }
+        }
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-default)"
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-strong)"
+            }
+          }
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{brand.primary.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-focus)"
+            }
+          }
+        }
+      },
+      "control": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-control)"
+            }
+          }
+        }
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{error.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-error)"
+            }
+          }
+        }
+      },
+      "glass": {
+        "$type": "color",
+        "$value": "{white-alpha.40}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-glass)"
+            }
+          }
+        }
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{white-alpha.12}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-on-dark)"
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "primary": {
+        "bg": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.primary.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-bg-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.primary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-bg-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.primary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-bg-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-bg-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "border": {
+          "divider": {
+            "$type": "color",
+            "$value": "{brand.primary.400}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-divider)"
+                }
+              }
+            }
+          },
+          "default": {
+            "$type": "color",
+            "$value": "{brand.primary.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-border-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.primary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-border-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.primary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-border-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-border-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-text-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-text-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-text-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-text-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "icon": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-icon-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-icon-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-icon-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-primary-icon-disabled)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "secondary": {
+        "bg": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-bg-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.secondary.50}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-bg-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.secondary.100}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-bg-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-bg-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.secondary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-text-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.secondary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-text-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.secondary.900}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-text-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.400}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-text-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "icon": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.secondary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-icon-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.secondary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-icon-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.secondary.900}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-icon-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.400}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-icon-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "border": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.secondary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-border-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.secondary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-border-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.secondary.900}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-border-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-secondary-border-disabled)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "tertiary": {
+        "text": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.primary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-text-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.primary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-text-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.primary.900}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-text-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.400}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-text-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "bg": {
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.primary.50}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-bg-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.primary.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-bg-pressed)"
+                }
+              }
+            }
+          },
+          "selected": {
+            "$type": "color",
+            "$value": "{brand.primary.100}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-selected)"
+                }
+              }
+            }
+          },
+          "default": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-bg-default)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-bg-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "icon": {
+          "default": {
+            "$type": "color",
+            "$value": "{brand.primary.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-icon-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{brand.primary.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-icon-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{brand.primary.900}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-icon-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.400}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-icon-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "border": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-border-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-border-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-border-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{base.transparent}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-tertiary-border-disabled)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "destructive": {
+        "bg": {
+          "default": {
+            "$type": "color",
+            "$value": "{error.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-bg-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{error.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-bg-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{error.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-bg-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-bg-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-text-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-text-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-text-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "TEXT_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-text-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "icon": {
+          "default": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-icon-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-icon-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{base.white}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-icon-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "SHAPE_FILL",
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-icon-disabled)"
+                }
+              }
+            }
+          }
+        },
+        "border": {
+          "default": {
+            "$type": "color",
+            "$value": "{error.600}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-border-default)"
+                }
+              }
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{error.700}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-border-hover)"
+                }
+              }
+            }
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{error.800}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-border-pressed)"
+                }
+              }
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{neutral.200}",
+            "$extensions": {
+              "com.figma": {
+                "collection": "Semantic - Color",
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--color-action-destructive-border-disabled)"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "success": {
+      "bg": {
+        "$type": "color",
+        "$value": "{success.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-success-bg)"
+            }
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{success.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-success-border)"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{success.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-success-text)"
+            }
+          }
+        }
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{success.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-success-solid)"
+            }
+          }
+        }
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{success.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-success-accent)"
+            }
+          }
+        }
+      }
+    },
+    "warning": {
+      "bg": {
+        "$type": "color",
+        "$value": "{warning.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-warning-bg)"
+            }
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{warning.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-warning-border)"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{warning.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-warning-text)"
+            }
+          }
+        }
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{warning.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-warning-solid)"
+            }
+          }
+        }
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{warning.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-warning-accent)"
+            }
+          }
+        }
+      }
+    },
+    "error": {
+      "bg": {
+        "$type": "color",
+        "$value": "{error.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-bg)"
+            }
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{error.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-border)"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{error.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-text)"
+            }
+          }
+        }
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{error.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-solid)"
+            }
+          }
+        }
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{error.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-accent)"
+            }
+          }
+        }
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{error.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-error-on-dark)"
+            }
+          }
+        }
+      }
+    },
+    "info": {
+      "bg": {
+        "$type": "color",
+        "$value": "{info.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-info-bg)"
+            }
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{info.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-info-border)"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{info.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-info-text)"
+            }
+          }
+        }
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{info.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-info-solid)"
+            }
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{info.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-info-subtle)"
+            }
+          }
+        }
+      }
+    },
+    "control": {
+      "track-off": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-control-track-off)"
+            }
+          }
+        }
+      },
+      "track-off-hover": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-control-track-off-hover)"
+            }
+          }
+        }
+      },
+      "knob": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-control-knob)"
+            }
+          }
+        }
+      }
+    },
+    "progress": {
+      "track": {
+        "$type": "color",
+        "$value": "{neutral.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-progress-track)"
+            }
+          }
+        }
+      },
+      "fill": {
+        "$type": "color",
+        "$value": "{brand.primary.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-progress-fill)"
+            }
+          }
+        }
+      }
+    },
+    "badge": {
+      "bg": {
+        "$type": "color",
+        "$value": "{brand.primary.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-badge-bg)"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-badge-text)"
+            }
+          }
+        }
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-40}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-overlay-scrim)"
+            }
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-06}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-overlay-subtle)"
+            }
+          }
+        }
+      },
+      "soft": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-10}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-overlay-soft)"
+            }
+          }
+        }
+      },
+      "medium": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-14}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-overlay-medium)"
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-24}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-overlay-strong)"
+            }
+          }
+        }
+      }
+    },
+    "brand": {
+      "accent": {
+        "$type": "color",
+        "$value": "{brand.accent.300}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-accent)"
+            }
+          }
+        }
+      },
+      "accent-soft": {
+        "$type": "color",
+        "$value": "{brand.accent.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-accent-soft)"
+            }
+          }
+        }
+      },
+      "deep": {
+        "$type": "color",
+        "$value": "{brand.primary.900}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-deep)"
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{brand.primary.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-strong)"
+            }
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{brand.primary.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-subtle)"
+            }
+          }
+        }
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{brand.primary.300}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-on-dark)"
+            }
+          }
+        }
+      },
+      "tint": {
+        "$type": "color",
+        "$value": "{brand.tint.300}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-tint)"
+            }
+          }
+        }
+      },
+      "tint-strong": {
+        "$type": "color",
+        "$value": "{brand.tint.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-tint-strong)"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{brand.secondary.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-secondary)"
+            }
+          }
+        }
+      },
+      "secondary-soft": {
+        "$type": "color",
+        "$value": "{brand.secondary.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-secondary-soft)"
+            }
+          }
+        }
+      },
+      "accent-faint": {
+        "$type": "color",
+        "$value": "{brand.accent.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-accent-faint)"
+            }
+          }
+        }
+      },
+      "on-accent": {
+        "$type": "color",
+        "$value": "{brand.accent.700}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-on-accent)"
+            }
+          }
+        }
+      },
+      "tint-faint": {
+        "$type": "color",
+        "$value": "{brand.tint.100}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-tint-faint)"
+            }
+          }
+        }
+      },
+      "tint-soft": {
+        "$type": "color",
+        "$value": "{brand.tint.200}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-tint-soft)"
+            }
+          }
+        }
+      },
+      "tint-deep": {
+        "$type": "color",
+        "$value": "{brand.tint.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-tint-deep)"
+            }
+          }
+        }
+      },
+      "accent-strong": {
+        "$type": "color",
+        "$value": "{brand.accent.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-accent-strong)"
+            }
+          }
+        }
+      },
+      "on-accent-strong": {
+        "$type": "color",
+        "$value": "{brand.accent.800}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic - Color",
+            "scopes": [
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-on-accent-strong)"
+            }
+          }
+        }
+      }
+    },
+    "accent": {
+      "secondary": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{violet.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-subtle)"
+              }
+            }
+          }
+        },
+        "soft": {
+          "$type": "color",
+          "$value": "{violet.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-soft)"
+              }
+            }
+          }
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{violet.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-default)"
+              }
+            }
+          }
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{violet.600}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL",
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-strong)"
+              }
+            }
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{violet.700}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-text)"
+              }
+            }
+          }
+        },
+        "faint": {
+          "$type": "color",
+          "$value": "{violet.50}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-faint)"
+              }
+            }
+          }
+        },
+        "deep": {
+          "$type": "color",
+          "$value": "{violet.900}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL",
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-accent-secondary-deep)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "data": {
+      "map": {
+        "region-1": {
+          "$type": "color",
+          "$value": "{teal.50}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-region-1)"
+              }
+            }
+          }
+        },
+        "region-2": {
+          "$type": "color",
+          "$value": "{mint.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-region-2)"
+              }
+            }
+          }
+        },
+        "region-3": {
+          "$type": "color",
+          "$value": "{violet.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-region-3)"
+              }
+            }
+          }
+        },
+        "region-4": {
+          "$type": "color",
+          "$value": "{lime.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-region-4)"
+              }
+            }
+          }
+        },
+        "region-5": {
+          "$type": "color",
+          "$value": "{mint.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-region-5)"
+              }
+            }
+          }
+        },
+        "land": {
+          "$type": "color",
+          "$value": "{neutral.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-land)"
+              }
+            }
+          }
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{emerald.600}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "STROKE_COLOR"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-data-map-outline)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "gradient": {
+      "aura": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.tint.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aura-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.secondary.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aura-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.primary.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aura-end)"
+              }
+            }
+          }
+        }
+      },
+      "aurora-green": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.primary.400}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-green-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.secondary.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-green-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.accent.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-green-end)"
+              }
+            }
+          }
+        }
+      },
+      "teal-flow": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.secondary.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-teal-flow-start)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.secondary.700}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-teal-flow-end)"
+              }
+            }
+          }
+        }
+      },
+      "lime-glow": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.accent.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-lime-glow-start)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.accent.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-lime-glow-end)"
+              }
+            }
+          }
+        }
+      },
+      "earth-breeze": {
+        "start": {
+          "$type": "color",
+          "$value": "{neutral.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-earth-breeze-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.tint.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-earth-breeze-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.primary.700}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-earth-breeze-end)"
+              }
+            }
+          }
+        }
+      },
+      "aurora": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.tint.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.secondary.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{info.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-aurora-end)"
+              }
+            }
+          }
+        }
+      },
+      "violet-glow": {
+        "start": {
+          "$type": "color",
+          "$value": "{violet.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-violet-glow-start)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{violet.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-violet-glow-end)"
+              }
+            }
+          }
+        }
+      },
+      "mint-breeze": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.tint.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-mint-breeze-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.tint.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-mint-breeze-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.secondary.400}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-mint-breeze-end)"
+              }
+            }
+          }
+        }
+      },
+      "nebula": {
+        "start": {
+          "$type": "color",
+          "$value": "{info.600}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-nebula-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{violet.600}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-nebula-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{violet.300}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-nebula-end)"
+              }
+            }
+          }
+        }
+      },
+      "dream": {
+        "start": {
+          "$type": "color",
+          "$value": "{violet.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-dream-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{info.100}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-dream-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{brand.tint.200}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-dream-end)"
+              }
+            }
+          }
+        }
+      },
+      "midnight": {
+        "start": {
+          "$type": "color",
+          "$value": "{neutral.900}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-midnight-start)"
+              }
+            }
+          }
+        },
+        "mid": {
+          "$type": "color",
+          "$value": "{brand.primary.900}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-midnight-mid)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{violet.900}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-midnight-end)"
+              }
+            }
+          }
+        }
+      },
+      "mint-glow": {
+        "start": {
+          "$type": "color",
+          "$value": "{brand.tint.500}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-mint-glow-start)"
+              }
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{base.transparent}",
+          "$extensions": {
+            "com.figma": {
+              "collection": "Semantic - Color",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--color-gradient-mint-glow-end)"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

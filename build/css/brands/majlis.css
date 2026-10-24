@@ -1,0 +1,48 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-brand="majlis"] {
+  --brand-primary-50: var(--color-emerald-50);
+  --brand-primary-100: var(--color-emerald-100);
+  --brand-primary-200: var(--color-emerald-200);
+  --brand-primary-300: var(--color-emerald-300);
+  --brand-primary-400: var(--color-emerald-400);
+  --brand-primary-500: var(--color-emerald-500);
+  --brand-primary-600: var(--color-emerald-600);
+  --brand-primary-700: var(--color-emerald-700);
+  --brand-primary-800: var(--color-emerald-800);
+  --brand-primary-900: var(--color-emerald-900);
+  --brand-secondary-50: var(--color-teal-50);
+  --brand-secondary-100: var(--color-teal-100);
+  --brand-secondary-200: var(--color-teal-200);
+  --brand-secondary-300: var(--color-teal-300);
+  --brand-secondary-400: var(--color-teal-400);
+  --brand-secondary-500: var(--color-teal-500);
+  --brand-secondary-600: var(--color-teal-600);
+  --brand-secondary-700: var(--color-teal-700);
+  --brand-secondary-800: var(--color-teal-800);
+  --brand-secondary-900: var(--color-teal-900);
+  --brand-tint-50: var(--color-mint-50);
+  --brand-tint-100: var(--color-mint-100);
+  --brand-tint-200: var(--color-mint-200);
+  --brand-tint-300: var(--color-mint-300);
+  --brand-tint-400: var(--color-mint-400);
+  --brand-tint-500: var(--color-mint-500);
+  --brand-tint-600: var(--color-mint-600);
+  --brand-tint-700: var(--color-mint-700);
+  --brand-tint-800: var(--color-mint-800);
+  --brand-tint-900: var(--color-mint-900);
+  --brand-accent-50: var(--color-lime-50);
+  --brand-accent-100: var(--color-lime-100);
+  --brand-accent-200: var(--color-lime-200);
+  --brand-accent-300: var(--color-lime-300);
+  --brand-accent-400: var(--color-lime-400);
+  --brand-accent-500: var(--color-lime-500);
+  --brand-accent-600: var(--color-lime-600);
+  --brand-accent-700: var(--color-lime-700);
+  --brand-accent-800: var(--color-lime-800);
+  --brand-accent-900: var(--color-lime-900);
+  --brand-font-heading: var(--font-family-primary);
+  --brand-font-body: var(--font-family-primary);
+}

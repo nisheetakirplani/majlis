@@ -1,0 +1,781 @@
+{
+  "icon": {
+    "size": {
+      "badge": {
+        "$type": "dimension",
+        "$value": "{icon-size.12}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-badge)"
+            }
+          }
+        }
+      },
+      "inline": {
+        "$type": "dimension",
+        "$value": "{icon-size.14}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-inline)"
+            }
+          }
+        }
+      },
+      "default": {
+        "$type": "dimension",
+        "$value": "{icon-size.16}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-default)"
+            }
+          }
+        }
+      },
+      "nav": {
+        "$type": "dimension",
+        "$value": "{icon-size.20}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-nav)"
+            }
+          }
+        }
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "{icon-size.24}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-large)"
+            }
+          }
+        }
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{icon-size.32}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-card)"
+            }
+          }
+        }
+      },
+      "hero": {
+        "$type": "dimension",
+        "$value": "{icon-size.40}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--icon-size-hero)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "color": {
+    "icon": {
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.900}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-primary)"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-secondary)"
+            }
+          }
+        }
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-muted)"
+            }
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-disabled)"
+            }
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-inverse)"
+            }
+          }
+        }
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{brand.primary.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-brand)"
+            }
+          }
+        }
+      },
+      "brand-hover": {
+        "$type": "color",
+        "$value": "{brand.primary.700}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-brand-hover)"
+            }
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{success.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-success)"
+            }
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{warning.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-warning)"
+            }
+          }
+        }
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{error.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-error)"
+            }
+          }
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{info.600}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-info)"
+            }
+          }
+        }
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{base.white}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-on-dark)"
+            }
+          }
+        }
+      },
+      "on-dark-secondary": {
+        "$type": "color",
+        "$value": "{white-alpha.60}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-on-dark-secondary)"
+            }
+          }
+        }
+      },
+      "brand-strong": {
+        "$type": "color",
+        "$value": "{brand.primary.700}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-brand-strong)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$type": "number",
+      "$value": "{opacity.40}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--opacity-disabled)"
+          }
+        }
+      }
+    },
+    "hover": {
+      "$type": "number",
+      "$value": "{opacity.8}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--opacity-hover)"
+          }
+        }
+      }
+    },
+    "pressed": {
+      "$type": "number",
+      "$value": "{opacity.12}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--opacity-pressed)"
+          }
+        }
+      }
+    },
+    "dim-background": {
+      "$type": "number",
+      "$value": "{opacity.40}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--opacity-dim-background)"
+          }
+        }
+      }
+    },
+    "decoration": {
+      "$type": "number",
+      "$value": "{opacity.4}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "OPACITY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--opacity-decoration)"
+          }
+        }
+      }
+    }
+  },
+  "border": {
+    "width": {
+      "divider": {
+        "$type": "dimension",
+        "$value": "{border-width.hairline}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--border-width-divider)"
+            }
+          }
+        }
+      },
+      "default": {
+        "$type": "dimension",
+        "$value": "{border-width.thin}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--border-width-default)"
+            }
+          }
+        }
+      },
+      "focus": {
+        "$type": "dimension",
+        "$value": "{border-width.thick}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--border-width-focus)"
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "dimension",
+        "$value": "{border-width.heavy}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_FLOAT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--border-width-strong)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "shadow": {
+    "color": {
+      "contact": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-06}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "EFFECT_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--shadow-color-contact)"
+            }
+          }
+        }
+      },
+      "ambient": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-10}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "EFFECT_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--shadow-color-ambient)"
+            }
+          }
+        }
+      },
+      "deep": {
+        "$type": "color",
+        "$value": "{neutral-alpha.900-14}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "EFFECT_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--shadow-color-deep)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "size": {
+    "height": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{size.32}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--size-height-sm)"
+            }
+          }
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{size.40}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--size-height-md)"
+            }
+          }
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{size.48}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--size-height-lg)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "{radius.4}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--radius-sm)"
+          }
+        }
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{radius.8}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--radius-md)"
+          }
+        }
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{radius.12}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Semantic",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--radius-lg)"
+          }
+        }
+      }
+    }
+  },
+  "space": {
+    "padding": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{spacing.12}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-padding-sm)"
+            }
+          }
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{spacing.16}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-padding-md)"
+            }
+          }
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{spacing.20}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-padding-lg)"
+            }
+          }
+        }
+      }
+    },
+    "gap": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "{spacing.4}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-xs)"
+            }
+          }
+        }
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "{spacing.8}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-sm)"
+            }
+          }
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{spacing.12}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-md)"
+            }
+          }
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{spacing.16}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-lg)"
+            }
+          }
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "{spacing.24}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-xl)"
+            }
+          }
+        }
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "{spacing.32}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-2xl)"
+            }
+          }
+        }
+      },
+      "3xl": {
+        "$type": "dimension",
+        "$value": "{spacing.48}",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--space-gap-3xl)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

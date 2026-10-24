@@ -1,0 +1,42 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="dark"] {
+  --dash-bg: #0b100e;
+  --dash-glow-1: #0e3a2a;
+  --dash-card-solid: #1b2420;
+  --dash-deep: #1c4a39;
+  --dash-warn-soft: #3a2f17;
+  --dash-bad-soft: #3b1f21;
+  --dash-hot: #ff8a5c;
+  --dash-pop: #151c19;
+  --dash-glow-2: var(--color-violet-900);
+  --dash-card: var(--color-white-a8);
+  --dash-card-border: var(--color-white-a8);
+  --dash-tile: var(--color-white-a8);
+  --dash-tile-strong: var(--color-white-a12);
+  --dash-pill: var(--color-white-a12);
+  --dash-ink: var(--color-neutral-50);
+  --dash-ink-2: var(--color-neutral-300);
+  --dash-ink-3: var(--color-neutral-500);
+  --dash-line: var(--color-white-a12);
+  --dash-dark: var(--color-neutral-50);
+  --dash-dark-ink: var(--color-neutral-900);
+  --dash-on-deep: var(--color-white);
+  --dash-on-deep-2: var(--color-white-a60);
+  --dash-c1: var(--color-mint-500);
+  --dash-c2: var(--color-teal-400);
+  --dash-c3: var(--color-lime-300);
+  --dash-c4: var(--color-violet-300);
+  --dash-c5: var(--color-neutral-700);
+  --dash-warn: var(--color-warning-500);
+  --dash-bad: var(--color-error-500);
+  --dash-shadow: var(--color-black);
+  --dash-accent: var(--brand-tint-500);
+  --dash-accent-soft: var(--brand-primary-900);
+  --dash-hi: var(--brand-accent-300);
+  --dash-hi-ink: var(--brand-accent-900);
+  --dash-cap: var(--brand-primary-700);
+  --dash-orb-eye: var(--brand-primary-900);
+}
