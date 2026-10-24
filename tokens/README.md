@@ -28,6 +28,6 @@ Add a mode to the **Brand** collection in Figma, re-export, and a new `brands/<c
 ## Notes
 
 - The CSS variable name Figma uses for each token is kept in `$extensions["com.figma"].codeSyntax.WEB`.
-- Dimensions are in `px`. Letter-spacing values are percentages (`$extensions["com.figma"].unit = "percent"`).
+- Dimensions, including letter-spacing, are in `px` (Figma applies letter-spacing variables as pixels).
 - Font weights are CSS numbers. The original Figma style name is kept in `figmaFontStyle`.
 - Chart and map data colours (`color.data.*`, `dash.c1`–`c5`) deliberately do not change per brand.

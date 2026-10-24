@@ -14,7 +14,8 @@ Figma variables ──export──▶ tokens/*.json ──npm run tokens──�
 | `build-tokens.js` | Style Dictionary build: one CSS file per layer and per brand, plus the Tailwind theme. |
 | `build/css/` | Generated CSS variables. Do not edit by hand; run `npm run tokens`. |
 | `src/app.css` | Tailwind entry: imports the generated CSS. |
-| `demo/index.html` | Demo screen with a **Majlis / Brand1 / Side by side** switch. |
+| `demo/index.html`, `demo/assets/` | The Glass Bento Home screen from Figma, with a **Majlis / Brand1 / Both** switch. |
+| `scripts/serve.js` | Local server for the demo (`npm run serve`). |
 
 ### Commands
 
@@ -22,9 +23,12 @@ Figma variables ──export──▶ tokens/*.json ──npm run tokens──�
 npm install
 npm run build   # tokens + Tailwind CSS
 npm run dev     # same, then rebuild CSS on change
+npm run serve   # open http://localhost:4173
 ```
 
-Then open `demo/index.html` in a browser.
+Open the demo through `npm run serve`, not by double-clicking the file: icons are drawn with CSS masks, which browsers block on `file://`.
+
+The demo is a code version of the Figma screen **Set 2 / I · Glass Bento — Home** (node `824:2330`). Icons come from Figma and are filled with token colours, so they follow the brand.
 
 ### How brand switching works
 

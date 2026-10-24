@@ -7,7 +7,8 @@
     "tokens": "node build-tokens.js",
     "css": "tailwindcss -i ./src/app.css -o ./demo/app.css",
     "build": "npm run tokens && npm run css",
-    "dev": "npm run tokens && tailwindcss -i ./src/app.css -o ./demo/app.css --watch"
+    "dev": "npm run tokens && tailwindcss -i ./src/app.css -o ./demo/app.css --watch",
+    "serve": "node scripts/serve.js"
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",

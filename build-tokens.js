@@ -23,15 +23,9 @@ const hooks = {
       filter: (token) => token.$type === 'fontFamily',
       transform: (token) => `"${token.$value}", ${/mono/i.test(token.$value) ? 'monospace' : 'sans-serif'}`,
     },
-    // Figma letter-spacing is in percent; CSS wants em (-2% -> -0.02em).
-    'value/percent-to-em': {
-      type: 'value',
-      filter: (token) => figma(token).unit === 'percent',
-      transform: (token) => `${Number(token.$value) / 100}em`,
-    },
   },
 };
-const transforms = ['name/figma-code-syntax', 'value/font-family-css', 'value/percent-to-em'];
+const transforms = ['name/figma-code-syntax', 'value/font-family-css'];
 
 async function buildCss({ include = [], source, destination, selector }) {
   const sd = new StyleDictionary({
@@ -134,7 +128,7 @@ const lines = [
   '',
   ...[...gradients].map(([name, s]) => {
     const stops = ['start', 'mid', 'end'].filter((k) => s[k]).map((k) => s[k]).join(', ');
-    return `@utility bg-gradient-${name} {\n  background-image: linear-gradient(135deg, ${stops});\n}`;
+    return `@utility bg-gradient-${name} {\n  background-image: linear-gradient(120deg, ${stops});\n}`;
   }),
   '',
 ];

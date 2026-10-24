@@ -2710,9 +2710,9 @@
     },
     "letter-spacing": {
       "tighter": {
-        "$type": "number",
-        "$value": -2,
-        "$description": "-2% · Very large text",
+        "$type": "dimension",
+        "$value": "-2px",
+        "$description": "-2% · Very large text (Figma applies this value in px.)",
         "$extensions": {
           "com.figma": {
             "collection": "Primitives",
@@ -2721,15 +2721,14 @@
             ],
             "codeSyntax": {
               "WEB": "var(--font-letter-spacing-tighter)"
-            },
-            "unit": "percent"
+            }
           }
         }
       },
       "tight": {
-        "$type": "number",
-        "$value": -1,
-        "$description": "-1% · Headings",
+        "$type": "dimension",
+        "$value": "-1px",
+        "$description": "-1% · Headings (Figma applies this value in px.)",
         "$extensions": {
           "com.figma": {
             "collection": "Primitives",
@@ -2738,15 +2737,14 @@
             ],
             "codeSyntax": {
               "WEB": "var(--font-letter-spacing-tight)"
-            },
-            "unit": "percent"
+            }
           }
         }
       },
       "none": {
-        "$type": "number",
-        "$value": 0,
-        "$description": "0% · Body and labels",
+        "$type": "dimension",
+        "$value": "0px",
+        "$description": "0% · Body and labels (Figma applies this value in px.)",
         "$extensions": {
           "com.figma": {
             "collection": "Primitives",
@@ -2755,15 +2753,14 @@
             ],
             "codeSyntax": {
               "WEB": "var(--font-letter-spacing-none)"
-            },
-            "unit": "percent"
+            }
           }
         }
       },
       "wide": {
-        "$type": "number",
-        "$value": 2,
-        "$description": "2% · Slightly spread",
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "2% · Slightly spread (Figma applies this value in px.)",
         "$extensions": {
           "com.figma": {
             "collection": "Primitives",
@@ -2772,15 +2769,14 @@
             ],
             "codeSyntax": {
               "WEB": "var(--font-letter-spacing-wide)"
-            },
-            "unit": "percent"
+            }
           }
         }
       },
       "wider": {
-        "$type": "number",
-        "$value": 4,
-        "$description": "4% · UPPERCASE labels",
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "4% · UPPERCASE labels (Figma applies this value in px.)",
         "$extensions": {
           "com.figma": {
             "collection": "Primitives",
@@ -2789,8 +2785,7 @@
             ],
             "codeSyntax": {
               "WEB": "var(--font-letter-spacing-wider)"
-            },
-            "unit": "percent"
+            }
           }
         }
       }

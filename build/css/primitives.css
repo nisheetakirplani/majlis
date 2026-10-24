@@ -202,11 +202,11 @@
   --font-line-height-48: 48px; /** Line height 48px. */
   --font-line-height-56: 56px; /** Line height 56px. */
   --font-line-height-72: 72px; /** Line height 72px. */
-  --font-letter-spacing-tighter: -0.02em; /** -2% · Very large text */
-  --font-letter-spacing-tight: -0.01em; /** -1% · Headings */
-  --font-letter-spacing-none: 0em; /** 0% · Body and labels */
-  --font-letter-spacing-wide: 0.02em; /** 2% · Slightly spread */
-  --font-letter-spacing-wider: 0.04em; /** 4% · UPPERCASE labels */
+  --font-letter-spacing-tighter: -2px; /** -2% · Very large text (Figma applies this value in px.) */
+  --font-letter-spacing-tight: -1px; /** -1% · Headings (Figma applies this value in px.) */
+  --font-letter-spacing-none: 0px; /** 0% · Body and labels (Figma applies this value in px.) */
+  --font-letter-spacing-wide: 2px; /** 2% · Slightly spread (Figma applies this value in px.) */
+  --font-letter-spacing-wider: 4px; /** 4% · UPPERCASE labels (Figma applies this value in px.) */
   --size-24: 24px; /** Control height / square size. */
   --size-28: 28px; /** Control height / square size. */
   --size-32: 32px; /** Control height / square size. */

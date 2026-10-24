@@ -188,38 +188,38 @@
 }
 
 @utility bg-gradient-aura {
-  background-image: linear-gradient(135deg, var(--color-gradient-aura-start), var(--color-gradient-aura-mid), var(--color-gradient-aura-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-aura-start), var(--color-gradient-aura-mid), var(--color-gradient-aura-end));
 }
 @utility bg-gradient-aurora-green {
-  background-image: linear-gradient(135deg, var(--color-gradient-aurora-green-start), var(--color-gradient-aurora-green-mid), var(--color-gradient-aurora-green-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-aurora-green-start), var(--color-gradient-aurora-green-mid), var(--color-gradient-aurora-green-end));
 }
 @utility bg-gradient-teal-flow {
-  background-image: linear-gradient(135deg, var(--color-gradient-teal-flow-start), var(--color-gradient-teal-flow-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-teal-flow-start), var(--color-gradient-teal-flow-end));
 }
 @utility bg-gradient-lime-glow {
-  background-image: linear-gradient(135deg, var(--color-gradient-lime-glow-start), var(--color-gradient-lime-glow-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-lime-glow-start), var(--color-gradient-lime-glow-end));
 }
 @utility bg-gradient-earth-breeze {
-  background-image: linear-gradient(135deg, var(--color-gradient-earth-breeze-start), var(--color-gradient-earth-breeze-mid), var(--color-gradient-earth-breeze-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-earth-breeze-start), var(--color-gradient-earth-breeze-mid), var(--color-gradient-earth-breeze-end));
 }
 @utility bg-gradient-aurora {
-  background-image: linear-gradient(135deg, var(--color-gradient-aurora-start), var(--color-gradient-aurora-mid), var(--color-gradient-aurora-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-aurora-start), var(--color-gradient-aurora-mid), var(--color-gradient-aurora-end));
 }
 @utility bg-gradient-violet-glow {
-  background-image: linear-gradient(135deg, var(--color-gradient-violet-glow-start), var(--color-gradient-violet-glow-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-violet-glow-start), var(--color-gradient-violet-glow-end));
 }
 @utility bg-gradient-mint-breeze {
-  background-image: linear-gradient(135deg, var(--color-gradient-mint-breeze-start), var(--color-gradient-mint-breeze-mid), var(--color-gradient-mint-breeze-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-mint-breeze-start), var(--color-gradient-mint-breeze-mid), var(--color-gradient-mint-breeze-end));
 }
 @utility bg-gradient-nebula {
-  background-image: linear-gradient(135deg, var(--color-gradient-nebula-start), var(--color-gradient-nebula-mid), var(--color-gradient-nebula-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-nebula-start), var(--color-gradient-nebula-mid), var(--color-gradient-nebula-end));
 }
 @utility bg-gradient-dream {
-  background-image: linear-gradient(135deg, var(--color-gradient-dream-start), var(--color-gradient-dream-mid), var(--color-gradient-dream-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-dream-start), var(--color-gradient-dream-mid), var(--color-gradient-dream-end));
 }
 @utility bg-gradient-midnight {
-  background-image: linear-gradient(135deg, var(--color-gradient-midnight-start), var(--color-gradient-midnight-mid), var(--color-gradient-midnight-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-midnight-start), var(--color-gradient-midnight-mid), var(--color-gradient-midnight-end));
 }
 @utility bg-gradient-mint-glow {
-  background-image: linear-gradient(135deg, var(--color-gradient-mint-glow-start), var(--color-gradient-mint-glow-end));
+  background-image: linear-gradient(120deg, var(--color-gradient-mint-glow-start), var(--color-gradient-mint-glow-end));
 }

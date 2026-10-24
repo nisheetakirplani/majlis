@@ -11,116 +11,245 @@
 </head>
 <body class="min-h-screen">
   <!-- Toolbar: switches data-brand, which swaps every brand variable -->
-  <header class="sticky top-0 z-10 flex flex-wrap items-center gap-3 border-b border-border bg-surface px-4 py-3">
-    <p class="mr-auto text-sm text-text-secondary">Same HTML, same classes. Only <code class="font-mono text-text-primary">data-brand</code> changes.</p>
+  <header class="demo-bar sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b border-border bg-surface px-4 py-3">
+    <p class="mr-auto text-sm text-text-secondary">Figma screen <b class="font-semibold text-text-primary">Set 2 / I · Glass Bento — Home</b>, built from tokens. Only <code class="font-mono text-text-primary">data-brand</code> changes.</p>
     <div class="flex rounded-lg border border-border p-1" role="group" aria-label="Brand">
-      <button type="button" data-set-brand="majlis" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Majlis</button>
-      <button type="button" data-set-brand="brand1" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Brand1</button>
-      <button type="button" data-set-brand="compare" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Side by side</button>
+      <button type="button" id="brand-majlis" data-set-brand="majlis" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Majlis</button>
+      <button type="button" id="brand-brand1" data-set-brand="brand1" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Brand1</button>
+      <button type="button" id="brand-compare" data-set-brand="compare" class="brand-btn rounded-md px-3 py-1.5 text-sm font-semibold">Both</button>
     </div>
   </header>
 
-  <main id="stage" class="grid gap-6 p-4 md:p-6"></main>
+  <main id="stage" class="flex flex-col gap-6"></main>
 
-  <!-- One app screen built only from semantic token utilities -->
+  <!-- Set 2 / I · Glass Bento — Home (Figma node 824:2330), 1440 × 900 -->
   <template id="screen">
-    <section class="screen overflow-hidden rounded-lg border border-border bg-bg-subtle">
-      <p class="brand-label border-b border-border bg-surface px-4 py-2 text-xs font-semibold uppercase tracking-wide text-text-secondary"></p>
-      <div class="flex flex-col gap-4 p-4 lg:flex-row">
-        <!-- Sidebar -->
-        <aside class="flex shrink-0 flex-col gap-3 lg:w-56">
-          <div class="rounded-lg bg-surface p-3 shadow-sm">
-            <div class="mb-3 flex items-center gap-2">
-              <span class="grid size-8 place-items-center rounded-md bg-gradient-aurora-green text-text-inverse">
-                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>
-              </span>
-              <span class="font-heading font-semibold">Majlis AI</span>
+    <section class="screen relative isolate flex flex-col gap-4 overflow-hidden bg-bg p-5 lg:h-[900px] lg:flex-row">
+      <img class="absolute inset-0 -z-10 size-full object-cover" src="assets/background.png" alt="">
+      <div class="absolute inset-0 -z-10 bg-surface opacity-[0.68]"></div>
+
+      <!-- Left Navigation (Style=Cards, State=Expanded) -->
+      <aside class="flex shrink-0 flex-col gap-3 lg:h-full lg:w-[276px]">
+        <div class="flex w-full flex-col gap-3 rounded-[16px] border border-border-glass bg-[rgba(255,255,255,0.64)] p-4 backdrop-blur-[12px]">
+          <div class="flex w-full items-center gap-3">
+            <div class="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-gradient-aurora-green">
+              <span class="relative size-5 shrink-0 text-icon-inverse"><span class="ico inset-[-50057.29%_0_0_-124036.46%]" style="--ico:url(assets/sparkles.svg)"></span></span>
             </div>
-            <button class="flex w-full items-center justify-center gap-2 rounded-md bg-action-primary-bg px-3 py-2 text-sm font-semibold text-action-primary-text hover:bg-action-primary-bg-hover">
-              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              New chat
+            <p class="min-w-px flex-1 font-body text-[length:var(--font-size-md)] font-bold leading-[var(--font-line-height-20)] text-text-primary">Majlis AI</p>
+            <button type="button" class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary" aria-label="Collapse sidebar">
+              <span class="relative size-4 shrink-0"><span class="ico inset-[0_0_-21003.13%_-102161.46%]" style="--ico:url(assets/sidebar.svg)"></span></span>
             </button>
           </div>
-          <nav class="rounded-lg bg-surface p-2 text-sm shadow-sm">
-            <a class="flex items-center gap-2 rounded-md bg-action-tertiary-bg-selected px-3 py-2 font-semibold text-action-tertiary-text" href="#">
-              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Overview</a>
-            <a class="flex items-center gap-2 rounded-md px-3 py-2 text-text-secondary hover:bg-action-tertiary-bg-hover" href="#">
-              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l3 3v15H6z"/></svg>Documents</a>
-            <a class="flex items-center gap-2 rounded-md px-3 py-2 text-text-secondary hover:bg-action-tertiary-bg-hover" href="#">
-              <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Analytics
-              <span class="ml-auto rounded-full bg-info-bg px-2 text-xs text-info-text">New</span></a>
-          </nav>
-          <div class="rounded-lg bg-action-primary-bg p-4 text-action-primary-text">
-            <p class="font-heading text-lg font-bold">Premium plan</p>
-            <p class="mb-3 text-xs opacity-90">Pick the plan and unlock all features</p>
-            <button class="w-full rounded-md bg-surface px-3 py-2 text-sm font-semibold text-action-secondary-text">Upgrade now</button>
-          </div>
-        </aside>
+          <button type="button" class="flex h-10 w-full items-center justify-center gap-2 rounded-[8px] bg-action-primary-bg px-4 text-action-primary-icon hover:bg-action-primary-bg-hover">
+            <span class="relative size-5 shrink-0"><span class="ico inset-[-51448.96%_0_0_-17469.79%]" style="--ico:url(assets/plus-btn.svg)"></span></span>
+            <span class="font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-20)] text-text-inverse">New chat</span>
+          </button>
+        </div>
 
-        <!-- Main -->
-        <div class="flex min-w-0 flex-1 flex-col items-center gap-5 rounded-lg bg-surface p-6 shadow-sm">
-          <span class="relative mt-4 size-16 rounded-full bg-gradient-aurora-green shadow-lg">
-            <span class="absolute left-[38%] top-[42%] h-3 w-1.5 rounded-full bg-brand-deep"></span>
-            <span class="absolute left-[56%] top-[42%] h-3 w-1.5 rounded-full bg-brand-deep"></span>
+        <div class="hidden flex-1 lg:block"></div>
+
+        <nav class="flex w-full flex-col gap-0.5 rounded-[16px] border border-border-glass bg-[rgba(255,255,255,0.64)] p-2 backdrop-blur-[12px]" aria-label="Main">
+          <a href="#" aria-current="page" class="flex h-11 w-full items-center gap-3 rounded-[12px] bg-surface-raised px-3 text-icon-primary shadow-[0_1px_2px_var(--shadow-color-ambient),0_1px_1px_var(--shadow-color-contact)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-[-17478.13%_0_0_-68519.79%]" style="--ico:url(assets/home.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-18)] text-text-primary">Overview</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-[-22144.79%_0_0_-17471.88%]" style="--ico:url(assets/documents.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Documents</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/analytics.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Analytics</span>
+            <span class="shrink-0 rounded-full bg-info-bg px-2 py-0.5 font-body text-[length:var(--font-size-xs)] font-medium leading-[var(--font-line-height-16)] text-info-text">New</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-[0_0_-11207.29%_-112247.92%]" style="--ico:url(assets/insights.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Insights</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-[-45390.63%_0_0_-42330.22%]" style="--ico:url(assets/plans.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Plans</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/team.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Team</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/integrations.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Integrations</span>
+          </a>
+          <a href="#" class="flex h-11 w-full items-center gap-3 rounded-[12px] px-3 text-icon-secondary hover:bg-[rgba(255,255,255,0.6)]">
+            <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/settings.svg)"></span></span>
+            <span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Settings</span>
+          </a>
+        </nav>
+
+        <div class="flex w-full items-center gap-3 rounded-[12px] border border-border bg-[rgba(255,255,255,0.64)] p-3 backdrop-blur-[12px]">
+          <span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-action-tertiary-bg-selected font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-20)] text-action-tertiary-text">SH</span>
+          <span class="flex min-w-px flex-1 flex-col text-[length:var(--font-size-sm)]">
+            <span class="font-body font-semibold leading-[var(--font-line-height-18)] text-text-primary">Syed Hafeez</span>
+            <span class="font-body font-normal leading-[var(--font-line-height-20)] text-text-secondary">Enterprise</span>
           </span>
-          <div class="text-center">
-            <h1 class="font-heading text-3xl font-bold tracking-tight">Good afternoon, Syed.</h1>
-            <p class="text-text-secondary">What are we working on?</p>
+          <span class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary">
+            <span class="relative size-4 shrink-0"><span class="ico inset-0" style="--ico:url(assets/chevron-right.svg)"></span></span>
+          </span>
+        </div>
+
+        <div class="hidden flex-1 lg:block"></div>
+
+        <div class="flex w-full flex-col gap-5 rounded-[16px] border border-border-glass bg-action-primary-bg p-5 shadow-[0_1px_2px_var(--shadow-color-ambient),0_1px_1px_var(--shadow-color-contact)]">
+          <div class="flex w-full flex-col gap-1 text-text-inverse">
+            <p class="font-heading text-[length:var(--font-size-xl)] font-bold leading-[var(--font-line-height-28)] tracking-[var(--font-letter-spacing-tight)]">Premium plan</p>
+            <p class="font-body text-[length:var(--font-size-sm)] font-normal leading-[var(--font-line-height-20)]">Pick the plan and unlock all features</p>
           </div>
-          <div class="w-full max-w-xl rounded-lg border border-border bg-surface p-3 shadow-sm">
-            <p class="mb-6 text-text-tertiary">Just ask…</p>
-            <div class="flex items-center gap-2">
-              <span class="rounded-full border border-border px-3 py-1 text-xs text-text-secondary">Institutional Memory</span>
-              <button class="ml-auto grid size-9 place-items-center rounded-full bg-action-primary-bg text-action-primary-text" aria-label="Send">
-                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          <button type="button" class="flex h-10 w-full items-center justify-center gap-2 rounded-[8px] border border-action-secondary-border bg-action-secondary-bg px-4 text-icon-brand">
+            <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/arrow-up-right.svg)"></span></span>
+            <span class="font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-20)] text-action-secondary-text">Upgrade now</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Center -->
+      <div class="flex min-w-0 flex-1 flex-col gap-4 lg:h-full">
+        <div class="flex w-full items-center gap-2 rounded-[16px] border border-border-glass bg-surface-glass py-2 pl-6 pr-3 shadow-[0_2px_4px_0_var(--shadow-color-contact),0_4px_8px_0_var(--shadow-color-ambient)]">
+          <p class="min-w-px flex-1 font-body text-[length:var(--font-size-md)] font-semibold leading-[var(--font-line-height-20)] text-text-primary">Q3 board review</p>
+          <button type="button" class="flex h-8 shrink-0 items-center justify-center gap-1.5 rounded-[8px] border border-action-secondary-border bg-action-secondary-bg px-3 text-action-secondary-icon">
+            <span class="relative size-4 shrink-0"><span class="ico inset-[-19340.63%_0_0_-129836.46%]" style="--ico:url(assets/share.svg)"></span></span>
+            <span class="font-body text-[length:var(--font-size-xs)] font-semibold leading-[var(--font-line-height-16)] text-action-secondary-text">Share</span>
+          </button>
+          <button type="button" class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary" aria-label="More">
+            <span class="relative size-4 shrink-0"><span class="ico inset-[-46776.04%_0_0_-13130.27%]" style="--ico:url(assets/more-vertical.svg)"></span></span>
+          </button>
+        </div>
+
+        <div class="flex min-h-px w-full flex-1 flex-col items-center justify-center gap-5 py-8 lg:py-0">
+          <!-- Orb (Face=Eyes) -->
+          <div class="animate-orb-float relative flex size-[72px] shrink-0 items-center justify-center overflow-clip rounded-full bg-gradient-aurora-green">
+            <span class="relative size-[45px] shrink-0 text-brand-accent"><span class="ico inset-[-26.67%]" style="--ico:url(assets/orb-flow.svg)"></span></span>
+            <span class="absolute left-[3.6px] top-[8.64px] size-[64.8px] text-brand-accent"><span class="ico inset-[-74.07%]" style="--ico:url(assets/orb-glow.svg)"></span></span>
+            <img class="absolute left-[12.96px] top-[8.64px] h-[17.28px] w-[30.24px] max-w-none" src="assets/orb-highlight.svg" alt="">
+            <span class="relative flex shrink-0 items-center justify-center gap-3">
+              <span class="h-[14px] w-[6px] rounded-[4px] bg-brand-deep"></span>
+              <span class="h-[14px] w-[6px] rounded-[4px] bg-brand-deep"></span>
+            </span>
+          </div>
+
+          <div class="animate-rise-in flex flex-col items-center gap-1 text-center">
+            <h1 class="font-heading text-[length:var(--font-size-4xl)] font-bold leading-[var(--font-line-height-40)] tracking-[var(--font-letter-spacing-tight)] text-text-primary">Good afternoon, Syed.</h1>
+            <p class="font-body text-[length:var(--font-size-lg)] font-normal leading-[var(--font-line-height-28)] text-text-secondary">What are we working on?</p>
+          </div>
+
+          <!-- Query Input (Type=Card) -->
+          <div class="animate-rise-in flex w-full max-w-[640px] flex-col gap-2 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_2px_4px_0_var(--shadow-color-contact),0_4px_8px_0_var(--shadow-color-ambient)] [animation-delay:0.2s]">
+            <label for="ask" class="sr-only">Ask Majlis</label>
+            <textarea id="ask" rows="2" placeholder="Just ask…" class="h-[52px] w-full resize-none bg-transparent font-body text-[length:var(--font-size-lg)] font-normal leading-[var(--font-line-height-28)] text-text-primary outline-none placeholder:text-text-disabled"></textarea>
+            <div class="flex w-full items-center gap-2">
+              <button type="button" class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary" aria-label="Add">
+                <span class="relative size-4 shrink-0"><span class="ico inset-[-51448.96%_0_0_-17469.79%]" style="--ico:url(assets/plus.svg)"></span></span>
+              </button>
+              <span class="flex h-8 shrink-0 items-center justify-center gap-2 rounded-full border border-border bg-surface px-3 text-icon-secondary">
+                <span class="relative size-4 shrink-0"><span class="ico inset-[-52390.63%_0_0_-53928.13%]" style="--ico:url(assets/sparkles-chip.svg)"></span></span>
+                <span class="whitespace-nowrap font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-secondary">Institutional Memory</span>
+              </span>
+              <span class="h-px min-w-px flex-1"></span>
+              <button type="button" class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary" aria-label="Voice">
+                <span class="relative size-4 shrink-0"><span class="ico inset-[-73685.94%_-29.69%_-42.19%_-11023.44%]" style="--ico:url(assets/mic.svg)"></span></span>
+              </button>
+              <button type="button" class="flex size-10 shrink-0 items-center justify-center rounded-full bg-action-primary-bg text-action-primary-icon hover:bg-action-primary-bg-hover" aria-label="Send">
+                <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/arrow-up.svg)"></span></span>
               </button>
             </div>
           </div>
-          <div class="grid w-full max-w-xl gap-3 sm:grid-cols-2">
-            <div class="flex gap-3 rounded-lg border border-border p-3">
-              <span class="grid size-8 shrink-0 place-items-center rounded-md bg-brand-tint-faint text-icon-brand">
-                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l3 3v15H6z"/></svg></span>
-              <div><p class="text-sm font-semibold">Summarise this week’s board documents</p><p class="text-xs text-text-secondary">Decisions, risks and owners</p></div>
-            </div>
-            <div class="flex gap-3 rounded-lg border border-border p-3">
-              <span class="grid size-8 shrink-0 place-items-center rounded-md bg-brand-tint-faint text-icon-brand">
-                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7"/></svg></span>
-              <div><p class="text-sm font-semibold">Compare Q3 revenue by region</p><p class="text-xs text-text-secondary">Variance against plan</p></div>
-            </div>
-          </div>
-          <div class="w-full max-w-xl">
-            <div class="mb-1 flex justify-between text-xs text-text-secondary"><span>57.5k / 200k</span><span>28.75%</span></div>
-            <div class="h-1.5 rounded-full bg-progress-track"><div class="h-1.5 w-[29%] rounded-full bg-progress-fill"></div></div>
-          </div>
-          <div class="flex flex-wrap justify-center gap-2 text-xs">
-            <span class="rounded-full bg-success-bg px-2 py-1 text-success-text">Success</span>
-            <span class="rounded-full bg-warning-bg px-2 py-1 text-warning-text">Warning</span>
-            <span class="rounded-full bg-error-bg px-2 py-1 text-error-text">Error</span>
-            <span class="rounded-full bg-brand-accent px-2 py-1 text-brand-on-accent">Brand accent</span>
+
+          <!-- Starters -->
+          <div class="animate-rise-in grid w-full max-w-[640px] gap-3 sm:grid-cols-2 [animation-delay:0.35s]">
+            <a href="#" class="flex min-w-px items-start gap-3 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_1px_4px_0_var(--shadow-color-ambient),0_1px_2px_0_var(--shadow-color-contact)]">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-action-tertiary-bg-selected text-action-tertiary-icon">
+                <span class="relative size-5 shrink-0"><span class="ico inset-[-22144.79%_0_0_-17471.88%]" style="--ico:url(assets/file.svg)"></span></span>
+              </span>
+              <span class="flex min-w-px flex-1 flex-col gap-0.5 text-[length:var(--font-size-sm)]">
+                <span class="font-body font-semibold leading-[var(--font-line-height-18)] text-text-primary">Summarise this week’s board documents</span>
+                <span class="font-body font-normal leading-[var(--font-line-height-20)] text-text-secondary">Decisions, risks and owners across 14 files</span>
+              </span>
+              <span class="relative size-4 shrink-0 text-action-tertiary-icon"><span class="ico inset-0" style="--ico:url(assets/arrow-right.svg)"></span></span>
+            </a>
+            <a href="#" class="flex min-w-px items-start gap-3 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_1px_4px_0_var(--shadow-color-ambient),0_1px_2px_0_var(--shadow-color-contact)]">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-action-tertiary-bg-selected text-action-tertiary-icon">
+                <span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/chart.svg)"></span></span>
+              </span>
+              <span class="flex min-w-px flex-1 flex-col gap-0.5 text-[length:var(--font-size-sm)]">
+                <span class="font-body font-semibold leading-[var(--font-line-height-18)] text-text-primary">Compare Q3 revenue by region</span>
+                <span class="font-body font-normal leading-[var(--font-line-height-20)] text-text-secondary">Variance against plan, with drivers</span>
+              </span>
+              <span class="relative size-4 shrink-0 text-action-tertiary-icon"><span class="ico inset-0" style="--ico:url(assets/arrow-right.svg)"></span></span>
+            </a>
+            <a href="#" class="flex min-w-px items-start gap-3 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_1px_4px_0_var(--shadow-color-ambient),0_1px_2px_0_var(--shadow-color-contact)]">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-action-tertiary-bg-selected text-action-tertiary-icon">
+                <span class="relative size-5 shrink-0"><span class="ico inset-[0_0_-8401.04%_-70011.46%]" style="--ico:url(assets/mail.svg)"></span></span>
+              </span>
+              <span class="flex min-w-px flex-1 flex-col gap-0.5 text-[length:var(--font-size-sm)]">
+                <span class="font-body font-semibold leading-[var(--font-line-height-18)] text-text-primary">Draft a follow-up to Al Noor Holdings</span>
+                <span class="font-body font-normal leading-[var(--font-line-height-20)] text-text-secondary">Grounded in Tuesday’s meeting notes</span>
+              </span>
+              <span class="relative size-4 shrink-0 text-action-tertiary-icon"><span class="ico inset-0" style="--ico:url(assets/arrow-right.svg)"></span></span>
+            </a>
+            <a href="#" class="flex min-w-px items-start gap-3 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_1px_4px_0_var(--shadow-color-ambient),0_1px_2px_0_var(--shadow-color-contact)]">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-[12px] bg-action-tertiary-bg-selected text-action-tertiary-icon">
+                <span class="relative size-5 shrink-0"><span class="ico inset-[0_0_-20540.63%_-104976.04%]" style="--ico:url(assets/calendar.svg)"></span></span>
+              </span>
+              <span class="flex min-w-px flex-1 flex-col gap-0.5 text-[length:var(--font-size-sm)]">
+                <span class="font-body font-semibold leading-[var(--font-line-height-18)] text-text-primary">Find contracts expiring in 90 days</span>
+                <span class="font-body font-normal leading-[var(--font-line-height-20)] text-text-secondary">Renewal owners and value at risk</span>
+              </span>
+              <span class="relative size-4 shrink-0 text-action-tertiary-icon"><span class="ico inset-0" style="--ico:url(assets/arrow-right.svg)"></span></span>
+            </a>
           </div>
         </div>
       </div>
+
+      <!-- Context rail -->
+      <aside class="flex shrink-0 flex-col gap-4 lg:h-full lg:w-[272px]">
+        <div class="flex w-full items-center gap-2 rounded-[16px] border border-border-glass bg-surface-glass py-3 pl-5 pr-2 shadow-[0_2px_4px_0_var(--shadow-color-contact),0_4px_8px_0_var(--shadow-color-ambient)]">
+          <p class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-18)] text-text-primary">Q3 board review</p>
+          <button type="button" class="flex size-8 shrink-0 items-center justify-center rounded-full text-icon-secondary" aria-label="More">
+            <span class="relative size-4 shrink-0"><span class="ico inset-[-46776.04%_0_0_-13130.27%]" style="--ico:url(assets/more-vertical.svg)"></span></span>
+          </button>
+        </div>
+        <ul class="flex w-full flex-col gap-0.5 rounded-[16px] border border-border-glass bg-surface-glass p-2 shadow-[0_2px_4px_0_var(--shadow-color-contact),0_4px_8px_0_var(--shadow-color-ambient)]">
+          <li class="flex w-full items-center gap-3 rounded-[12px] p-2 text-brand-on-accent"><span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/folder.svg)"></span></span><span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-primary">Board</span><span class="font-body text-[length:var(--font-size-xs)] leading-[var(--font-line-height-16)] text-text-disabled tabular-nums">14</span></li>
+          <li class="flex w-full items-center gap-3 rounded-[12px] p-2 text-brand-on-accent"><span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/folder.svg)"></span></span><span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-primary">Finance</span><span class="font-body text-[length:var(--font-size-xs)] leading-[var(--font-line-height-16)] text-text-disabled tabular-nums">9</span></li>
+          <li class="flex w-full items-center gap-3 rounded-[12px] p-2 text-brand-on-accent"><span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/folder.svg)"></span></span><span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-primary">Legal</span><span class="font-body text-[length:var(--font-size-xs)] leading-[var(--font-line-height-16)] text-text-disabled tabular-nums">6</span></li>
+          <li class="flex w-full items-center gap-3 rounded-[12px] p-2 text-brand-on-accent"><span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/folder.svg)"></span></span><span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-primary">Operations</span><span class="font-body text-[length:var(--font-size-xs)] leading-[var(--font-line-height-16)] text-text-disabled tabular-nums">11</span></li>
+          <li class="flex w-full items-center gap-3 rounded-[12px] p-2 text-brand-on-accent"><span class="relative size-5 shrink-0"><span class="ico inset-0" style="--ico:url(assets/folder.svg)"></span></span><span class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-medium leading-[var(--font-line-height-18)] text-text-primary">Drafts</span><span class="font-body text-[length:var(--font-size-xs)] leading-[var(--font-line-height-16)] text-text-disabled tabular-nums">3</span></li>
+        </ul>
+        <div class="hidden flex-1 lg:block"></div>
+        <div class="flex w-full flex-col gap-2 rounded-[16px] border border-border-glass bg-surface-glass p-4 shadow-[0_2px_4px_0_var(--shadow-color-contact),0_4px_8px_0_var(--shadow-color-ambient)]">
+          <div class="flex w-full items-center gap-2">
+            <p class="min-w-px flex-1 font-body text-[length:var(--font-size-sm)] font-semibold leading-[var(--font-line-height-18)] text-text-primary tabular-nums">57.5k / 200k</p>
+            <p class="font-body text-[length:var(--font-size-xs)] font-normal leading-[var(--font-line-height-16)] text-text-secondary tabular-nums">28.75%</p>
+          </div>
+          <div class="relative h-1 w-full overflow-clip rounded-full bg-progress-track" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Usage">
+            <div class="absolute inset-y-0 left-0 right-3/4 rounded-full bg-progress-fill"></div>
+          </div>
+        </div>
+      </aside>
     </section>
   </template>
 
   <script>
     const stage = document.getElementById('stage');
     const tpl = document.getElementById('screen');
-    const LABELS = { majlis: 'Majlis · emerald · Plus Jakarta Sans', brand1: 'Brand1 · #E4572E · Poppins + Manrope' };
     function screen(brand) {
       const node = tpl.content.firstElementChild.cloneNode(true);
       if (brand) node.dataset.brand = brand;
-      node.querySelector('.brand-label').textContent = LABELS[brand || document.documentElement.dataset.brand];
       return node;
     }
     function show(mode) {
       stage.replaceChildren();
       if (mode === 'compare') {
-        stage.className = 'grid gap-6 p-4 md:p-6 xl:grid-cols-2';
         stage.append(screen('majlis'), screen('brand1'));
       } else {
         document.documentElement.dataset.brand = mode;
-        stage.className = 'grid gap-6 p-4 md:p-6';
         stage.append(screen());
       }
       document.querySelectorAll('.brand-btn').forEach((b) => {
