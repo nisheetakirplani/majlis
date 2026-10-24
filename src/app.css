@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Generated from tokens/ by `npm run tokens` */
+@import "../build/css/primitives.css";
+@import "../build/css/brands/majlis.css";
+@import "../build/css/brands/brand1.css";
+@import "../build/css/semantic.css";
+@import "../build/css/tailwind-theme.css";
+
+@source "../demo";
+
+@layer base {
+  body {
+    font-family: var(--brand-font-body);
+    color: var(--color-text-primary);
+    background: var(--color-bg-subtle);
+  }
+}

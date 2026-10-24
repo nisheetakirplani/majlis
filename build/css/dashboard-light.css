@@ -1,0 +1,42 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-brand] {
+  --dash-bg: #eef1ec;
+  --dash-hot: #e2531f;
+  --dash-card: var(--color-white-a60);
+  --dash-card-solid: var(--color-white);
+  --dash-card-border: var(--color-white);
+  --dash-tile: var(--color-neutral-900-a06);
+  --dash-tile-strong: var(--color-neutral-900-a10);
+  --dash-pill: var(--color-white);
+  --dash-ink: var(--color-neutral-900);
+  --dash-ink-2: var(--color-neutral-600);
+  --dash-ink-3: var(--color-neutral-400);
+  --dash-line: var(--color-neutral-900-a10);
+  --dash-dark: var(--color-neutral-900);
+  --dash-dark-ink: var(--color-white);
+  --dash-on-deep: var(--color-white);
+  --dash-on-deep-2: var(--color-white-a60);
+  --dash-c1: var(--color-emerald-600);
+  --dash-c2: var(--color-teal-400);
+  --dash-c3: var(--color-lime-300);
+  --dash-c4: var(--color-violet-500);
+  --dash-c5: var(--color-neutral-300);
+  --dash-warn: var(--color-warning-500);
+  --dash-warn-soft: var(--color-warning-100);
+  --dash-bad: var(--color-error-500);
+  --dash-bad-soft: var(--color-error-100);
+  --dash-pop: var(--color-white);
+  --dash-shadow: var(--color-neutral-900-a10);
+  --dash-glow-1: var(--brand-accent-200);
+  --dash-glow-2: var(--brand-secondary-200);
+  --dash-accent: var(--brand-primary-600);
+  --dash-accent-soft: var(--brand-primary-100);
+  --dash-hi: var(--brand-accent-200);
+  --dash-hi-ink: var(--brand-accent-900);
+  --dash-deep: var(--brand-primary-900);
+  --dash-cap: var(--brand-primary-300);
+  --dash-orb-eye: var(--brand-primary-900);
+}

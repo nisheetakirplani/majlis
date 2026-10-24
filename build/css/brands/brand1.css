@@ -1,0 +1,48 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-brand="brand1"] {
+  --brand-primary-50: #fff4f1;
+  --brand-primary-100: #ffe6df;
+  --brand-primary-200: #feccbe;
+  --brand-primary-300: #fda78f;
+  --brand-primary-400: #f27a58;
+  --brand-primary-500: #e4572e;
+  --brand-primary-600: #b74321;
+  --brand-primary-700: #903418;
+  --brand-primary-800: #682511;
+  --brand-primary-900: #45170a;
+  --brand-secondary-50: #f2f8fe;
+  --brand-secondary-100: #e1effe;
+  --brand-secondary-200: #c4dffc;
+  --brand-secondary-300: #9cc9f8;
+  --brand-secondary-400: #6daded;
+  --brand-secondary-500: #4d93d8;
+  --brand-secondary-600: #3f79b2;
+  --brand-secondary-700: #2f5d8a;
+  --brand-secondary-800: #214365;
+  --brand-secondary-900: #142c43;
+  --brand-tint-50: #fef8f6;
+  --brand-tint-100: #fef0ea;
+  --brand-tint-200: #fce1d6;
+  --brand-tint-300: #faceba;
+  --brand-tint-400: #f6b69a;
+  --brand-tint-500: #f4a582;
+  --brand-tint-600: #c58468;
+  --brand-tint-700: #996750;
+  --brand-tint-800: #6f4a39;
+  --brand-tint-900: #483025;
+  --brand-accent-50: #fefaf1;
+  --brand-accent-100: #fcf2de;
+  --brand-accent-200: #fae6bd;
+  --brand-accent-300: #f6d48c;
+  --brand-accent-400: #f2c14e;
+  --brand-accent-500: #dfab1e;
+  --brand-accent-600: #b78c19;
+  --brand-accent-700: #916d01;
+  --brand-accent-800: #684e05;
+  --brand-accent-900: #453202;
+  --brand-font-heading: "Poppins", sans-serif;
+  --brand-font-body: "Manrope", sans-serif;
+}
