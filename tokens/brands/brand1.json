@@ -1,0 +1,524 @@
+{
+  "brand": {
+    "primary": {
+      "50": {
+        "$type": "color",
+        "$value": "#fff4f1",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-50)"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffe6df",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-100)"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#feccbe",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-200)"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#fda78f",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-300)"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#f27a58",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-400)"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#e4572e",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-500)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#b74321",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-600)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#903418",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-700)"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#682511",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-800)"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#45170a",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-primary-900)"
+            }
+          }
+        }
+      }
+    },
+    "secondary": {
+      "50": {
+        "$type": "color",
+        "$value": "#f2f8fe",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-50)"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#e1effe",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-100)"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#c4dffc",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-200)"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#9cc9f8",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-300)"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#6daded",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-400)"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#4d93d8",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-500)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#3f79b2",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-600)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#2f5d8a",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-700)"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#214365",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-800)"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#142c43",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-secondary-900)"
+            }
+          }
+        }
+      }
+    },
+    "tint": {
+      "50": {
+        "$type": "color",
+        "$value": "#fef8f6",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-50)"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#fef0ea",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-100)"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#fce1d6",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-200)"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#faceba",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-300)"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#f6b69a",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-400)"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#f4a582",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-500)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#c58468",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-600)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#996750",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-700)"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#6f4a39",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-800)"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#483025",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-tint-900)"
+            }
+          }
+        }
+      }
+    },
+    "accent": {
+      "50": {
+        "$type": "color",
+        "$value": "#fefaf1",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-50)"
+            }
+          }
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#fcf2de",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-100)"
+            }
+          }
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#fae6bd",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-200)"
+            }
+          }
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#f6d48c",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-300)"
+            }
+          }
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#f2c14e",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-400)"
+            }
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#dfab1e",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-500)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#b78c19",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-600)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#916d01",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-700)"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#684e05",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-800)"
+            }
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#453202",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "codeSyntax": {
+              "WEB": "var(--brand-accent-900)"
+            }
+          }
+        }
+      }
+    },
+    "font": {
+      "heading": {
+        "$type": "fontFamily",
+        "$value": "Poppins",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "scopes": [
+              "FONT_FAMILY"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--brand-font-heading)"
+            }
+          }
+        }
+      },
+      "body": {
+        "$type": "fontFamily",
+        "$value": "Manrope",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Brand",
+            "scopes": [
+              "FONT_FAMILY"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--brand-font-body)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

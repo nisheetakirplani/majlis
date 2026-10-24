@@ -1,0 +1,591 @@
+{
+  "dash": {
+    "bg": {
+      "$type": "color",
+      "$value": "#eef1ec",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-bg)"
+          }
+        }
+      }
+    },
+    "glow-1": {
+      "$type": "color",
+      "$value": "{brand.accent.200}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-glow-1)"
+          }
+        }
+      }
+    },
+    "glow-2": {
+      "$type": "color",
+      "$value": "{brand.secondary.200}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-glow-2)"
+          }
+        }
+      }
+    },
+    "card": {
+      "$type": "color",
+      "$value": "{white-alpha.60}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-card)"
+          }
+        }
+      }
+    },
+    "card-solid": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-card-solid)"
+          }
+        }
+      }
+    },
+    "card-border": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-card-border)"
+          }
+        }
+      }
+    },
+    "tile": {
+      "$type": "color",
+      "$value": "{neutral-alpha.900-06}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-tile)"
+          }
+        }
+      }
+    },
+    "tile-strong": {
+      "$type": "color",
+      "$value": "{neutral-alpha.900-10}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-tile-strong)"
+          }
+        }
+      }
+    },
+    "pill": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-pill)"
+          }
+        }
+      }
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "{neutral.900}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-ink)"
+          }
+        }
+      }
+    },
+    "ink-2": {
+      "$type": "color",
+      "$value": "{neutral.600}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-ink-2)"
+          }
+        }
+      }
+    },
+    "ink-3": {
+      "$type": "color",
+      "$value": "{neutral.400}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-ink-3)"
+          }
+        }
+      }
+    },
+    "line": {
+      "$type": "color",
+      "$value": "{neutral-alpha.900-10}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-line)"
+          }
+        }
+      }
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{brand.primary.600}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-accent)"
+          }
+        }
+      }
+    },
+    "accent-soft": {
+      "$type": "color",
+      "$value": "{brand.primary.100}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-accent-soft)"
+          }
+        }
+      }
+    },
+    "hi": {
+      "$type": "color",
+      "$value": "{brand.accent.200}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-hi)"
+          }
+        }
+      }
+    },
+    "hi-ink": {
+      "$type": "color",
+      "$value": "{brand.accent.900}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-hi-ink)"
+          }
+        }
+      }
+    },
+    "dark": {
+      "$type": "color",
+      "$value": "{neutral.900}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-dark)"
+          }
+        }
+      }
+    },
+    "dark-ink": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-dark-ink)"
+          }
+        }
+      }
+    },
+    "deep": {
+      "$type": "color",
+      "$value": "{brand.primary.900}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-deep)"
+          }
+        }
+      }
+    },
+    "on-deep": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-on-deep)"
+          }
+        }
+      }
+    },
+    "on-deep-2": {
+      "$type": "color",
+      "$value": "{white-alpha.60}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-on-deep-2)"
+          }
+        }
+      }
+    },
+    "c1": {
+      "$type": "color",
+      "$value": "{emerald.600}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-c1)"
+          }
+        }
+      }
+    },
+    "c2": {
+      "$type": "color",
+      "$value": "{teal.400}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-c2)"
+          }
+        }
+      }
+    },
+    "c3": {
+      "$type": "color",
+      "$value": "{lime.300}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-c3)"
+          }
+        }
+      }
+    },
+    "c4": {
+      "$type": "color",
+      "$value": "{violet.500}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-c4)"
+          }
+        }
+      }
+    },
+    "c5": {
+      "$type": "color",
+      "$value": "{neutral.300}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-c5)"
+          }
+        }
+      }
+    },
+    "cap": {
+      "$type": "color",
+      "$value": "{brand.primary.300}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-cap)"
+          }
+        }
+      }
+    },
+    "warn": {
+      "$type": "color",
+      "$value": "{warning.500}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-warn)"
+          }
+        }
+      }
+    },
+    "warn-soft": {
+      "$type": "color",
+      "$value": "{warning.100}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-warn-soft)"
+          }
+        }
+      }
+    },
+    "bad": {
+      "$type": "color",
+      "$value": "{error.500}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-bad)"
+          }
+        }
+      }
+    },
+    "bad-soft": {
+      "$type": "color",
+      "$value": "{error.100}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-bad-soft)"
+          }
+        }
+      }
+    },
+    "hot": {
+      "$type": "color",
+      "$value": "#e2531f",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "SHAPE_FILL",
+            "TEXT_FILL",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-hot)"
+          }
+        }
+      }
+    },
+    "pop": {
+      "$type": "color",
+      "$value": "{base.white}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-pop)"
+          }
+        }
+      }
+    },
+    "orb-eye": {
+      "$type": "color",
+      "$value": "{brand.primary.900}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-orb-eye)"
+          }
+        }
+      }
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": "{neutral-alpha.900-10}",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Executive Dashboard",
+          "scopes": [
+            "ALL_FILLS",
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--dash-shadow)"
+          }
+        }
+      }
+    }
+  }
+}
