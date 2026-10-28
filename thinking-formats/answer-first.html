@@ -466,7 +466,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .panel{border:1px solid var(--glass-line);border-radius:24px;background:var(--glass);box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(6px)}
 .ptabs{padding:12px 14px 0;border-bottom:1px solid var(--line-2)}
 .ptab em{background:var(--surface-3)}
-.ppane{padding:16px}
+.ppane{padding:14px 16px 18px}
 .panel__h{display:flex;align-items:center;gap:10px;padding:16px 18px 4px}
 .panel__h b{font-size:15px;font-weight:600}
 .panel__h small{font-size:12.5px;color:var(--muted);margin-inline-start:auto}
@@ -475,9 +475,51 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .memc{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:99px;background:var(--accent-soft);color:var(--accent-text);font-size:12.5px;font-weight:600}
 .blk{border-radius:16px}
 .kpi{border-radius:14px}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(124px,1fr))}
-.kpi b{font-size:20px}
-.cue{padding:0 6px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.kpi b{font-size:22px}
+.ev__h{flex-wrap:wrap;gap:4px 12px}
+.cue{padding:0}
+/* activity card above the input: live state only */
+.actv{display:flex;flex-direction:column;gap:10px;padding:12px 16px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow)}
+.actv[data-state="idle"]{display:none}
+.actv__top{display:flex;align-items:center;gap:12px}
+.actv__top .cue{flex:1;min-width:0}
+.actv__view{flex:none;height:32px;padding:0 12px;border-radius:10px;font-size:13px;font-weight:600;color:var(--accent-text);background:var(--accent-soft)}
+.actv__bar{height:4px;border-radius:2px;background:var(--surface-3);overflow:hidden}
+.actv__bar b{display:block;height:100%;width:0;background:var(--accent);border-radius:2px;transition:width var(--d-bar) var(--ease-out)}
+.actv[data-state="done"] .actv__bar{display:none}
+.actv__live{display:flex;flex-direction:column;gap:6px;padding-left:28px}
+.actv__live:empty{display:none}
+.actv__live .thought__btn{padding-left:0}
+.actv__live .msg{font-size:14px;color:var(--ink-2)}
+/* answer hierarchy */
+.ans--wait{gap:14px}
+.skl{display:flex;flex-direction:column;gap:8px}
+.skl i{display:block;border-radius:6px;background:linear-gradient(90deg,var(--surface-3),var(--surface-2),var(--surface-3));background-size:200% 100%;animation:shim 1.4s linear infinite}
+@keyframes shim{from{background-position:120% 0}to{background-position:-120% 0}}
+.waitnote{font-size:13px;color:var(--muted)}
+.blk__t--stack{flex-direction:column;align-items:flex-start;gap:2px}
+.blk__t--stack small{font-size:12.5px;font-weight:500;color:var(--muted)}
+.anslinks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.alink{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface-2);font-size:13.5px;font-weight:600;text-align:start}
+.alink small{font-weight:500;color:var(--muted);font-size:12.5px;flex:1}
+.alink:hover{border-color:var(--accent-line)}
+/* evidence panel: steps list */
+.pempty{font-size:13px;color:var(--muted)}
+.wsteps{display:flex;flex-direction:column}
+.ws{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 4px;border-top:1px solid var(--line-2)}
+.ws:first-child{border-top:0;padding-top:4px}
+.ws .st{margin-top:1px}
+.ws__b b{display:block;font-size:13.5px;font-weight:600}
+.ws__b small{display:block;font-size:12.5px;color:var(--muted)}
+.ws.is-q .ws__b b{color:var(--muted);font-weight:500}
+.ws.is-w{background:var(--surface-2);border-radius:12px;padding-left:8px;padding-right:8px;border-top-color:transparent}
+.ws__res{display:flex;flex-direction:column;gap:6px;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.ws__t{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px}
+.wsec{margin-top:8px}
+.sdh{font-size:15px;font-weight:600}
+.srclist,.srcdetail{display:flex;flex-direction:column;gap:8px}
+.srcdetail{gap:12px}
 .sheet{border-radius:24px 0 0 24px}
 @media (max-width:1100px){.frame__body{grid-template-columns:minmax(0,1fr) 360px}}
 @media (max-width:900px){
@@ -551,10 +593,17 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
       <div class="chatcol">
         <div class="convo" id="convo" tabindex="0" aria-label="Conversation"><div class="thread" id="thread"></div></div>
         <div class="foot">
-          <div class="cue" id="cue" data-state="idle">
-            <span class="cue__mark" aria-hidden="true"></span>
-            <span class="cue__label" id="cueLabel" aria-live="polite"><b>Ready</b></span>
-            <span class="cue__meta" id="cueMeta"></span>
+          <div class="actv" id="act" data-state="idle" aria-label="Majlis activity">
+            <div class="actv__top">
+              <div class="cue" id="cue" data-state="idle">
+                <span class="cue__mark" aria-hidden="true"></span>
+                <span class="cue__label" id="cueLabel" aria-live="polite"><b>Ready</b></span>
+                <span class="cue__meta" id="cueMeta"></span>
+              </div>
+              <button class="actv__view" id="actView" type="button" hidden>View steps</button>
+            </div>
+            <div class="actv__bar" aria-hidden="true"><b id="actBar"></b></div>
+            <div class="actv__live" id="actLive"></div>
           </div>
           <div class="ask" aria-hidden="true"><span class="agt"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11h14V8M10 12h4"/></svg></i>Institutional Memory<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span><span class="ph" id="inputText">Ask about your company…</span><span class="mic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="snd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
           <p class="disclaim">Majlis can make mistakes. Check important figures before acting.</p>
@@ -1134,11 +1183,16 @@ function answerEl(sc, events, opts) {
     '<div class="ans__k">' + memcHTML(sc) + "</div>" +
     '<p class="ans__line" data-why="answer-line">' + rich(sc.answer.headline) + "</p>" + confHTML(sc) +
     '<div class="ev" data-why="evidence"><div class="ev__h"><b>Evidence</b><span>' + asOfLine(sc) + '</span></div><div class="blocks"></div></div>' +
-    howHTML(sc) + recordHTML(events) + "</section>");
+    (opts.compact ? linksHTML(sc, events) : howHTML(sc) + recordHTML(events)) + "</section>");
   const blocks = el.querySelector(".blocks");
   sc.answer.blocks.forEach((b) => blocks.appendChild(BLOCKS[b.type](b, sc)));
   postRender(el);
   return el;
+}
+function linksHTML(sc, events) {
+  const q = sc.plan.reduce((n, s) => n + s.queries.length, 0);
+  return '<div class="anslinks"><button type="button" class="alink" data-open="work">How it got there <small>' + plural(sc.plan.length, "step") + " · " + plural(systemsOf(sc).length, "system") + " · " + plural(q, "query", "queries") + "</small>" + I.chev + '</button>' +
+    '<button type="button" class="alink" data-open="rec">Full record <small>' + events.length + " events with times</small>" + I.chev + "</button></div>";
 }
 function memcHTML(sc) {
   const n = Object.values(sc.sources).filter((s) => s.kind !== "locked").length;
@@ -1262,7 +1316,7 @@ const BLOCKS = {
       "<p>" + esc(s.reason) + '</p><div class="kv"><span>Would have answered</span><b style="font-weight:500">' + esc(s.wouldAnswer) + "</b><span>Access owner</span><b style=\"font-weight:500\">" + esc(s.owner) + "</b><span>System</span><b style=\"font-weight:500\">" + esc(s.system) + "</b></div></figure>");
   },
   actions(b) {
-    return frag('<figure class="blk" data-why="blk-actions"><div class="blk__t"><span>Recommended actions, fastest first</span></div><ol class="acts">' +
+    return frag('<figure class="blk" data-why="blk-actions"><div class="blk__t blk__t--stack"><span>What to do next</span><small>Ranked by how soon each one can take effect</small></div><ol class="acts">' +
       b.items.map((a) => '<li class="act"><div><b>' + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + " · " + esc(a.why) + "</small><small>Based on " + a.refs.map(chip).join(" ") + "</small></div></li>").join("") + "</ol></figure>");
   },
   caveat(b) {
@@ -1500,33 +1554,41 @@ RENDERERS.log = function (ctx) {
   };
 };
 
-/* ---------- 4. Answer-first with evidence panel ---------- */
+/* ---------- Answer-first with evidence panel ----------
+   Where each kind of content lives:
+   - Activity card above the input: live state only (thinking, the current one or two line message, progress).
+   - Thread: the question, the acknowledgement, and the answer. Nothing about the process is repeated here.
+   - Evidence panel: steps (Work), sources (Sources) and the timestamped record (Record), each written once. */
 RENDERERS.answer = function (ctx) {
-  const { sc, thread, panel, events } = ctx; const N = sc.plan.length; let body, card, hold, pairBox, done = 0; const th = {}, wk = {}, seen = {};
-  panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small>Fills in as Majlis works</small></div><div class="ptabs" role="tablist" aria-label="Evidence panel" data-why="panel-tabs">' +
-    '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Work<em id="pcn-work">0</em></button>' +
+  const { sc, thread, panel, events } = ctx; const N = sc.plan.length; let body, card, hold, done = 0; const th = {}, seen = {};
+  const act = $("#act"), live = $("#actLive"), bar = $("#actBar"), viewBtn = $("#actView");
+  act.dataset.state = "run"; live.innerHTML = ""; bar.style.width = "0%"; viewBtn.hidden = true;
+  panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small id="pStat">Waiting to start</small></div>' +
+    '<div class="ptabs" role="tablist" aria-label="Evidence panel">' +
+    '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Steps<em id="pcn-work">0/' + N + "</em></button>" +
     '<button class="ptab" role="tab" id="pt-src" aria-selected="false" aria-controls="pp-src" data-pane="src" type="button" tabindex="-1">Sources<em id="pcn-src">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-rec" aria-selected="false" aria-controls="pp-rec" data-pane="rec" type="button" tabindex="-1">Record<em id="pcn-rec">0</em></button></div>' +
-    '<div class="ppane" id="pp-work" role="tabpanel" aria-labelledby="pt-work" data-why="lay-answer"></div>' +
-    '<div class="ppane" id="pp-src" role="tabpanel" aria-labelledby="pt-src" hidden><div class="srclist" style="display:flex;flex-direction:column;gap:8px"><p class="muted" style="font-size:12.5px">Sources appear here as they are read.</p></div><div class="srcdetail" hidden style="display:flex;flex-direction:column;gap:12px"></div></div>' +
-    '<div class="ppane" id="pp-rec" role="tabpanel" aria-labelledby="pt-rec" hidden><p class="muted" style="font-size:12.5px" data-why="record">Every event, timestamped, as the backend stores it.</p><table class="audit"><tbody></tbody></table></div>';
+    '<div class="ppane" id="pp-work" role="tabpanel" aria-labelledby="pt-work">' +
+      '<ol class="wsteps">' + sc.plan.map((s, i) => '<li class="ws is-q" data-i="' + i + '">' + stIcon("q") + '<div class="ws__b"><b>' + esc(s.title) + "</b><small>" + esc(AGENTS[s.agent].name) + " · " + esc(s.skill) + '</small><div class="ws__res" hidden></div></div><span class="ws__t"></span></li>').join("") + "</ol>" +
+      '<div class="wsec" id="wAgents" hidden></div></div>' +
+    '<div class="ppane" id="pp-src" role="tabpanel" aria-labelledby="pt-src" hidden><div class="srclist"><p class="pempty">Sources are listed here as each one is read.</p></div><div class="srcdetail" hidden></div></div>' +
+    '<div class="ppane" id="pp-rec" role="tabpanel" aria-labelledby="pt-rec" hidden><p class="pempty">Every event with its time, as the backend stores it.</p><table class="audit"><tbody></tbody></table></div>';
   const P = (s) => panel.querySelector(s);
-  const work = P("#pp-work"), srcList = P(".srclist"), srcDetail = P(".srcdetail"), rec = P("#pp-rec tbody");
+  const srcList = P(".srclist"), srcDetail = P(".srcdetail"), rec = P("#pp-rec tbody");
   function selectTab(name, focus) {
     $$(".ptab", panel).forEach((t) => { const on = t.dataset.pane === name; t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
     P("#pp-work").hidden = name !== "work"; P("#pp-src").hidden = name !== "src"; P("#pp-rec").hidden = name !== "rec";
-    if (S.why) refreshPins();
   }
-  panel.querySelector(".ptabs").addEventListener("click", (e) => { const t = e.target.closest(".ptab"); if (t) { selectTab(t.dataset.pane); if (t.dataset.pane === "src") { srcDetail.hidden = true; srcList.hidden = false; } } });
-  panel.querySelector(".ptabs").addEventListener("keydown", (e) => {
+  P(".ptabs").addEventListener("click", (e) => { const t = e.target.closest(".ptab"); if (t) { selectTab(t.dataset.pane); if (t.dataset.pane === "src") { srcDetail.hidden = true; srcList.hidden = false; } } });
+  P(".ptabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return; const tabs = $$(".ptab", panel); const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
-    const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; selectTab(n.dataset.pane, true);
+    selectTab(tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length].dataset.pane, true);
   });
-  const count = (id, n) => { P("#pcn-" + id).textContent = String(n); };
+  viewBtn.onclick = () => selectTab("work", true);
   function showDetail(id, key) {
     const s = sc.sources[id]; if (!s) return;
     selectTab("src"); srcList.hidden = true; srcDetail.hidden = false;
-    srcDetail.innerHTML = '<button class="btn" type="button" data-back style="align-self:flex-start">Back to all sources</button><div><small class="muted">' + esc(s.system) + "</small><h3 style=\"font-size:15px;font-weight:600\">" + esc(s.title) + "</h3></div>" + sourceHTML(id, key);
+    srcDetail.innerHTML = '<button class="btn" type="button" data-back style="align-self:flex-start">Back to all sources</button><div><small class="muted">' + esc(s.system) + '</small><h3 class="sdh">' + esc(s.title) + "</h3></div>" + sourceHTML(id, key);
     srcDetail.querySelector("[data-back]").addEventListener("click", () => { srcDetail.hidden = true; srcList.hidden = false; });
     srcDetail.querySelector("[data-back]").focus();
     const c = srcDetail.querySelector(".cited"); if (c) c.scrollIntoView({ block: "center" });
@@ -1536,68 +1598,70 @@ RENDERERS.answer = function (ctx) {
       if (seen[id]) return; seen[id] = true; const s = sc.sources[id];
       if (Object.keys(seen).length === 1) srcList.innerHTML = "";
       const badge = s.kind === "locked" ? '<span class="badge badge--lock">' + I.lock + "Locked</span>" : step.status === "conflict" ? '<span class="badge badge--warn">' + I.warn + "Conflict</span>" : '<span class="badge badge--good">' + I.check + "Read</span>";
-      const el = frag('<button type="button" class="srcitem' + (animOK() ? " enter" : "") + '" data-src="' + id + '" data-why="viewer"><b>' + esc(s.title) + "</b>" + badge + "<small>" + esc(s.system) + " · " + esc(s.kind === "locked" ? "not read" : "as of " + s.asOf) + "</small></button>");
+      const el = frag('<button type="button" class="srcitem' + (animOK() ? " enter" : "") + '" data-src="' + id + '"><b>' + esc(s.title) + "</b>" + badge + "<small>" + esc(s.system) + " · " + esc(s.kind === "locked" ? "not read" : "as of " + s.asOf) + "</small></button>");
       el.addEventListener("click", () => showDetail(id, ""));
       srcList.appendChild(el);
     });
-    count("src", Object.keys(seen).length);
+    P("#pcn-src").textContent = String(Object.keys(seen).length);
   }
-  thread.addEventListener("mouseover", (e) => { const c = e.target.closest(".chip"); if (!c) return; const it = panel.querySelector('.srcitem[data-src="' + c.dataset.src + '"]'); if (it) it.classList.add("is-linked"); });
-  thread.addEventListener("mouseout", (e) => { const c = e.target.closest(".chip"); if (!c) return; $$(".srcitem.is-linked", panel).forEach((x) => x.classList.remove("is-linked")); });
+  thread.onmouseover = (e) => { const c = e.target.closest(".chip"); if (!c) return; const it = panel.querySelector('.srcitem[data-src="' + c.dataset.src + '"]'); if (it) it.classList.add("is-linked"); };
+  thread.onmouseout = (e) => { if (e.target.closest(".chip")) $$(".srcitem.is-linked", panel).forEach((x) => x.classList.remove("is-linked")); };
+  const waitHTML = '<section class="ans ans--wait" aria-label="Answer, not ready yet"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--plain">Answer</span></div>' +
+    '<div class="skl" aria-hidden="true"><i style="width:88%;height:18px"></i><i style="width:62%;height:18px"></i><i style="width:100%;height:44px;border-radius:12px;margin-top:6px"></i><i style="width:100%;height:96px;border-radius:14px"></i></div>' +
+    '<p class="waitnote">The answer fills in here as soon as the first figure is confirmed. It is marked Draft until every check has finished.</p></section>';
   function draftHTML(d) {
-    return '<section class="ans' + (animOK() ? " enter" : "") + '" data-why="draft" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--info af-tag">Draft</span></div>' +
-      '<p class="ans__line" data-why="answer-line">' + esc(d.headline) + '</p><p class="conf conf--draft" data-why="confidence"><b class="lvl">Draft.</b><span class="af-dn">' + done + " of " + N + ' checks done.</span><span class="gaps af-note">' + esc(d.note) + " Confidence is set when all checks finish.</span></p></section>";
+    return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--info af-tag">Draft</span></div>' +
+      '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Draft.</b><span class="af-dn">' + done + " of " + N + ' checks done.</span><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p>" +
+      '<div class="skl" aria-hidden="true"><i style="width:100%;height:96px;border-radius:14px"></i></div></section>';
   }
-  function flash(lineEl, tagEl) {
-    if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); }
-    if (tagEl) tagEl.textContent = "Draft · updated";
-  }
+  function flash(lineEl, tagEl) { if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); } if (tagEl) tagEl.textContent = "Draft · updated"; }
   return {
     noStick: true,
     openSource: showDetail,
+    selectTab,
     on(ev) {
-      const row = frag(auditRow(ev)); rec.appendChild(row); count("rec", rec.children.length);
+      rec.appendChild(frag(auditRow(ev))); P("#pcn-rec").textContent = String(rec.children.length);
       switch (ev.type) {
         case "query": {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
-          hold = frag('<p class="draftnote" data-why="lay-answer">A draft answer appears here after the first check. Work and sources fill in on the right.</p>'); body.appendChild(hold); break;
+          hold = frag(waitHTML); body.appendChild(hold); P("#pStat").textContent = "Starting"; break;
         }
-        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el); break;
+        case "think": live.innerHTML = ""; th[ev.id] = thoughtLine(ev); live.appendChild(th[ev.id].el); break;
         case "thinkEnd": th[ev.id].end(); break;
         case "say":
           if (ev.id === "ack") body.insertBefore(sayEl(ev.lines, "ack"), hold);
-          else work.appendChild(sayEl(ev.lines, "say", "msg--sm"));
-          break;
-        case "plan": work.appendChild(planMini(sc)); break;
-        case "status":
-          if (!pairBox) { pairBox = pairEl(ev); pairBox.style.cssText = "padding:10px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line-2)"; work.insertBefore(pairBox, work.firstChild); }
-          else pairBox.innerHTML = "<span><b>" + esc(ev.doneLabel) + ":</b> " + esc(ev.done) + "</span><span><b>" + esc(ev.nextLabel) + ":</b> " + esc(ev.next) + "</span>";
+          else live.appendChild(sayEl(ev.lines, "say", "msg--sm"));
           break;
         case "stepStart": {
-          const s = sc.plan[ev.step];
-          wk[ev.step] = frag('<div class="wk' + (animOK() ? " enter" : "") + '" data-why="step">' + stIcon("w") + "<div><b>" + esc(s.title) + "</b><small>Working · " + esc(AGENTS[s.agent].name) + " · " + esc(s.skill) + "</small></div></div>");
-          work.appendChild(wk[ev.step]); count("work", ev.step + 1); break;
+          const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
+          P("#pStat").textContent = "Step " + (ev.step + 1) + " of " + N; break;
         }
         case "stepEnd": {
           const s = sc.plan[ev.step]; done++;
-          const el = frag('<div class="wk tick">' + stIcon(stateOf(s)) + "<div><b>" + esc(s.summary) + " " + statusBadge(s) + "</b><small>" + esc(s.result) + " · " + (s.ms / 1000).toFixed(1) + 's</small><details class="disc" data-why="step-detail" style="margin-top:6px"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details></div></div>");
-          wk[ev.step].replaceWith(el); addSources(s);
+          const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
+          r.querySelector(".st").outerHTML = stIcon(stateOf(s));
+          r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
+          const res = r.querySelector(".ws__res"); res.hidden = false;
+          res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
+          addSources(s);
+          P("#pcn-work").textContent = done + "/" + N; bar.style.width = (done / N * 100) + "%";
           const d = sc.drafts.find((x) => x.after === ev.step);
           if (d) {
-            if (!card) { hold.remove(); card = frag(draftHTML(d)); body.appendChild(card); }
-            else { const ln = card.querySelector(".ans__line"); if (ln.textContent !== d.headline) { ln.textContent = d.headline; flash(ln, card.querySelector(".af-tag")); } card.querySelector(".af-note").textContent = d.note + " Confidence is set when all checks finish."; }
+            if (!card) { card = frag(draftHTML(d)); hold.replaceWith(card); }
+            else { const ln = card.querySelector(".ans__line"); if (ln.textContent !== d.headline) { ln.textContent = d.headline; flash(ln, card.querySelector(".af-tag")); } card.querySelector(".af-note").textContent = d.note + " Confidence is set when every check has finished."; }
           }
           if (card) { const dn = card.querySelector(".af-dn"); if (dn) dn.textContent = done + " of " + N + " checks done."; }
           break;
         }
-        case "agents": work.appendChild(agentsEl(sc)); break;
+        case "agents": { const w = P("#wAgents"); w.hidden = false; w.appendChild(agentsEl(sc)); P("#pStat").textContent = "Writing the answer"; break; }
         case "answer": {
           const prev = card ? card.querySelector(".ans__line").textContent : "";
-          const fin = answerEl(sc, events, { noEnter: !!card });
-          if (card) card.replaceWith(fin); else { if (hold) hold.remove(); body.appendChild(fin); }
-          card = fin;
+          const fin = answerEl(sc, events, { noEnter: !!card, compact: true });
+          (card || hold).replaceWith(fin); card = fin;
           const ln = fin.querySelector(".ans__line");
           if (prev && prev !== ln.textContent) { fin.querySelector(".ans__k").insertAdjacentHTML("beforeend", '<span class="badge badge--good">Final · updated from draft</span>'); if (animOK()) ln.classList.add("is-flash"); }
+          act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
+          P("#pStat").textContent = "Complete · " + N + " steps";
           break;
         }
       }
@@ -1627,6 +1691,7 @@ function init() {
   $("#sheetClose").addEventListener("click", () => closeSheet());
   $("#noteClose").addEventListener("click", closeNote);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-open]"); if (b && RUN && RUN.handler.selectTab) RUN.handler.selectTab(b.dataset.open, true); });
   play();
 }
 init();
