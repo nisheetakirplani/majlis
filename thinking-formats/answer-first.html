@@ -563,16 +563,18 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .ws .st{margin-top:1px}
 .ws__b b{display:block;font-size:13.5px;font-weight:600}
 .ws__b small{display:block;font-size:12.5px;color:var(--muted)}
-.agstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px 14px 4px}
-.agp{display:flex;align-items:center;gap:8px;min-width:0;padding:7px 8px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);transition:border-color var(--d-base),box-shadow var(--d-base),opacity var(--d-base)}
-.agp i,.agtag i{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-style:normal;font-size:11px;font-weight:700;flex:none;color:#fff}
-.agp span{min-width:0}
-.agp b{display:block;font-size:12.5px;font-weight:600;line-height:1.25}
-.agp small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.agp.is-idle{opacity:.55}
-.agp.is-idle i{background:var(--faint)!important}
+.agstrip{display:flex;align-items:flex-start;gap:10px;padding:10px 16px 4px}
+.agstrip[hidden]{display:none}
+.agstrip__k{flex:none;font-size:12px;font-weight:600;color:var(--muted);line-height:28px}
+.agrow{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.agp{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 8px 0 3px;border-radius:9px;border:1px solid var(--line-2);background:var(--surface);font-size:12.5px;transition:border-color var(--d-base),box-shadow var(--d-base),background var(--d-base)}
+.agp i,.agtag i{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;font-style:normal;font-size:10px;font-weight:700;flex:none;color:#fff}
+.agp b{font-weight:600;white-space:nowrap}
+.agp small{min-width:18px;height:18px;padding:0 5px;border-radius:6px;background:var(--surface-3);font-size:11.5px;font-weight:600;color:var(--ink-2);display:grid;place-items:center}
+.agp:hover{border-color:var(--line)}
 .agp.is-on{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
-.agp.is-on small{color:var(--accent-text)}
+.agp.is-sel{background:var(--ink);border-color:var(--ink);color:#fff}
+.agp.is-sel small{background:rgba(255,255,255,.18);color:#fff}
 .ag-data i{background:#0b825a}.ag-analysis i{background:#2c4a7a}.ag-doc i{background:#7a4f9c}
 .agtag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 3px;border-radius:8px;font-size:12px;font-weight:600;color:var(--ink)}
 .agtag i{width:18px;height:18px;border-radius:6px;font-size:9.5px}
@@ -1683,9 +1685,18 @@ RENDERERS.answer = function (ctx) {
   act.dataset.state = "run"; live.innerHTML = ""; bar.style.width = "0%"; viewBtn.hidden = true;
   const AK = { data: "DR", analysis: "AN", doc: "DO" };
   const agUse = { data: 0, analysis: 0, doc: 0 };
+  function agPill(k) {
+    let p = P('.agp[data-ag="' + k + '"]');
+    if (!p) {
+      P(".agstrip").hidden = false;
+      p = frag('<button type="button" class="agp ag-' + k + (animOK() ? " enter" : "") + '" data-ag="' + k + '" title="' + esc(AGENTS[k].name + ": " + AGENTS[k].role) + '"><i>' + AK[k] + '</i><b>' + esc(AGENTS[k].name) + '</b><small>0</small></button>');
+      P(".agrow").appendChild(p);
+    }
+    return p;
+  }
   const agTag = (k) => '<span class="agtag ag-' + k + '"><i>' + AK[k] + "</i>" + esc(AGENTS[k].name) + "</span>";
   panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small id="pStat">Waiting to start</small></div>' +
-    '<div class="agstrip" aria-label="Agents">' + Object.keys(AGENTS).map((k) => '<div class="agp ag-' + k + ' is-idle" data-ag="' + k + '" title="' + esc(AGENTS[k].role) + '"><i>' + AK[k] + "</i><span><b>" + esc(AGENTS[k].name) + '</b><small>Not used yet</small></span></div>').join("") + "</div>" +
+    '<div class="agstrip" aria-label="Agents used" hidden><span class="agstrip__k">Agents</span><div class="agrow"></div></div>' +
     '<div class="ptabs" role="tablist" aria-label="Evidence panel">' +
     '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Steps<em id="pcn-work">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-src" aria-selected="false" aria-controls="pp-src" data-pane="src" type="button" tabindex="-1">Sources<em id="pcn-src">0</em></button>' +
@@ -1701,8 +1712,15 @@ RENDERERS.answer = function (ctx) {
     $$(".ptab", panel).forEach((t) => { const on = t.dataset.pane === name; t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
     P("#pp-work").hidden = name !== "work"; P("#pp-src").hidden = name !== "src"; P("#pp-rec").hidden = name !== "rec";
   }
-  P(".agstrip").addEventListener("mouseover", (e) => { const a = e.target.closest(".agp"); $$(".ws", panel).forEach((w) => w.classList.toggle("is-dim", !!a && !w.querySelector(".ag-" + (a && a.dataset.ag)))); });
-  P(".agstrip").addEventListener("mouseleave", () => $$(".ws.is-dim", panel).forEach((w) => w.classList.remove("is-dim")));
+  /* Click an agent to show only its steps; click again to show all. Scales to any number of agents. */
+  P(".agstrip").addEventListener("click", (e) => {
+    const a = e.target.closest(".agp"); if (!a) return;
+    const on = !a.classList.contains("is-sel");
+    $$(".agp", panel).forEach((x) => { x.classList.remove("is-sel"); x.setAttribute("aria-pressed", "false"); });
+    if (on) { a.classList.add("is-sel"); a.setAttribute("aria-pressed", "true"); }
+    $$(".ws", panel).forEach((w) => w.classList.toggle("is-dim", on && !w.querySelector(".ag-" + a.dataset.ag)));
+    selectTab("work");
+  });
   P(".ptabs").addEventListener("click", (e) => { const t = e.target.closest(".ptab"); if (t) { selectTab(t.dataset.pane); if (t.dataset.pane === "src") { srcDetail.hidden = true; srcList.hidden = false; } } });
   P(".ptabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return; const tabs = $$(".ptab", panel); const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
@@ -1765,8 +1783,8 @@ RENDERERS.answer = function (ctx) {
           r.querySelector(".ws__b b").textContent = (ev.step + 1) + ". " + s.title;
           const who = r.querySelector(".ws__who"); who.hidden = false; who.innerHTML = agTag(s.agent) + '<span class="sk">' + esc(s.skill) + "</span>";
           $$(".agp", panel).forEach((x) => { x.classList.remove("is-on"); });
-          const ap = P('.agp[data-ag="' + s.agent + '"]'); agUse[s.agent]++; ap.classList.remove("is-idle"); ap.classList.add("is-on");
-          ap.querySelector("small").textContent = "Working now";
+          const ap = agPill(s.agent); agUse[s.agent]++; ap.classList.add("is-on");
+          ap.querySelector("small").textContent = String(agUse[s.agent]);
           P("#pcn-work").textContent = String(ev.step + 1);
           P("#pStat").textContent = "Step " + (ev.step + 1); break;
         }
@@ -1774,7 +1792,7 @@ RENDERERS.answer = function (ctx) {
           const s = sc.plan[ev.step]; done++;
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
           r.querySelector(".st").outerHTML = stIcon(stateOf(s));
-          { const ap = P('.agp[data-ag="' + s.agent + '"]'), n = agUse[s.agent]; ap.classList.remove("is-on"); ap.querySelector("small").textContent = n + (n === 1 ? " step" : " steps"); }
+          P('.agp[data-ag="' + s.agent + '"]').classList.remove("is-on");
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
           res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
@@ -1788,8 +1806,6 @@ RENDERERS.answer = function (ctx) {
           break;
         }
         case "agents": {
-          Object.keys(AGENTS).forEach((k) => { const ap = P('.agp[data-ag="' + k + '"]'), n = agUse[k];
-            ap.querySelector("small").textContent = n ? "Steps " + sc.plan.map((p, j) => p.agent === k ? j + 1 : 0).filter(Boolean).join(", ") : "Not used"; });
           P("#pStat").textContent = "Writing the answer"; break; }
         case "answer": {
           const prev = card ? card.querySelector(".ans__line").textContent : "";
