@@ -511,9 +511,10 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 /* answer hierarchy: text first */
 .br{gap:18px;padding:22px 24px}
 .br .ans__line{font-size:19px;line-height:1.5}
-.br__conf{display:flex;flex-direction:column;gap:6px;padding:0 0 0 14px;border-left:3px solid var(--line);font-size:14px;line-height:1.55;color:var(--ink-2)}
-.br__conf.conf--medium{border-left-color:var(--amber)}
-.br__conf.conf--high{border-left-color:var(--accent)}
+.br__conf{display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.55;color:var(--ink-2)}
+.br__conf b.lvl::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px;background:var(--faint)}
+.br__conf.conf--medium b.lvl::before{background:var(--amber)}
+.br__conf.conf--high b.lvl::before{background:var(--accent)}
 .br__conf b.lvl{font-weight:600;color:var(--ink)}
 .br__gaps{display:flex;flex-direction:column;gap:4px}
 .br__gaps li{position:relative;padding-left:14px}
@@ -528,7 +529,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .br__acts li::before{counter-increment:n;content:counter(n);position:absolute;left:0;top:1px;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--surface-3);font-size:12px;font-weight:700;color:var(--ink-2)}
 .br__acts b{font-weight:500}
 .br__acts small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
-.br__lead{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line-2);border-left:3px solid var(--accent)}
+.br__lead{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line-2)}
 .br__lk{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
 .br__lead b{font-size:16px;font-weight:600;line-height:1.45}
 .br__lead small{font-size:13px;color:var(--muted)}
@@ -562,6 +563,25 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .ws .st{margin-top:1px}
 .ws__b b{display:block;font-size:13.5px;font-weight:600}
 .ws__b small{display:block;font-size:12.5px;color:var(--muted)}
+.agstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px 14px 4px}
+.agp{display:flex;align-items:center;gap:8px;min-width:0;padding:7px 8px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);transition:border-color var(--d-base),box-shadow var(--d-base),opacity var(--d-base)}
+.agp i,.agtag i{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-style:normal;font-size:11px;font-weight:700;flex:none;color:#fff}
+.agp span{min-width:0}
+.agp b{display:block;font-size:12.5px;font-weight:600;line-height:1.25}
+.agp small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.agp.is-idle{opacity:.55}
+.agp.is-idle i{background:var(--faint)!important}
+.agp.is-on{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
+.agp.is-on small{color:var(--accent-text)}
+.ag-data i{background:#0b825a}.ag-analysis i{background:#2c4a7a}.ag-doc i{background:#7a4f9c}
+.agtag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 3px;border-radius:8px;font-size:12px;font-weight:600;color:var(--ink)}
+.agtag i{width:18px;height:18px;border-radius:6px;font-size:9.5px}
+.agtag.ag-data{background:rgba(11,130,90,.10)}.agtag.ag-analysis{background:rgba(44,74,122,.10)}.agtag.ag-doc{background:rgba(122,79,156,.10)}
+.ws__who{display:flex!important;align-items:center;gap:8px;margin-top:6px}
+.ws__who[hidden]{display:none!important}
+.ws__who .sk{font-size:12.5px;color:var(--muted)}
+.ws.is-dim{opacity:.35}
+.ws{transition:opacity var(--d-base)}
 .ws__why{color:var(--ink-2)!important;margin-top:2px}
 .ws__why:empty{display:none}
 .ws.is-d .ws__b b{color:var(--muted);font-weight:500}
@@ -656,7 +676,6 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
                 <span class="cue__label" id="cueLabel" aria-live="polite"><b>Ready</b></span>
                 <span class="cue__meta" id="cueMeta"></span>
               </div>
-              <button class="actv__view" id="actView" type="button" hidden>View steps</button>
             </div>
             <div class="actv__bar" aria-hidden="true"><b id="actBar"></b></div>
             <div class="actv__live" id="actLive"></div>
@@ -1660,17 +1679,21 @@ RENDERERS.log = function (ctx) {
    - Evidence panel: steps (Work), sources (Sources) and the timestamped record (Record), each written once. */
 RENDERERS.answer = function (ctx) {
   const { sc, thread, panel, events } = ctx; const N = sc.plan.length; let body, card, hold, done = 0; const th = {}, seen = {};
-  const act = $("#act"), live = $("#actLive"), bar = $("#actBar"), viewBtn = $("#actView");
+  const act = $("#act"), live = $("#actLive"), bar = $("#actBar"), viewBtn = { hidden: true };
   act.dataset.state = "run"; live.innerHTML = ""; bar.style.width = "0%"; viewBtn.hidden = true;
+  const AK = { data: "DR", analysis: "AN", doc: "DO" };
+  const agUse = { data: 0, analysis: 0, doc: 0 };
+  const agTag = (k) => '<span class="agtag ag-' + k + '"><i>' + AK[k] + "</i>" + esc(AGENTS[k].name) + "</span>";
   panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small id="pStat">Waiting to start</small></div>' +
+    '<div class="agstrip" aria-label="Agents">' + Object.keys(AGENTS).map((k) => '<div class="agp ag-' + k + ' is-idle" data-ag="' + k + '" title="' + esc(AGENTS[k].role) + '"><i>' + AK[k] + "</i><span><b>" + esc(AGENTS[k].name) + '</b><small>Not used yet</small></span></div>').join("") + "</div>" +
     '<div class="ptabs" role="tablist" aria-label="Evidence panel">' +
     '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Steps<em id="pcn-work">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-src" aria-selected="false" aria-controls="pp-src" data-pane="src" type="button" tabindex="-1">Sources<em id="pcn-src">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-rec" aria-selected="false" aria-controls="pp-rec" data-pane="rec" type="button" tabindex="-1">Record<em id="pcn-rec">0</em></button></div>' +
     '<div class="ppane" id="pp-work" role="tabpanel" aria-labelledby="pt-work">' +
-      '<p class="pempty" id="wEmpty">Majlis decides each step from what the previous one found. Steps appear here as they are taken.</p><ol class="wsteps"></ol>' +
+      '<ol class="wsteps"></ol>' +
       '<div class="wsec" id="wAgents" hidden></div></div>' +
-    '<div class="ppane" id="pp-src" role="tabpanel" aria-labelledby="pt-src" hidden><div class="srclist"><p class="pempty">Sources are listed here as each one is read.</p></div><div class="srcdetail" hidden></div></div>' +
+    '<div class="ppane" id="pp-src" role="tabpanel" aria-labelledby="pt-src" hidden><div class="srclist"></div><div class="srcdetail" hidden></div></div>' +
     '<div class="ppane" id="pp-rec" role="tabpanel" aria-labelledby="pt-rec" hidden><p class="pempty">Every event with its time, as the backend stores it.</p><table class="audit"><tbody></tbody></table></div>';
   const P = (s) => panel.querySelector(s);
   const srcList = P(".srclist"), srcDetail = P(".srcdetail"), rec = P("#pp-rec tbody");
@@ -1678,12 +1701,13 @@ RENDERERS.answer = function (ctx) {
     $$(".ptab", panel).forEach((t) => { const on = t.dataset.pane === name; t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
     P("#pp-work").hidden = name !== "work"; P("#pp-src").hidden = name !== "src"; P("#pp-rec").hidden = name !== "rec";
   }
+  P(".agstrip").addEventListener("mouseover", (e) => { const a = e.target.closest(".agp"); $$(".ws", panel).forEach((w) => w.classList.toggle("is-dim", !!a && !w.querySelector(".ag-" + (a && a.dataset.ag)))); });
+  P(".agstrip").addEventListener("mouseleave", () => $$(".ws.is-dim", panel).forEach((w) => w.classList.remove("is-dim")));
   P(".ptabs").addEventListener("click", (e) => { const t = e.target.closest(".ptab"); if (t) { selectTab(t.dataset.pane); if (t.dataset.pane === "src") { srcDetail.hidden = true; srcList.hidden = false; } } });
   P(".ptabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return; const tabs = $$(".ptab", panel); const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
     selectTab(tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length].dataset.pane, true);
   });
-  viewBtn.onclick = () => selectTab("work", true);
   function showDetail(id, key) {
     const s = sc.sources[id]; if (!s) return;
     selectTab("src"); srcList.hidden = true; srcDetail.hidden = false;
@@ -1739,7 +1763,10 @@ RENDERERS.answer = function (ctx) {
         case "stepStart": {
           const s = sc.plan[ev.step], r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
           r.querySelector(".ws__b b").textContent = (ev.step + 1) + ". " + s.title;
-          const who = r.querySelector(".ws__who"); who.hidden = false; who.textContent = AGENTS[s.agent].name + " · " + s.skill;
+          const who = r.querySelector(".ws__who"); who.hidden = false; who.innerHTML = agTag(s.agent) + '<span class="sk">' + esc(s.skill) + "</span>";
+          $$(".agp", panel).forEach((x) => { x.classList.remove("is-on"); });
+          const ap = P('.agp[data-ag="' + s.agent + '"]'); agUse[s.agent]++; ap.classList.remove("is-idle"); ap.classList.add("is-on");
+          ap.querySelector("small").textContent = "Working now";
           P("#pcn-work").textContent = String(ev.step + 1);
           P("#pStat").textContent = "Step " + (ev.step + 1); break;
         }
@@ -1747,6 +1774,7 @@ RENDERERS.answer = function (ctx) {
           const s = sc.plan[ev.step]; done++;
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
           r.querySelector(".st").outerHTML = stIcon(stateOf(s));
+          { const ap = P('.agp[data-ag="' + s.agent + '"]'), n = agUse[s.agent]; ap.classList.remove("is-on"); ap.querySelector("small").textContent = n + (n === 1 ? " step" : " steps"); }
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
           res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
@@ -1759,7 +1787,10 @@ RENDERERS.answer = function (ctx) {
           }
           break;
         }
-        case "agents": { const w = P("#wAgents"); w.hidden = false; w.appendChild(agentsEl(sc)); P("#pStat").textContent = "Writing the answer"; break; }
+        case "agents": {
+          Object.keys(AGENTS).forEach((k) => { const ap = P('.agp[data-ag="' + k + '"]'), n = agUse[k];
+            ap.querySelector("small").textContent = n ? "Steps " + sc.plan.map((p, j) => p.agent === k ? j + 1 : 0).filter(Boolean).join(", ") : "Not used"; });
+          P("#pStat").textContent = "Writing the answer"; break; }
         case "answer": {
           const prev = card ? card.querySelector(".ans__line").textContent : "";
           const fin = answerEl(sc, events, { noEnter: !!card, compact: true });
