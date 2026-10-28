@@ -528,6 +528,18 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .br__acts li::before{counter-increment:n;content:counter(n);position:absolute;left:0;top:1px;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--surface-3);font-size:12px;font-weight:700;color:var(--ink-2)}
 .br__acts b{font-weight:500}
 .br__acts small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.br__lead{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line-2);border-left:3px solid var(--accent)}
+.br__lk{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+.br__lead b{font-size:16px;font-weight:600;line-height:1.45}
+.br__lead small{font-size:13px;color:var(--muted)}
+.br__lead p{font-size:14px;color:var(--ink-2);margin-top:2px}
+.br__also{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.br__also>span{font-size:13px;font-weight:600;color:var(--muted)}
+.br__also ol{display:flex;flex-direction:column;gap:10px}
+.br__also li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:14.5px;line-height:1.5}
+.br__also li i{font-style:normal;font-size:13px;font-weight:600;color:var(--muted);padding-top:1px}
+.br__also b{font-weight:500}
+.br__also small{display:block;font-size:12.5px;color:var(--muted)}
 .br__foot{font-size:12.5px;color:var(--muted);padding-top:14px;border-top:1px solid var(--line-2)}
 .chip--s{height:20px;padding:0 7px;font-size:12px;margin-left:4px}
 
@@ -1267,7 +1279,10 @@ function briefEl(sc, opts) {
     '<p class="ans__line">' + rich(sc.answer.headline) + "</p>" +
     '<div class="br__conf conf--' + c.level.toLowerCase() + '"><p><b class="lvl">Confidence: ' + esc(c.level.toLowerCase()) + ".</b> " + esc(c.text) + (c.gaps.length ? "" : " " + esc(c.note || "")) + "</p>" + gaps + "</div>" +
     '<div class="br__sec"><h4>What we found</h4><ul class="br__pts">' + B.points.map((p) => "<li>" + rich(p) + "</li>").join("") + "</ul></div>" +
-    (acts.length ? '<div class="br__sec"><h4>What to do next</h4><ol class="br__acts">' + acts.map((a) => "<li><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></li>").join("") + "</ol></div>" : "") +
+    (acts.length ? '<div class="br__sec"><h4>What to do next</h4>' +
+      '<div class="br__lead"><span class="br__lk">Do this first</span><b>' + esc(acts[0].text) + "</b><small>" + esc(acts[0].owner) + " · " + esc(acts[0].when) + "</small><p>" + esc(acts[0].why) + "</p></div>" +
+      (acts.length > 1 ? '<div class="br__also"><span>Also consider</span><ol>' + acts.slice(1).map((a, i) => '<li><i>' + (i + 2) + "</i><div><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></li>").join("") + "</ol></div>" : "") +
+      "</div>" : "") +
     '<p class="br__foot">' + asOfLine(sc) + "</p></section>");
 }
 function linksHTML(sc, events) {
