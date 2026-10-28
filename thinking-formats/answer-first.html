@@ -489,6 +489,21 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .br{padding:4px 0 8px}
 .br__lead{background:var(--surface);border:1px solid var(--line-2)}
 .cue__meta{display:none}
+/* slow-run offer */
+.slow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 0 4px 26px;font-size:13px;color:var(--ink-2);animation:lineIn var(--d-reveal) var(--ease-out) both}
+.slow button{height:28px;padding:0 12px;border-radius:99px;background:var(--user);color:var(--user-ink);font-size:12.5px;font-weight:600}
+.slow.is-set{color:var(--accent-text)}
+.rtoast{position:fixed;left:50%;top:14px;z-index:70;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;background:var(--user);color:var(--user-ink);font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);transform:translate(-50%,-16px);opacity:0;pointer-events:none;transition:transform 260ms var(--ease-out),opacity 200ms var(--ease-out)}
+.rtoast.is-on{transform:translate(-50%,0);opacity:1}
+/* follow-ups */
+.fups{display:flex;flex-direction:column;gap:8px}
+.fups>span{font-size:13px;font-weight:600;color:var(--muted)}
+.fups>div{display:flex;flex-wrap:wrap;gap:8px}
+.fup{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:500;color:var(--ink);transition:border-color var(--d-fast),background var(--d-fast),transform var(--d-fast)}
+.fup svg{color:var(--muted);transition:transform var(--d-base) var(--ease-out)}
+.fup:hover{border-color:var(--accent-line);background:var(--accent-soft)}
+.fup:hover svg{transform:translateX(2px);color:var(--accent-text)}
+#inputText.is-typed{color:var(--ink)}
 /* status line button + agents popover */
 .actv{position:relative}
 .actv__top{min-height:36px}
@@ -729,6 +744,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
               </div>
               <button class="agbtn" id="agBtn" type="button" aria-expanded="false" aria-controls="agPop" hidden><span class="agbtn__av" id="agBtnAv" aria-hidden="true"></span><span id="agBtnT">View agents in progress</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
             </div>
+            <div class="slow" id="slow" hidden><span id="slowT">Taking longer than usual</span><button type="button" id="slowBtn">Notify me when ready</button></div>
             <div class="actv__bar" aria-hidden="true"><b id="actBar"></b></div>
             <div class="actv__live" id="actLive"></div>
           </div>
@@ -1065,6 +1081,11 @@ const OPTIONS = [ { id: "answer", name: "Answer-first with evidence panel", layo
 const REASONS = {};
 window.SHORT_CHIPS = true;
 /* Key findings per scenario, one sentence each, for the text-first answer. */
+const FOLLOWUPS = {
+  simple: ["Break this down by function", "Compare with Q3 last year", "Which teams are above 5%?"],
+  moderate: ["Why is Saudi Arabia behind plan?", "Forecast Q4 against plan", "Show the Egypt figures after close"],
+  complex: ["Compare with Q3 last year", "Break Mid-market down by manager", "Draft a note to the CRO"]
+};
 const BRIEF = {
   simple: { points: [
     "149 people left this quarter, out of an average headcount of 4,820. [[hrms_attr#3]]",
@@ -1199,7 +1220,7 @@ function play() {
   document.body.classList.toggle("no-anim", S.speed === "instant");
   closeSheet(false); closeNote();
   $("#frameQ").textContent = sc.query;
-  renderRecents();
+  renderRecents(); $("#inputText").textContent = "Ask about your company…"; $("#inputText").classList.remove("is-typed");
   cueSet("idle", "<b>Ready</b>", "");
   const events = buildTimeline(sc);
   const ctx = { sc, thread, panel, convo, events, opt };
@@ -1357,7 +1378,9 @@ function briefEl(sc, opts) {
       '<div class="br__lead"><span class="br__lk">Do this first</span><b>' + esc(acts[0].text) + "</b><small>" + esc(acts[0].owner) + " · " + esc(acts[0].when) + "</small><p>" + esc(acts[0].why) + "</p></div>" +
       (acts.length > 1 ? '<div class="br__also"><span>Also consider</span><ol>' + acts.slice(1).map((a, i) => '<li><i>' + (i + 2) + "</i><div><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></li>").join("") + "</ol></div>" : "") +
       "</div>" : "") +
-    '<p class="br__foot">' + asOfLine(sc) + "</p></section>");
+    '<p class="br__foot">' + asOfLine(sc) + "</p>" +
+    ((FOLLOWUPS[S.sc] || []).length ? '<div class="fups"><span>Ask next</span><div>' + FOLLOWUPS[S.sc].map((q) => '<button type="button" class="fup" data-fup="' + esc(q) + '">' + esc(q) + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>').join("") + "</div></div>" : "") +
+    "</section>");
 }
 function linksHTML(sc, events) {
   const q = sc.plan.reduce((n, s) => n + s.queries.length, 0);
@@ -1745,7 +1768,12 @@ RENDERERS.answer = function (ctx) {
     return p;
   }
   /* ---- agents popover above the status line ---- */
+  let card2done = false;
   const pop = $("#agPop"), popList = $("#agPopList"), agBtn = $("#agBtn"), agState = {};
+  /* slow run: offer a notification after 20s of work (real time at 1x) */
+  const slow = $("#slow"), SLOW_AT = 20000; let notify = false;
+  slow.hidden = true; slow.classList.remove("is-set"); $("#slowT").textContent = "Taking longer than usual"; $("#slowBtn").hidden = false;
+  $("#slowBtn").onclick = () => { notify = true; slow.classList.add("is-set"); $("#slowT").textContent = "You will be notified when the answer is ready. You can switch chats."; $("#slowBtn").hidden = true; };
   pop.hidden = true; popList.innerHTML = ""; agBtn.hidden = true; agBtn.setAttribute("aria-expanded", "false"); $("#agBtnT").textContent = "View agents in progress"; $("#agBtnAv").innerHTML = "";
   agBtn.onclick = () => togglePop();
   function togglePop(force) {
@@ -1838,6 +1866,7 @@ RENDERERS.answer = function (ctx) {
     openSource: showDetail,
     selectTab,
     on(ev) {
+      if (ev.at >= SLOW_AT && slow.hidden && ev.type !== "answer" && ev.type !== "done" && !card2done) slow.hidden = false;
       rec.appendChild(frag(auditRow(ev))); P("#pcn-rec").textContent = String(rec.children.length);
       switch (ev.type) {
         case "query": {
@@ -1891,6 +1920,8 @@ RENDERERS.answer = function (ctx) {
           (card || hold).replaceWith(fin); card = fin;
           const ln = fin.querySelector(".ans__line");
           if (prev && prev !== ln.textContent && animOK()) ln.classList.add("is-flash");
+          card2done = true; slow.hidden = true;
+          if (notify) toastMsg("Your answer is ready");
           $("#agBtnT").textContent = "View agents"; act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
           P("#pStat").textContent = "Complete · " + N + " steps";
           break;
@@ -1904,6 +1935,12 @@ RENDERERS.answer = function (ctx) {
    START: scenario switcher only. Selecting a scenario, or the active one again, replays it.
    ===================================================================== */
 const OLDER = ["Q3 forecast variance", "Supplier indemnity clauses", "Board pack summary"];
+function toastMsg(t) {
+  let el = $("#readyToast"); if (!el) { el = frag('<div class="rtoast" id="readyToast" role="status"></div>'); document.body.appendChild(el); }
+  el.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' + esc(t);
+  el.classList.remove("is-on"); void el.offsetWidth; el.classList.add("is-on");
+  clearTimeout(toastMsg.t); toastMsg.t = setTimeout(() => el.classList.remove("is-on"), 3200);
+}
 function renderRecents() {
   const ic = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>';
   $("#recents").innerHTML = SCENARIO_ORDER.map((k) => '<button class="hi' + (k === S.sc ? " on" : "") + '" type="button" data-sc="' + k + '"' + (k === S.sc ? ' aria-current="true"' : "") + ">" + ic + "<span>" + esc(SCENARIOS[k].query) + "</span></button>").join("") +
@@ -1927,6 +1964,7 @@ function init() {
   $("#sheetClose").addEventListener("click", () => closeSheet());
   $("#noteClose").addEventListener("click", closeNote);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") { const p = $("#agPop"); if (!p.hidden) { $("#agBtn").click(); $("#agBtn").focus(); } else closeSheet(); } });
+  document.addEventListener("click", (e) => { const f = e.target.closest("[data-fup]"); if (!f) return; const t = $("#inputText"); t.textContent = f.dataset.fup; t.classList.add("is-typed"); $(".ask").classList.add("is-ready"); });
   document.addEventListener("click", (e) => { const p = $("#agPop"); if (!p.hidden && !e.target.closest("#agPop,#agBtn")) $("#agBtn").click(); });
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-open]"); if (b && RUN && RUN.handler.selectTab) RUN.handler.selectTab(b.dataset.open, true); });
   play();
