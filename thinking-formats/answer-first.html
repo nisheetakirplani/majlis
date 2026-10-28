@@ -490,7 +490,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .br__lead{background:var(--surface);border:1px solid var(--line-2)}
 .cue__meta{display:none}
 /* slow-run offer */
-.slow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 0 4px 26px;font-size:13px;color:var(--ink-2);animation:lineIn var(--d-reveal) var(--ease-out) both}
+.slow{display:none!important;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 0 4px 26px;font-size:13px;color:var(--ink-2);animation:lineIn var(--d-reveal) var(--ease-out) both}
 .slow button{height:28px;padding:0 12px;border-radius:99px;background:var(--user);color:var(--user-ink);font-size:12.5px;font-weight:600}
 .slow.is-set{color:var(--accent-text)}
 .rtoast{position:fixed;left:50%;top:14px;z-index:70;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;background:var(--user);color:var(--user-ink);font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);transform:translate(-50%,-16px);opacity:0;pointer-events:none;transition:transform 260ms var(--ease-out),opacity 200ms var(--ease-out)}
@@ -1866,7 +1866,7 @@ RENDERERS.answer = function (ctx) {
     openSource: showDetail,
     selectTab,
     on(ev) {
-      if (ev.at >= SLOW_AT && slow.hidden && ev.type !== "answer" && ev.type !== "done" && !card2done) slow.hidden = false;
+      
       rec.appendChild(frag(auditRow(ev))); P("#pcn-rec").textContent = String(rec.children.length);
       switch (ev.type) {
         case "query": {
