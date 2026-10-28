@@ -484,7 +484,50 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .panel__h{display:flex;align-items:center;gap:10px;padding:16px 18px 4px}
 .panel__h b{font-size:15px;font-weight:600}
 .panel__h small{font-size:12.5px;color:var(--muted);margin-inline-start:auto}
-.ans{border-radius:22px;border-color:var(--line-2)}
+.ans{padding:4px 0 8px;border:0;border-radius:0;background:none;box-shadow:none}
+.conf{background:none;border:0;padding:0}
+.br{padding:4px 0 8px}
+.br__lead{background:var(--surface);border:1px solid var(--line-2)}
+.cue__meta{display:none}
+/* status line button + agents popover */
+.actv{position:relative}
+.actv__top{min-height:36px}
+.agbtn{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 6px;border-radius:10px;font-size:13px;font-weight:600;color:var(--ink-2);flex:none;transition:background var(--d-fast)}
+.agbtn:hover{background:var(--surface-3)}
+.agbtn svg{transition:transform var(--d-base) var(--ease-out)}
+.agbtn[aria-expanded="true"]{background:var(--surface);box-shadow:var(--shadow)}
+.agbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.agbtn__av{display:flex}
+.agbtn__av:empty{display:none}
+.agbtn__av i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;margin-left:-6px;border:2px solid var(--bg);font-style:normal;font-size:9px;font-weight:700;color:#fff;animation:avIn 280ms var(--ease-out) both}
+.agbtn__av i:first-child{margin-left:0}
+.agbtn__av i.is-w{box-shadow:0 0 0 2px var(--accent-line)}
+@keyframes avIn{from{transform:scale(.4);opacity:0}}
+.agbtn__av i.ag-data,.agi__av.ag-data i{background:#0b825a}.agbtn__av i.ag-analysis,.agi__av.ag-analysis i{background:#2c4a7a}.agbtn__av i.ag-doc,.agi__av.ag-doc i{background:#7a4f9c}
+.agpop{position:absolute;left:0;right:0;bottom:calc(100% + 8px);z-index:8;padding:16px 18px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line-2);box-shadow:0 18px 50px rgba(28,40,34,.16);opacity:0;transform:translateY(8px) scale(.98);transform-origin:50% 100%;transition:opacity 200ms var(--ease-out),transform 260ms var(--ease-out)}
+.agpop.is-open{opacity:1;transform:none}
+.agpop__h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.agpop__h b{font-size:15px;font-weight:500}
+.agpop__h span{font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.agpop__list{display:flex;flex-direction:column;gap:2px}
+.agi{display:grid;grid-template-columns:20px 26px minmax(0,1fr) auto;align-items:center;gap:10px;padding:7px 0;animation:rowIn 320ms var(--ease-out) both}
+@keyframes rowIn{from{opacity:0;transform:translateY(6px)}}
+.agi__st{display:grid;place-items:center;width:20px;height:20px;color:var(--accent)}
+.agi__st .ck{stroke-dasharray:24;animation:tickDraw 360ms var(--ease-out) both}
+.agi__av i{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;font-style:normal;font-size:10px;font-weight:700;color:#fff}
+.agi__t{min-width:0}
+.agi__t b{display:block;font-size:14px;font-weight:500}
+.agi__t small{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.agi.is-w .agi__t small{color:var(--ink-2)}
+.agi__n{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.agi.is-d .agi__av i{opacity:.75}
+.dgrid{display:grid;grid-template-columns:repeat(3,4px);gap:2px}
+.dgrid i{width:4px;height:4px;border-radius:1px;background:var(--ink);opacity:.15;animation:dgrid 1200ms steps(1) infinite}
+.dgrid i:nth-child(1){animation-delay:0ms}.dgrid i:nth-child(2){animation-delay:130ms}.dgrid i:nth-child(3){animation-delay:260ms}
+.dgrid i:nth-child(6){animation-delay:390ms}.dgrid i:nth-child(9){animation-delay:520ms}.dgrid i:nth-child(8){animation-delay:650ms}
+.dgrid i:nth-child(7){animation-delay:780ms}.dgrid i:nth-child(4){animation-delay:910ms}.dgrid i:nth-child(5){animation-delay:1040ms}
+@keyframes dgrid{0%{opacity:1}30%{opacity:.55}60%,100%{opacity:.15}}
+@media (prefers-reduced-motion:reduce){.agpop{transition:none}.dgrid i{animation:none;opacity:.6}}
 .ans__k .memc{text-transform:none;letter-spacing:0}
 .memc{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:99px;background:var(--accent-soft);color:var(--accent-text);font-size:12.5px;font-weight:600}
 .blk{border-radius:16px}
@@ -672,12 +715,17 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
         <div class="convo" id="convo" tabindex="0" aria-label="Conversation"><div class="thread" id="thread"></div></div>
         <div class="foot">
           <div class="actv" id="act" data-state="idle" aria-label="Majlis activity">
+            <section class="agpop" id="agPop" aria-label="Agents in progress" hidden>
+              <div class="agpop__h"><b>Agents in progress</b><span id="agPopN"></span></div>
+              <ul class="agpop__list" id="agPopList"></ul>
+            </section>
             <div class="actv__top">
               <div class="cue" id="cue" data-state="idle">
                 <span class="cue__mark" aria-hidden="true"></span>
                 <span class="cue__label" id="cueLabel" aria-live="polite"><b>Ready</b></span>
                 <span class="cue__meta" id="cueMeta"></span>
               </div>
+              <button class="agbtn" id="agBtn" type="button" aria-expanded="false" aria-controls="agPop" hidden><span class="agbtn__av" id="agBtnAv" aria-hidden="true"></span><span id="agBtnT">View agents in progress</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
             </div>
             <div class="actv__bar" aria-hidden="true"><b id="actBar"></b></div>
             <div class="actv__live" id="actLive"></div>
@@ -1694,6 +1742,34 @@ RENDERERS.answer = function (ctx) {
     }
     return p;
   }
+  /* ---- agents popover above the status line ---- */
+  const pop = $("#agPop"), popList = $("#agPopList"), agBtn = $("#agBtn"), agState = {};
+  pop.hidden = true; popList.innerHTML = ""; agBtn.hidden = true; agBtn.setAttribute("aria-expanded", "false"); $("#agBtnT").textContent = "View agents in progress"; $("#agBtnAv").innerHTML = "";
+  agBtn.onclick = () => togglePop();
+  function togglePop(force) {
+    const open = force !== undefined ? force : pop.hidden;
+    agBtn.setAttribute("aria-expanded", String(open));
+    if (open) { pop.hidden = false; requestAnimationFrame(() => pop.classList.add("is-open")); }
+    else { pop.classList.remove("is-open"); setTimeout(() => { if (!pop.classList.contains("is-open")) pop.hidden = true; }, animOK() ? 200 : 0); }
+  }
+  const grid = '<span class="dgrid" aria-hidden="true">' + "<i></i>".repeat(9) + "</span>";
+  function popDraw() {
+    const ks = Object.keys(agState), working = ks.filter((k) => agState[k].st === "w").length, done = ks.filter((k) => agState[k].st === "d").length;
+    $("#agPopN").textContent = done + "/" + ks.length;
+    ks.forEach((k) => {
+      const a = agState[k]; let li = popList.querySelector('[data-ag="' + k + '"]');
+      if (!li) { li = frag('<li class="agi" data-ag="' + k + '"><span class="agi__st"></span><span class="agi__av ag-' + k + '"><i>' + AK[k] + '</i></span><span class="agi__t"><b>' + esc(AGENTS[k].name) + '</b><small></small></span><span class="agi__n"></span></li>'); popList.appendChild(li); }
+      li.className = "agi is-" + a.st;
+      const st = li.querySelector(".agi__st"), want = a.st === "w" ? "w" : "d";
+      if (st.dataset.v !== want) { st.dataset.v = want; st.innerHTML = want === "w" ? grid : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="ck" d="M5 12.5l4.5 4.5L19 7.5"/></svg>'; }
+      li.querySelector("small").textContent = a.st === "w" ? a.task : "Done · " + a.task;
+      li.querySelector(".agi__n").textContent = a.n + (a.n === 1 ? " step" : " steps");
+    });
+    $("#agBtnAv").innerHTML = ks.map((k) => '<i class="ag-' + k + (agState[k].st === "w" ? " is-w" : "") + '">' + AK[k] + "</i>").join("");
+    agBtn.hidden = ks.length === 0;
+  }
+  function agStart(k, task) { const a = agState[k] || (agState[k] = { n: 0 }); a.st = "w"; a.task = task; a.n++; Object.keys(agState).forEach((x) => { if (x !== k && agState[x].st === "w") agState[x].st = "d"; }); popDraw(); }
+  function agEnd(k, result) { const a = agState[k]; if (!a) return; a.st = "d"; a.task = result; popDraw(); }
   const agTag = (k) => '<span class="agtag ag-' + k + '"><i>' + AK[k] + "</i>" + esc(AGENTS[k].name) + "</span>";
   panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small id="pStat">Waiting to start</small></div>' +
     '<div class="agstrip" aria-label="Agents used" hidden><span class="agstrip__k">Agents</span><div class="agrow"></div></div>' +
@@ -1783,7 +1859,7 @@ RENDERERS.answer = function (ctx) {
           r.querySelector(".ws__b b").textContent = (ev.step + 1) + ". " + s.title;
           const who = r.querySelector(".ws__who"); who.hidden = false; who.innerHTML = agTag(s.agent) + '<span class="sk">' + esc(s.skill) + "</span>";
           $$(".agp", panel).forEach((x) => { x.classList.remove("is-on"); });
-          const ap = agPill(s.agent); agUse[s.agent]++; ap.classList.add("is-on");
+          const ap = agPill(s.agent); agUse[s.agent]++; ap.classList.add("is-on"); agStart(s.agent, s.title);
           ap.querySelector("small").textContent = String(agUse[s.agent]);
           P("#pcn-work").textContent = String(ev.step + 1);
           P("#pStat").textContent = "Step " + (ev.step + 1); break;
@@ -1792,7 +1868,7 @@ RENDERERS.answer = function (ctx) {
           const s = sc.plan[ev.step]; done++;
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
           r.querySelector(".st").outerHTML = stIcon(stateOf(s));
-          P('.agp[data-ag="' + s.agent + '"]').classList.remove("is-on");
+          P('.agp[data-ag="' + s.agent + '"]').classList.remove("is-on"); agEnd(s.agent, s.result);
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
           res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
@@ -1813,7 +1889,7 @@ RENDERERS.answer = function (ctx) {
           (card || hold).replaceWith(fin); card = fin;
           const ln = fin.querySelector(".ans__line");
           if (prev && prev !== ln.textContent && animOK()) ln.classList.add("is-flash");
-          act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
+          $("#agBtnT").textContent = "View agents"; act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
           P("#pStat").textContent = "Complete · " + N + " steps";
           break;
         }
@@ -1848,7 +1924,8 @@ function init() {
   });
   $("#sheetClose").addEventListener("click", () => closeSheet());
   $("#noteClose").addEventListener("click", closeNote);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { const p = $("#agPop"); if (!p.hidden) { $("#agBtn").click(); $("#agBtn").focus(); } else closeSheet(); } });
+  document.addEventListener("click", (e) => { const p = $("#agPop"); if (!p.hidden && !e.target.closest("#agPop,#agBtn")) $("#agBtn").click(); });
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-open]"); if (b && RUN && RUN.handler.selectTab) RUN.handler.selectTab(b.dataset.open, true); });
   play();
 }
