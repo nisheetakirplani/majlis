@@ -494,7 +494,29 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .actv__live:empty{display:none}
 .actv__live .thought__btn{padding-left:0}
 .actv__live .msg{font-size:14px;color:var(--ink-2)}
-/* answer hierarchy */
+/* answer hierarchy: text first */
+.br{gap:18px;padding:22px 24px}
+.br .ans__line{font-size:19px;line-height:1.5}
+.br__conf{display:flex;flex-direction:column;gap:6px;padding:0 0 0 14px;border-left:3px solid var(--line);font-size:14px;line-height:1.55;color:var(--ink-2)}
+.br__conf.conf--medium{border-left-color:var(--amber)}
+.br__conf.conf--high{border-left-color:var(--accent)}
+.br__conf b.lvl{font-weight:600;color:var(--ink)}
+.br__gaps{display:flex;flex-direction:column;gap:4px}
+.br__gaps li{position:relative;padding-left:14px}
+.br__gaps li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--faint)}
+.br__sec{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--line-2)}
+.br__sec h4{font-size:13px;font-weight:600;color:var(--muted)}
+.br__pts{display:flex;flex-direction:column;gap:10px}
+.br__pts li{position:relative;padding-left:18px;font-size:15px;line-height:1.6}
+.br__pts li::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:2px;background:var(--accent)}
+.br__acts{display:flex;flex-direction:column;gap:12px;counter-reset:n}
+.br__acts li{position:relative;padding-left:32px;font-size:15px;line-height:1.5}
+.br__acts li::before{counter-increment:n;content:counter(n);position:absolute;left:0;top:1px;display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--surface-3);font-size:12px;font-weight:700;color:var(--ink-2)}
+.br__acts b{font-weight:500}
+.br__acts small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.br__foot{font-size:12.5px;color:var(--muted);padding-top:14px;border-top:1px solid var(--line-2)}
+.chip--s{height:20px;padding:0 7px;font-size:12px;margin-left:4px}
+
 .ans--wait{gap:14px}
 .skl{display:flex;flex-direction:column;gap:8px}
 .skl i{display:block;border-radius:6px;background:linear-gradient(90deg,var(--surface-3),var(--surface-2),var(--surface-3));background-size:200% 100%;animation:shim 1.4s linear infinite}
@@ -939,6 +961,28 @@ const SCENARIO_ORDER = ["simple", "moderate", "complex"];
 /* Only the answer-first option is used on this page. */
 const OPTIONS = [ { id: "answer", name: "Answer-first with evidence panel", layout: "panel" } ];
 const REASONS = {};
+window.SHORT_CHIPS = true;
+/* Key findings per scenario, one sentence each, for the text-first answer. */
+const BRIEF = {
+  simple: { points: [
+    "149 people left this quarter, out of an average headcount of 4,820. [[hrms_attr#3]]",
+    "Last quarter the rate was 2.7%. [[hrms_attr#2]]",
+    "Sales accounts for 14 of the 20 extra leavers. [[hrms_fn#0]]"
+  ] },
+  moderate: { points: [
+    "The UAE is ahead of plan by 4.2%, at AED 182.4M. [[erp_rev#0]]",
+    "Europe is ahead by 2.5%, at AED 77.9M. [[erp_rev#3]]",
+    "Saudi Arabia is behind by 5.6%, at AED 141.6M. This is the largest gap, AED 8.4M. [[erp_rev#1]]",
+    "Egypt and North Africa is behind by 6.0%, at AED 58.3M, and may move by up to 2% when its books close. [[close_cal#p3]]"
+  ] },
+  complex: { points: [
+    "31 people left Sales in Q3, against 17 in Q2. [[hrms_sales#3]]",
+    "Mid-market is where it happened: 17 of the 31 leavers, an attrition rate of 10.4%. [[hrms_sales#1]]",
+    "The rise began in the quarter the commission plan changed, on 1 July. Quota relief for reassigned accounts now only starts after 90 days. [[comp_plan#p3]]",
+    "12 of the 22 leavers who answered the exit survey named the commission changes. [[exit_survey#0]]",
+    "Median quota attainment in Mid-market fell from 92% to 71%. [[crm_roster#1]]"
+  ] }
+};
 </script>
 <script>
 "use strict";
@@ -982,6 +1026,10 @@ function chip(ref) {
   const s = SC().sources[id];
   const locked = s && s.kind === "locked";
   const label = chipLabel(id, key);
+  if (window.SHORT_CHIPS && s) {
+    const short = locked ? "Locked" : s.system.split(",")[0];
+    return '<button type="button" class="chip chip--s' + (locked ? " is-locked" : "") + '" data-src="' + esc(id) + '" data-key="' + esc(key || "") + '" aria-label="Open source: ' + esc(label) + '" title="' + esc(label) + '">' + (locked ? I.lock : "") + "<span>" + esc(short) + "</span></button>";
+  }
   return '<button type="button" class="chip' + (locked ? " is-locked" : "") + '" data-src="' + esc(id) + '" data-key="' + esc(key || "") + '" aria-label="Open source: ' + esc(label) + '" title="' + esc(label) + '">' + (locked ? I.lock : I.src) + "<span>" + esc(label) + "</span></button>";
 }
 function rich(text) { return esc(text).replace(/\[\[([a-z_]+)(?:#([a-z0-9]+))?\]\]/g, (m, id, k) => chip(id + (k !== undefined ? "#" + k : ""))); }
@@ -1182,6 +1230,7 @@ function recordHTML(events) {
 const auditRow = (e) => "<tr><td>" + esc(e.clock) + "</td><td>" + esc(e.log[0]) + "</td><td>" + esc(e.log[1]) + "</td></tr>";
 function answerEl(sc, events, opts) {
   opts = opts || {};
+  if (opts.compact && typeof BRIEF !== "undefined" && BRIEF[S.sc]) return briefEl(sc, opts);
   const el = frag('<section class="ans' + (animOK() && !opts.noEnter ? " enter" : "") + '" data-why="answer" aria-label="Answer">' +
     '<div class="ans__k">' + memcHTML(sc) + "</div>" +
     '<p class="ans__line" data-why="answer-line">' + rich(sc.answer.headline) + "</p>" + confHTML(sc) +
@@ -1191,6 +1240,19 @@ function answerEl(sc, events, opts) {
   sc.answer.blocks.forEach((b) => blocks.appendChild(BLOCKS[b.type](b, sc)));
   postRender(el);
   return el;
+}
+/* Text-first answer: answer, confidence, what we found, what to do next. No charts or tiles. */
+function briefEl(sc, opts) {
+  const B = BRIEF[S.sc], c = sc.answer.confidence;
+  const gaps = c.gaps.length ? '<ul class="br__gaps">' + c.gaps.map((g) => "<li>" + rich(g) + "</li>").join("") + "</ul>" : "";
+  const acts = (sc.answer.blocks.find((b) => b.type === "actions") || { items: [] }).items;
+  return frag('<section class="ans br' + (animOK() && !opts.noEnter ? " enter" : "") + '" aria-label="Answer">' +
+    '<div class="ans__k">' + memcHTML(sc) + "</div>" +
+    '<p class="ans__line">' + rich(sc.answer.headline) + "</p>" +
+    '<div class="br__conf conf--' + c.level.toLowerCase() + '"><p><b class="lvl">Confidence: ' + esc(c.level.toLowerCase()) + ".</b> " + esc(c.text) + (c.gaps.length ? "" : " " + esc(c.note || "")) + "</p>" + gaps + "</div>" +
+    '<div class="br__sec"><h4>What we found</h4><ul class="br__pts">' + B.points.map((p) => "<li>" + rich(p) + "</li>").join("") + "</ul></div>" +
+    (acts.length ? '<div class="br__sec"><h4>What to do next</h4><ol class="br__acts">' + acts.map((a) => "<li><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></li>").join("") + "</ol></div>" : "") +
+    '<p class="br__foot">' + asOfLine(sc) + "</p></section>");
 }
 function linksHTML(sc, events) {
   const q = sc.plan.reduce((n, s) => n + s.queries.length, 0);
