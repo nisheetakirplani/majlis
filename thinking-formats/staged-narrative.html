@@ -591,6 +591,34 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .nfold__c{color:var(--muted);display:grid;transition:transform var(--d-base) var(--ease-out)}
 .nfold[aria-expanded="true"] .nfold__c{transform:rotate(90deg)}
 .nfold[aria-expanded="true"]+.nwork{padding:4px 0 8px;border-bottom:1px solid var(--line-2);margin-bottom:6px}
+/* narrative: plan, agents, sources */
+.nplan{border-radius:16px;background:var(--surface);border:1px solid var(--line-2)}
+.nplan>summary{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 16px;cursor:pointer;list-style:none;border-radius:16px}
+.nplan>summary::-webkit-details-marker{display:none}
+.nplan>summary::marker{content:""}
+.nplan>summary svg{color:var(--muted);transition:transform var(--d-base) var(--ease-out)}
+.nplan[open]>summary svg{transform:rotate(90deg)}
+.nplan>summary b{font-size:14.5px;font-weight:600}
+.nplan>summary small{font-size:13px;color:var(--muted)}
+.nplan__l{display:flex;flex-direction:column;padding:0 16px 10px}
+.npr{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--line-2)}
+.npr .st{margin-top:1px}
+.npr b{display:block;font-size:14px;font-weight:600}
+.npr small{display:block;font-size:12.5px;color:var(--muted)}
+.npr.is-d b{font-weight:500;color:var(--muted)}
+.nwork .agents{border-radius:16px}
+.nsrc{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line-2)}
+.nsrc__h{display:flex;align-items:baseline;gap:10px}
+.nsrc__h b{font-size:13px;font-weight:600;color:var(--muted)}
+.nsrc__h span{font-size:12.5px;color:var(--faint)}
+.nsrc ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.nsrc__i.chip{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:auto;min-height:56px;margin:0;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line-2);color:var(--ink);text-align:start;white-space:normal}
+.nsrc__i.chip:hover,.nsrc__i.chip:focus-visible{background:var(--surface);border-color:var(--accent-line);color:var(--ink)}
+.nsrc__t{min-width:0;flex:1}
+.nsrc__i.chip span{overflow:visible}
+.nsrc__i .badge{flex:none}
+.nsrc__t b{display:block;font-size:13px;font-weight:600}
+.nsrc__t small{display:block;font-size:12px;color:var(--muted);font-weight:500}
 /* answer hierarchy: text first */
 .br{gap:18px;padding:22px 24px}
 .br .ans__line{font-size:19px;line-height:1.5}
@@ -1688,6 +1716,30 @@ RENDERERS.narr = function (ctx) {
   function agEnd(k, result) { const a = agState[k]; if (!a) return; a.st = "d"; a.task = result; popDraw(); }
   const agTag = (k) => '<span class="agtag ag-' + k + '"><i>' + AK[k] + "</i>" + esc(AGENTS[k].name) + "</span>";
 
+  let plan = null;
+  function planCard() {
+    plan = frag('<details class="nplan' + (animOK() ? " enter" : "") + '" open><summary>' + I.chev + '<b>Plan</b><small class="nplan__n">Builds as Majlis decides each step</small></summary><ol class="nplan__l"></ol></details>');
+    return plan;
+  }
+  function planRow(i, title, s) {
+    const li = frag('<li class="npr is-d' + (animOK() ? " enter" : "") + '" data-i="' + i + '">' + '<span class="st st--think" aria-hidden="true"></span><span><b>' + esc(title) + '</b><small></small></span></li>');
+    plan.querySelector(".nplan__l").appendChild(li);
+  }
+  function planUpdate(i, state, s) {
+    const li = plan.querySelector('.npr[data-i="' + i + '"]'); if (!li) return;
+    li.className = "npr" + (state === "w" ? " is-w" : " tick");
+    li.querySelector(".st").outerHTML = stIcon(state === "w" ? "w" : stateOf(s));
+    li.querySelector("b").textContent = s.title;
+    li.querySelector("small").innerHTML = esc(AGENTS[s.agent].name) + " · " + esc(s.skill) + (state === "w" ? "" : " · " + (s.ms / 1000).toFixed(1) + "s");
+    const n = plan.querySelectorAll(".npr").length, d = plan.querySelectorAll(".npr.tick").length;
+    plan.querySelector(".nplan__n").textContent = d + " of " + n + " steps done · more may be added";
+  }
+  function sourcesEl() {
+    const ids = []; sc.plan.forEach((p) => p.sources.forEach((id) => { if (ids.indexOf(id) < 0) ids.push(id); }));
+    const statusOf = (id) => { const s = sc.sources[id]; if (s.kind === "locked") return '<span class="badge badge--lock">' + I.lock + "Locked</span>"; const st = sc.plan.find((p) => p.sources.indexOf(id) >= 0); return st && st.status === "conflict" ? '<span class="badge badge--warn">' + I.warn + "Conflict</span>" : '<span class="badge badge--good">' + I.check + "Read</span>"; };
+    return frag('<div class="nsrc"><div class="nsrc__h"><b>Sources</b><span>' + ids.length + ' · tap one to see the exact row or passage</span></div><ul>' +
+      ids.map((id) => { const s = sc.sources[id]; return '<li><button type="button" class="nsrc__i chip" data-src="' + id + '" data-key=""><span class="nsrc__t"><b>' + esc(s.title) + "</b><small>" + esc(s.system) + " · " + esc(s.kind === "locked" ? "not read" : (/^(Effective|Approved|Updated)/.test(s.asOf) ? s.asOf : "as of " + s.asOf)) + "</small></span>" + statusOf(id) + "</button></li>"; }).join("") + "</ul></div>");
+  }
   function stepRow(s, i) {
     const el = frag('<div class="ns is-w' + (animOK() ? " enter" : "") + '"><button class="ns__h" type="button" aria-expanded="false" disabled>' + stIcon("w") +
       '<span class="ns__t"><b>' + esc(s.title) + '</b><span class="ns__m">' + agTag(s.agent) + '<span class="sk">' + esc(s.skill) + '</span></span></span><span class="ns__d">…</span></button><div class="ns__b" hidden></div></div>');
@@ -1711,18 +1763,16 @@ RENDERERS.narr = function (ctx) {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
           work = frag('<div class="nwork"></div>'); body.appendChild(work); break;
         }
-        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el); break;
+        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el); if (plan && ev.step != null) planRow(ev.step, "Deciding the next step"); break;
+        case "plan": work.appendChild(planCard()); break;
         case "thinkEnd": th[ev.id].end(); break;
         case "say": (ev.final ? body : work).appendChild(sayEl(ev.lines, "say")); break;
-        case "stepStart": { const s = sc.plan[ev.step]; rows[ev.step] = stepRow(s, ev.step); work.appendChild(rows[ev.step].el); agStart(s.agent, s.title); break; }
-        case "stepEnd": { const s = sc.plan[ev.step]; done++; rows[ev.step].end(); agEnd(s.agent, s.result); break; }
+        case "stepStart": { const s = sc.plan[ev.step]; rows[ev.step] = stepRow(s, ev.step); work.appendChild(rows[ev.step].el); agStart(s.agent, s.title); planUpdate(ev.step, "w", s); break; }
+        case "stepEnd": { const s = sc.plan[ev.step]; done++; rows[ev.step].end(); agEnd(s.agent, s.result); planUpdate(ev.step, "d", s); break; }
+        case "agents": { work.appendChild(agentsEl(sc)); plan.querySelector(".nplan__n").textContent = N + " steps · all done"; break; }
         case "answer": {
-          const g = sc.answer.confidence.gaps.length, total = secs(ev.at);
-          const fold = frag('<button type="button" class="nfold" aria-expanded="false"><span class="nfold__i">' + I.check + '</span><span>Worked for ' + total + "s · " + plural(N, "step") + (g ? " · " + g + (g > 1 ? " gaps named" : " gap named") : "") + '</span><span class="nfold__c">' + I.chev + "</span></button>");
-          body.insertBefore(fold, work);
-          work.classList.add("is-folded");
-          fold.addEventListener("click", () => { const o = fold.getAttribute("aria-expanded") === "true"; fold.setAttribute("aria-expanded", String(!o)); work.classList.toggle("is-folded", o); });
           body.appendChild(answerEl(sc, events, { compact: true }));
+          body.appendChild(sourcesEl());
           card2done = true; slow.hidden = true;
           fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + esc(f[1]) + "</button>").join("");
           fc.hidden = !fc.children.length;
