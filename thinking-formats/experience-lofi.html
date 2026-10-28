@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Majlis experience improvements, lo-fi</title>
+<!--
+  Lo-fi wireframes for 17 improvements to the answer-first Majlis chat.
+  Light mode only. Greyscale on purpose: the review is about structure and flow, not styling.
+  Layout: five stages (before, during, reading, after, search). Each stage shows one annotated
+  screen with every change in place, followed by a close-up card per change.
+-->
+<style>
+:root{--bg:#f3f4f2;--paper:#fff;--ink:#222;--ink2:#555;--mute:#888;--line:#cfd2cc;--fill:#e9ebe7;--fill2:#dadcd6;--mark:#222;
+  --sans:"Host Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
+h1,h2,h3,h4,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.wrap{max-width:1320px;margin:0 auto;padding:36px 32px 64px;display:flex;flex-direction:column;gap:40px}
+.hd h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.hd p{margin-top:6px;color:var(--ink2);max-width:900px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;font-size:12.5px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.toc a{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:13px;font-weight:500}
+.toc a b{margin-right:6px;font-weight:700}
+.priority{display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 7px;border-radius:5px;background:var(--ink);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.02em}
+
+/* stage */
+.stage{display:flex;flex-direction:column;gap:16px}
+.stage__h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.stage__h h2{font-size:20px;font-weight:600}
+.stage__h p{color:var(--ink2);font-size:13.5px}
+.stage__n{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+
+/* annotated screen */
+.screen{display:grid;grid-template-columns:44px minmax(0,1fr) 300px;gap:10px;height:520px;padding:10px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.screen.no-panel{grid-template-columns:44px minmax(0,1fr)}
+.s-rail{border:1.5px dashed var(--line);border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0}
+.s-rail i{width:24px;height:24px;border-radius:7px;background:var(--fill2)}
+.s-rail i:first-child{background:var(--ink)}
+.s-main{position:relative;display:flex;flex-direction:column;min-width:0;border-radius:10px;padding:10px 14px}
+.s-thread{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:10px;padding:6px 4px}
+.s-panel{border:1.5px dashed var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.s-panel .ph{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.s-tabs{display:flex;gap:10px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--line);padding-bottom:6px}
+.s-tabs b{color:var(--ink)}
+.u{align-self:flex-end;max-width:75%;padding:7px 12px;border-radius:12px 12px 3px 12px;background:var(--ink);color:#fff;font-size:13px}
+.ln{display:block;height:9px;border-radius:4px;background:var(--fill2)}
+.ln.k{height:13px;background:var(--ink);opacity:.8}
+.txt{font-size:13px;color:var(--ink)}
+.txt.m{color:var(--mute);font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border:1px solid var(--ink);border-radius:7px;font-size:12px;font-weight:600;background:var(--paper);white-space:nowrap}
+.chip.g{border-color:var(--line);color:var(--ink2)}
+.chip.f{background:var(--fill2);border-color:var(--fill2)}
+.chip .x{color:var(--mute);font-weight:400}
+.btn{display:inline-flex;align-items:center;height:26px;padding:0 10px;border:1.5px solid var(--ink);border-radius:7px;font-size:12px;font-weight:600;background:var(--paper)}
+.btn.p{background:var(--ink);color:#fff}
+.btn.g{border-color:var(--line);color:var(--ink2)}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.status{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:2px 2px 6px}
+.status .sq{width:12px;height:12px;border-radius:3px;background:var(--ink)}
+.status .sp{flex:1}
+.input{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border:1.5px solid var(--ink);border-radius:16px;background:var(--paper)}
+.input__r{display:flex;align-items:center;gap:8px}
+.input__r .ph2{flex:1;font-size:13px;color:var(--mute)}
+.input__r .go{width:26px;height:26px;border-radius:50%;background:var(--ink)}
+.box{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.hl{background:var(--fill2);border-radius:4px;padding:0 3px}
+.step{display:grid;grid-template-columns:14px 1fr;gap:8px;font-size:12px}
+.step i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--ink);margin-top:2px}
+.step i.d{background:var(--ink)}
+.step.on{background:var(--fill);border-radius:6px;padding:4px;outline:1.5px solid var(--ink)}
+.toast{align-self:center;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff;font-size:12px}
+.pop{position:absolute;left:14px;right:14px;bottom:118px;padding:10px 12px;border:1.5px solid var(--ink);border-radius:12px;background:var(--paper);box-shadow:0 8px 20px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+
+/* numbered markers */
+.mk{position:relative}
+.mk::after{content:attr(data-n);position:absolute;top:-9px;right:-9px;z-index:3;display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#d64b2a;color:#fff;font-size:11px;font-weight:700;font-family:var(--sans);line-height:1}
+.mk.l::after{right:auto;left:-9px}
+
+/* close-up cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.card__h{display:flex;align-items:center;gap:8px}
+.card__h .num{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:#d64b2a;color:#fff;font-size:11.5px;font-weight:700}
+.card__h h3{font-size:15px;font-weight:600;flex:1}
+.wf{padding:12px;border:1.5px dashed var(--line);border-radius:10px;background:#fbfbfa;display:flex;flex-direction:column;gap:8px}
+.meta{display:grid;grid-template-columns:62px minmax(0,1fr);gap:4px 10px;font-size:12.5px;color:var(--ink2)}
+.meta b{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);padding-top:1px}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font-size:13px}
+.flow span{padding:6px 10px;border:1px solid var(--line);border-radius:8px}
+.flow span.k{border-color:var(--ink);font-weight:600}
+.flow i{color:var(--mute);font-style:normal}
+@media (max-width:900px){.screen{grid-template-columns:1fr;height:auto}.s-rail{display:none}.s-panel{min-height:200px}.pop{position:static}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hd">
+    <h1>Majlis experience improvements: lo-fi</h1>
+    <p>All 17 suggested changes, placed into the answer-first chat as greyscale wireframes. Each stage shows one annotated screen with its changes in place (red numbers), then a close-up card per change with what it does, why, and the risk. Example question throughout: <b>Why did attrition rise in Sales and what should we do?</b></p>
+    <div class="legend"><span><span class="mk" data-n="1" style="display:inline-block;width:14px;height:14px"></span>&nbsp;&nbsp;Change number</span><span><span class="priority">Start here</span> Small effort, large gain</span></div>
+    <nav class="toc" aria-label="Stages"><a href="#s1"><b>1</b>Before the question</a><a href="#s2"><b>2</b>While Majlis works</a><a href="#s3"><b>3</b>Reading the answer</a><a href="#s4"><b>4</b>After the answer</a><a href="#s5"><b>5</b>Search overall</a></nav>
+  </header>
+
+  <div class="flow" aria-label="Flow"><span class="k">Ask</span><i>→</i><span>Scope chips confirm what will be read</span><i>→</i><span class="k">Work</span><i>→</i><span>Stop, steer or leave</span><i>→</i><span class="k">Answer</span><i>→</i><span>Check a claim in one tap</span><i>→</i><span class="k">Act</span><i>→</i><span>Follow up, share, assign</span><i>→</i><span class="k">Return</span><i>→</i><span>Search, watch, what changed</span></div>
+
+  <!-- ======================= STAGE 1 ======================= -->
+  <section class="stage" id="s1">
+    <div class="stage__h"><span class="stage__n">Stage 1</span><h2>Before the question is sent</h2><p>Catch a wrong scope before any work runs.</p></div>
+    <div class="screen">
+      <div class="s-rail"><i></i><i></i><i></i></div>
+      <div class="s-main">
+        <div class="s-thread">
+          <p class="txt" style="font-size:16px;font-weight:600;margin-top:20px">Good morning, Syed</p>
+          <p class="txt m">Changed this week in your areas</p>
+          <div class="row mk" data-n="2"><span class="chip">Attrition rose in Sales: why?</span><span class="chip">Q3 revenue against plan</span><span class="chip">Supplier spend over budget</span></div>
+          <div class="box mk" data-n="3" style="margin-top:8px"><p class="txt"><b>Answered 2 days ago</b> · Why did attrition rise in Sales…</p><p class="txt m">1 figure has changed since · <u>Open that answer</u> or run again</p></div>
+        </div>
+        <div class="input mk" data-n="1">
+          <div class="row"><span class="txt m">Majlis will read</span><span class="chip">Q3 2026 <span class="x">×</span></span><span class="chip">Sales <span class="x">×</span></span><span class="chip g">HRMS, CRM, surveys <span class="x">▾</span></span></div>
+          <div class="input__r"><span class="chip f">Institutional Memory ▾</span><span class="ph2">Why did attrition rise in Sales and what should we do?</span><span class="go"></span></div>
+        </div>
+      </div>
+      <div class="s-panel"><span class="ph">Evidence</span><span class="txt m">Empty until a question runs.</span></div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">1</span><h3>Scope chips in the input</h3></div>
+        <div class="wf"><div class="row"><span class="txt m">Majlis will read</span><span class="chip">Q3 2026 ×</span><span class="chip">Sales ×</span><span class="chip g">HRMS, CRM ▾</span></div></div>
+        <div class="meta"><b>Does</b><span>As they type, Majlis shows the period, team and systems it will use. Each chip can be removed or changed.</span><b>Why</b><span>A wrong quarter or team is the most expensive mistake; this catches it before work starts.</span><b>Risk</b><span>Wrongly guessed chips feel like nagging; only show them when confident.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">2</span><h3>Starter questions on an empty chat</h3></div>
+        <div class="wf"><span class="txt m">Changed this week in your areas</span><div class="row"><span class="chip">Attrition rose in Sales: why?</span><span class="chip">Q3 revenue against plan</span></div></div>
+        <div class="meta"><b>Does</b><span>3 or 4 decision-level questions based on role and what changed this week.</span><b>Why</b><span>A blank box makes executives guess what Majlis can answer.</span><b>Risk</b><span>Stale or generic suggestions get ignored; refresh weekly.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">3</span><h3>Recent answer found</h3></div>
+        <div class="wf"><div class="box"><p class="txt"><b>Answered 2 days ago</b></p><p class="txt m">1 figure has changed since · Open · Run again</p></div></div>
+        <div class="meta"><b>Does</b><span>If a similar question was answered recently, offer it before running again.</span><b>Why</b><span>Saves the wait and keeps one version of the truth.</span><b>Risk</b><span>Must say what changed, or people trust an old answer.</span></div></article>
+    </div>
+  </section>
+
+  <!-- ======================= STAGE 2 ======================= -->
+  <section class="stage" id="s2">
+    <div class="stage__h"><span class="stage__n">Stage 2</span><h2>While Majlis works</h2><p>Keep the executive in control without making them watch.</p></div>
+    <div class="screen">
+      <div class="s-rail"><i></i><i></i><i></i></div>
+      <div class="s-main">
+        <div class="s-thread">
+          <span class="u">Why did attrition rise in Sales and what should we do?</span>
+          <p class="txt">Understood. I will start with people data for Sales and follow what it shows.</p>
+          <span class="ln k" style="width:70%"></span>
+          <p class="txt m">Still checking. Confidence is set when every check has finished.</p>
+          <span class="toast mk" data-n="6">Taking longer than usual · <u>Notify me when ready</u></span>
+        </div>
+        <div class="status"><span class="sq"></span><b class="mk" data-n="5">Conflict found</b><span class="txt m">HRMS and CRM differ</span><span class="sp"></span><span class="txt m">View agents in progress ▴</span><span class="btn mk" data-n="4">Stop</span></div>
+        <div class="input mk l" data-n="4"><div class="input__r"><span class="chip f">Institutional Memory ▾</span><span class="ph2">Add a constraint, e.g. only Mid-market…</span><span class="go"></span></div></div>
+      </div>
+      <div class="s-panel"><span class="ph">Evidence</span><div class="s-tabs"><b>Steps 2</b><span>Sources 3</span><span>Record 18</span></div>
+        <div class="step"><i class="d"></i><span>1. Read Sales headcount and leavers<br><span class="txt m">Data retrieval · HRMS</span></span></div>
+        <div class="step"><i></i><span>2. Cross-check sellers in CRM<br><span class="txt m">Conflict · 398 against 412</span></span></div>
+        <div class="step"><i></i><span class="txt m">Deciding the next step</span></div></div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">4</span><h3>Stop and steer</h3><span class="priority">Start here</span></div>
+        <div class="wf"><div class="status" style="padding:0"><span class="sq"></span><b>Working</b><span class="sp"></span><span class="btn">Stop</span></div><div class="input" style="padding:6px 10px"><span class="txt m">Add a constraint, e.g. only Mid-market…</span></div><span class="txt m">While running, the input becomes a steer field. Sending adds the constraint to the next step.</span></div>
+        <div class="meta"><b>Does</b><span>Stop ends the run and keeps what was found. A constraint redirects the next steps.</span><b>Why</b><span>Correcting mid-run is cheaper than waiting for a wrong answer.</span><b>Risk</b><span>A stopped run must say clearly that the answer is partial.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">5</span><h3>Early finding alert</h3></div>
+        <div class="wf"><div class="status" style="padding:0"><span class="sq"></span><b>Conflict found</b><span class="txt m">HRMS and CRM differ</span></div><span class="txt m">One highlight on the status line for 3 seconds, then back to Working.</span></div>
+        <div class="meta"><b>Does</b><span>Surfaces a conflict or a locked source the moment it is found.</span><b>Why</b><span>Gaps should not wait for the answer to be noticed.</span><b>Risk</b><span>Too many alerts become noise; only conflicts and locks.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">6</span><h3>Notify me when ready</h3></div>
+        <div class="wf"><span class="toast">Taking longer than usual · Notify me when ready</span><span class="txt m">After about 20 seconds. The run continues; a notification brings them back.</span></div>
+        <div class="meta"><b>Does</b><span>Lets the executive switch chats while the run continues.</span><b>Why</b><span>Busy people should not watch a spinner.</span><b>Risk</b><span>The notification must name any gaps, not just "ready".</span></div></article>
+    </div>
+  </section>
+
+  <!-- ======================= STAGE 3 ======================= -->
+  <section class="stage" id="s3">
+    <div class="stage__h"><span class="stage__n">Stage 3</span><h2>Reading the answer</h2><p>Make checking cheap and the answer the right length.</p></div>
+    <div class="screen">
+      <div class="s-rail"><i></i><i></i><i></i></div>
+      <div class="s-main">
+        <div class="s-thread">
+          <div class="row" style="justify-content:space-between"><span class="chip g">Institutional Memory · 5 sources</span><span class="row mk" data-n="7"><span class="chip f">Short</span><span class="chip g">Full detail</span></span></div>
+          <p class="txt" style="font-size:15px;font-weight:600">Sales attrition rose from 4.2% to <span class="mk" data-n="9" style="display:inline-block">7.5% <span class="txt m">(was 4.2%)</span></span> in Q3, mostly in Mid-market, after the 1 July commission changes.</p>
+          <div class="box mk" data-n="10"><p class="txt"><b>Confidence: medium.</b> Cause is likely, not proven.</p><p class="txt m">Access to exit interview notes would raise this to high · <u>Request access</u></p></div>
+          <p class="txt m" style="font-weight:600">What we found</p>
+          <p class="txt mk" data-n="8"><span class="hl">Mid-market: 17 of the 31 leavers, attrition 10.4%.</span> <span class="chip g">HRMS</span></p>
+          <p class="txt">12 of 22 survey replies named the commission changes. <span class="chip g">Exit survey</span></p>
+        </div>
+        <div class="input"><div class="input__r"><span class="chip f">Institutional Memory ▾</span><span class="ph2">Ask a follow-up…</span><span class="go"></span></div></div>
+      </div>
+      <div class="s-panel"><span class="ph">Evidence</span><div class="s-tabs"><b>Steps 6</b><span>Sources 6</span><span>Record 49</span></div>
+        <div class="step"><i class="d"></i><span>1. Read Sales headcount and leavers</span></div>
+        <div class="step"><i class="d"></i><span>2. Cross-check sellers in CRM</span></div>
+        <div class="step on mk" data-n="8"><i class="d"></i><span>3. Break down by team and trend<br><span class="txt m">Mid-market 10.4% · HRMS row 2</span></span></div>
+        <div class="step"><i class="d"></i><span>4. Read exit feedback</span></div></div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">7</span><h3>Length control</h3></div>
+        <div class="wf"><div class="row"><span class="chip f">Short</span><span class="chip g">Full detail</span></div><span class="txt m">Short: answer, confidence, top 3 findings, lead action. Full: everything.</span></div>
+        <div class="meta"><b>Does</b><span>Switches between a 3-line read and the full answer.</span><b>Why</b><span>Same answer, two uses: a quick check or meeting prep.</span><b>Risk</b><span>Short must never drop gaps.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">8</span><h3>Claim to source in one step</h3><span class="priority">Start here</span></div>
+        <div class="wf"><p class="txt"><span class="hl">Mid-market: 17 of 31 leavers</span> ↔ <span class="chip">Step 3 · HRMS row 2</span></p><span class="txt m">Hover or tap a sentence: its step and source highlight in the panel.</span></div>
+        <div class="meta"><b>Does</b><span>Links each finding to the step and row that produced it.</span><b>Why</b><span>People check AI output when checking is cheap.</span><b>Risk</b><span>Each sentence needs a real link, or the highlight lies.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">9</span><h3>What changed since last time</h3></div>
+        <div class="wf"><p class="txt">Sales attrition <b>7.5%</b> <span class="txt m">was 4.2% on 25 Oct</span></p></div>
+        <div class="meta"><b>Does</b><span>On repeated questions, marks figures that moved.</span><b>Why</b><span>Executives re-ask to see what changed, not to reread.</span><b>Risk</b><span>Needs a stored previous answer per question.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">10</span><h3>Confidence you can act on</h3></div>
+        <div class="wf"><p class="txt"><b>Confidence: medium.</b></p><p class="txt m">Access to exit interview notes would raise this to high · Request access</p></div>
+        <div class="meta"><b>Does</b><span>Says what would raise confidence, with one action.</span><b>Why</b><span>A label alone tells them how worried to be, not what to do.</span><b>Risk</b><span>Request access goes to the owner; Majlis never works around access.</span></div></article>
+    </div>
+  </section>
+
+  <!-- ======================= STAGE 4 ======================= -->
+  <section class="stage" id="s4">
+    <div class="stage__h"><span class="stage__n">Stage 4</span><h2>After the answer</h2><p>Make the next move one tap away.</p></div>
+    <div class="screen">
+      <div class="s-rail"><i></i><i></i><i></i></div>
+      <div class="s-main">
+        <div class="s-thread">
+          <p class="txt m" style="font-weight:600">What to do next</p>
+          <div class="box mk" data-n="13"><p class="txt m" style="font-weight:700">DO THIS FIRST</p><p class="txt"><b>Apply quota relief to reassigned Mid-market accounts from day one.</b></p><p class="txt m">CRO with Sales operations · Decide this month</p><div class="row" style="margin-top:6px"><span class="btn p">Add to my tasks</span><span class="btn">Assign</span><span class="btn g">Not now</span></div></div>
+          <p class="txt m">Also consider: 2. Review the accelerator cut · 3. Stay interviews · 4. Request exit notes</p>
+          <div class="row mk" data-n="11"><span class="chip">Compare with Q3 last year</span><span class="chip">Break down by manager</span><span class="chip">Draft a note to the CRO</span></div>
+          <div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:8px"><span class="row mk l" data-n="12"><span class="btn g">Copy as brief</span><span class="btn g">Export PDF</span></span><span class="row mk" data-n="14"><span class="txt m">Useful?</span><span class="btn g">Yes</span><span class="btn g">No</span></span></div>
+        </div>
+        <div class="input"><div class="input__r"><span class="chip f">Institutional Memory ▾</span><span class="ph2">Ask a follow-up…</span><span class="go"></span></div></div>
+      </div>
+      <div class="s-panel"><span class="ph">Evidence</span><div class="s-tabs"><b>Steps 6</b><span>Sources 6</span><span>Record 49</span></div><span class="ln" style="width:90%"></span><span class="ln" style="width:70%"></span><span class="ln" style="width:80%"></span></div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">11</span><h3>Ready-made follow-ups</h3><span class="priority">Start here</span></div>
+        <div class="wf"><div class="row"><span class="chip">Compare with Q3 last year</span><span class="chip">Break down by manager</span><span class="chip">Draft a note to the CRO</span></div></div>
+        <div class="meta"><b>Does</b><span>2 or 3 next questions built from this answer.</span><b>Why</b><span>The next question is usually predictable; save the typing.</span><b>Risk</b><span>Generic follow-ups look like filler; tie them to the findings.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">12</span><h3>Copy as brief and export</h3><span class="priority">Start here</span></div>
+        <div class="wf"><div class="row"><span class="btn g">Copy as brief</span><span class="btn g">Export PDF</span></div><span class="txt m">Brief: answer, confidence, findings, actions and sources, as plain text. PDF carries the audit ID.</span></div>
+        <div class="meta"><b>Does</b><span>Turns the answer into something to forward.</span><b>Why</b><span>Executives pass answers on more than they reread them.</span><b>Risk</b><span>Copied text loses links; keep source names in it.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">13</span><h3>Act on the lead action</h3></div>
+        <div class="wf"><div class="row"><span class="btn p">Add to my tasks</span><span class="btn">Assign</span><span class="btn g">Not now</span></div><span class="txt m">Creates a draft task. Nothing is sent automatically.</span></div>
+        <div class="meta"><b>Does</b><span>Ends a decision question with a decision.</span><b>Why</b><span>Saves switching to another tool to record it.</span><b>Risk</b><span>Needs a task system; until then, draft only.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">14</span><h3>Feedback in one tap</h3></div>
+        <div class="wf"><div class="row"><span class="txt m">Useful?</span><span class="btn g">Yes</span><span class="btn">No</span></div><div class="row"><span class="chip g">Wrong period</span><span class="chip g">Missing source</span><span class="chip g">Too long</span></div></div>
+        <div class="meta"><b>Does</b><span>Yes or No; No shows reason chips.</span><b>Why</b><span>Quality signal without a form.</span><b>Risk</b><span>Low response; keep it out of the way.</span></div></article>
+    </div>
+  </section>
+
+  <!-- ======================= STAGE 5 ======================= -->
+  <section class="stage" id="s5">
+    <div class="stage__h"><span class="stage__n">Stage 5</span><h2>Search overall</h2><p>Find past answers and know where answers come from.</p></div>
+    <div class="screen no-panel" style="grid-template-columns:240px minmax(0,1fr)">
+      <div class="s-panel" style="border-style:solid">
+        <div class="input mk" data-n="15" style="border-width:1px"><div class="input__r"><span class="ph2">attrition</span></div></div>
+        <span class="txt m" style="font-weight:600">Answers</span>
+        <div class="box"><p class="txt"><b>Sales attrition 4.2% → 7.5%</b></p><p class="txt m">2 days ago · HRMS · 1 figure changed</p></div>
+        <div class="box"><p class="txt"><b>Company attrition 3.1% in Q3</b></p><p class="txt m">Last week · HRMS</p></div>
+        <span class="txt m" style="font-weight:600;margin-top:6px">Watching</span>
+        <div class="box mk" data-n="16"><p class="txt"><b>Sales attrition</b></p><p class="txt m">Notify when Q4 data lands</p></div>
+      </div>
+      <div class="s-main">
+        <div class="s-thread">
+          <p class="txt" style="font-size:15px;font-weight:600">Sales attrition rose from 4.2% to 7.5% in Q3…</p>
+          <div class="row"><span class="btn mk" data-n="16">Watch this figure</span></div>
+          <span class="ln" style="width:85%"></span><span class="ln" style="width:65%"></span>
+        </div>
+        <div class="pop mk" data-n="17" style="bottom:66px"><b>Answer from</b><div class="row"><span class="chip f">Institutional Memory only</span><span class="chip g">Include my email and Teams</span></div><span class="txt m">Shown on the input so they always know where an answer can come from.</span></div>
+        <div class="input"><div class="input__r"><span class="chip f">Institutional Memory only ▾</span><span class="ph2">Ask about your company…</span><span class="go"></span></div></div>
+      </div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">15</span><h3>Search past answers</h3></div>
+        <div class="wf"><div class="box"><p class="txt"><b>Sales attrition 4.2% → 7.5%</b></p><p class="txt m">2 days ago · HRMS · 1 figure changed</p></div></div>
+        <div class="meta"><b>Does</b><span>Search by topic, figure or record ID; results show the answer's first line.</span><b>Why</b><span>Chat titles are poor labels; the answer is what they remember.</span><b>Risk</b><span>Old answers must show their date and any change.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">16</span><h3>Watch a figure</h3></div>
+        <div class="wf"><div class="row"><span class="btn">Watch this figure</span><span class="txt m">→ listed under Watching; notifies when it changes</span></div></div>
+        <div class="meta"><b>Does</b><span>Majlis tells them when a figure in the answer updates.</span><b>Why</b><span>Turns a one-off answer into ongoing awareness.</span><b>Risk</b><span>Alert fatigue; limit to figures they chose.</span></div></article>
+      <article class="card"><div class="card__h"><span class="num">17</span><h3>Source scope switch</h3></div>
+        <div class="wf"><div class="row"><span class="chip f">Institutional Memory only</span><span class="chip g">Include my email and Teams</span></div></div>
+        <div class="meta"><b>Does</b><span>Makes the source boundary visible and changeable on the input.</span><b>Why</b><span>Executives need to know whether personal mail was used.</span><b>Risk</b><span>The default must be the safest scope.</span></div></article>
+    </div>
+  </section>
+</main>
+</body>
+</html>
