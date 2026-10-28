@@ -514,6 +514,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .ws .st{margin-top:1px}
 .ws__b b{display:block;font-size:13.5px;font-weight:600}
 .ws__b small{display:block;font-size:12.5px;color:var(--muted)}
+.ws__b small.is-say{color:var(--ink-2)}
 .ws.is-q .ws__b b{color:var(--muted);font-weight:500}
 .ws.is-w{background:var(--surface-2);border-radius:12px;padding-left:8px;padding-right:8px;border-top-color:transparent}
 .ws__res{display:flex;flex-direction:column;gap:6px;margin-top:6px;font-size:13px;color:var(--ink-2)}
@@ -1613,8 +1614,7 @@ RENDERERS.answer = function (ctx) {
     '<p class="waitnote">The answer fills in here as soon as the first figure is confirmed. It is marked Draft until every check has finished.</p></section>';
   function draftHTML(d) {
     return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--info af-tag">Draft</span></div>' +
-      '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Draft.</b><span class="af-dn">' + done + " of " + N + ' checks done.</span><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p>" +
-      '<div class="skl" aria-hidden="true"><i style="width:100%;height:96px;border-radius:14px"></i></div></section>';
+      '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Draft.</b><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p></section>";
   }
   function flash(lineEl, tagEl) { if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); } if (tagEl) tagEl.textContent = "Draft · updated"; }
   return {
@@ -1626,13 +1626,12 @@ RENDERERS.answer = function (ctx) {
       switch (ev.type) {
         case "query": {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
-          hold = frag(waitHTML); body.appendChild(hold); P("#pStat").textContent = "Starting"; break;
+          hold = frag('<span class="hold" hidden></span>'); body.appendChild(hold); P("#pStat").textContent = "Starting"; break;
         }
-        case "think": live.innerHTML = ""; th[ev.id] = thoughtLine(ev); live.appendChild(th[ev.id].el); break;
-        case "thinkEnd": th[ev.id].end(); break;
+        case "think": case "thinkEnd": break;
         case "say":
           if (ev.id === "ack") body.insertBefore(sayEl(ev.lines, "ack"), hold);
-          else live.appendChild(sayEl(ev.lines, "say", "msg--sm"));
+          else if (ev.step != null) { const sm = P('.ws[data-i="' + ev.step + '"] .ws__b small'); sm.textContent = ev.lines.join(" "); sm.classList.add("is-say"); }
           break;
         case "stepStart": {
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
@@ -1642,6 +1641,7 @@ RENDERERS.answer = function (ctx) {
           const s = sc.plan[ev.step]; done++;
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
           r.querySelector(".st").outerHTML = stIcon(stateOf(s));
+          const sm = r.querySelector(".ws__b small"); sm.classList.remove("is-say"); sm.textContent = AGENTS[s.agent].name + " · " + s.skill;
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
           res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
@@ -1652,7 +1652,6 @@ RENDERERS.answer = function (ctx) {
             if (!card) { card = frag(draftHTML(d)); hold.replaceWith(card); }
             else { const ln = card.querySelector(".ans__line"); if (ln.textContent !== d.headline) { ln.textContent = d.headline; flash(ln, card.querySelector(".af-tag")); } card.querySelector(".af-note").textContent = d.note + " Confidence is set when every check has finished."; }
           }
-          if (card) { const dn = card.querySelector(".af-dn"); if (dn) dn.textContent = done + " of " + N + " checks done."; }
           break;
         }
         case "agents": { const w = P("#wAgents"); w.hidden = false; w.appendChild(agentsEl(sc)); P("#pStat").textContent = "Writing the answer"; break; }
