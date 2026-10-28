@@ -562,7 +562,10 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .ws .st{margin-top:1px}
 .ws__b b{display:block;font-size:13.5px;font-weight:600}
 .ws__b small{display:block;font-size:12.5px;color:var(--muted)}
-.ws__b small.is-say{color:var(--ink-2)}
+.ws__why{color:var(--ink-2)!important;margin-top:2px}
+.ws__why:empty{display:none}
+.ws.is-d .ws__b b{color:var(--muted);font-weight:500}
+.st--think{position:relative;width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--lime),var(--accent));animation:breathe 1600ms var(--ease-io) infinite}
 .ws.is-q .ws__b b{color:var(--muted);font-weight:500}
 .ws.is-w{background:var(--surface-2);border-radius:12px;padding-left:8px;padding-right:8px;border-top-color:transparent}
 .ws__res{display:flex;flex-direction:column;gap:6px;margin-top:6px;font-size:13px;color:var(--ink-2)}
@@ -846,7 +849,7 @@ const SCENARIOS = {
     clock: "15:21:18",
     firstThink: 1700,
     firstThinkNote: "This needs the size of the rise, where it sits, what leavers said, and what changed for Sales. Cause will be inferred, not proven.",
-    ack: ["Understood: why Sales attrition rose in Q3, and what to do about it.", "I will check people data, sales data, exit feedback and the commission plan."],
+    ack: ["Understood: why Sales attrition rose in Q3, and what to do about it.", "I will start with people data for Sales and follow what it shows."],
     sources: {
       hrms_sales: {
         kind: "data", system: "HRMS", short: "Sales by team", title: "Sales headcount and leavers by team",
@@ -1154,8 +1157,8 @@ function dispatch(ev) {
 function cueSet(state, label, meta) { const c = $("#cue"); c.dataset.state = state; $("#cueLabel").innerHTML = label; $("#cueMeta").textContent = meta || ""; }
 function cueOn(ev) {
   const sc = SC(); const N = sc.plan.length;
-  if (ev.type === "query" || ev.type === "think") cueSet("thinking", "<b>Thinking</b>", ev.step != null ? "Before step " + (ev.step + 1) + " of " + N : "");
-  else if (ev.type === "stepStart") cueSet("working", "<b>Working</b> · " + esc(sc.plan[ev.step].title), "Step " + (ev.step + 1) + " of " + N + " · " + AGENTS[sc.plan[ev.step].agent].name);
+  if (ev.type === "query" || ev.type === "think") cueSet("thinking", "<b>Thinking</b>", ev.step != null ? (ev.step === 0 ? "Reading your question" : "Deciding the next step from what step " + ev.step + " found") : (ev.final ? "Bringing the findings together" : ""));
+  else if (ev.type === "stepStart") cueSet("working", "<b>Working</b> · " + esc(sc.plan[ev.step].title), "Step " + (ev.step + 1) + " · " + AGENTS[sc.plan[ev.step].agent].name);
   else if (ev.type === "answer") {
     const g = sc.answer.confidence.gaps.length;
     cueSet("settled", "<b>Done</b> · answered after " + secs(ev.at) + "s", N + " steps · " + (g ? g + (g > 1 ? " gaps" : " gap") + " named in the answer" : "no gaps found"));
@@ -1661,11 +1664,11 @@ RENDERERS.answer = function (ctx) {
   act.dataset.state = "run"; live.innerHTML = ""; bar.style.width = "0%"; viewBtn.hidden = true;
   panel.innerHTML = '<div class="panel__h"><b>Evidence</b><small id="pStat">Waiting to start</small></div>' +
     '<div class="ptabs" role="tablist" aria-label="Evidence panel">' +
-    '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Steps<em id="pcn-work">0/' + N + "</em></button>" +
+    '<button class="ptab" role="tab" id="pt-work" aria-selected="true" aria-controls="pp-work" data-pane="work" type="button">Steps<em id="pcn-work">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-src" aria-selected="false" aria-controls="pp-src" data-pane="src" type="button" tabindex="-1">Sources<em id="pcn-src">0</em></button>' +
     '<button class="ptab" role="tab" id="pt-rec" aria-selected="false" aria-controls="pp-rec" data-pane="rec" type="button" tabindex="-1">Record<em id="pcn-rec">0</em></button></div>' +
     '<div class="ppane" id="pp-work" role="tabpanel" aria-labelledby="pt-work">' +
-      '<ol class="wsteps">' + sc.plan.map((s, i) => '<li class="ws is-q" data-i="' + i + '">' + stIcon("q") + '<div class="ws__b"><b>' + esc(s.title) + "</b><small>" + esc(AGENTS[s.agent].name) + " · " + esc(s.skill) + '</small><div class="ws__res" hidden></div></div><span class="ws__t"></span></li>').join("") + "</ol>" +
+      '<p class="pempty" id="wEmpty">Majlis decides each step from what the previous one found. Steps appear here as they are taken.</p><ol class="wsteps"></ol>' +
       '<div class="wsec" id="wAgents" hidden></div></div>' +
     '<div class="ppane" id="pp-src" role="tabpanel" aria-labelledby="pt-src" hidden><div class="srclist"><p class="pempty">Sources are listed here as each one is read.</p></div><div class="srcdetail" hidden></div></div>' +
     '<div class="ppane" id="pp-rec" role="tabpanel" aria-labelledby="pt-rec" hidden><p class="pempty">Every event with its time, as the backend stores it.</p><table class="audit"><tbody></tbody></table></div>';
@@ -1721,25 +1724,34 @@ RENDERERS.answer = function (ctx) {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
           hold = frag('<span class="hold" hidden></span>'); body.appendChild(hold); P("#pStat").textContent = "Starting"; break;
         }
-        case "think": case "thinkEnd": break;
+        case "think": {
+          if (ev.step == null) break;
+          const em = P("#wEmpty"); if (em) em.remove();
+          const li = frag('<li class="ws is-d' + (animOK() ? " enter" : "") + '" data-i="' + ev.step + '"><span class="st st--think" aria-hidden="true"></span><div class="ws__b"><b>' + (ev.step === 0 ? "Reading the question" : "Deciding the next step") + '</b><small class="ws__why"></small><small class="ws__who" hidden></small><div class="ws__res" hidden></div></div><span class="ws__t"></span></li>');
+          P(".wsteps").appendChild(li); li.scrollIntoView({ block: "nearest" });
+          break;
+        }
+        case "thinkEnd": break;
         case "say":
           if (ev.id === "ack") body.insertBefore(sayEl(ev.lines, "ack"), hold);
-          else if (ev.step != null) { const sm = P('.ws[data-i="' + ev.step + '"] .ws__b small'); sm.textContent = ev.lines.join(" "); sm.classList.add("is-say"); }
+          else if (ev.step != null) { const w = P('.ws[data-i="' + ev.step + '"] .ws__why'); if (w) w.textContent = ev.lines.join(" "); }
           break;
         case "stepStart": {
-          const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
-          P("#pStat").textContent = "Step " + (ev.step + 1) + " of " + N; break;
+          const s = sc.plan[ev.step], r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
+          r.querySelector(".ws__b b").textContent = (ev.step + 1) + ". " + s.title;
+          const who = r.querySelector(".ws__who"); who.hidden = false; who.textContent = AGENTS[s.agent].name + " · " + s.skill;
+          P("#pcn-work").textContent = String(ev.step + 1);
+          P("#pStat").textContent = "Step " + (ev.step + 1); break;
         }
         case "stepEnd": {
           const s = sc.plan[ev.step]; done++;
           const r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws tick" + (s.status === "conflict" ? " is-f" : s.status === "locked" ? " is-l" : "");
           r.querySelector(".st").outerHTML = stIcon(stateOf(s));
-          const sm = r.querySelector(".ws__b small"); sm.classList.remove("is-say"); sm.textContent = AGENTS[s.agent].name + " · " + s.skill;
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
           res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
           addSources(s);
-          P("#pcn-work").textContent = done + "/" + N; bar.style.width = (done / N * 100) + "%";
+          bar.style.width = (done / N * 100) + "%";
           const d = sc.drafts.find((x) => x.after === ev.step);
           if (d) {
             if (!card) { card = frag(draftHTML(d)); hold.replaceWith(card); }
