@@ -1706,10 +1706,10 @@ RENDERERS.answer = function (ctx) {
     '<div class="skl" aria-hidden="true"><i style="width:88%;height:18px"></i><i style="width:62%;height:18px"></i><i style="width:100%;height:44px;border-radius:12px;margin-top:6px"></i><i style="width:100%;height:96px;border-radius:14px"></i></div>' +
     '<p class="waitnote">The answer fills in here as soon as the first figure is confirmed. It is marked Draft until every check has finished.</p></section>';
   function draftHTML(d) {
-    return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--info af-tag">Draft</span></div>' +
-      '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Draft.</b><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p></section>";
+    return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span></div>' +
+      '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Still checking.</b><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p></section>";
   }
-  function flash(lineEl, tagEl) { if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); } if (tagEl) tagEl.textContent = "Draft · updated"; }
+  function flash(lineEl, tagEl) { if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); }  }
   return {
     noStick: true,
     openSource: showDetail,
@@ -1753,7 +1753,7 @@ RENDERERS.answer = function (ctx) {
           const fin = answerEl(sc, events, { noEnter: !!card, compact: true });
           (card || hold).replaceWith(fin); card = fin;
           const ln = fin.querySelector(".ans__line");
-          if (prev && prev !== ln.textContent) { fin.querySelector(".ans__k").insertAdjacentHTML("beforeend", '<span class="badge badge--good">Final · updated from draft</span>'); if (animOK()) ln.classList.add("is-flash"); }
+          if (prev && prev !== ln.textContent && animOK()) ln.classList.add("is-flash");
           act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
           P("#pStat").textContent = "Complete · " + N + " steps";
           break;
