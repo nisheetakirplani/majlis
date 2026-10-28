@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Majlis answer-first</title>
 <!--
   MAJLIS · ANSWER-FIRST WITH EVIDENCE PANEL
@@ -31,36 +32,6 @@
   --ease-out:cubic-bezier(.2,.8,.2,1); --ease-io:cubic-bezier(.4,0,.2,1);
   --d-fast:120ms; --d-base:240ms; --d-reveal:280ms; --d-tick:320ms; --d-bar:400ms; --d-count:700ms; --d-draw:700ms;
   color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0b100e; --bgimg:radial-gradient(1000px 660px at 4% 110%,rgba(62,213,152,.17),transparent 62%),radial-gradient(760px 500px at 102% -8%,rgba(139,111,217,.14),transparent 60%);
-    --surface:#1b2420; --surface-2:#202b26; --surface-3:#28342e; --glass:rgba(27,36,32,.72); --glass-line:rgba(255,255,255,.08);
-    --ink:#eef3f0; --ink-2:#c9d2cd; --muted:#aab5af; --faint:#76827c; --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.08);
-    --accent:#3ed598; --accent-ink:#062419; --accent-text:#bff3dc; --accent-soft:rgba(62,213,152,.15); --accent-line:rgba(62,213,152,.45);
-    --deep:#1f3a2e; --deep-ink:#e9f5d6; --user:#eef3f0; --user-ink:#0b100e;
-    --warn:#f5c86a; --warn-bg:rgba(245,183,60,.14); --warn-line:rgba(245,183,60,.4); --amber:#f5b73c;
-    --bad:#f39a88; --bad-bg:rgba(243,154,136,.12); --good:#3ed598; --good-bg:rgba(62,213,152,.12);
-    --info:#a4bdec; --info-bg:rgba(164,189,236,.12); --lock:#c3c7d8; --lock-bg:rgba(195,199,216,.1);
-    --chart-1:#3ed598; --chart-2:#4a5a52; --chart-3:#a4bdec; --chart-hi:#f5b73c;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25); --shadow-lg:0 24px 60px rgba(0,0,0,.5);
-    --focus:0 0 0 3px rgba(62,213,152,.45);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-    --bg:#0b100e; --bgimg:radial-gradient(1000px 660px at 4% 110%,rgba(62,213,152,.17),transparent 62%),radial-gradient(760px 500px at 102% -8%,rgba(139,111,217,.14),transparent 60%);
-    --surface:#1b2420; --surface-2:#202b26; --surface-3:#28342e; --glass:rgba(27,36,32,.72); --glass-line:rgba(255,255,255,.08);
-    --ink:#eef3f0; --ink-2:#c9d2cd; --muted:#aab5af; --faint:#76827c; --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.08);
-    --accent:#3ed598; --accent-ink:#062419; --accent-text:#bff3dc; --accent-soft:rgba(62,213,152,.15); --accent-line:rgba(62,213,152,.45);
-    --deep:#1f3a2e; --deep-ink:#e9f5d6; --user:#eef3f0; --user-ink:#0b100e;
-    --warn:#f5c86a; --warn-bg:rgba(245,183,60,.14); --warn-line:rgba(245,183,60,.4); --amber:#f5b73c;
-    --bad:#f39a88; --bad-bg:rgba(243,154,136,.12); --good:#3ed598; --good-bg:rgba(62,213,152,.12);
-    --info:#a4bdec; --info-bg:rgba(164,189,236,.12); --lock:#c3c7d8; --lock-bg:rgba(195,199,216,.1);
-    --chart-1:#3ed598; --chart-2:#4a5a52; --chart-3:#a4bdec; --chart-hi:#f5b73c;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25); --shadow-lg:0 24px 60px rgba(0,0,0,.5);
-    --focus:0 0 0 3px rgba(62,213,152,.45);
-    color-scheme:dark;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
