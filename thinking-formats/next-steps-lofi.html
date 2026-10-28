@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>What to do next, lo-fi options</title>
+<!--
+  Lo-fi wireframes: seven ways to show "What to do next" at the end of a Majlis answer.
+  Light mode only. Greyscale on purpose, so the review is about structure, not styling.
+  Content: the Complex scenario (Sales attrition). Edit ACTIONS below to change it.
+-->
+<style>
+:root{--bg:#f3f4f2;--paper:#fff;--ink:#222;--ink2:#555;--mute:#888;--line:#cfd2cc;--fill:#e7e9e5;--fill2:#d9dcd6;--hi:#222;
+  --sans:"Host Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
+h1,h2,h3,p,ol,ul{margin:0}ul,ol{padding:0;list-style:none}
+.wrap{max-width:1320px;margin:0 auto;padding:36px 32px 56px;display:flex;flex-direction:column;gap:28px}
+.hd h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.hd p{margin-top:6px;color:var(--ink2);max-width:860px}
+.ctx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ctx span{height:26px;display:inline-flex;align-items:center;padding:0 10px;border:1px dashed var(--line);border-radius:8px;font-size:12.5px;color:var(--ink2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,580px),1fr));gap:20px}
+.opt{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.opt.rec{border:2px solid var(--ink);grid-column:1/-1}
+.opt__h{display:flex;align-items:baseline;gap:10px;padding:16px 20px 4px}
+.n{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;flex:none;align-self:center}
+.opt__h h2{font-size:16px;font-weight:600}
+.tag{margin-left:auto;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--fill)}
+.opt__d{padding:0 20px 14px;color:var(--ink2);font-size:13.5px}
+.frame{margin:0 20px;padding:16px;border:1.5px dashed var(--line);border-radius:12px;background:#fbfbfa;display:flex;flex-direction:column;gap:10px}
+.frame__k{font-size:12px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 20px 18px;font-size:13px}
+.notes b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:2px}
+.bar{display:block;height:10px;border-radius:4px;background:var(--fill2)}
+/* shared wireframe atoms */
+.row{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.row .num{display:grid;place-items:center;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--ink);font-size:12px;font-weight:700;flex:none}
+.row .txt{flex:1;min-width:0}
+.row .txt b{display:block;font-weight:500}
+.row .txt small{display:block;color:var(--mute);font-size:12.5px}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+.b{height:28px;padding:0 10px;border-radius:7px;border:1.5px solid var(--ink);font-size:12.5px;font-weight:600;background:var(--paper)}
+.b.pri{background:var(--ink);color:#fff}
+.b.ghost{border-color:var(--line);color:var(--ink2)}
+.b.on{background:var(--fill2);border-color:var(--fill2);color:var(--ink)}
+.closes{display:inline-flex;align-items:center;gap:5px;margin-top:4px;font-size:12px;color:var(--ink2);border:1px dashed var(--line);border-radius:6px;padding:1px 7px}
+/* 2: grid */
+.mx{display:grid;grid-template-columns:24px 1fr;gap:6px}
+.mx__y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;color:var(--mute);text-align:center}
+.mx__box{position:relative;height:200px;border-left:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:linear-gradient(var(--line),var(--line)) 50% 0/1px 100% no-repeat,linear-gradient(var(--line),var(--line)) 0 50%/100% 1px no-repeat}
+.mx__q{position:absolute;font-size:12px;color:var(--mute)}
+.dot{position:absolute;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:700;transform:translate(-50%,-50%)}
+.mx__x{grid-column:2;text-align:center;font-size:12px;color:var(--mute)}
+/* 3: timeline */
+.tl{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:22px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:var(--ink)}
+.tl__c{position:relative;display:flex;flex-direction:column;gap:8px}
+.tl__c::before{content:"";position:absolute;top:-19px;left:0;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.tl__c h4{margin:0;font-size:12.5px;font-weight:700}
+.card{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);font-size:13px}
+.card small{display:block;color:var(--mute);font-size:12px}
+/* 4: owners */
+.own{display:flex;flex-direction:column;gap:10px}
+.own__g{border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.own__h{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line)}
+.av{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--fill2);font-size:12px;font-weight:700}
+.own__h b{flex:1}
+.own__i{padding:8px 12px 8px 48px;font-size:13px}
+.own__i small{display:block;color:var(--mute);font-size:12px}
+/* 5: lead */
+.lead{padding:14px;border:2px solid var(--ink);border-radius:12px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.lead__k{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.lead b{font-size:15.5px;font-weight:600;line-height:1.45}
+.lead small{color:var(--ink2);font-size:13px}
+.also{display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.also h4{margin:0;font-size:12.5px;color:var(--mute);font-weight:600}
+.also li{display:flex;gap:8px;font-size:13.5px}
+.also li span{color:var(--mute)}
+/* recommended */
+.recgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;padding:0 20px}
+.recgrid .frame{margin:0}
+.why{display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--ink2)}
+.why li{padding-left:16px;position:relative}
+.why li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:2px;background:var(--ink)}
+.state{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--mute)}
+.done{opacity:.55}
+.done .txt b{text-decoration:line-through}
+.toast{font-size:12.5px;padding:6px 10px;border-radius:8px;background:var(--fill);color:var(--ink)}
+@media (max-width:760px){.recgrid,.notes{grid-template-columns:1fr}.tl{grid-template-columns:1fr}.tl::before{display:none}.tl__c::before{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hd">
+    <h1>What to do next: lo-fi options</h1>
+    <p>Seven ways to end a Majlis answer with actions, drawn as greyscale wireframes so the comparison is about structure, not styling. Every option uses the same four actions, from the Complex scenario. The recommended combination is first and its buttons work.</p>
+    <div class="ctx"><span>Question: Why did attrition rise in Sales and what should we do?</span><span>4 actions</span><span>Light mode only</span></div>
+  </header>
+
+  <!-- RECOMMENDED -->
+  <section class="opt rec" aria-labelledby="o0">
+    <div class="opt__h"><span class="n">R</span><h2 id="o0">Recommended: lead action, decision buttons, linked to the gap</h2><span class="tag">Combines 1, 5 and 6</span></div>
+    <p class="opt__d">One highlighted action with Approve, Assign and Not now. The other actions sit in a short list with the same controls. Each one says which finding or gap it closes. Try the buttons.</p>
+    <div class="recgrid">
+      <div class="frame" id="recFrame">
+        <span class="frame__k">What to do next</span>
+        <div class="lead" id="leadCard"></div>
+        <div class="also"><h4>Also consider</h4><div id="recList" style="display:flex;flex-direction:column;gap:8px"></div></div>
+        <p class="toast" id="recToast" hidden></p>
+      </div>
+      <ul class="why">
+        <li><b>Why:</b> a decision-level question should end in a decision, not more reading.</li>
+        <li>One lead action keeps reading light; the rest stay one glance away.</li>
+        <li>"Closes" ties each action to the evidence, the same way each claim links to its source.</li>
+        <li><b>Risk:</b> Approve implies Majlis can act. Until there is an integration, Approve should create a draft task, not send anything.</li>
+        <li><b>Test:</b> do executives approve the lead action without opening the evidence? If so, the lead needs its "why" more visible.</li>
+      </ul>
+    </div>
+    <div class="notes"><div><b>States shown</b>Approved actions grey out with an undo; Assign opens an owner picker; Not now moves the action to the end.</div><div><b>Hierarchy</b>Lead action 15.5px semibold; others 13.5px; owner and timing muted underneath.</div></div>
+  </section>
+
+  <div class="grid">
+    <section class="opt" aria-labelledby="o1">
+      <div class="opt__h"><span class="n">1</span><h2 id="o1">Decision list</h2><span class="tag">Act</span></div>
+      <p class="opt__d">Every action is a row with Approve, Assign and Not now.</p>
+      <div class="frame" id="f1"><span class="frame__k">What to do next</span></div>
+      <div class="notes"><div><b>Good for</b>Executives who decide and delegate in one place.</div><div><b>Risk</b>Needs a real task system behind it; four equal rows give no priority.</div></div>
+    </section>
+
+    <section class="opt" aria-labelledby="o2">
+      <div class="opt__h"><span class="n">2</span><h2 id="o2">Impact and effort grid</h2><span class="tag">Prioritise</span></div>
+      <p class="opt__d">Numbered dots on a 2×2 grid, with the ranked list underneath.</p>
+      <div class="frame"><span class="frame__k">What to do next</span>
+        <div class="mx"><span class="mx__y">Impact →</span>
+          <div class="mx__box"><span class="mx__q" style="left:56%;top:6px">Quick wins</span><span class="mx__q" style="left:6px;top:6px">Big bets</span>
+            <span class="dot" style="left:78%;top:22%">1</span><span class="dot" style="left:30%;top:28%">2</span><span class="dot" style="left:70%;top:62%">3</span><span class="dot" style="left:88%;top:48%">4</span></div>
+          <span class="mx__x">Less effort →</span></div>
+        <div id="f2" style="display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+      <div class="notes"><div><b>Good for</b>Showing why action 1 is first at a glance.</div><div><b>Risk</b>A visual again; impact and effort are Majlis's judgement and need a "how scored" note.</div></div>
+    </section>
+
+    <section class="opt" aria-labelledby="o3">
+      <div class="opt__h"><span class="n">3</span><h2 id="o3">Timeline strip</h2><span class="tag">When</span></div>
+      <p class="opt__d">Actions placed by when they must happen.</p>
+      <div class="frame"><span class="frame__k">What to do next</span>
+        <div class="tl" id="f3"></div>
+      </div>
+      <div class="notes"><div><b>Good for</b>Deadline-driven decisions; the 15 Nov plan lock stands out.</div><div><b>Risk</b>Loses the "why" and the priority order.</div></div>
+    </section>
+
+    <section class="opt" aria-labelledby="o4">
+      <div class="opt__h"><span class="n">4</span><h2 id="o4">Grouped by owner</h2><span class="tag">Delegate</span></div>
+      <p class="opt__d">Actions grouped under who does them, with Send to owner.</p>
+      <div class="frame"><span class="frame__k">What to do next</span><div class="own" id="f4"></div></div>
+      <div class="notes"><div><b>Good for</b>Maps straight to who the executive will message.</div><div><b>Risk</b>Priority across owners is lost; an action with two owners is split.</div></div>
+    </section>
+
+    <section class="opt" aria-labelledby="o5">
+      <div class="opt__h"><span class="n">5</span><h2 id="o5">Lead action plus also consider</h2><span class="tag">Calm</span></div>
+      <p class="opt__d">One highlighted action; the rest as a short secondary list.</p>
+      <div class="frame"><span class="frame__k">What to do next</span><div id="f5" style="display:flex;flex-direction:column;gap:10px"></div></div>
+      <div class="notes"><div><b>Good for</b>Lowest reading load; matches answer-first.</div><div><b>Risk</b>Hides a close second; the ranking must be right.</div></div>
+    </section>
+
+    <section class="opt" aria-labelledby="o6">
+      <div class="opt__h"><span class="n">6</span><h2 id="o6">Linked to the gap it closes</h2><span class="tag">Trust</span></div>
+      <p class="opt__d">Each action names the finding or gap it addresses.</p>
+      <div class="frame" id="f6"><span class="frame__k">What to do next</span></div>
+      <div class="notes"><div><b>Good for</b>Shows the actions follow from the evidence.</div><div><b>Risk</b>One more line per action.</div></div>
+    </section>
+  </div>
+</main>
+<script>
+"use strict";
+const ACTIONS = [
+  { text: "Apply quota relief to reassigned Mid-market accounts from day one, not after 90 days.", owner: "CRO with Sales operations", ini: "CRO", when: "Decide this month", slot: 1, why: "Fastest lever; addresses the top two exit reasons.", closes: "Finding: relief only after 90 days" },
+  { text: "Review the accelerator cut from 2.0x to 1.5x before the H1 FY27 plan is locked.", owner: "CFO and CRO", ini: "CFO", when: "Before 15 Nov plan lock", slot: 2, why: "Most cited exit reason.", closes: "Finding: 12 of 22 leavers named commission" },
+  { text: "Hold stay interviews with Mid-market sellers below 70% attainment.", owner: "HR Business Partner, Sales", ini: "HR", when: "Next 2 weeks", slot: 0, why: "Median attainment fell from 92% to 71%.", closes: "Finding: attainment 92% → 71%" },
+  { text: "Request access to the exit interview notes to test the cause.", owner: "HR Business Partner, Sales", ini: "HR", when: "This week", slot: 0, why: "Closes the main gap in this answer.", closes: "Gap: exit interview notes not read" }
+];
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const btns = '<div class="btns"><button class="b pri" type="button">Approve</button><button class="b" type="button">Assign</button><button class="b ghost" type="button">Not now</button></div>';
+
+$("#f1").insertAdjacentHTML("beforeend", ACTIONS.map((a, i) => '<div class="row"><span class="num">' + (i + 1) + '</span><div class="txt"><b>' + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></div>" + '<div style="margin:-4px 0 4px 34px">' + btns + "</div>").join(""));
+$("#f2").innerHTML = ACTIONS.map((a, i) => '<div class="card"><b style="font-weight:600">' + (i + 1) + ".</b> " + esc(a.text) + "</div>").join("");
+const slots = ["This week and next 2 weeks", "This month", "Before 15 Nov"];
+$("#f3").innerHTML = slots.map((s, k) => '<div class="tl__c"><h4>' + s + "</h4>" + ACTIONS.filter((a) => a.slot === k).map((a) => '<div class="card">' + esc(a.text) + "<small>" + esc(a.owner) + "</small></div>").join("") + "</div>").join("");
+const owners = {}; ACTIONS.forEach((a) => { (owners[a.owner] = owners[a.owner] || []).push(a); });
+$("#f4").innerHTML = Object.keys(owners).map((o) => '<div class="own__g"><div class="own__h"><span class="av">' + esc(owners[o][0].ini) + "</span><b>" + esc(o) + '</b><button class="b" type="button">Send to owner</button></div>' + owners[o].map((a) => '<div class="own__i">' + esc(a.text) + "<small>" + esc(a.when) + "</small></div>").join("") + "</div>").join("");
+$("#f5").innerHTML = '<div class="lead"><span class="lead__k">Do this first</span><b>' + esc(ACTIONS[0].text) + "</b><small>" + esc(ACTIONS[0].owner) + " · " + esc(ACTIONS[0].when) + " · " + esc(ACTIONS[0].why) + '</small></div><div class="also"><h4>Also consider</h4><ol>' + ACTIONS.slice(1).map((a, i) => "<li><span>" + (i + 2) + ".</span>" + esc(a.text) + "</li>").join("") + "</ol></div>";
+$("#f6").insertAdjacentHTML("beforeend", ACTIONS.map((a, i) => '<div class="row"><span class="num">' + (i + 1) + '</span><div class="txt"><b>' + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + '</small><span class="closes">Closes · ' + esc(a.closes) + "</span></div></div>").join(""));
+
+/* Recommended: working states */
+const state = ACTIONS.map(() => "open"); let order = ACTIONS.map((a, i) => i);
+function ctl(i) {
+  if (state[i] === "approved") return '<div class="btns"><span class="b on" style="display:inline-flex;align-items:center">Approved · draft task created</span><button class="b ghost" type="button" data-act="undo" data-i="' + i + '">Undo</button></div>';
+  if (state[i] === "assign") return '<div class="btns"><span style="font-size:12.5px;color:var(--ink2);align-self:center">Assign to</span>' + ["CRO", "CFO", "HR Business Partner"].map((o) => '<button class="b" type="button" data-act="to" data-i="' + i + '" data-o="' + o + '">' + o + "</button>").join("") + '<button class="b ghost" type="button" data-act="undo" data-i="' + i + '">Cancel</button></div>';
+  if (state[i].startsWith("to:")) return '<div class="btns"><span class="b on" style="display:inline-flex;align-items:center">Assigned to ' + esc(state[i].slice(3)) + '</span><button class="b ghost" type="button" data-act="undo" data-i="' + i + '">Undo</button></div>';
+  return '<div class="btns"><button class="b pri" type="button" data-act="approve" data-i="' + i + '">Approve</button><button class="b" type="button" data-act="assign" data-i="' + i + '">Assign</button><button class="b ghost" type="button" data-act="later" data-i="' + i + '">Not now</button></div>';
+}
+function drawRec() {
+  const li = order[0], a = ACTIONS[li];
+  $("#leadCard").className = "lead" + (state[li] === "approved" ? " done" : "");
+  $("#leadCard").innerHTML = '<span class="lead__k">Do this first</span><b>' + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + " · " + esc(a.why) + '</small><span class="closes" style="align-self:flex-start">Closes · ' + esc(a.closes) + "</span>" + ctl(li);
+  $("#recList").innerHTML = order.slice(1).map((i) => { const x = ACTIONS[i]; return '<div class="row' + (state[i] === "approved" ? " done" : "") + '"><span class="num">' + (ACTIONS.indexOf(x) + 1) + '</span><div class="txt"><b>' + esc(x.text) + "</b><small>" + esc(x.owner) + " · " + esc(x.when) + '</small><span class="closes">Closes · ' + esc(x.closes) + '</span><div style="margin-top:8px">' + ctl(i) + "</div></div></div>"; }).join("");
+}
+function toast(t) { const el = $("#recToast"); el.hidden = false; el.textContent = t; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 2600); }
+$("#recFrame").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-act]"); if (!b) return; const i = +b.dataset.i;
+  if (b.dataset.act === "approve") { state[i] = "approved"; toast("Draft task created. Nothing has been sent."); }
+  if (b.dataset.act === "assign") state[i] = "assign";
+  if (b.dataset.act === "to") { state[i] = "to:" + b.dataset.o; toast("Assigned to " + b.dataset.o + "."); }
+  if (b.dataset.act === "undo") state[i] = "open";
+  if (b.dataset.act === "later") { order = order.filter((x) => x !== i).concat(i); toast("Moved to the end of the list."); }
+  drawRec();
+});
+drawRec();
+</script>
+</body>
+</html>
