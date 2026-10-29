@@ -497,9 +497,10 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .rtoast{position:fixed;left:50%;top:14px;z-index:70;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;background:var(--user);color:var(--user-ink);font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);transform:translate(-50%,-16px);opacity:0;pointer-events:none;transition:transform 260ms var(--ease-out),opacity 200ms var(--ease-out)}
 .rtoast.is-on{transform:translate(-50%,0);opacity:1}
 /* follow-ups: compact chips just above the input */
-.fchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 2px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 2px 4px}
+.fchip svg{flex:none;color:var(--accent-text)}
 .fchips[hidden]{display:none}
-.fchip{height:30px;padding:0 12px;border-radius:9px;background:var(--surface);border:1px solid var(--line-2);box-shadow:0 1px 2px rgba(28,40,34,.04);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;animation:lineIn var(--d-reveal) var(--ease-out) both;transition:background var(--d-fast),color var(--d-fast),border-color var(--d-fast)}
+.fchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px 0 10px;border-radius:9px;background:var(--surface);border:1px solid var(--line-2);box-shadow:0 1px 2px rgba(28,40,34,.04);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;animation:lineIn var(--d-reveal) var(--ease-out) both;transition:background var(--d-fast),color var(--d-fast),border-color var(--d-fast)}
 .fchip:hover,.fchip:focus-visible{border-color:var(--accent-line);color:var(--accent-text)}
 #inputText.is-typed{color:var(--ink)}
 /* status line button + agents popover */
@@ -786,6 +787,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
       <div class="chatcol">
         <div class="convo" id="convo" tabindex="0" aria-label="Conversation"><div class="thread" id="thread"></div></div>
         <div class="foot">
+          <div class="fchips" id="fchips" role="group" aria-label="Suggested follow-ups" hidden></div>
           <div class="actv" id="act" data-state="idle" aria-label="Majlis activity">
             <section class="agpop" id="agPop" aria-label="Agents in progress" hidden>
               <div class="agpop__h"><b>Agents in progress</b><span id="agPopN"></span></div>
@@ -803,7 +805,6 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
             <div class="actv__bar" aria-hidden="true"><b id="actBar"></b></div>
             <div class="actv__live" id="actLive"></div>
           </div>
-          <div class="fchips" id="fchips" role="group" aria-label="Suggested follow-ups" hidden></div>
           <div class="ask" aria-hidden="true"><span class="agt"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11h14V8M10 12h4"/></svg></i>Institutional Memory<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span><span class="ph" id="inputText">Ask about your company…</span><span class="mic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="snd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
           <p class="disclaim">Majlis can make mistakes. Check important figures before acting.</p>
         </div>
@@ -1774,7 +1775,7 @@ RENDERERS.narr = function (ctx) {
           body.appendChild(answerEl(sc, events, { compact: true }));
           body.appendChild(sourcesEl());
           card2done = true; slow.hidden = true;
-          fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + esc(f[1]) + "</button>").join("");
+          fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
           fc.hidden = !fc.children.length;
           $("#agBtnT").textContent = "View agents"; act.dataset.state = "done"; live.innerHTML = "";
           break;
