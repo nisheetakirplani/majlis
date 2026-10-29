@@ -681,6 +681,53 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .shim{background:linear-gradient(90deg,var(--muted) 0,var(--muted) 40%,#b9c6bf 50%,var(--muted) 60%,var(--muted) 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimx 1.8s linear infinite}
 @keyframes shimx{from{background-position:150% 0}to{background-position:-50% 0}}
 .nwork{gap:10px}
+/* ---- hierarchy refinements ---- */
+/* process: quieter, smaller, set apart */
+.ffd{gap:8px;margin:4px 0 0;padding:12px 14px 12px 16px;border:0;border-left:2px solid var(--line);border-radius:0;background:none}
+.ffd__k{font-size:11.5px;letter-spacing:.07em}
+.ffd__l{gap:6px}
+.ffr,.ffd__now{grid-template-columns:16px minmax(0,1fr);gap:10px}
+.ffr .st,.ffd__now .st{width:16px;height:16px;margin-top:2px}
+.ffr .st svg{width:9px;height:9px}
+.ffr__t{font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.ffr__t .fig{font-weight:600;color:var(--ink)}
+.ffr__t .badge{height:18px;font-size:11px;padding:0 6px}
+.ffr__t .sref{min-width:15px;height:15px;font-size:10px;vertical-align:3px}
+.ffd__now{font-size:13px}
+/* answer: clearly separate, its own header */
+.xa{margin-top:22px;padding-top:22px;border-top:1px solid var(--line);gap:20px}
+.xa__head{display:flex;align-items:center;gap:10px}
+.xa__badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:8px;background:var(--accent-soft);color:var(--accent-text);font-size:12.5px;font-weight:700}
+.xa__badge svg{width:12px;height:12px}
+.xa__from{font-size:12.5px;color:var(--muted)}
+.xa__lead{font-size:20px;line-height:1.5}
+.sref{color:var(--accent-text);border-color:var(--accent-line);background:var(--accent-soft)}
+/* actions: lead only, the rest folded */
+.xa__also{margin-top:4px}
+.xa__also>summary{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 6px;border-radius:9px;cursor:pointer;list-style:none;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.xa__also>summary::-webkit-details-marker{display:none}
+.xa__also>summary::marker{content:""}
+.xa__also>summary:hover{background:var(--surface)}
+.xa__also>summary svg{color:var(--muted);transition:transform var(--d-base) var(--ease-out)}
+.xa__also[open]>summary svg{transform:rotate(90deg)}
+.xa__also ol{display:flex;flex-direction:column;gap:10px;padding:8px 0 0 6px}
+.xa__also li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:14.5px;line-height:1.5}
+.xa__also li i{font-style:normal;font-size:13px;font-weight:600;color:var(--muted)}
+.xa__also b{font-weight:500}
+.xa__also small{display:block;font-size:12.5px;color:var(--muted)}
+/* sources: clearly tappable rows */
+.xa__srch{display:flex;align-items:baseline;gap:10px}
+.xa__srch h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.xa__srch span{font-size:12.5px;color:var(--faint)}
+.srows{gap:6px}
+.srow{grid-template-columns:22px minmax(0,1fr) auto auto;gap:12px;min-height:46px;padding:6px 10px 6px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line-2);font-size:13.5px;transition:border-color var(--d-fast),box-shadow var(--d-fast)}
+.srow:hover,.srow:focus-visible{background:var(--surface);border-color:var(--accent-line);box-shadow:0 2px 10px rgba(28,40,34,.06)}
+.srow__n{border-color:var(--accent-line);color:var(--accent-text);background:var(--accent-soft)}
+.srow__t{font-weight:500}
+.srow__go{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;font-weight:600;color:var(--accent-text)}
+.srow__go svg{transition:transform var(--d-base) var(--ease-out)}
+.srow:hover .srow__go svg{transform:translateX(2px)}
+.xa__cur{margin-top:4px}
 /* answer hierarchy: text first */
 .br{gap:18px;padding:22px 24px}
 .br .ans__line{font-size:19px;line-height:1.5}
@@ -1792,18 +1839,21 @@ function narrAnswer(sc, opts) {
   const A = NARR[S.sc], order = srcOrder(sc), lvl = A.conf[0].toLowerCase();
   const acts = (sc.answer.blocks.find((b) => b.type === "actions") || { items: [] }).items;
   const status = (id) => { const s = sc.sources[id]; if (s.kind === "locked") return "Locked"; const st = sc.plan.find((p) => p.sources.indexOf(id) >= 0); return st && st.status === "conflict" ? "Conflict" : "Read"; };
-  const srcRow = (id, i) => { const s = sc.sources[id], st = status(id); return '<li><button type="button" class="srow" data-src="' + id + '" data-key=""><span class="srow__n">' + (i + 1) + '</span><span class="srow__t">' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</span><span class="srow__s is-' + st.toLowerCase() + '">' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, "").replace(/ 2026$/, ""))) + " · " + st + "</span></button></li>"; };
+  const srcRow = (id, i) => { const s = sc.sources[id], st = status(id); return '<li><button type="button" class="srow" data-src="' + id + '" data-key=""><span class="srow__n">' + (i + 1) + '</span><span class="srow__t">' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</span><span class="srow__s is-' + st.toLowerCase() + '">' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, "").replace(/ 2026$/, ""))) + " · " + st + '</span><span class="srow__go">View' + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' + "</span></button></li>"; };
   const firstN = 3;
+  const nsrc = order.filter((id) => sc.sources[id].kind !== "locked").length;
   const el = frag('<section class="xa' + (animOK() ? " enter" : "") + '" aria-label="Answer">' +
+    '<div class="xa__head"><span class="xa__badge">' + I.check + "Answer</span><span class=\"xa__from\">From institutional memory · " + nsrc + " sources</span></div>" +
     '<p class="xa__lead">' + fmt(A.lead, order) + "</p>" +
     '<div class="xa__conf"><p><span class="dot dot--' + lvl + '"></span><b>Confidence: ' + esc(lvl) + ".</b> " + esc(A.conf[1]) + "</p>" +
       (A.gaps.length ? '<ul class="xa__gaps">' + A.gaps.map((g) => "<li><b>" + esc(g[0]) + ":</b> " + fmt(g[1], order) + "</li>").join("") + "</ul>" : "") + "</div>" +
     (opts.noGroups ? "" : '<div class="xa__sec">' + A.groups.map((g) => '<h4>' + esc(g[0]) + '</h4><ul class="xa__pts">' + g[1].map((p) => "<li>" + fmt(p, order) + "</li>").join("") + "</ul>").join("") + "</div>") +
     (acts.length ? '<div class="xa__sec"><h4>What to do next</h4><div class="br__lead"><span class="br__lk">Do this first</span><b>' + esc(acts[0].text) + "</b><small>" + esc(acts[0].owner) + " · " + esc(acts[0].when) + "</small><p>" + esc(acts[0].why) + "</p></div>" +
-      (acts.length > 1 ? '<div class="br__also"><span>Also consider</span><ol>' + acts.slice(1).map((a, i) => "<li><i>" + (i + 2) + "</i><div><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></li>").join("") + "</ol></div>" : "") + "</div>" : "") +
-    '<div class="xa__src"><p class="xa__cur"><b>Current to ' + esc(A.current) + ".</b> From " + esc(A.from) + ".</p>" +
+      (acts.length > 1 ? '<details class="xa__also"><summary>' + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' + "Also consider · " + (acts.length - 1) + " more actions</summary><ol>" + acts.slice(1).map((a, i) => "<li><i>" + (i + 2) + "</i><div><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></li>").join("") + "</ol></details>" : "") + "</div>" : "") +
+    '<div class="xa__src"><div class="xa__srch"><h4>Sources</h4><span>Tap a source to see the exact row or passage</span></div>' +
       '<ol class="srows">' + order.map(srcRow).join("") + "</ol>" +
-      (order.length > firstN ? '<button type="button" class="xa__more" aria-expanded="false">Show all ' + order.length + " sources</button>" : "") + "</div></section>");
+      (order.length > firstN ? '<button type="button" class="xa__more" aria-expanded="false">Show all ' + order.length + " sources</button>" : "") +
+      '<p class="xa__cur"><b>Current to ' + esc(A.current) + ".</b> From " + esc(A.from) + ".</p></div></section>");
   const list = el.querySelector(".srows"), more = el.querySelector(".xa__more");
   if (more) { list.classList.add("is-short"); more.addEventListener("click", () => { const o = more.getAttribute("aria-expanded") === "true"; more.setAttribute("aria-expanded", String(!o)); list.classList.toggle("is-short", o); more.textContent = o ? "Show all " + order.length + " sources" : "Show fewer"; }); }
   return el;
@@ -1927,7 +1977,7 @@ RENDERERS.narr = function (ctx) {
         }
         case "answer": {
           const nw = ff.querySelector(".ffd__now"); if (nw) nw.remove();
-          ff.querySelector(".ffd__k").textContent = "Found";
+          ff.querySelector(".ffd__k").textContent = "How I got here";
           ff.querySelector(".ffd__n").textContent = done + " findings · " + N + " steps · " + secs(ev.at) + "s";
           body.appendChild(narrAnswer(sc, { noGroups: true }));
           card2done = true; slow.hidden = true;
