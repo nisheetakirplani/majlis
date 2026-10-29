@@ -1047,6 +1047,18 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .tdots i:nth-child(3){animation-delay:400ms}
 @media (prefers-reduced-motion:reduce){.tdots i{animation:none;opacity:.6}}
 .tk__plan{margin-top:0}
+
+/* sources popover · fixed height, tight width, scrolls */
+.tray__pop--src{display:flex;flex-direction:column;width:340px;height:320px;max-height:none;padding:0;overflow:hidden}
+.tray__pop--src[hidden]{display:none}
+.tray__pop--src .tray__ph{flex:none;justify-content:space-between;align-items:center;margin:0;padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+.tray__slist{flex:1;min-height:0;overflow-y:auto;list-style:none;margin:0;padding:6px;display:flex;flex-direction:column;gap:2px}
+.tray__slist .tsr{grid-template-columns:20px minmax(0,1fr) auto;gap:12px;padding:8px 10px}
+.tsr__t b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:19px}
+.tsr__t small{line-height:17px;margin-top:1px}
+.tsr__s{font-size:12px;font-weight:500;white-space:nowrap}
+.tsr__s.is-conflict{color:var(--warn)}
+.tsr__s.is-locked{color:var(--lock)}
 </style>
 </head>
 <body>
@@ -1083,7 +1095,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
           <div class="fchips" id="fchips" role="group" aria-label="Suggested follow-ups" hidden></div>
           <div class="tray" id="tray" hidden>
             <div class="tray__pop" id="trayPop" hidden><div class="tray__ph"><b>Steps</b><span class="tray__meta" id="trayMeta"></span></div><ol class="tray__list" id="trayList"></ol></div>
-            <div class="tray__pop tray__pop--src" id="traySrcPop" hidden><div class="tray__ph"><b>Sources</b><small>Tap one to see the exact row or passage</small></div><ol class="tray__list" id="traySrcList"></ol></div>
+            <div class="tray__pop tray__pop--src" id="traySrcPop" hidden><div class="tray__ph"><b>Sources</b><span class="tray__meta">Tap to open</span></div><ol class="tray__slist" id="traySrcList"></ol></div>
             <button type="button" class="tray__bar" id="trayBar" aria-expanded="false" aria-controls="trayPop"><span class="tray__ic" id="trayIc"></span><span class="tray__t" id="trayT"></span><span class="tray__n" id="trayN"></span><svg class="tray__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
             <button type="button" class="tray__src" id="traySrc" aria-expanded="false" aria-controls="traySrcPop"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg>Sources<em id="traySrcN">0</em><svg class="tray__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
           </div>
@@ -2086,7 +2098,7 @@ RENDERERS.tray = function (ctx) {
       if (seen[id]) return; seen[id] = true;
       const s = sc.sources[id], n = order.indexOf(id) + 1;
       const stt = s.kind === "locked" ? "Locked" : (step.status === "conflict" ? "Conflict" : "Read");
-      const li = frag('<li><button type="button" class="tsr" data-src="' + id + '" data-key=""><span class="spr__n">' + n + '</span><span class="tsr__t"><b>' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</b><small class="is-' + stt.toLowerCase() + '">' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, ""))) + " · " + stt + "</small></span></button></li>");
+      const li = frag('<li><button type="button" class="tsr" data-src="' + id + '" data-key=""><span class="spr__n">' + n + '</span><span class="tsr__t"><b>' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</b><small>' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, ""))) + "</small></span>" + (stt === "Read" ? "" : '<span class="tsr__s is-' + stt.toLowerCase() + '">' + stt + "</span>") + "</button></li>");
       const list = $("#traySrcList"), before = Array.from(list.children).find((x) => +x.querySelector(".spr__n").textContent > n);
       before ? list.insertBefore(li, before) : list.appendChild(li);
     });
