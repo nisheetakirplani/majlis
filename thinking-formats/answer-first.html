@@ -698,6 +698,29 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 }
 
 .ans.br{padding:4px 0 8px}
+/* response header: one line, label + step pips + count */
+.rsum{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;height:28px;padding:0 8px 0 0;border-radius:8px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted);font-size:12.5px}
+.rsum:hover .rsum__t{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.rsum__k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.rsum__pips{display:inline-flex;gap:3px}
+.pip{width:10px;height:4px;border-radius:2px;background:var(--good)}
+.pip.is-f{background:var(--warn)}
+.pip.is-l{background:var(--lock)}
+/* step cards in the panel: title, output, agent + Details; reasoning behind Details */
+.ws__b{display:flex;flex-direction:column;min-width:0}
+.ws.tick .ws__b b{font-size:13.5px;font-weight:500;color:var(--ink)}
+.ws__why{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ws__res{margin-top:4px;gap:0}
+.ws__out{margin:0;font-size:13px;line-height:1.5;color:var(--ink-2);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ws__who .badge{margin-left:0}
+.ws__who .agtag,.ws__who .badge{white-space:nowrap;flex:none}
+.ws.is-end .ws__res{order:1}
+.ws.is-end .ws__why{display:none!important;order:2}
+.ws.is-end.is-open .ws__why{display:block!important;-webkit-line-clamp:unset;margin-top:8px;padding-left:10px;border-left:2px solid var(--line);color:var(--muted)!important}
+.ws.is-open .ws__out{-webkit-line-clamp:unset}
+.ws.is-end .ws__who{order:3;margin-top:8px}
+.ws__more{margin-left:auto;font-size:12px;font-weight:500;color:var(--muted);padding:2px 6px;border-radius:6px}
+.ws__more:hover,.ws__more:focus-visible{color:var(--ink);background:var(--surface-2)}
 </style>
 </head>
 <body>
@@ -1896,8 +1919,8 @@ RENDERERS.answer = function (ctx) {
           break;
         case "stepStart": {
           const s = sc.plan[ev.step], r = P('.ws[data-i="' + ev.step + '"]'); r.className = "ws is-w"; r.querySelector(".st").outerHTML = stIcon("w");
-          r.querySelector(".ws__b b").textContent = (ev.step + 1) + ". " + s.title;
-          const who = r.querySelector(".ws__who"); who.hidden = false; who.innerHTML = agTag(s.agent) + '<span class="sk">' + esc(s.skill) + "</span>";
+          r.querySelector(".ws__b b").textContent = s.title;
+          const who = r.querySelector(".ws__who"); who.hidden = false; who.innerHTML = agTag(s.agent);
           $$(".agp", panel).forEach((x) => { x.classList.remove("is-on"); });
           const ap = agPill(s.agent); agUse[s.agent]++; ap.classList.add("is-on"); agStart(s.agent, s.title);
           ap.querySelector("small").textContent = String(agUse[s.agent]);
@@ -1911,7 +1934,13 @@ RENDERERS.answer = function (ctx) {
           P('.agp[data-ag="' + s.agent + '"]').classList.remove("is-on"); agEnd(s.agent, s.result);
           r.querySelector(".ws__t").textContent = (s.ms / 1000).toFixed(1) + "s";
           const res = r.querySelector(".ws__res"); res.hidden = false;
-          res.innerHTML = "<p>" + esc(s.result) + " " + statusBadge(s) + '</p><details class="disc"><summary>' + I.chev + 'Queries and sources</summary><div class="disc__b">' + stepDetail(s, sc) + "</div></details>";
+          res.innerHTML = '<p class="ws__out">' + esc(s.result) + "</p>";
+          /* finished step: output first, agent below; the reasoning folds behind "Details"; long text clamps to two lines */
+          r.classList.add("is-end"); const who = r.querySelector(".ws__who");
+          if (statusBadge(s) && !who.querySelector(".badge")) who.appendChild(frag(statusBadge(s)));
+          if (!who.querySelector(".ws__more")) who.appendChild(frag('<button type="button" class="ws__more" aria-expanded="false">Details</button>'));
+          const mb = who.querySelector(".ws__more");
+          mb.onclick = () => { const o = r.classList.toggle("is-open"); mb.setAttribute("aria-expanded", String(o)); mb.textContent = o ? "Less" : "Details"; };
           addSources(s);
           bar.style.width = (done / N * 100) + "%";
           const d = sc.drafts.find((x) => x.after === ev.step);
@@ -1945,6 +1974,12 @@ RENDERERS.answer = function (ctx) {
 /* =====================================================================
    START: scenario switcher only. Selecting a scenario, or the active one again, replays it.
    ===================================================================== */
+/* Response header: a label and the steps behind it in one line; opens the Steps tab. */
+memcHTML = function (sc) {
+  const n = sc.plan.reduce((a, p) => a.concat(p.sources), []).filter((id, i, a) => a.indexOf(id) === i && sc.sources[id].kind !== "locked").length;
+  const pips = sc.plan.map((p) => '<i class="pip is-' + stateOf(p) + '"></i>').join("");
+  return '<button type="button" class="rsum" data-open="work" title="See the steps in the panel"><span class="rsum__k">Response</span><span class="rsum__pips" aria-hidden="true">' + pips + '</span><span class="rsum__t">' + sc.plan.length + " steps · " + n + (n === 1 ? " source" : " sources") + "</span></button>";
+};
 const OLDER = ["Q3 forecast variance", "Supplier indemnity clauses", "Board pack summary"];
 function toastMsg(t) {
   let el = $("#readyToast"); if (!el) { el = frag('<div class="rtoast" id="readyToast" role="status"></div>'); document.body.appendChild(el); }
