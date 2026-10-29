@@ -972,7 +972,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
   <div class="main">
     <header class="mh">
       <b id="frameQ" hidden></b><span style="flex:1"></span>
-      <button class="ib" type="button" id="panelTog" aria-label="Show progress panel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h7M4 12h11M4 18h5"/><path d="M14 6h6M18 12h2M12 18h8" opacity=".45"/></svg></button>
+      <button class="ib" type="button" id="panelTog" aria-label="Show activity panel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h7M4 12h11M4 18h5"/><path d="M14 6h6M18 12h2M12 18h8" opacity=".45"/></svg></button>
       <button class="ib" type="button" aria-label="Pin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6l-1 7 4 3H6l4-3z"/><path d="M12 13v8"/></svg></button>
       <button class="ib" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </header>
@@ -1002,7 +1002,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
           <p class="disclaim">Majlis can make mistakes. Check important figures before acting.</p>
         </div>
       </div>
-      <aside class="panel sp" id="panel" aria-label="Progress" hidden></aside>
+      <aside class="panel sp" id="panel" aria-label="Activity" hidden></aside>
     </div>
   </div>
 </div>
@@ -1986,10 +1986,10 @@ RENDERERS.side = function (ctx) {
   function agEnd(k, result) { const a = agState[k]; if (!a) return; a.st = "d"; a.task = result; popDraw(); }
   const CHV = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   panel.innerHTML =
-    '<div class="sp__h"><b id="spTitle">Progress</b><span class="sp__meta" id="spMeta"></span><button type="button" class="sp__x" id="spClose" aria-label="Close panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>' +
+    '<div class="sp__h"><b id="spTitle">Activity</b><span class="sp__meta" id="spMeta"></span><button type="button" class="sp__x" id="spClose" aria-label="Close panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>' +
     '<div class="sp__body" id="spBody">' +
       '<section class="sp__prog"><button type="button" class="ri__more" id="spMore" hidden></button><ol class="prail" id="spRail"></ol></section>' +
-      '<section class="sp__sec" id="spSrc" hidden><button type="button" class="sp__tog" aria-expanded="true" aria-controls="spSrcList"><span>Sources</span><em id="spSrcN">0</em>' + '<svg class="sp__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="sp__coll" id="spSrcList"><ol class="sps"></ol></div></section>' +
+      '<section class="sp__sec is-closed" id="spSrc" hidden><button type="button" class="sp__tog" aria-expanded="false" aria-controls="spSrcList"><span>Sources</span><em id="spSrcN">0</em>' + '<svg class="sp__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="sp__coll" id="spSrcList"><ol class="sps"></ol></div></section>' +
       '<section class="sp__sec" id="spUsed" hidden><h4>Used in this response</h4><div class="spu"></div></section>' +
     '</div>' +
     '<div class="sp__detail" id="spDetail" hidden></div>';
@@ -2020,8 +2020,8 @@ RENDERERS.side = function (ctx) {
     const s = sc.sources[id]; if (!s) return;
     const d = P("#spDetail"); P("#spBody").hidden = true; d.hidden = false;
     P("#spTitle").textContent = "Source"; P("#spMeta").textContent = "";
-    d.innerHTML = '<button type="button" class="sp__back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Back to progress</button><div class="sp__dh"><small>' + esc(s.system) + "</small><b>" + esc(s.title) + "</b></div>" + sourceHTML(id, key);
-    d.querySelector(".sp__back").onclick = () => { d.hidden = true; P("#spBody").hidden = false; P("#spTitle").textContent = "Progress"; setMeta(); };
+    d.innerHTML = '<button type="button" class="sp__back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Back to activity</button><div class="sp__dh"><small>' + esc(s.system) + "</small><b>" + esc(s.title) + "</b></div>" + sourceHTML(id, key);
+    d.querySelector(".sp__back").onclick = () => { d.hidden = true; P("#spBody").hidden = false; P("#spTitle").textContent = "Activity"; setMeta(); };
     d.querySelector(".sp__back").focus();
     const c = d.querySelector(".cited"); if (c) c.scrollIntoView({ block: "center" });
   }
@@ -2080,7 +2080,7 @@ RENDERERS.side = function (ctx) {
           if (cur) { cur.className = "ri is-done"; cur.querySelector(".ri__b").innerHTML = '<p class="ri__t">Response ready</p>'; }
           collapse(); setMeta();
           P("#spUsed").hidden = false; P(".spu").innerHTML = usedEl();
-          ticker('<span class="tkr__ok">' + I.check + '</span><span class="tkr__a">' + tkFirst + '</span><span class="tkr__s">·</span><span>Worked for ' + secs(ev.at) + "s · " + N + ' steps</span><span class="tkr__go">View progress' + CHV + "</span>", false);
+          ticker('<span class="tkr__ok">' + I.check + '</span><span class="tkr__a">' + tkFirst + '</span><span class="tkr__s">·</span><span>Worked for ' + secs(ev.at) + "s · " + N + ' steps</span><span class="tkr__go">View activity' + CHV + "</span>", false);
           body.appendChild(narrAnswer(sc, { noSources: true }));
           fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
           fc.hidden = !fc.children.length;
