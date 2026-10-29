@@ -1039,6 +1039,14 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .tray__list .badge svg{display:none}
 .tray__list .badge::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:2px}
 .tray__list .tli__t{font-size:12px;line-height:20px;padding-top:0;color:var(--faint)}
+
+/* thinking dots: same square dots and stepping as the reading grid, in one line */
+.tdots{display:inline-flex;align-items:center;gap:3px;margin-left:2px}
+.tdots i{width:4px;height:4px;border-radius:1px;background:var(--ink);opacity:.15;animation:dgrid 1200ms steps(1) infinite}
+.tdots i:nth-child(2){animation-delay:200ms}
+.tdots i:nth-child(3){animation-delay:400ms}
+@media (prefers-reduced-motion:reduce){.tdots i{animation:none;opacity:.6}}
+.tk__plan{margin-top:0}
 </style>
 </head>
 <body>
@@ -2045,20 +2053,20 @@ function narrAnswer(sc, opts) {
 document.addEventListener("click", (e) => { const b = e.target.closest(".sref,.srow,.spr,.tsr"); if (b) openSource(b.dataset.src, b.dataset.key, b); });
 /* =====================================================================
    RENDERER: task tray (HIX-style)
-   Chat: a collapsible "working on your task" header with the current step,
-   the plan sentence, and a pen-drawn "Thinking" cue. Above the input: a tray
+   Chat: the plan sentence and a "Thinking" cue with three stepping dots.
+   The live step shows only in the tray. Above the input: a tray
    with the current step that opens upward into the steps so far, plus a
    Sources dropdown. Steps are never listed in advance.
    ===================================================================== */
 const GRID = '<span class="dgrid" aria-hidden="true">' + "<i></i>".repeat(9) + "</span>";
-const PEN = '<svg class="pen" width="34" height="16" viewBox="0 0 34 16" fill="none" aria-hidden="true"><path class="pen__l" d="M2 11c3-6 5-6 6-1s3 5 5 0 3-6 5-1 3 5 5 0 4-5 6-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path class="pen__n" d="M29 4l3-2-1 3-2 1z" fill="currentColor"/></svg>';
+const DOTS = '<span class="tdots" aria-hidden="true"><i></i><i></i><i></i></span>';
 RENDERERS.tray = function (ctx) {
   const { sc, thread } = ctx; const N = sc.plan.length; const order = srcOrder(sc);
   const fc = $("#fchips"); fc.hidden = true; fc.innerHTML = "";
   const tray = $("#tray"), bar = $("#trayBar"), pop = $("#trayPop"), sbtn = $("#traySrc"), spop = $("#traySrcPop");
   tray.hidden = true; pop.hidden = true; spop.hidden = true; bar.setAttribute("aria-expanded", "false"); sbtn.setAttribute("aria-expanded", "false");
   $("#trayList").innerHTML = ""; $("#traySrcList").innerHTML = ""; $("#traySrcN").textContent = "0";
-  let body, head, sub, plan, think, done = 0, steps = [], seen = {}, startedAt = 0;
+  let body, plan, think, done = 0, steps = [], seen = {}, startedAt = 0;
   const CK = '<span class="st st--d">' + I.check + "</span>";
   function setBar(icon, text, count) { $("#trayIc").innerHTML = icon; $("#trayT").textContent = text; $("#trayN").textContent = count; }
   function drawList() {
@@ -2084,21 +2092,12 @@ RENDERERS.tray = function (ctx) {
     });
     $("#traySrcN").textContent = String(Object.keys(seen).length);
   }
-  function headWorking(title) {
-    head.querySelector(".tk__h").innerHTML = GRID + "<span>Majlis is working on your task</span>" + CHEV_R;
-    sub.innerHTML = '<div class="tk__step">' + GRID + "<span>" + esc(title) + '</span></div><div class="tk__sk" aria-hidden="true"></div>';
-  }
-  const CHEV_R = '<svg class="tk__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   return {
     on(ev) {
       switch (ev.type) {
         case "query": {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
-          head = frag('<div class="tk"><button type="button" class="tk__h" aria-expanded="true"></button><div class="tk__sub"></div></div>');
-          body.appendChild(head); sub = head.querySelector(".tk__sub");
-          head.querySelector(".tk__h").onclick = (e) => { const b = e.currentTarget, o = b.getAttribute("aria-expanded") === "true"; b.setAttribute("aria-expanded", String(!o)); sub.hidden = o; };
-          headWorking("Reading your question");
-          think = frag('<p class="tk__think">Thinking ' + PEN + "</p>"); body.appendChild(think);
+          think = frag('<p class="tk__think">Thinking ' + DOTS + "</p>"); body.appendChild(think);
           tray.hidden = false; setBar(GRID, "Reading your question", ""); startedAt = ev.at;
           break;
         }
@@ -2107,9 +2106,9 @@ RENDERERS.tray = function (ctx) {
           if (ev.id === "ack") { plan = frag('<p class="tk__plan' + (animOK() ? " enter" : "") + '">' + esc(ev.lines.join(" ")) + "</p>"); body.insertBefore(plan, think); }
           break;
         case "stepStart": {
-          const s = sc.plan[ev.step]; think.hidden = true;
+          const s = sc.plan[ev.step];
           steps.push({ k: "w", title: s.title, st: "w" }); drawList();
-          headWorking(s.title); setBar(GRID, s.title, "Step " + (ev.step + 1));
+          setBar(GRID, s.title, "Step " + (ev.step + 1));
           break;
         }
         case "stepEnd": {
@@ -2123,9 +2122,6 @@ RENDERERS.tray = function (ctx) {
         case "answer": {
           think.remove();
           const total = secs(ev.at);
-          head.querySelector(".tk__h").innerHTML = '<span class="st st--d">' + I.check + "</span><span>Worked for " + total + "s · " + N + " steps</span>" + CHEV_R;
-          head.querySelector(".tk__h").setAttribute("aria-expanded", "false"); sub.hidden = true;
-          sub.innerHTML = '<ol class="tk__list">' + steps.map((s) => '<li class="tli">' + stIcon(s.st) + '<span class="tli__b"><b>' + esc(s.title) + "</b><small>" + s.found + '</small></span><span class="tli__t">' + s.t + "</span></li>").join("") + "</ol>";
           body.appendChild(narrAnswer(sc, { noSources: true }));
           setBar(CK, "All " + N + " steps done", total + "s");
           fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
