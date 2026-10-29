@@ -502,6 +502,29 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .fchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px 0 10px;border-radius:9px;background:var(--surface);border:1px solid var(--line-2);box-shadow:0 1px 2px rgba(28,40,34,.04);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;animation:lineIn var(--d-reveal) var(--ease-out) both;transition:background var(--d-fast),color var(--d-fast),border-color var(--d-fast)}
 .fchip:hover,.fchip:focus-visible{border-color:var(--accent-line);color:var(--accent-text)}
 #inputText.is-typed{color:var(--ink)}
+/* end of answer: done row + follow-up rows */
+.aend{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.aend__bar{display:flex;align-items:center;gap:6px;min-height:40px;flex-wrap:wrap}
+.aend__ok{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--accent-text);padding-right:4px}
+.aend__ok svg{width:14px;height:14px}
+.aend__sep{width:1px;height:20px;background:var(--line);margin:0 6px}
+.aend__ib{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;color:var(--muted);transition:background var(--d-fast),color var(--d-fast)}
+.aend__ib:hover,.aend__ib:focus-visible{background:var(--surface);color:var(--ink)}
+.aend__ib.is-done{color:var(--accent)}
+.aend__time{font-size:13px;color:var(--muted);margin-left:4px;font-variant-numeric:tabular-nums}
+.aend__sp{flex:1}
+.aend__q{font-size:13.5px;color:var(--ink-2);margin-right:4px}
+.aend__stars{display:inline-flex;gap:2px}
+.aend__star{display:grid;place-items:center;width:26px;height:26px;border-radius:6px;color:var(--line);transition:color var(--d-fast),transform var(--d-fast)}
+.aend__star.is-hov,.aend__star.is-on{color:var(--amber)}
+.aend__star:hover{transform:scale(1.12)}
+.aend__fups{display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
+.aend__fups li{border-bottom:1px solid var(--line-2);animation:lineIn var(--d-reveal) var(--ease-out) both}
+.aend__fup{display:grid;grid-template-columns:22px minmax(0,1fr) 20px;gap:14px;align-items:center;width:100%;min-height:52px;padding:8px 6px 8px 2px;text-align:start;font-size:15px;color:var(--ink);border-radius:10px;transition:background var(--d-fast)}
+.aend__ci{display:grid;color:var(--muted)}
+.aend__go{display:grid;color:var(--faint);transition:transform var(--d-base) var(--ease-out),color var(--d-fast)}
+.aend__fup:hover,.aend__fup:focus-visible{background:var(--surface)}
+.aend__fup:hover .aend__go,.aend__fup:focus-visible .aend__go{transform:translateX(3px);color:var(--accent-text)}
 /* status line button + agents popover */
 .actv{position:relative}
 .actv__top{min-height:36px}
@@ -1084,9 +1107,9 @@ window.SHORT_CHIPS = true;
 /* Key findings per scenario, one sentence each, for the text-first answer. */
 /* Follow-ups: kind sets the icon and the hint (compare, drill, forecast, explain, draft). */
 const FOLLOWUPS = {
-  simple: [["drill", "Break this down by function", "By team"], ["compare", "Compare with Q3 last year", "Year on year"], ["explain", "Which teams are above 5%?", "Find outliers"]],
-  moderate: [["explain", "Why is Saudi Arabia behind plan?", "Explain the gap"], ["forecast", "Forecast Q4 against plan", "Look ahead"], ["drill", "Show Egypt and North Africa after close", "Recheck"]],
-  complex: [["compare", "Compare with Q3 last year", "Year on year"], ["drill", "Break Mid-market down by manager", "Go deeper"], ["draft", "Draft a note to the CRO", "Write"]]
+  simple: [["drill", "Break this quarter's attrition down by function and team.", ""], ["compare", "How does this compare with Q3 last year?", ""], ["explain", "Which teams are above 5% attrition, and why?", ""]],
+  moderate: [["explain", "Why is Saudi Arabia behind plan, and which accounts drive the gap?", ""], ["forecast", "Forecast Q4 revenue against plan by region.", ""], ["drill", "Show Egypt and North Africa again after its close on 3 November.", ""]],
+  complex: [["compare", "How does Sales attrition compare with Q3 last year?", ""], ["drill", "Break Mid-market leavers down by manager and tenure.", ""], ["draft", "Draft a note to the CRO recommending quota relief from day one.", ""]]
 };
 const BRIEF = {
   simple: { points: [
@@ -1930,8 +1953,7 @@ RENDERERS.answer = function (ctx) {
           const ln = fin.querySelector(".ans__line");
           if (prev && prev !== ln.textContent && animOK()) ln.classList.add("is-flash");
           card2done = true; slow.hidden = true;
-          fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
-          fc.hidden = !fc.children.length;
+          fin.appendChild(endEl(FOLLOWUPS[S.sc] || []));
           if (notify) toastMsg("Your answer is ready");
           $("#agBtnT").textContent = "View agents"; act.dataset.state = "done"; live.innerHTML = ""; viewBtn.hidden = false; bar.style.width = "100%";
           P("#pStat").textContent = "Complete · " + N + " steps";
@@ -1946,6 +1968,36 @@ RENDERERS.answer = function (ctx) {
    START: scenario switcher only. Selecting a scenario, or the active one again, replays it.
    ===================================================================== */
 const OLDER = ["Q3 forecast variance", "Supplier indemnity clauses", "Board pack summary"];
+/* End of answer: done row with actions and rating, then follow-up questions as full-width rows. */
+function endEl(fups) {
+  const ic = {
+    copy: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+    redo: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15"/><path d="M4 20v-5h5"/></svg>',
+    star: '<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/></svg>',
+    chat: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-7.2-4.5L4 20l4.6-.9A8 8 0 0 0 12 20z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-width="2.4"/></svg>',
+    arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  };
+  const now = new Date(), h = now.getHours(), mm = String(now.getMinutes()).padStart(2, "0");
+  const time = ((h % 12) || 12) + ":" + mm + (h < 12 ? " am" : " pm");
+  const el = frag('<div class="aend"><div class="aend__bar">' +
+    '<span class="aend__ok">' + I.check + "Answer complete</span><span class=\"aend__sep\" aria-hidden=\"true\"></span>" +
+    '<button type="button" class="aend__ib" data-act="copy" aria-label="Copy answer" title="Copy answer">' + ic.copy + "</button>" +
+    '<button type="button" class="aend__ib" data-act="redo" aria-label="Run again" title="Run again">' + ic.redo + "</button>" +
+    '<span class="aend__time">' + time + '</span><span class="aend__sp"></span>' +
+    '<span class="aend__q" id="rateQ">How was this answer?</span><span class="aend__stars" role="radiogroup" aria-labelledby="rateQ">' +
+      [1, 2, 3, 4, 5].map((n) => '<button type="button" class="aend__star" role="radio" aria-checked="false" aria-label="' + n + (n > 1 ? " stars" : " star") + '" data-n="' + n + '">' + ic.star + "</button>").join("") + "</span></div>" +
+    (fups.length ? '<ul class="aend__fups" aria-label="Suggested follow-ups">' + fups.map((f, i) => '<li style="animation-delay:' + (i * 70) + 'ms"><button type="button" class="aend__fup" data-fup="' + esc(f[1]) + '"><span class="aend__ci">' + ic.chat + "</span><span>" + esc(f[1]) + '</span><span class="aend__go">' + ic.arrow + "</span></button></li>").join("") + "</ul>" : "") + "</div>");
+  const stars = Array.from(el.querySelectorAll(".aend__star"));
+  const paint = (n, cls) => stars.forEach((s, i) => s.classList.toggle(cls, i < n));
+  stars.forEach((s, i) => {
+    s.addEventListener("mouseenter", () => paint(i + 1, "is-hov"));
+    s.addEventListener("click", () => { paint(i + 1, "is-on"); stars.forEach((x, j) => x.setAttribute("aria-checked", String(j === i))); el.querySelector(".aend__q").textContent = "Thanks for rating"; });
+  });
+  el.querySelector(".aend__stars").addEventListener("mouseleave", () => paint(0, "is-hov"));
+  el.querySelector('[data-act="copy"]').addEventListener("click", (e) => { const b = e.currentTarget; b.classList.add("is-done"); b.title = "Copied"; setTimeout(() => b.classList.remove("is-done"), 1400); });
+  el.querySelector('[data-act="redo"]').addEventListener("click", () => play());
+  return el;
+}
 function toastMsg(t) {
   let el = $("#readyToast"); if (!el) { el = frag('<div class="rtoast" id="readyToast" role="status"></div>'); document.body.appendChild(el); }
   el.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' + esc(t);
