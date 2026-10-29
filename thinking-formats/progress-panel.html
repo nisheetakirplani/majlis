@@ -947,6 +947,9 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .xa{margin-top:10px;padding-top:0;border-top:0}
 .xa__cur--solo{padding-top:14px;border-top:1px solid var(--line-2)}
 @media (max-width:1100px){.app.has-panel .frame__body{grid-template-columns:minmax(0,1fr) 340px}}
+
+/* no agents button or popover in this version */
+#agBtn,#agPop{display:none!important}
 </style>
 </head>
 <body>
@@ -2031,8 +2034,7 @@ RENDERERS.side = function (ctx) {
   function usedEl() {
     const used = {}; sc.plan.forEach((p) => { (used[p.agent] = used[p.agent] || []).push(p.skill); });
     const sys = systemsOf(sc);
-    return '<div class="spu__r"><span class="spu__k">Agents</span><span class="spu__v">' + Object.keys(used).map((k) => '<span class="spa ag-' + k + '"><i>' + AK[k] + "</i>" + esc(AGENTS[k].name) + "</span>").join("") + "</span></div>" +
-      '<div class="spu__r"><span class="spu__k">Systems</span><span class="spu__v">' + sys.map(esc).join(", ") + "</span></div>" +
+    return '<div class="spu__r"><span class="spu__k">Systems</span><span class="spu__v">' + sys.map(esc).join(", ") + "</span></div>" +
       '<div class="spu__r"><span class="spu__k">Confidence</span><span class="spu__v">' + esc(sc.answer.confidence.level) + " · " + sc.answer.confidence.gaps.length + (sc.answer.confidence.gaps.length === 1 ? " gap" : " gaps") + " named</span></div>";
   }
   return {
