@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Majlis thinking stream formats</title>
+<!--
+  Eight ways to format the thinking stream (thought lines, preview lines, steps) before the answer.
+  Light mode only. Same question, same timing and same answer in every format; only the stream changes.
+  Data lives in STEPS and ANSWER below. Each format is a renderer in FORMATS: mount(host) returns on(event).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1ec;--bgimg:radial-gradient(1100px 720px at 6% 108%,rgba(196,231,143,.75),transparent 62%),radial-gradient(820px 540px at 102% -6%,rgba(77,187,187,.22),transparent 60%);
+  --surface:#fff;--surface-2:#f6f8f5;--surface-3:#e8ece6;--ink:#1c2420;--ink-2:#3f4944;--muted:#5d6862;--faint:#8b958f;
+  --line:rgba(28,40,34,.13);--line-2:rgba(28,40,34,.08);--accent:#0b825a;--accent-text:#064933;--accent-soft:rgba(11,130,90,.12);
+  --amber:#f5b73c;--warn:#6b4708;--warn-bg:#fdecc8;--lock:#4a4f63;--lock-bg:#eceef4;--user:#18211d;
+  --shadow:0 1px 2px rgba(28,40,34,.04),0 10px 30px rgba(28,40,34,.05);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --sans:"Host Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--ink);background-color:var(--bg);background-image:var(--bgimg);background-attachment:fixed;-webkit-font-smoothing:antialiased;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+p,h1,h2,h3,h4,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+
+/* top bar: format switcher only */
+.top{display:flex;align-items:center;gap:14px;padding:12px 24px;flex-wrap:wrap}
+.top b{font-size:14px;font-weight:600;color:var(--muted);margin-right:4px}
+.seg{display:flex;flex-wrap:wrap;gap:3px;padding:4px;border-radius:14px;background:var(--surface-3)}
+.seg button{height:32px;padding:0 12px;border-radius:10px;font-size:13px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(28,40,34,.12)}
+.replay{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:12px;background:var(--user);color:#fff;font-size:13px;font-weight:600;margin-left:auto}
+
+.app{height:calc(100vh - 60px);display:flex;flex-direction:column;padding:0 24px 12px}
+.desc{max-width:760px;width:100%;margin:2px auto 8px;font-size:13px;color:var(--muted)}
+.desc b{color:var(--ink);font-weight:600}
+.convo{flex:1;min-height:0;overflow-y:auto}
+.thread{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px;padding:12px 0 24px}
+.u{align-self:flex-end;max-width:80%;padding:12px 18px;border-radius:16px 16px 4px 16px;background:var(--user);color:#fff;font-size:15px}
+.ack{font-size:15px;line-height:1.6}
+.stream{display:flex;flex-direction:column}
+
+.foot{max-width:760px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:8px;padding-top:6px}
+.status{display:flex;align-items:center;gap:10px;min-height:28px;font-size:13px;color:var(--ink-2)}
+.status b{font-weight:600;color:var(--ink)}
+.cue{width:14px;height:14px;border-radius:4px;background:var(--surface-3);flex:none}
+.status[data-s="think"] .cue{background:linear-gradient(135deg,#d3ee9a,var(--accent));animation:breathe 1.6s ease-in-out infinite}
+.status[data-s="work"] .cue{background:linear-gradient(135deg,var(--accent),#143a2d);animation:turn 1.2s ease-in-out infinite}
+.status[data-s="done"] .cue{border-radius:50%;background:var(--accent)}
+.ask{display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow)}
+.agt{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px 0 6px;border-radius:99px;background:var(--surface-3);font-size:13.5px;font-weight:600}
+.agt i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--surface);color:var(--accent)}
+.ask .ph{flex:1;color:var(--muted);font-size:15px;padding-left:6px}
+.ask .snd{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--user);color:#fff}
+.disc{text-align:center;font-size:12px;color:var(--muted)}
+
+/* shared atoms */
+.mark{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;flex:none}
+.mark.w{border:2px solid var(--accent-soft);border-top-color:var(--accent);animation:spin .9s linear infinite}
+.mark.d{background:var(--accent);color:#fff}
+.mark.f{background:var(--warn-bg);color:var(--warn)}
+.mark.l{background:var(--lock-bg);color:var(--lock)}
+.mark.q{border:1.5px dashed var(--line)}
+.src{font-size:12px;color:var(--faint);white-space:nowrap}
+.flag{display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:6px;border-radius:6px;font-size:11.5px;font-weight:600;vertical-align:1px}
+.flag.f{background:var(--warn-bg);color:var(--warn)}.flag.l{background:var(--lock-bg);color:var(--lock)}
+.in{animation:in .32s var(--ease) both}
+.fig{font-weight:700;font-variant-numeric:tabular-nums}
+.was{color:var(--muted);font-weight:400}
+.dim{color:var(--faint)}
+@keyframes in{from{opacity:0;transform:translateY(5px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{50%{transform:scale(.85);opacity:.7}}
+@keyframes turn{40%,100%{transform:rotate(90deg)}}
+@keyframes shim{from{background-position:150% 0}to{background-position:-50% 0}}
+.shim{background:linear-gradient(90deg,var(--muted) 0,var(--muted) 40%,#b9c6bf 50%,var(--muted) 60%,var(--muted) 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 1.8s linear infinite}
+
+/* 1 ticker */
+.tick{display:flex;align-items:center;gap:10px;min-height:34px;font-size:14.5px;color:var(--ink-2)}
+.tick__t{animation:in .3s var(--ease) both}
+.tickdone{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:34px;padding:0 10px 0 6px;border-radius:10px;font-size:14px;color:var(--ink-2)}
+.tickdone:hover{background:var(--surface)}
+.tickhist{display:flex;flex-direction:column;gap:4px;padding:6px 0 4px 34px;font-size:13.5px;color:var(--ink-2)}
+
+/* 2 merged lines */
+.ml{display:grid;grid-template-columns:44px 18px minmax(0,1fr);gap:10px;align-items:start;padding:5px 0;font-size:14.5px;line-height:1.5}
+.ml__t{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;padding-top:2px;text-align:right}
+.ml .mark{margin-top:2px}
+.ml__x{color:var(--ink)}
+.ml__x .sub{display:block;font-size:13px;color:var(--muted)}
+
+/* 3 findings first */
+.ff{display:flex;flex-direction:column;gap:8px}
+.ff__k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ff__l{display:flex;flex-direction:column;gap:6px}
+.ff__l li{position:relative;padding-left:18px;font-size:15px;line-height:1.55}
+.ff__l li::before{content:"";position:absolute;left:3px;top:10px;width:6px;height:6px;border-radius:2px;background:var(--accent)}
+.ff__l li.f::before{background:var(--amber)}.ff__l li.l::before{background:var(--lock)}
+.ff__now{display:flex;align-items:center;gap:10px;font-size:13.5px;padding-left:0}
+
+/* 4 timeline rail */
+.tl{position:relative;display:flex;flex-direction:column;padding-left:0}
+.tl__i{display:grid;grid-template-columns:40px 22px minmax(0,1fr);gap:10px;align-items:start;padding-bottom:14px;position:relative}
+.tl__i::before{content:"";position:absolute;left:60px;top:16px;bottom:-2px;width:2px;background:var(--line-2)}
+.tl__i:last-child::before{display:none}
+.tl__t{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;text-align:right;padding-top:1px}
+.tl__d{width:12px;height:12px;border-radius:50%;margin:4px 0 0 4px;border:2px solid var(--accent);background:var(--surface);position:relative;z-index:1}
+.tl__d.d{background:var(--accent)}.tl__d.f{border-color:var(--amber);background:var(--amber)}.tl__d.l{border-color:var(--lock);background:var(--lock)}
+.tl__d.w{animation:breathe 1.4s ease-in-out infinite}
+.tl__x>b{display:block;font-size:14.5px;font-weight:600}
+.tl__x .sub{display:block;font-size:13.5px;color:var(--ink-2)}
+
+/* 5 phases */
+.ph{display:flex;flex-direction:column;gap:2px}
+.ph__h{display:flex;align-items:center;gap:10px;min-height:34px;font-size:14.5px;font-weight:600}
+.ph__h small{font-weight:500;color:var(--muted);font-size:13px}
+.ph__h.q{color:var(--faint);font-weight:500}
+.ph__b{display:flex;flex-direction:column;gap:4px;padding:0 0 8px 28px;font-size:14px;color:var(--ink-2)}
+.ph__b li{display:flex;gap:8px}
+
+/* 6 question-led */
+.qa{display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
+.qa__r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14.5px}
+.qa__q{color:var(--muted)}
+.qa__a{font-weight:600}
+.qa__a.w{font-weight:500}
+
+/* 7 builds in place */
+.bp{display:flex;flex-direction:column;gap:10px}
+.bp__l{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:16px;line-height:1.55}
+.bp__l .mark{margin-top:4px}
+.bp__l.w span:last-child{color:var(--faint);font-size:14.5px}
+.bp__l.lead{font-size:19px;font-weight:600}
+
+/* 8 quiet */
+.qt{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:32px;padding:0 10px 0 6px;border-radius:10px;font-size:13.5px;font-weight:600;color:var(--accent-text)}
+.qt:hover{background:var(--surface)}
+.qt svg{transition:transform .24s var(--ease)}
+.qt[aria-expanded="true"] svg{transform:rotate(90deg)}
+.qtl{display:flex;flex-direction:column;gap:4px;padding:4px 0 6px 30px;font-size:13.5px;color:var(--ink-2)}
+
+/* answer */
+.ans{display:flex;flex-direction:column;gap:16px;padding-top:4px}
+.ans__lead{font-size:19px;line-height:1.5;font-weight:600}
+.ans__conf{font-size:14px;color:var(--ink-2)}
+.ans__conf b{color:var(--ink);font-weight:600}
+.cdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+.ans__gaps{display:flex;flex-direction:column;gap:2px;padding:4px 0 0 16px;font-size:13.5px}
+.ans__sec{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line-2)}
+.ans__sec h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ans__pts li{position:relative;padding-left:18px;font-size:15px;line-height:1.6;margin-bottom:4px}
+.ans__pts li::before{content:"";position:absolute;left:3px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--ink-2)}
+.lead-act{padding:14px 16px;border-radius:14px;background:var(--surface);border:1px solid var(--line-2)}
+.lead-act small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+.lead-act b{display:block;font-size:15.5px;font-weight:600;margin-top:2px}
+.lead-act span{display:block;font-size:13px;color:var(--muted)}
+.ans__cur{font-size:12.5px;color:var(--muted);padding-top:12px;border-top:1px solid var(--line-2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:760px){.app{padding:0 12px 12px}.top{padding:10px 12px}.qa__r{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <b id="lbl">Stream format</b>
+  <div class="seg" role="group" aria-labelledby="lbl" id="seg"></div>
+  <button class="replay" id="replay" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Replay</button>
+</header>
+<div class="app">
+  <p class="desc" id="desc"></p>
+  <div class="convo" id="convo"><div class="thread" id="thread"></div></div>
+  <div class="foot">
+    <div class="status" id="status" data-s="idle"><span class="cue" aria-hidden="true"></span><span id="statusT" aria-live="polite"><b>Ready</b></span></div>
+    <div class="ask" aria-hidden="true"><span class="agt"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11h14V8M10 12h4"/></svg></i>Institutional Memory</span><span class="ph">Ask about your company…</span><span class="snd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    <p class="disc">Majlis can make mistakes. Check important figures before acting.</p>
+  </div>
+</div>
+<script>
+"use strict";
+/* ---------------- data ---------------- */
+const QUESTION = "Why did attrition rise in Sales and what should we do?";
+const ACK = "Understood: why Sales attrition rose in Q3, and what to do about it. I will start with people data for Sales and follow what it shows.";
+const STEPS = [
+  { think: 1100, ms: 2300, phase: 0, st: "d", src: "HRMS", doing: "Reading headcount and leavers from HRMS", preview: "Starting with people data for Sales.",
+    found: "Q3 attrition **7.5%** (was 4.2%)", q: "How big is the rise?", a: "**7.5%**, up from 4.2%", build: "Sales attrition rose to **7.5%** (was 4.2%) in Q3." },
+  { think: 900, ms: 2800, phase: 0, st: "f", src: "CRM", doing: "Cross-checking the seller count in CRM", preview: "Mid-market has 17 of the 31 leavers.",
+    found: "Two headcounts: **412** in HRMS, **398** in CRM", q: "Do the systems agree?", a: "No: 412 vs 398; HRMS used", build: "Headcounts differ (412 HRMS, 398 CRM); HRMS is used." },
+  { think: 1200, ms: 1900, phase: 1, st: "d", src: "HRMS", doing: "Breaking down by team and trend", preview: "HRMS and CRM count Sales differently; using HRMS.",
+    found: "Mid-market: **17 of 31** leavers, **10.4%**", q: "Where is it concentrated?", a: "Mid-market, **10.4%**", build: "Mostly in Mid-market: **17 of 31** leavers, attrition **10.4%**." },
+  { think: 800, ms: 2400, phase: 1, st: "l", src: "Exit survey", doing: "Reading exit feedback", preview: "The rise starts in Q3, after 1 July.",
+    found: "**12 of 22** survey replies named commission changes; interview notes locked", q: "What did leavers say?", a: "Commission changes, **12 of 22**", build: "**12 of 22** survey replies named the commission changes; interview notes were locked." },
+  { think: 700, ms: 1700, phase: 1, st: "d", src: "Comp plan", doing: "Reading the commission plan", preview: "Checking the plan that changed on 1 July.",
+    found: "Accelerator cut to 1.5x; quota relief only after 90 days", q: "What changed on 1 July?", a: "Accelerator cut, relief after 90 days", build: "The rise began when the commission plan changed on 1 July." },
+  { think: 1300, ms: 1600, phase: 2, st: "d", src: "Analysis", doing: "Linking timing and drafting actions", preview: "The timing lines up with the 1 July changes.",
+    found: "Cause likely, not proven; 4 actions drafted", q: "What should we do?", a: "Quota relief from day one", build: "Fastest lever: quota relief for reassigned accounts from day one." }
+];
+const PHASES = ["Gathering", "Analysing", "Concluding"];
+const FINAL_THINK = 1000;
+
+/* ---------------- helpers ---------------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, '<b class="fig">$1</b>').replace(/\((was [^)]+)\)/g, '<span class="was">($1)</span>');
+const plain = (t) => t.replace(/\*\*/g, "");
+function el(html) { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; }
+const CK = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const WN = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M12 6v7M12 17.5h.01"/></svg>';
+const LK = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+const CHEV = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+const mark = (st) => '<span class="mark ' + st + '">' + (st === "d" ? CK : st === "f" ? WN : st === "l" ? LK : "") + "</span>";
+const flag = (st) => st === "f" ? '<span class="flag f">Conflict</span>' : st === "l" ? '<span class="flag l">Locked</span>' : "";
+const secs = (ms) => (ms / 1000).toFixed(1).replace(/\.0$/, "") + "s";
+const clock = (ms) => "0:" + String(Math.floor(ms / 1000)).padStart(2, "0");
+
+/* ---------------- timeline ---------------- */
+function timeline() {
+  const ev = []; let t = 0;
+  const add = (type, o) => ev.push(Object.assign({ type, at: t }, o || {}));
+  add("query"); t += 400;
+  add("think", { i: -1 }); t += 1500; add("thinkEnd", { i: -1, ms: 1500 }); t += 400; add("ack"); t += 900;
+  STEPS.forEach((s, i) => {
+    add("think", { i }); t += s.think; add("thinkEnd", { i, ms: s.think });
+    t += 500; add("say", { i }); t += 400;
+    add("start", { i }); t += s.ms; add("end", { i });
+    t += 300;
+  });
+  add("think", { i: 99 }); t += FINAL_THINK; add("thinkEnd", { i: 99, ms: FINAL_THINK });
+  t += 300; add("done", { total: t });
+  return ev;
+}
+
+/* ---------------- shared answer ---------------- */
+function answerEl(opts) {
+  opts = opts || {};
+  return el('<section class="ans in" aria-label="Answer">' +
+    (opts.noLead ? "" : '<p class="ans__lead">' + fmt("Sales attrition rose to **7.5%** (was 4.2%) in Q3, mostly in Mid-market, after the 1 July commission changes. The fastest lever is quota relief for reassigned accounts.") + "</p>") +
+    '<div class="ans__conf"><p><span class="cdot"></span><b>Confidence: medium.</b> The cause is likely, not proven.</p><ul class="ans__gaps"><li><b>Not read:</b> exit interview notes</li><li><b>Two counts:</b> 412 HRMS, 398 CRM; HRMS used</li><li><b>Partial:</b> 22 of 31 leavers surveyed</li></ul></div>' +
+    (opts.noFindings ? "" : '<div class="ans__sec"><h4>What we found</h4><ul class="ans__pts"><li>' + fmt("**31** people left Sales in Q3 (was 17).") + "</li><li>" + fmt("Mid-market: **17 of 31** leavers, attrition **10.4%**.") + "</li><li>" + fmt("**12 of 22** survey replies named the 1 July commission changes.") + "</li></ul></div>") +
+    '<div class="ans__sec"><h4>What to do next</h4><div class="lead-act"><small>Do this first</small><b>Apply quota relief to reassigned Mid-market accounts from day one.</b><span>CRO with Sales operations · Decide this month</span></div></div>' +
+    '<p class="ans__cur"><b>Current to 27 Oct.</b> From HRMS, CRM, the exit survey and the commission plan.</p></section>');
+}
+
+/* ---------------- formats ---------------- */
+const FORMATS = [
+  { id: "ticker", name: "1 · Rolling ticker", desc: "<b>One line rewrites itself</b> as Majlis works; older lines disappear. When done it folds to one line you can open. Calmest screen.", mount(host, A) {
+      const line = el('<div class="tick"><span class="mark w"></span><span class="tick__t shim">Thinking</span></div>'); host.appendChild(line);
+      const set = (m, t) => { line.querySelector(".mark").outerHTML = mark(m); const x = line.querySelector(".tick__t"); x.replaceWith(el('<span class="tick__t' + (m === "w" ? " shim" : "") + '">' + t + "</span>")); };
+      return { on(ev) {
+        if (ev.type === "think") set("w", "Thinking");
+        if (ev.type === "say") set("w", esc(STEPS[ev.i].preview));
+        if (ev.type === "start") set("w", esc(STEPS[ev.i].doing) + "…");
+        if (ev.type === "end") set(STEPS[ev.i].st, fmt(STEPS[ev.i].found));
+        if (ev.type === "done") {
+          const b = el('<button class="tickdone" type="button" aria-expanded="false">' + mark("d") + "Worked for " + secs(ev.total) + " · 6 steps · 3 gaps " + CHEV + "</button>");
+          const h = el('<ul class="tickhist" hidden>' + STEPS.map((s) => "<li>" + fmt(s.found) + ' <span class="src">· ' + s.src + "</span></li>").join("") + "</ul>");
+          b.onclick = () => { const o = b.getAttribute("aria-expanded") === "true"; b.setAttribute("aria-expanded", String(!o)); h.hidden = o; };
+          line.replaceWith(b); host.appendChild(h); A();
+        }
+      } };
+  } },
+  { id: "merged", name: "2 · One line per beat", desc: "<b>Thought time and preview merged</b> into one line per step: time, then what it learned. Half the height of the current stream.", mount(host, A) {
+      const rows = {};
+      const row = (i) => { const r = el('<div class="ml in"><span class="ml__t">0s</span>' + mark("w") + '<span class="ml__x shim">Thinking</span></div>'); host.appendChild(r); rows[i] = r; return r; };
+      let t0 = 0, iv = null;
+      return { on(ev) {
+        if (ev.type === "think" && ev.i !== 99) { const r = row(ev.i); t0 = performance.now(); iv = setInterval(() => { r.querySelector(".ml__t").textContent = Math.floor((performance.now() - t0) / 1000) + "s"; }, 200); TIMERS.push(iv); }
+        if (ev.type === "thinkEnd" && rows[ev.i]) { clearInterval(iv); rows[ev.i].querySelector(".ml__t").textContent = secs(ev.ms); }
+        if (ev.type === "ack") { const r = rows[-1]; r.querySelector(".mark").outerHTML = mark("d"); r.querySelector(".ml__x").outerHTML = '<span class="ml__x">Understood: why Sales attrition rose in Q3</span>'; }
+        if (ev.type === "say") rows[ev.i].querySelector(".ml__x").outerHTML = '<span class="ml__x">' + esc(STEPS[ev.i].preview) + '<span class="sub shim">' + esc(STEPS[ev.i].doing) + "…</span></span>";
+        if (ev.type === "end") { const s = STEPS[ev.i], r = rows[ev.i]; r.querySelector(".mark").outerHTML = mark(s.st); r.querySelector(".ml__x").outerHTML = '<span class="ml__x">' + fmt(s.found) + flag(s.st) + ' <span class="src">· ' + s.src + "</span></span>"; }
+        if (ev.type === "done") A();
+      } };
+  } },
+  { id: "findings", name: "3 · Findings first", desc: "<b>Only what was found</b> is listed, as notes building toward the answer. What Majlis is doing shows as one quiet line underneath.", mount(host, A) {
+      const box = el('<div class="ff"><span class="ff__k">Found so far</span><ul class="ff__l"></ul><div class="ff__now"><span class="mark w"></span><span class="shim">Reading your question</span></div></div>'); host.appendChild(box);
+      const now = (t) => { box.querySelector(".ff__now").innerHTML = '<span class="mark w"></span><span class="shim">' + t + "</span>"; };
+      return { on(ev) {
+        if (ev.type === "think" && ev.i >= 0 && ev.i < 99) now(esc(STEPS[ev.i].preview));
+        if (ev.type === "start") now(esc(STEPS[ev.i].doing) + "…");
+        if (ev.type === "end") { const s = STEPS[ev.i]; box.querySelector(".ff__l").appendChild(el('<li class="in ' + s.st + '">' + fmt(s.found) + ' <span class="src">· ' + s.src + "</span></li>")); }
+        if (ev.type === "think" && ev.i === 99) now("Writing the answer");
+        if (ev.type === "done") { box.querySelector(".ff__now").remove(); box.querySelector(".ff__k").textContent = "Found · 6 steps · " + secs(ev.total); A({ noFindings: true }); }
+      } };
+  } },
+  { id: "rail", name: "4 · Timeline rail", desc: "<b>A dot per beat with a timestamp</b>, so the order and pace of the work are visible at a glance. Good for audit.", mount(host, A) {
+      const tl = el('<ol class="tl"></ol>'); host.appendChild(tl); const items = {};
+      const item = (k, at, title, sub, st) => { const i = el('<li class="tl__i in"><span class="tl__t">' + clock(at) + '</span><span class="tl__d ' + st + '"></span><span class="tl__x"><b>' + title + "</b>" + (sub ? '<span class="sub">' + sub + "</span>" : "") + "</span></li>"); tl.appendChild(i); items[k] = i; return i; };
+      return { on(ev) {
+        if (ev.type === "ack") item("ack", ev.at, "Understood the question", "Starting with people data for Sales", "d");
+        if (ev.type === "start") item(ev.i, ev.at, esc(STEPS[ev.i].doing), '<span class="shim">Working…</span>', "w");
+        if (ev.type === "end") { const s = STEPS[ev.i]; items[ev.i].querySelector(".tl__d").className = "tl__d " + s.st; items[ev.i].querySelector(".tl__x .sub").outerHTML = '<span class="sub">' + fmt(s.found) + flag(s.st) + "</span>"; }
+        if (ev.type === "think" && ev.i === 99) item("w", ev.at, "Writing the answer", "", "w");
+        if (ev.type === "done") { items.w.querySelector(".tl__d").className = "tl__d d"; items.w.querySelector("b").textContent = "Answered"; A(); }
+      } };
+  } },
+  { id: "phases", name: "5 · Grouped by phase", desc: "<b>Three phases</b>: Gathering, Analysing, Concluding. The current one is open; finished ones fold to one line, so long runs stay short.", mount(host, A) {
+      const box = el('<div class="ph">' + PHASES.map((p, k) => '<div data-p="' + k + '"><div class="ph__h q">' + mark("q") + p + ' <small></small></div><ul class="ph__b" hidden></ul></div>').join("") + "</div>"); host.appendChild(box);
+      const P = (k) => box.querySelector('[data-p="' + k + '"]');
+      const open = (k) => { const p = P(k); p.querySelector(".ph__h").className = "ph__h"; p.querySelector(".mark").outerHTML = mark("w"); p.querySelector(".ph__b").hidden = false; };
+      const close = (k) => { const p = P(k); const n = STEPS.filter((s) => s.phase === k).length; p.querySelector(".mark").outerHTML = mark("d"); p.querySelector("small").textContent = "· " + n + (n > 1 ? " steps" : " step"); p.querySelector(".ph__b").hidden = true; };
+      let cur = -1;
+      return { on(ev) {
+        if (ev.type === "start") { const k = STEPS[ev.i].phase; if (k !== cur) { if (cur >= 0) close(cur); open(k); cur = k; } P(k).querySelector(".ph__b").appendChild(el('<li class="in" data-i="' + ev.i + '"><span class="mark w"></span><span class="shim">' + esc(STEPS[ev.i].doing) + "…</span></li>")); }
+        if (ev.type === "end") { const s = STEPS[ev.i]; const li = box.querySelector('li[data-i="' + ev.i + '"]'); li.innerHTML = mark(s.st) + "<span>" + fmt(s.found) + flag(s.st) + "</span>"; }
+        if (ev.type === "done") { close(cur); A(); }
+      } };
+  } },
+  { id: "qa", name: "6 · Question-led", desc: "<b>Each step is the small question it answers</b>, with its answer beside it. Reads like a briefing and doubles as a summary.", mount(host, A) {
+      const box = el('<div class="qa"></div>'); host.appendChild(box); const rows = {};
+      return { on(ev) {
+        if (ev.type === "start") { const r = el('<div class="qa__r in"><span class="qa__q">' + esc(STEPS[ev.i].q) + '</span><span class="qa__a w shim">Checking…</span></div>'); box.appendChild(r); rows[ev.i] = r; }
+        if (ev.type === "end") { const s = STEPS[ev.i]; rows[ev.i].querySelector(".qa__a").outerHTML = '<span class="qa__a">' + fmt(s.a) + flag(s.st) + "</span>"; }
+        if (ev.type === "done") A({ noFindings: true });
+      } };
+  } },
+  { id: "build", name: "7 · Answer builds in place", desc: "<b>No separate stream.</b> Each sentence of the answer appears where it will stay and fills in when its check finishes.", mount(host, A) {
+      const box = el('<div class="bp"></div>'); host.appendChild(box); const rows = {};
+      return { on(ev) {
+        if (ev.type === "start") { const r = el('<div class="bp__l w in' + (ev.i === 0 ? " lead" : "") + '"><span class="mark w"></span><span class="shim">' + esc(STEPS[ev.i].doing) + "…</span></div>"); box.appendChild(r); rows[ev.i] = r; }
+        if (ev.type === "end") { const s = STEPS[ev.i], r = rows[ev.i]; r.classList.remove("w"); r.innerHTML = mark(s.st) + "<span>" + fmt(s.build) + "</span>"; }
+        if (ev.type === "done") A({ noLead: true, noFindings: true });
+      } };
+  } },
+  { id: "quiet", name: "8 · Quiet mode", desc: "<b>Only the status line moves</b> while Majlis works. The answer arrives complete, with a link to see how it got there.", mount(host, A) {
+      return { on(ev) {
+        if (ev.type === "done") {
+          const b = el('<button class="qt" type="button" aria-expanded="false">' + CHEV + "See how I got this · 6 steps · " + secs(ev.total) + "</button>");
+          const l = el('<ul class="qtl" hidden>' + STEPS.map((s) => "<li>" + esc(s.doing) + " → " + fmt(s.found) + "</li>").join("") + "</ul>");
+          b.onclick = () => { const o = b.getAttribute("aria-expanded") === "true"; b.setAttribute("aria-expanded", String(!o)); l.hidden = o; };
+          host.appendChild(b); host.appendChild(l); A();
+        }
+      } };
+  } }
+];
+
+/* ---------------- runner ---------------- */
+let CUR = 0, TIMERS = [];
+function status(s, html) { const st = $("#status"); st.dataset.s = s; $("#statusT").innerHTML = html; }
+function play() {
+  TIMERS.forEach((x) => { clearTimeout(x); clearInterval(x); }); TIMERS = [];
+  const F = FORMATS[CUR], thread = $("#thread"), convo = $("#convo");
+  $("#desc").innerHTML = F.desc;
+  thread.innerHTML = "";
+  thread.appendChild(el('<div class="u in">' + esc(QUESTION) + "</div>"));
+  const ack = el('<p class="ack in" hidden>' + esc(ACK) + "</p>"); thread.appendChild(ack);
+  const host = el('<div class="stream"></div>'); thread.appendChild(host);
+  const ansHost = el("<div></div>"); thread.appendChild(ansHost);
+  const r = F.mount(host, (o) => ansHost.appendChild(answerEl(o)));
+  status("think", "<b>Thinking</b> · Reading your question");
+  timeline().forEach((ev) => TIMERS.push(setTimeout(() => {
+    if (ev.type === "ack") ack.hidden = false;
+    if (ev.type === "think") status("think", "<b>Thinking</b>" + (ev.i === 99 ? " · Bringing the findings together" : ""));
+    if (ev.type === "start") status("work", "<b>Working</b> · " + esc(STEPS[ev.i].doing));
+    if (ev.type === "done") status("done", "<b>Done</b> · answered after " + secs(ev.total) + " · 3 gaps named");
+    r.on(ev);
+    if (ev.type === "done") { const a = ansHost.firstElementChild || ansHost; convo.scrollTop = Math.max(0, host.offsetTop - 20); }
+    else convo.scrollTop = convo.scrollHeight;
+  }, ev.at)));
+}
+$("#seg").innerHTML = FORMATS.map((f, i) => '<button type="button" aria-pressed="' + (i === 0) + '" data-i="' + i + '">' + esc(f.name) + "</button>").join("");
+$("#seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; CUR = +b.dataset.i; document.querySelectorAll("#seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); play(); });
+$("#replay").addEventListener("click", play);
+play();
+</script>
+</body>
+</html>
