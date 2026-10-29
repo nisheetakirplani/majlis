@@ -621,6 +621,66 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .nsrc__i .badge{flex:none}
 .nsrc__t b{display:block;font-size:13px;font-weight:600}
 .nsrc__t small{display:block;font-size:12px;color:var(--muted);font-weight:500}
+/* ---- stream alignment: one 22px gutter for every beat ---- */
+.nwork{gap:6px}
+.nwork>.msg{margin:2px 0 8px}
+.npv{margin:0 0 2px 34px;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.nwork .ns__h{padding:6px 0;gap:12px}
+.nwork .ns__h:not(:disabled):hover{background:none}
+.nwork .ns__h:not(:disabled):hover .ns__t b{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.nwork .ns{margin-bottom:8px}
+.nwork .ns__b{padding:2px 0 10px 34px}
+.nwork .agents{margin:4px 0 0 34px}
+.nwork .thought__btn{padding-left:0}
+/* ---- executive answer ---- */
+.xa{display:flex;flex-direction:column;gap:18px;padding:6px 0 4px}
+.xa__lead{font-size:19px;line-height:1.5;font-weight:600;letter-spacing:-.005em}
+.fig{font-weight:700;font-variant-numeric:tabular-nums}
+.was{color:var(--muted);font-weight:400}
+.sref{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;margin-left:2px;border-radius:5px;background:var(--surface);border:1px solid var(--line);font-size:10.5px;font-weight:700;color:var(--ink-2);vertical-align:5px;line-height:1;transition:background var(--d-fast),color var(--d-fast),border-color var(--d-fast)}
+.sref:hover,.sref:focus-visible{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.cert{display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:6px;border-radius:6px;border:1px dashed var(--line);font-size:11.5px;font-weight:600;color:var(--muted);vertical-align:1px}
+.xa__conf{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
+.xa__conf b{color:var(--ink);font-weight:600}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px;background:var(--faint)}
+.dot--high{background:var(--accent)}.dot--medium{background:var(--amber)}.dot--low{background:var(--bad)}
+.xa__gaps{display:flex;flex-direction:column;gap:3px;padding-left:16px;font-size:13.5px}
+.xa__gaps b{font-weight:600}
+.xa__sec{display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid var(--line-2)}
+.xa__sec h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.xa__sec h4:first-child{margin-top:0}
+.xa__pts{display:flex;flex-direction:column;gap:6px}
+.xa__pts li{position:relative;padding-left:18px;font-size:15px;line-height:1.6}
+.xa__pts li::before{content:"";position:absolute;left:3px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--ink-2)}
+.xa__src{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line-2)}
+.xa__cur{font-size:13px;color:var(--muted)}
+.xa__cur b{color:var(--ink-2);font-weight:600}
+.srows{display:flex;flex-direction:column}
+.srows.is-short li:nth-child(n+4){display:none}
+.srow{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:34px;padding:2px 6px;border-radius:8px;text-align:start;font-size:13px}
+.srow:hover,.srow:focus-visible{background:var(--surface)}
+.srow__n{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;border:1px solid var(--line);font-size:10.5px;font-weight:700;color:var(--ink-2)}
+.srow__t{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow__s{font-size:12px;color:var(--muted);white-space:nowrap}
+.srow__s.is-conflict{color:var(--warn)}.srow__s.is-locked{color:var(--lock)}
+.xa__more{align-self:flex-start;font-size:13px;font-weight:600;color:var(--accent-text);padding:2px 6px}
+.xa__more:hover{text-decoration:underline;text-underline-offset:3px}
+/* ---- findings-first stream ---- */
+.ffd{display:flex;flex-direction:column;gap:10px;margin:6px 0 4px;padding:14px 0 16px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.ffd__h{display:flex;align-items:baseline;gap:10px}
+.ffd__k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ffd__n{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.ffd__l{display:flex;flex-direction:column;gap:8px}
+.ffd__l:empty{display:none}
+.ffr,.ffd__now{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;align-items:start}
+.ffr .st,.ffd__now .st{margin-top:2px}
+.ffr__t{font-size:15px;line-height:1.55;color:var(--ink)}
+.ffr__t .badge{margin-left:6px;vertical-align:1px}
+.ffd__now{font-size:14px;color:var(--muted)}
+.ffd__nt{line-height:1.55}
+.shim{background:linear-gradient(90deg,var(--muted) 0,var(--muted) 40%,#b9c6bf 50%,var(--muted) 60%,var(--muted) 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimx 1.8s linear infinite}
+@keyframes shimx{from{background-position:150% 0}to{background-position:-50% 0}}
+.nwork{gap:10px}
 /* answer hierarchy: text first */
 .br{gap:18px;padding:22px 24px}
 .br .ans__line{font-size:19px;line-height:1.5}
@@ -1144,6 +1204,49 @@ const FOLLOWUPS = {
   simple: [["drill", "Break this down by function", "By team"], ["compare", "Compare with Q3 last year", "Year on year"], ["explain", "Which teams are above 5%?", "Find outliers"]],
   moderate: [["explain", "Why is Saudi Arabia behind plan?", "Explain the gap"], ["forecast", "Forecast Q4 against plan", "Look ahead"], ["drill", "Show Egypt and North Africa after close", "Recheck"]],
   complex: [["compare", "Compare with Q3 last year", "Year on year"], ["drill", "Break Mid-market down by manager", "Go deeper"], ["draft", "Draft a note to the CRO", "Write"]]
+};
+/* Executive answer format. Markup: **figure** bold; (was x) muted; [[source#key]] numbered source mark; {likely} {partial} certainty tags. */
+/* Findings-first stream: one finding per step, in the same markup as NARR. */
+const FOUND = {
+  simple: ["Attrition **3.1%** in Q3 (was 2.7%)[[hrms_attr#3]]", "Sales: **14 of the 20** extra leavers[[hrms_fn#0]]"],
+  moderate: ["Q3 revenue **AED 460.2M**; Egypt and North Africa still provisional[[erp_rev]]", "Approved plan **AED 463.0M** for Q3[[plan_fy]]",
+    "**0.6%** below plan; Saudi Arabia and Egypt and North Africa behind[[erp_rev#1]]", "Egypt and North Africa closes on **3 Nov**; may move up to 2%[[close_cal#p2]]"],
+  complex: ["Q3 attrition **7.5%** (was 4.2%)[[hrms_sales#3]]", "Two headcounts: **412** in HRMS, **398** in CRM[[crm_roster#0]]",
+    "Mid-market: **17 of 31** leavers, attrition **10.4%**[[hrms_sales#1]]", "**12 of 22** survey replies named commission changes; interview notes locked[[exit_survey#0]]",
+    "Accelerator cut to **1.5x**; quota relief only after **90 days**[[comp_plan#p3]]", "Timing matches the 1 July changes; cause likely, not proven"]
+};
+const NARR = {
+  simple: {
+    lead: "Attrition is **3.1%** this quarter (was 2.7% in Q2). Most of the rise is in Sales.[[hrms_attr#3]]",
+    conf: ["High", "Read directly from HRMS."],
+    gaps: [],
+    groups: [
+      ["What happened", ["**149** people left, against an average headcount of **4,820**.[[hrms_attr#3]]", "Employees only; contractors and interns are excluded by definition."]],
+      ["Where", ["Sales: **14 of the 20** extra leavers this quarter.[[hrms_fn#0]]"]]
+    ],
+    current: "27 Oct", from: "HRMS"
+  },
+  moderate: {
+    lead: "Q3 revenue is **AED 460.2M**, **0.6%** below plan. Saudi Arabia and Egypt and North Africa are behind; the UAE and Europe are ahead.",
+    conf: ["High", "Three of four regions have closed their books."],
+    gaps: [["Provisional", "Egypt and North Africa until its close on 3 Nov[[close_cal#p2]]"]],
+    groups: [
+      ["Behind plan", ["Egypt and North Africa **−6.0%** (AED 58.3M); may move up to 2% at close.[[erp_rev#2]][[close_cal#p3]] {partial}", "Saudi Arabia **−5.6%** (AED 141.6M), the largest gap at **AED 8.4M**.[[erp_rev#1]]"]],
+      ["Ahead of plan", ["UAE **+4.2%** (AED 182.4M).[[erp_rev#0]]", "Europe **+2.5%** (AED 77.9M).[[erp_rev#3]]"]]
+    ],
+    current: "27 Oct", from: "the general ledger, the FY26 plan and the close calendar"
+  },
+  complex: {
+    lead: "Sales attrition rose to **7.5%** (was 4.2%) in Q3, mostly in Mid-market, after the 1 July commission changes. The fastest lever is quota relief for reassigned accounts.[[hrms_sales#3]]",
+    conf: ["Medium", "The cause is likely, not proven."],
+    gaps: [["Not read", "exit interview notes[[exit_notes]]"], ["Two counts", "412 HRMS, 398 CRM; HRMS used[[hrms_sales#3]][[crm_roster#0]]"], ["Partial", "22 of 31 leavers surveyed[[exit_survey]]"]],
+    groups: [
+      ["What happened", ["**31** people left Sales in Q3 (was 17).[[hrms_sales#3]]"]],
+      ["Where", ["Mid-market: **17 of 31** leavers, attrition **10.4%**.[[hrms_sales#1]]", "Mid-market quota attainment **71%** (from 92%).[[crm_roster#1]]"]],
+      ["Why", ["The rise began when the commission plan changed on 1 July; quota relief now starts after 90 days.[[comp_plan#p3]] {likely}", "**12 of 22** survey replies named the commission changes.[[exit_survey#0]] {partial}"]]
+    ],
+    current: "27 Oct", from: "HRMS, CRM, the exit survey and the commission plan"
+  }
 };
 const BRIEF = {
   simple: { points: [
@@ -1675,6 +1778,37 @@ document.addEventListener("click", (e) => {
    When the answer is ready, the whole stream folds to one line above it.
    ===================================================================== */
 const RENDERERS = {};
+/* ---- executive answer: bold figures, grouped findings, numbered source marks, compact sources ---- */
+function srcOrder(sc) { const ids = []; sc.plan.forEach((p) => p.sources.forEach((id) => { if (ids.indexOf(id) < 0) ids.push(id); })); return ids; }
+function fmt(t, order) {
+  return esc(t)
+    .replace(/\*\*(.+?)\*\*/g, '<b class="fig">$1</b>')
+    .replace(/\((was|from) ([^)]+)\)/g, '<span class="was">($1 $2)</span>')
+    .replace(/\{likely\}/g, '<span class="cert">Likely</span>').replace(/\{partial\}/g, '<span class="cert">Partial</span>')
+    .replace(/\[\[([a-z_]+)(?:#([a-z0-9]+))?\]\]/g, (m, id, k) => { const n = order.indexOf(id) + 1; const s = SC().sources[id]; return '<button type="button" class="sref" data-src="' + id + '" data-key="' + (k || "") + '" title="' + esc(s ? s.system + " · " + s.title : id) + '" aria-label="Source ' + n + '">' + n + "</button>"; });
+}
+function narrAnswer(sc, opts) {
+  opts = opts || {};
+  const A = NARR[S.sc], order = srcOrder(sc), lvl = A.conf[0].toLowerCase();
+  const acts = (sc.answer.blocks.find((b) => b.type === "actions") || { items: [] }).items;
+  const status = (id) => { const s = sc.sources[id]; if (s.kind === "locked") return "Locked"; const st = sc.plan.find((p) => p.sources.indexOf(id) >= 0); return st && st.status === "conflict" ? "Conflict" : "Read"; };
+  const srcRow = (id, i) => { const s = sc.sources[id], st = status(id); return '<li><button type="button" class="srow" data-src="' + id + '" data-key=""><span class="srow__n">' + (i + 1) + '</span><span class="srow__t">' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</span><span class="srow__s is-' + st.toLowerCase() + '">' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, "").replace(/ 2026$/, ""))) + " · " + st + "</span></button></li>"; };
+  const firstN = 3;
+  const el = frag('<section class="xa' + (animOK() ? " enter" : "") + '" aria-label="Answer">' +
+    '<p class="xa__lead">' + fmt(A.lead, order) + "</p>" +
+    '<div class="xa__conf"><p><span class="dot dot--' + lvl + '"></span><b>Confidence: ' + esc(lvl) + ".</b> " + esc(A.conf[1]) + "</p>" +
+      (A.gaps.length ? '<ul class="xa__gaps">' + A.gaps.map((g) => "<li><b>" + esc(g[0]) + ":</b> " + fmt(g[1], order) + "</li>").join("") + "</ul>" : "") + "</div>" +
+    (opts.noGroups ? "" : '<div class="xa__sec">' + A.groups.map((g) => '<h4>' + esc(g[0]) + '</h4><ul class="xa__pts">' + g[1].map((p) => "<li>" + fmt(p, order) + "</li>").join("") + "</ul>").join("") + "</div>") +
+    (acts.length ? '<div class="xa__sec"><h4>What to do next</h4><div class="br__lead"><span class="br__lk">Do this first</span><b>' + esc(acts[0].text) + "</b><small>" + esc(acts[0].owner) + " · " + esc(acts[0].when) + "</small><p>" + esc(acts[0].why) + "</p></div>" +
+      (acts.length > 1 ? '<div class="br__also"><span>Also consider</span><ol>' + acts.slice(1).map((a, i) => "<li><i>" + (i + 2) + "</i><div><b>" + esc(a.text) + "</b><small>" + esc(a.owner) + " · " + esc(a.when) + "</small></div></li>").join("") + "</ol></div>" : "") + "</div>" : "") +
+    '<div class="xa__src"><p class="xa__cur"><b>Current to ' + esc(A.current) + ".</b> From " + esc(A.from) + ".</p>" +
+      '<ol class="srows">' + order.map(srcRow).join("") + "</ol>" +
+      (order.length > firstN ? '<button type="button" class="xa__more" aria-expanded="false">Show all ' + order.length + " sources</button>" : "") + "</div></section>");
+  const list = el.querySelector(".srows"), more = el.querySelector(".xa__more");
+  if (more) { list.classList.add("is-short"); more.addEventListener("click", () => { const o = more.getAttribute("aria-expanded") === "true"; more.setAttribute("aria-expanded", String(!o)); list.classList.toggle("is-short", o); more.textContent = o ? "Show all " + order.length + " sources" : "Show fewer"; }); }
+  return el;
+}
+document.addEventListener("click", (e) => { const b = e.target.closest(".sref,.srow"); if (b) openSource(b.dataset.src, b.dataset.key, b); });
 RENDERERS.narr = function (ctx) {
   const { sc, thread, events } = ctx; const N = sc.plan.length;
   let body, work, done = 0; const th = {}, rows = {};
@@ -1758,6 +1892,13 @@ RENDERERS.narr = function (ctx) {
       }
     };
   }
+  let ff = null;
+  function ffBuild() {
+    ff = frag('<section class="ffd' + (animOK() ? " enter" : "") + '" aria-label="Findings"><div class="ffd__h"><span class="ffd__k">Found so far</span><span class="ffd__n"></span></div><ol class="ffd__l"></ol>' +
+      '<div class="ffd__now" aria-live="polite"><span class="st st--w" aria-hidden="true"></span><span class="ffd__nt shim">Thinking</span></div></section>');
+    work.appendChild(ff);
+  }
+  function ffNow(t) { if (!ff) return; const n = ff.querySelector(".ffd__nt"); if (n) { n.innerHTML = t; n.classList.remove("enter"); void n.offsetWidth; n.classList.add("enter"); } }
   return {
     on(ev) {
       switch (ev.type) {
@@ -1765,16 +1906,30 @@ RENDERERS.narr = function (ctx) {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
           work = frag('<div class="nwork"></div>'); body.appendChild(work); break;
         }
-        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el);  break;
-        case "plan": break;
-        case "thinkEnd": th[ev.id].end(); break;
-        case "say": (ev.final ? body : work).appendChild(sayEl(ev.lines, "say")); break;
-        case "stepStart": { const s = sc.plan[ev.step]; rows[ev.step] = stepRow(s, ev.step); work.appendChild(rows[ev.step].el); agStart(s.agent, s.title); break; }
-        case "stepEnd": { const s = sc.plan[ev.step]; done++; rows[ev.step].end(); agEnd(s.agent, s.result); break; }
-        case "agents": { work.appendChild(agentsEl(sc)); break; }
+        case "think": {
+          if (ev.id === "t0") break;
+          if (ff) ffNow(ev.final ? "Bringing the findings together" : "Thinking");
+          break;
+        }
+        case "plan": case "thinkEnd": case "agents": break;
+        case "say":
+          if (ev.final) break;
+          if (ev.id === "ack") { work.appendChild(sayEl(ev.lines, "say")); ffBuild(); break; }
+          ffNow(esc(ev.lines[0])); break;
+        case "stepStart": { const s = sc.plan[ev.step]; ffNow(esc(s.title) + "…"); agStart(s.agent, s.title); break; }
+        case "stepEnd": {
+          const s = sc.plan[ev.step], st = stateOf(s); done++;
+          const txt = (FOUND[S.sc] || [])[ev.step] || s.result;
+          const li = frag('<li class="ffr' + (animOK() ? " enter" : "") + '">' + stIcon(st) + '<span class="ffr__t">' + fmt(txt, srcOrder(sc)) + statusBadge(s) + '</span></li>');
+          ff.querySelector(".ffd__l").appendChild(li);
+          ff.querySelector(".ffd__n").textContent = done + (done === 1 ? " finding" : " findings");
+          agEnd(s.agent, s.result); break;
+        }
         case "answer": {
-          body.appendChild(answerEl(sc, events, { compact: true }));
-          body.appendChild(sourcesEl());
+          const nw = ff.querySelector(".ffd__now"); if (nw) nw.remove();
+          ff.querySelector(".ffd__k").textContent = "Found";
+          ff.querySelector(".ffd__n").textContent = done + " findings · " + N + " steps · " + secs(ev.at) + "s";
+          body.appendChild(narrAnswer(sc, { noGroups: true }));
           card2done = true; slow.hidden = true;
           fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
           fc.hidden = !fc.children.length;
