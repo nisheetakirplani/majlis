@@ -1765,13 +1765,13 @@ RENDERERS.narr = function (ctx) {
           thread.appendChild(userBubble(sc.query)); const t = botTurn(); thread.appendChild(t.el); body = t.body;
           work = frag('<div class="nwork"></div>'); body.appendChild(work); break;
         }
-        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el); if (plan && ev.step != null) planRow(ev.step, "Deciding the next step"); break;
-        case "plan": work.appendChild(planCard()); break;
+        case "think": th[ev.id] = thoughtLine(ev); work.appendChild(th[ev.id].el);  break;
+        case "plan": break;
         case "thinkEnd": th[ev.id].end(); break;
         case "say": (ev.final ? body : work).appendChild(sayEl(ev.lines, "say")); break;
-        case "stepStart": { const s = sc.plan[ev.step]; rows[ev.step] = stepRow(s, ev.step); work.appendChild(rows[ev.step].el); agStart(s.agent, s.title); planUpdate(ev.step, "w", s); break; }
-        case "stepEnd": { const s = sc.plan[ev.step]; done++; rows[ev.step].end(); agEnd(s.agent, s.result); planUpdate(ev.step, "d", s); break; }
-        case "agents": { work.appendChild(agentsEl(sc)); plan.querySelector(".nplan__n").textContent = N + " steps · all done"; break; }
+        case "stepStart": { const s = sc.plan[ev.step]; rows[ev.step] = stepRow(s, ev.step); work.appendChild(rows[ev.step].el); agStart(s.agent, s.title); break; }
+        case "stepEnd": { const s = sc.plan[ev.step]; done++; rows[ev.step].end(); agEnd(s.agent, s.result); break; }
+        case "agents": { work.appendChild(agentsEl(sc)); break; }
         case "answer": {
           body.appendChild(answerEl(sc, events, { compact: true }));
           body.appendChild(sourcesEl());
