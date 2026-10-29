@@ -1014,6 +1014,31 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .tsr__t small{display:block;font-size:12px;color:var(--muted)}
 .tsr__t small.is-conflict{color:var(--warn)}.tsr__t small.is-locked{color:var(--lock)}
 @media (prefers-reduced-motion:reduce){.pen__l,.pen__n,.dgrid i,.tk__sk{animation:none!important}.pen__l{stroke-dashoffset:0}}
+
+/* steps popover · refined */
+.tray__pop:not(.tray__pop--src){padding:0;max-height:380px}
+.tray__pop:not(.tray__pop--src) .tray__ph{position:sticky;top:0;z-index:1;justify-content:space-between;align-items:center;margin:0;padding:14px 18px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
+.tray__ph b{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink)}
+.tray__meta{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tray__list{gap:0;padding:6px 18px 10px;list-style:none;margin:0}
+.tray__list .tli{position:relative;grid-template-columns:16px minmax(0,1fr) auto;column-gap:14px;padding:10px 0}
+.tray__list .tli:not(:last-child)::before{content:"";position:absolute;left:7.5px;top:32px;bottom:-6px;width:1px;background:var(--line-2)}
+.tray__list .tli .st{width:16px;height:16px;margin-top:2px;border:0}
+.tray__list .tli .st svg{width:9px;height:9px}
+.tray__list .st--d{background:var(--good-bg);color:var(--good)}
+.tray__list .st--f{background:var(--warn-bg);color:var(--warn)}
+.tray__list .st--l{background:var(--lock-bg);color:var(--lock)}
+.tray__list .tli__b>b{font-size:14px;font-weight:500;line-height:20px;color:var(--ink)}
+.tray__list .tli.is-w .tli__b>b{color:var(--muted)}
+.tray__list .tli__b small{font-size:13px;line-height:19px;color:var(--muted);margin-top:2px}
+.tray__list .tli__b small .fig{font-weight:600;color:var(--ink-2)}
+.tray__list .tli__b small .was{color:var(--faint)}
+.tray__list .sref{min-width:14px;height:14px;padding:0 3px;margin-left:3px;border:0;border-radius:4px;background:var(--surface-3);color:var(--muted);font-size:9.5px;font-weight:600;vertical-align:2px}
+.tray__list .sref:hover{background:var(--accent);color:var(--accent-ink)}
+.tray__list .badge{display:inline;line-height:inherit;height:auto;padding:0;margin-left:8px;background:none;font-size:12px;font-weight:500;vertical-align:0}
+.tray__list .badge svg{display:none}
+.tray__list .badge::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:2px}
+.tray__list .tli__t{font-size:12px;line-height:20px;padding-top:0;color:var(--faint)}
 </style>
 </head>
 <body>
@@ -1049,7 +1074,7 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
         <div class="foot">
           <div class="fchips" id="fchips" role="group" aria-label="Suggested follow-ups" hidden></div>
           <div class="tray" id="tray" hidden>
-            <div class="tray__pop" id="trayPop" hidden><div class="tray__ph"><b>Steps so far</b><small>Majlis adds each step as it decides it</small></div><ol class="tray__list" id="trayList"></ol></div>
+            <div class="tray__pop" id="trayPop" hidden><div class="tray__ph"><b>Steps</b><span class="tray__meta" id="trayMeta"></span></div><ol class="tray__list" id="trayList"></ol></div>
             <div class="tray__pop tray__pop--src" id="traySrcPop" hidden><div class="tray__ph"><b>Sources</b><small>Tap one to see the exact row or passage</small></div><ol class="tray__list" id="traySrcList"></ol></div>
             <button type="button" class="tray__bar" id="trayBar" aria-expanded="false" aria-controls="trayPop"><span class="tray__ic" id="trayIc"></span><span class="tray__t" id="trayT"></span><span class="tray__n" id="trayN"></span><svg class="tray__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
             <button type="button" class="tray__src" id="traySrc" aria-expanded="false" aria-controls="traySrcPop"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg>Sources<em id="traySrcN">0</em><svg class="tray__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
@@ -2037,6 +2062,8 @@ RENDERERS.tray = function (ctx) {
   const CK = '<span class="st st--d">' + I.check + "</span>";
   function setBar(icon, text, count) { $("#trayIc").innerHTML = icon; $("#trayT").textContent = text; $("#trayN").textContent = count; }
   function drawList() {
+    const nd = steps.filter((s) => s.k !== "w").length;
+    $("#trayMeta").textContent = nd ? nd + " done" + (nd < steps.length ? " · 1 in progress" : "") : "Starting";
     $("#trayList").innerHTML = steps.map((s) => '<li class="tli is-' + s.k + '">' + (s.k === "w" ? GRID : stIcon(s.st)) + '<span class="tli__b"><b>' + esc(s.title) + "</b>" + (s.found ? '<small>' + s.found + "</small>" : "") + "</span>" + (s.t ? '<span class="tli__t">' + s.t + "</span>" : "") + "</li>").join("");
   }
   function toggle(btn, p, other, otherBtn) {
