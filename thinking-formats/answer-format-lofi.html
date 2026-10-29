@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Answer formatting, lo-fi</title>
+<!--
+  Lo-fi wireframes: eight ways to improve the data formatting of the Majlis answer
+  (staged narrative and answer-first share the same answer). Light mode only, greyscale on purpose.
+  Top: the current answer next to the answer with all eight changes. Below: one before/after card per change.
+-->
+<style>
+:root{--bg:#f3f4f2;--paper:#fff;--ink:#222;--ink2:#555;--mute:#888;--line:#cfd2cc;--fill:#eceee9;--fill2:#dcdfd8;--red:#d64b2a;
+  --sans:"Host Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55}
+h1,h2,h3,h4,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.wrap{max-width:1320px;margin:0 auto;padding:36px 32px 64px;display:flex;flex-direction:column;gap:32px}
+.hd h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.hd p{margin-top:6px;color:var(--ink2);max-width:900px}
+.sec__h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.sec__h h2{font-size:19px;font-weight:600}
+.sec__h p{color:var(--ink2);font-size:13.5px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pane{display:flex;flex-direction:column;gap:12px;padding:20px 22px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.pane.after{border:2px solid var(--ink)}
+.pane__k{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.pane.after .pane__k{color:var(--ink)}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:none}
+.lead{font-size:16.5px;font-weight:600;line-height:1.45}
+.lbl{font-size:12.5px;font-weight:600;color:var(--mute);margin-top:4px}
+.sub{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-top:2px}
+.pts{display:flex;flex-direction:column;gap:7px}
+.pts li{position:relative;padding-left:16px;font-size:14px}
+.pts li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:1px;background:var(--ink)}
+.chip{display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:4px;border-radius:6px;background:var(--fill2);font-size:11.5px;font-weight:600;vertical-align:1px}
+sup.s{display:inline-grid;place-items:center;min-width:16px;height:16px;padding:0 4px;margin-left:2px;border-radius:4px;background:var(--fill);border:1px solid var(--line);font-size:10.5px;font-weight:700;vertical-align:4px;line-height:1}
+b.n{font-weight:700}
+.was{color:var(--mute);font-weight:400}
+.q{display:inline-block;margin-left:6px;padding:0 6px;border-radius:4px;border:1px dashed var(--ink2);font-size:11.5px;font-weight:600;color:var(--ink2);vertical-align:1px}
+.conf{font-size:13.5px;color:var(--ink2)}
+.conf b{color:var(--ink)}
+.gaps{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2)}
+.gaps li b{color:var(--ink);font-weight:600}
+.actcard{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13.5px}
+.actcard small{display:block;color:var(--mute);font-size:12px}
+.foot{font-size:12.5px;color:var(--mute);padding-top:8px;border-top:1px solid var(--line)}
+.srcgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.srcgrid div{height:44px;border:1px solid var(--line);border-radius:8px;background:var(--fill)}
+.srcl{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--ink2)}
+.srcl li{display:grid;grid-template-columns:18px 1fr auto;gap:8px}
+.srcl li span:last-child{color:var(--mute)}
+.more{font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.mk{position:relative}
+.mk::after{content:attr(data-n);position:absolute;top:-8px;right:-10px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;line-height:1}
+.mk.l::after{right:auto;left:-22px;top:0}
+table.t{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.t th{text-align:left;font-size:11.5px;color:var(--mute);font-weight:600;padding:4px 6px;border-bottom:1px solid var(--line)}
+table.t td{padding:5px 6px;border-bottom:1px solid var(--fill2)}
+table.t .r{text-align:right}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,600px),1fr));gap:16px}
+.card{display:flex;flex-direction:column;gap:10px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.card__h{display:flex;align-items:center;gap:8px}
+.card__h .num{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:var(--red);color:#fff;font-size:11.5px;font-weight:700}
+.card__h h3{font-size:15px;font-weight:600;flex:1}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ba>div{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1.5px dashed var(--line);border-radius:10px;background:#fbfbfa;font-size:13px}
+.ba>div.a{border-style:solid;border-color:var(--ink)}
+.ba .k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ba>div.a .k{color:var(--ink)}
+.why{font-size:13px;color:var(--ink2)}
+.why b{color:var(--ink)}
+.pri{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;background:var(--ink);color:#fff;font-size:11px;font-weight:700}
+@media (max-width:900px){.cmp,.ba{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hd">
+    <h1>Answer formatting: lo-fi</h1>
+    <p>Eight ways to make the data in the answer faster to read, without adding charts. Shown on the Complex question, <b>Why did attrition rise in Sales and what should we do?</b> Top: today's answer next to the answer with all eight changes (red numbers). Below: one before and after per change, with the reason. The four marked <span class="pri">Start here</span> give most of the gain.</p>
+  </header>
+
+  <section>
+    <div class="sec__h"><h2>Today and with all eight changes</h2><p>Same content, same order of sections.</p></div>
+    <div class="cmp">
+      <article class="pane">
+        <span class="pane__k">Today</span>
+        <p class="lead">Sales attrition rose from 4.2% to 7.5% in Q3, mostly in Mid-market, after the 1 July commission plan and territory changes. The fastest lever is quota relief for reassigned accounts.</p>
+        <p class="conf"><b>Confidence: medium.</b> Timing, exit reasons and the plan change point the same way, but the cause is not proven.</p>
+        <ul class="pts"><li>Exit interview notes are restricted and were not read <span class="chip">Locked</span></li><li>HRMS and CRM disagree on Sales headcount, 412 against 398 <span class="chip">HRMS</span><span class="chip">CRM</span></li><li>The exit survey covers 22 of 31 leavers <span class="chip">Exit survey</span></li></ul>
+        <p class="lbl">What we found</p>
+        <ul class="pts"><li>31 people left Sales in Q3, against 17 in Q2. <span class="chip">HRMS</span></li><li>Mid-market is where it happened: 17 of the 31 leavers, an attrition rate of 10.4%. <span class="chip">HRMS</span></li><li>The rise began in the quarter the commission plan changed, on 1 July. Quota relief now only starts after 90 days. <span class="chip">SharePoint</span></li><li>12 of the 22 leavers who answered the exit survey named the commission changes. <span class="chip">Exit survey</span></li><li>Median quota attainment in Mid-market fell from 92% to 71%. <span class="chip">CRM</span></li></ul>
+        <p class="lbl">What to do next</p>
+        <div class="actcard"><b>Do this first:</b> Apply quota relief to reassigned Mid-market accounts from day one.<small>CRO with Sales operations · Decide this month</small></div>
+        <p class="foot">Data as of 27 Oct 2026 · HRMS, CRM, Exit survey, HR case management, SharePoint, Sales operations</p>
+        <p class="lbl">Sources 6</p>
+        <div class="srcgrid"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </article>
+
+      <article class="pane after">
+        <span class="pane__k">With all eight <span class="tag">Proposed</span></span>
+        <p class="lead mk" data-n="3">Sales attrition rose to <b class="n">7.5%</b> <span class="was">(was 4.2%)</span> in Q3, mostly in Mid-market, after the 1 July commission changes.<sup class="s">1</sup> The fastest lever is quota relief for reassigned accounts.</p>
+        <p class="conf"><b>Confidence: medium.</b> The cause is likely, not proven.</p>
+        <ul class="gaps mk" data-n="5"><li><b>Not read:</b> exit interview notes<sup class="s">5</sup></li><li><b>Two counts:</b> 412 HRMS, 398 CRM; HRMS used<sup class="s">1</sup><sup class="s">3</sup></li><li><b>Partial:</b> 22 of 31 leavers surveyed<sup class="s">4</sup></li></ul>
+        <p class="lbl mk l" data-n="2">What we found</p>
+        <p class="sub">What happened</p>
+        <ul class="pts"><li class="mk" data-n="1"><b class="n">31</b> people left Sales in Q3 <span class="was">(was 17)</span>.<sup class="s">1</sup></li></ul>
+        <p class="sub">Where</p>
+        <ul class="pts"><li>Mid-market: <b class="n">17 of 31</b> leavers, attrition <b class="n">10.4%</b>.<sup class="s">1</sup></li><li>Mid-market quota attainment <b class="n">71%</b> <span class="was">(from 92%)</span>.<sup class="s">3</sup></li></ul>
+        <p class="sub">Why</p>
+        <ul class="pts"><li class="mk" data-n="4">The rise began when the commission plan changed on 1 July; quota relief now starts after 90 days.<sup class="s">6</sup><span class="q">Likely</span></li><li><b class="n">12 of 22</b> survey replies named the commission changes.<sup class="s">4</sup><span class="q">Partial</span></li></ul>
+        <p class="lbl">What to do next</p>
+        <div class="actcard"><b>Do this first:</b> Apply quota relief to reassigned Mid-market accounts from day one.<small>CRO with Sales operations · Decide this month</small></div>
+        <p class="foot mk" data-n="8" style="align-self:stretch"><b style="color:var(--ink)">Current to 27 Oct.</b> From HRMS, CRM, the exit survey and the commission plan.</p>
+        <p class="lbl">Sources</p>
+        <ol class="srcl mk l" data-n="7"><li><span>1</span><span>HRMS · Sales headcount and leavers by team</span><span>27 Oct · Read</span></li><li><span>2</span><span>HRMS · Quarterly attrition</span><span>27 Oct · Read</span></li><li><span>3</span><span>CRM · Sellers and quota</span><span>27 Oct · Conflict</span></li></ol>
+        <span class="more">Show all 6 sources</span>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec__h"><h2>The eight changes</h2><p>Before on the left, after on the right.</p></div>
+    <div class="cards">
+      <article class="card"><div class="card__h"><span class="num">1</span><h3>Make the numbers stand out</h3><span class="pri">Start here</span></div>
+        <div class="ba"><div><span class="k">Before</span><p>Median quota attainment in Mid-market fell from 92% to 71%.</p><p>Q3 is 0.4 points above Q2.</p></div><div class="a"><span class="k">After</span><p>Mid-market quota attainment <b class="n">71%</b> <span class="was">(from 92%)</span>.</p><p>Attrition <b class="n">3.1%</b> <span class="was">(was 2.7%)</span>.</p></div></div>
+        <p class="why"><b>Why:</b> the eye finds the figure first, and change is always written one way, so there is nothing to decode. Figures use equal-width digits so they line up. <b>Risk:</b> too much bold stops working; one figure per sentence.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">2</span><h3>Order findings as a story</h3><span class="pri">Start here</span></div>
+        <div class="ba"><div><span class="k">Before</span><ul class="pts"><li>31 left Sales…</li><li>Mid-market is where…</li><li>The rise began…</li><li>12 of 22…</li><li>Attainment fell…</li></ul></div><div class="a"><span class="k">After</span><p class="sub">What happened</p><ul class="pts"><li>31 left Sales…</li></ul><p class="sub">Where</p><ul class="pts"><li>Mid-market…</li></ul><p class="sub">Why</p><ul class="pts"><li>Commission change…</li></ul></div></div>
+        <p class="why"><b>Why:</b> five equal bullets hide the chain of cause; three short labels make the reasoning readable at a glance. <b>Risk:</b> not every question has a "why"; use only the labels that apply.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">3</span><h3>Lighter source marks</h3><span class="pri">Start here</span></div>
+        <div class="ba"><div><span class="k">Before</span><p>31 people left Sales in Q3. <span class="chip">HRMS</span></p></div><div class="a"><span class="k">After</span><p>31 people left Sales in Q3.<sup class="s">1</sup></p><p style="font-size:12px;color:var(--mute)">¹ opens the same row; listed once in Sources.</p></div></div>
+        <p class="why"><b>Why:</b> one small number per claim reads like a report and removes the coloured blocks, while checking stays one tap away. <b>Risk:</b> numbers say less than names; hovering shows the system and record.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">4</span><h3>Mark how sure each finding is</h3></div>
+        <div class="ba"><div><span class="k">Before</span><p>The rise began when the commission plan changed.</p><p style="font-size:12px;color:var(--mute)">Certainty only in the confidence line above.</p></div><div class="a"><span class="k">After</span><p>The rise began when the commission plan changed. <span class="q">Likely</span></p><p>12 of 22 named it. <span class="q">Partial</span></p></div></div>
+        <p class="why"><b>Why:</b> executives quote single sentences; each one should carry its own certainty. Confirmed facts stay unmarked. <b>Risk:</b> too many marks look unsure; only "Likely" and "Partial".</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">5</span><h3>Gaps as short, specific lines</h3></div>
+        <div class="ba"><div><span class="k">Before</span><p>Exit interview notes are restricted and were not read.</p><p>HRMS and CRM disagree on Sales headcount, 412 against 398.</p></div><div class="a"><span class="k">After</span><p><b>Not read:</b> exit interview notes</p><p><b>Two counts:</b> 412 HRMS, 398 CRM; HRMS used</p><p><b>Partial:</b> 22 of 31 surveyed</p></div></div>
+        <p class="why"><b>Why:</b> the kind of gap comes first in three words, so the list scans like a checklist and says which figure was used. <b>Risk:</b> labels must stay consistent across answers.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">6</span><h3>A small table only when it earns it</h3></div>
+        <div class="ba"><div><span class="k">Before (Moderate)</span><ul class="pts"><li>UAE ahead by 4.2%, AED 182.4M</li><li>Europe ahead by 2.5%, AED 77.9M</li><li>Saudi Arabia behind by 5.6%…</li><li>Egypt and N. Africa behind by 6.0%…</li></ul></div><div class="a"><span class="k">After (Moderate)</span><table class="t"><thead><tr><th>Region</th><th class="r">Actual</th><th class="r">vs plan</th></tr></thead><tbody><tr><td>Egypt and N. Africa</td><td class="r">58.3</td><td class="r"><b>−6.0%</b></td></tr><tr><td>Saudi Arabia</td><td class="r">141.6</td><td class="r"><b>−5.6%</b></td></tr><tr><td>Europe</td><td class="r">77.9</td><td class="r">+2.5%</td></tr><tr><td>UAE</td><td class="r">182.4</td><td class="r">+4.2%</td></tr></tbody></table></div></div>
+        <p class="why"><b>Why:</b> comparing one measure across four or more items is faster down a column, sorted worst first. <b>Rule:</b> no table for Simple or Complex; bullets stay.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">7</span><h3>Compact sources list</h3><span class="pri">Start here</span></div>
+        <div class="ba"><div><span class="k">Before</span><div class="srcgrid"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div class="a"><span class="k">After</span><ol class="srcl"><li><span>1</span><span>HRMS · Sales by team</span><span>27 Oct · Read</span></li><li><span>2</span><span>HRMS · Attrition trend</span><span>27 Oct · Read</span></li><li><span>3</span><span>CRM · Sellers and quota</span><span>Conflict</span></li></ol><span class="more">Show all 6 sources</span></div></div>
+        <p class="why"><b>Why:</b> six cards take more space than the findings; one line each, numbered to match the marks in the text. <b>Risk:</b> a locked source must stay visible even when the list is collapsed.</p></article>
+
+      <article class="card"><div class="card__h"><span class="num">8</span><h3>Plain-language date line</h3></div>
+        <div class="ba"><div><span class="k">Before</span><p style="font-size:12.5px;color:var(--mute)">Data as of 27 Oct 2026 · HRMS, CRM, Exit survey, HR case management, SharePoint, Sales operations</p></div><div class="a"><span class="k">After</span><p style="font-size:12.5px;color:var(--ink2)"><b style="color:var(--ink)">Current to 27 Oct.</b> From HRMS, CRM, the exit survey and the commission plan.</p></div></div>
+        <p class="why"><b>Why:</b> reads as a sentence and names sources the way people say them. <b>Risk:</b> must still name every system that was used.</p></article>
+    </div>
+  </section>
+</main>
+</body>
+</html>
