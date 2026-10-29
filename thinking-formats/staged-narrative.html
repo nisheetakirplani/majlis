@@ -864,6 +864,35 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 }
 
 .ans.br{padding:4px 0 8px}
+
+/* finding rows expand inline into the step behind them */
+.ffx{display:flex;flex-direction:column}
+.ffr{grid-template-columns:16px minmax(0,1fr) 16px!important;margin:0 -8px;padding:4px 8px;border-radius:8px;cursor:pointer;transition:background var(--d-fast)}
+.ffr:hover,.ffr:focus-visible,.ffx.is-open .ffr{background:rgba(28,40,34,.045)}
+.ffr__c{display:grid;place-items:center;height:21px;color:var(--faint);opacity:0;transition:opacity var(--d-fast),transform var(--d-base) var(--ease-out)}
+.ffr__c svg{width:13px;height:13px}
+.ffr:hover .ffr__c,.ffr:focus-visible .ffr__c,.ffx.is-open .ffr__c{opacity:1}
+.ffx.is-open .ffr__c{transform:rotate(90deg)}
+.ffr__x{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-base) var(--ease-out)}
+.ffr__x>div{overflow:hidden;min-height:0}
+.ffx.is-open .ffr__x{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows var(--d-base) var(--ease-out),visibility 0s}
+.ffx:not(.is-open) .ffr__x{visibility:hidden;transition:grid-template-rows var(--d-base) var(--ease-out),visibility 0s var(--d-base)}
+.ffr__x>div>*:first-child{margin-top:8px}
+.ffr__x>div{padding-left:26px}
+.ffx__h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0}
+.ffx__h b{font-size:13px;font-weight:600;color:var(--ink)}
+.ffx__h span{font-size:12px;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ffx__why{margin:4px 0 0;font-size:13px;line-height:1.55;color:var(--muted)}
+.ffx__note{display:flex;gap:6px;align-items:baseline;margin:6px 0 0;font-size:12.5px;color:var(--lock)}
+.ffx__note.is-f{color:var(--warn)}
+.ffx__note svg{width:11px;height:11px;flex:none;transform:translateY(1px)}
+.ffx__src{list-style:none;margin:8px 0 6px;padding:0;display:flex;flex-direction:column;gap:2px}
+.ffs{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:5px 8px;margin-left:-8px;border-radius:7px;font-size:12.5px;text-align:start;color:var(--ink-2)}
+.ffs:hover,.ffs:focus-visible{background:var(--surface)}
+.ffs__n{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:var(--accent-soft);color:var(--accent-text);font-size:10.5px;font-weight:700}
+.ffs__t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ffs__s{font-size:12px;color:var(--faint)}
+@media (prefers-reduced-motion:reduce){.ffr__x,.ffr__c{transition:none}}
 </style>
 </head>
 <body>
@@ -1860,7 +1889,7 @@ function narrAnswer(sc, opts) {
   if (more) { list.classList.add("is-short"); more.addEventListener("click", () => { const o = more.getAttribute("aria-expanded") === "true"; more.setAttribute("aria-expanded", String(!o)); list.classList.toggle("is-short", o); more.textContent = o ? "Show all " + order.length + " sources" : "Show fewer"; }); }
   return el;
 }
-document.addEventListener("click", (e) => { const b = e.target.closest(".sref,.srow"); if (b) openSource(b.dataset.src, b.dataset.key, b); });
+document.addEventListener("click", (e) => { const b = e.target.closest(".sref,.srow,.ffs"); if (b) openSource(b.dataset.src, b.dataset.key, b); });
 RENDERERS.narr = function (ctx) {
   const { sc, thread, events } = ctx; const N = sc.plan.length;
   let body, work, done = 0; const th = {}, rows = {};
@@ -1944,6 +1973,17 @@ RENDERERS.narr = function (ctx) {
       }
     };
   }
+  /* Inline step detail, opened from a finding row: what Majlis did, why, who, and what it read. */
+  function stepX(s) {
+    const order = srcOrder(sc);
+    const srcs = s.sources.map((id) => { const x = sc.sources[id], n = order.indexOf(id) + 1, lk = x.kind === "locked";
+      return '<li><button type="button" class="ffs" data-src="' + id + '" data-key=""><span class="ffs__n">' + n + '</span><span class="ffs__t">' + esc(x.system.split(",")[0]) + " · " + esc(x.short) + '</span><span class="ffs__s">' + (lk ? "Not read" : esc(x.asOf.replace(/,.*$/, "").replace(/ 2026$/, ""))) + "</span></button></li>"; }).join("");
+    return '<p class="ffx__h"><b>' + esc(s.title) + '</b><span>' + esc(AGENTS[s.agent].name) + " · " + (s.ms / 1000).toFixed(1) + "s</span></p>" +
+      '<p class="ffx__why">' + esc(s.say.join(" ")) + "</p>" +
+      (s.status === "locked" ? '<p class="ffx__note">' + I.lock + " " + esc(lockedOf(s, sc).title) + " was not read: " + esc(lockedOf(s, sc).reason) + "</p>" : "") +
+      (s.status === "conflict" ? '<p class="ffx__note is-f">' + I.warn + " " + esc(s.result) + "</p>" : "") +
+      (srcs ? '<ol class="ffx__src">' + srcs + "</ol>" : "");
+  }
   let ff = null;
   function ffBuild() {
     ff = frag('<section class="ffd' + (animOK() ? " enter" : "") + '" aria-label="Findings"><div class="ffd__h"><span class="ffd__k">Found so far</span><span class="ffd__n"></span></div><ol class="ffd__l"></ol>' +
@@ -1972,7 +2012,11 @@ RENDERERS.narr = function (ctx) {
         case "stepEnd": {
           const s = sc.plan[ev.step], st = stateOf(s); done++;
           const txt = (FOUND[S.sc] || [])[ev.step] || s.result;
-          const li = frag('<li class="ffr' + (animOK() ? " enter" : "") + '">' + stIcon(st) + '<span class="ffr__t">' + fmt(txt, srcOrder(sc)) + statusBadge(s) + '</span></li>');
+          const li = frag('<li class="ffx' + (animOK() ? " enter" : "") + '"><div class="ffr" role="button" tabindex="0" aria-expanded="false">' + stIcon(st) + '<span class="ffr__t">' + fmt(txt, srcOrder(sc)) + statusBadge(s) + '</span><span class="ffr__c" aria-hidden="true">' + I.chev + '</span></div><div class="ffr__x"><div>' + stepX(s) + "</div></div></li>");
+          const row = li.querySelector(".ffr");
+          const tog = () => { const o = li.classList.toggle("is-open"); row.setAttribute("aria-expanded", String(o)); };
+          row.addEventListener("click", (e) => { if (!e.target.closest(".sref")) tog(); });
+          row.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tog(); } });
           ff.querySelector(".ffd__l").appendChild(li);
           ff.querySelector(".ffd__n").textContent = done + (done === 1 ? " finding" : " findings");
           agEnd(s.agent, s.result); break;
