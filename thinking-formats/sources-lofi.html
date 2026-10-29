@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Sources, lo-fi options</title>
+<!--
+  Lo-fi wireframes: ways to show the Sources block at the end of a Majlis response
+  (staged narrative). Light mode only, greyscale on purpose; red notes explain the idea.
+  Data: the Complex scenario, 6 sources from 5 systems, one conflict, one locked.
+-->
+<style>
+:root{--bg:#f3f4f2;--paper:#fff;--ink:#222;--ink2:#555;--mute:#888;--line:#cfd2cc;--fill:#eceee9;--fill2:#dcdfd8;--red:#d64b2a;
+  --sans:"Host Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:start}
+.wrap{max-width:1320px;margin:0 auto;padding:36px 24px 64px;display:flex;flex-direction:column;gap:28px}
+.hd h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.hd p{margin-top:6px;color:var(--ink2);max-width:860px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,600px),1fr));gap:18px}
+.opt{display:flex;flex-direction:column;gap:14px;padding:20px 22px 22px;background:var(--paper);border:1px solid var(--line);border-radius:16px}
+.opt--cur{background:transparent;border-style:dashed}
+.opt__h{display:flex;align-items:baseline;gap:10px}
+.opt__l{display:grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:7px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700}
+.opt--cur .opt__l{background:var(--fill2);color:var(--ink)}
+.opt__h h2{font-size:16px;font-weight:600}
+.opt__d{color:var(--ink2);font-size:13.5px}
+.note{font-size:12.5px;color:var(--red);display:flex;gap:6px}
+.note::before{content:"→";flex:none}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px;color:var(--ink2)}
+.pc b{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+.frame{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fafaf8;display:flex;flex-direction:column;gap:10px}
+.cap{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mute)}
+.ln{height:9px;border-radius:5px;background:var(--fill2)}
+.n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;background:var(--fill2);font-size:11px;font-weight:700;flex:none}
+.mut{color:var(--mute)}
+.flag{font-size:12px;font-weight:600}
+.flag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px;background:var(--ink)}
+.flag--lock::before{background:transparent;border:1.5px solid var(--ink)}
+.row{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 10px;border-radius:9px}
+.row+.row{border-top:1px solid var(--fill)}
+.row b{font-weight:500}
+.row small{display:block;font-size:12px;color:var(--mute)}
+.go{font-size:12.5px;color:var(--mute)}
+.box{border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.grp{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:8px 10px 2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--paper);font-size:12.5px}
+.chip .n{width:20px;height:20px}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:9px;background:var(--fill)}
+.seg span{padding:4px 10px;border-radius:7px;font-size:12.5px}
+.seg .on{background:var(--paper);box-shadow:0 1px 2px rgba(0,0,0,.08);font-weight:600}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:13px}
+.tile i{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+.one{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.one .sys{display:inline-flex}
+.one .sys span{width:22px;height:22px;border-radius:50%;background:var(--fill2);border:2px solid var(--paper);margin-left:-6px;display:grid;place-items:center;font-size:9px;font-weight:700}
+.one .sys span:first-child{margin-left:0}
+.claim{font-size:13px;color:var(--ink2)}
+.claim u{text-decoration:none;border-bottom:1.5px solid var(--ink);font-weight:600;color:var(--ink)}
+.pop{margin-left:24px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);box-shadow:0 8px 24px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:6px;font-size:12.5px;max-width:360px}
+.rec{padding:16px 20px;border-radius:14px;border:1.5px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.rec h2{font-size:16px;font-weight:600}
+.rec p{color:var(--ink2);font-size:13.5px}
+@media (max-width:640px){.wrap{padding:24px 16px 48px}.pc,.tiles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hd">
+    <h1>Sources, lo-fi options</h1>
+    <p>Where the Sources block sits at the end of the staged narrative response. All use the same six sources from the Complex question: five systems, one conflict, one locked. Red notes say what each option is trying to do. Pick one, or a mix, and I will build it.</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- CURRENT -->
+    <section class="opt opt--cur">
+      <div class="opt__h"><span class="opt__l">Now</span><h2>Current: list of source cards</h2></div>
+      <div class="frame">
+        <div><span class="cap">Sources</span> <span class="mut" style="font-size:12px">Tap a source to see the exact row or passage</span></div>
+        <div class="box row"><span class="n">1</span><b>HRMS · Sales by team</b><span class="go">27 Oct · Read &nbsp;View ›</span></div>
+        <div class="box row"><span class="n">2</span><b>HRMS · Attrition trend</b><span class="go">27 Oct · Read &nbsp;View ›</span></div>
+        <div class="box row"><span class="n">3</span><b>CRM · Sellers and quota</b><span class="go">27 Oct · Conflict &nbsp;View ›</span></div>
+        <span class="mut" style="font-size:12.5px">Show all 6 sources</span>
+        <span class="mut" style="font-size:12.5px">Current to 27 Oct. From HRMS, CRM, the exit survey and the commission plan.</span>
+      </div>
+      <p class="note">Every row repeats "Read" and "View", the cards are heavy, and the row does not say what the source was used for.</p>
+    </section>
+
+    <!-- A -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">A</span><h2>One line, opens on tap</h2></div>
+      <p class="opt__d">Sources fold into a single line under the response. Tapping it opens the list in place.</p>
+      <div class="frame">
+        <div class="one"><span class="sys"><span>HR</span><span>CR</span><span>EX</span><span>SP</span></span><span>Based on <b>6 sources</b> from HRMS, CRM, exit survey, SharePoint</span><span class="mut" style="margin-left:auto">›</span></div>
+        <span class="mut" style="font-size:12px">1 conflict · 1 not read · current to 27 Oct</span>
+      </div>
+      <p class="note">Smallest footprint. The response stays the focus; the numbered marks in the text are still the fast way in.</p>
+      <div class="pc"><div><b>Good for</b>Executives who rarely open sources.</div><div><b>Watch</b>One more tap to see a list.</div></div>
+    </section>
+
+    <!-- B -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">B</span><h2>What each source backs</h2></div>
+      <p class="opt__d">Each row says which figure in the response it supports. Status shows only when something is off.</p>
+      <div class="frame">
+        <span class="cap">Sources · 6</span>
+        <div class="box">
+          <div class="row"><span class="n">1</span><span><b>HRMS · Sales by team</b><small>Backs: Q3 attrition 7.5%, Mid-market 17 of 31</small></span><span class="go">›</span></div>
+          <div class="row"><span class="n">3</span><span><b>CRM · Sellers and quota</b><small>Backs: quota attainment 71%</small></span><span class="flag">Conflict</span></div>
+          <div class="row"><span class="n">5</span><span><b>HR case management · Exit interview notes</b><small>Would have backed: reasons for leaving</small></span><span class="flag flag--lock">Not read</span></div>
+          <div class="row"><span class="ln" style="width:20px;height:20px;border-radius:6px"></span><span class="ln" style="width:60%"></span><span></span></div>
+        </div>
+      </div>
+      <p class="note">Turns a list of files into evidence: you see why a source matters before you open it.</p>
+      <div class="pc"><div><b>Good for</b>Checking a single claim fast.</div><div><b>Watch</b>Two lines per row; longer list.</div></div>
+    </section>
+
+    <!-- C -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">C</span><h2>Grouped by system</h2></div>
+      <p class="opt__d">Sources sit under the system they came from. Dates and status move to the group or show only on exceptions.</p>
+      <div class="frame">
+        <span class="cap">Sources · 6 from 5 systems</span>
+        <div class="box">
+          <p class="grp">HRMS · 27 Oct</p>
+          <div class="row"><span class="n">1</span><b>Sales by team</b><span class="go">›</span></div>
+          <div class="row"><span class="n">2</span><b>Attrition trend</b><span class="go">›</span></div>
+          <p class="grp">CRM · 27 Oct</p>
+          <div class="row"><span class="n">3</span><b>Sellers and quota</b><span class="flag">Conflict</span></div>
+          <p class="grp">HR case management</p>
+          <div class="row"><span class="n">5</span><b>Exit interview notes</b><span class="flag flag--lock">Not read</span></div>
+        </div>
+      </div>
+      <p class="note">Matches how leaders think about data ("what did HR say, what did CRM say"). Scales when one system gives many sources.</p>
+      <div class="pc"><div><b>Good for</b>Many sources from few systems.</div><div><b>Watch</b>Numbers no longer run in order.</div></div>
+    </section>
+
+    <!-- D -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">D</span><h2>Trust summary with filter</h2></div>
+      <p class="opt__d">A one-line health check first, then a filter to see only what needs attention.</p>
+      <div class="frame">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="cap">Sources</span><span class="seg"><span class="on">All 6</span><span>Read 4</span><span>Conflict 1</span><span>Not read 1</span></span></div>
+        <div class="box">
+          <div class="row"><span class="n">3</span><span><b>CRM · Sellers and quota</b><small>398 sellers; HRMS says 412</small></span><span class="flag">Conflict</span></div>
+          <div class="row"><span class="n">5</span><span><b>HR case management · Exit interview notes</b><small>Restricted to HR Business Partners</small></span><span class="flag flag--lock">Not read</span></div>
+          <div class="row"><span class="ln" style="width:20px;height:20px;border-radius:6px"></span><span class="ln" style="width:55%"></span><span></span></div>
+        </div>
+      </div>
+      <p class="note">Problems sort to the top with their reason, so gaps are named where they are read.</p>
+      <div class="pc"><div><b>Good for</b>Audit and risk-minded readers.</div><div><b>Watch</b>Filter is overkill for 2–3 sources.</div></div>
+    </section>
+
+    <!-- E -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">E</span><h2>Chip strip</h2></div>
+      <p class="opt__d">Numbered chips in one wrapping line. Each chip opens the source sheet; a mark shows conflict or locked.</p>
+      <div class="frame">
+        <span class="cap">Sources</span>
+        <div class="chips">
+          <span class="chip"><span class="n">1</span>HRMS · Sales by team</span>
+          <span class="chip"><span class="n">2</span>HRMS · Attrition trend</span>
+          <span class="chip"><span class="n">3</span>CRM · Sellers <span class="flag"></span></span>
+          <span class="chip"><span class="n">4</span>Exit survey</span>
+          <span class="chip"><span class="n">5</span>HR notes <span class="flag flag--lock"></span></span>
+          <span class="chip"><span class="n">6</span>Comp plan FY26</span>
+        </div>
+      </div>
+      <p class="note">Same visual language as the numbered marks in the text, so the link between them is obvious.</p>
+      <div class="pc"><div><b>Good for</b>Compact, scannable, tappable.</div><div><b>Watch</b>Names get cut short; no dates.</div></div>
+    </section>
+
+    <!-- F -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">F</span><h2>Two-column tiles</h2></div>
+      <p class="opt__d">Small tiles with the system as a label, the title, and the date. Exceptions get a line of their own.</p>
+      <div class="frame">
+        <span class="cap">Sources · 6</span>
+        <div class="tiles">
+          <div class="tile"><i>1 · HRMS</i><b>Sales by team</b><span class="mut">27 Oct</span></div>
+          <div class="tile"><i>2 · HRMS</i><b>Attrition trend</b><span class="mut">27 Oct</span></div>
+          <div class="tile"><i>3 · CRM</i><b>Sellers and quota</b><span class="flag">Conflict</span></div>
+          <div class="tile"><i>4 · Exit survey</i><b>Exit reasons</b><span class="mut">25 Oct</span></div>
+        </div>
+      </div>
+      <p class="note">Uses the empty width on desktop; reads like a reference shelf.</p>
+      <div class="pc"><div><b>Good for</b>4–8 sources on wide screens.</div><div><b>Watch</b>Collapses to one column on phones.</div></div>
+    </section>
+
+    <!-- G -->
+    <section class="opt">
+      <div class="opt__h"><span class="opt__l">G</span><h2>No list: sources live on the claims</h2></div>
+      <p class="opt__d">Drop the block. Tapping a numbered mark opens a small card in place; a single line at the end keeps the date.</p>
+      <div class="frame">
+        <p class="claim">Sales attrition rose to <u>7.5%</u> <span class="n" style="width:18px;height:18px">1</span> in Q3, mostly in Mid-market…</p>
+        <div class="pop"><b>HRMS · Sales by team</b><span class="mut">Attrition 7.5% in Q3 (row: Sales, total) · 27 Oct</span><span>Open source ›</span></div>
+        <span class="mut" style="font-size:12.5px">Current to 27 Oct · 6 sources · 1 conflict · 1 not read</span>
+      </div>
+      <p class="note">The most minimal: proof sits exactly where the claim is, nothing to scroll past.</p>
+      <div class="pc"><div><b>Good for</b>Short answers, mobile.</div><div><b>Watch</b>No overview of everything read.</div></div>
+    </section>
+
+  </div>
+
+  <section class="rec">
+    <h2>My pick: A, opening into B</h2>
+    <p>Keep sources out of the way with the one-line summary (A), including the conflict and not-read counts. When opened, show rows that say what each source backs (B), with status only on exceptions. The numbered marks in the text keep opening the source sheet directly.</p>
+  </section>
+</main>
+</body>
+</html>
