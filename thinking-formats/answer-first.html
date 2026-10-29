@@ -1885,11 +1885,11 @@ RENDERERS.answer = function (ctx) {
   }
   thread.onmouseover = (e) => { const c = e.target.closest(".chip"); if (!c) return; const it = panel.querySelector('.srcitem[data-src="' + c.dataset.src + '"]'); if (it) it.classList.add("is-linked"); };
   thread.onmouseout = (e) => { if (e.target.closest(".chip")) $$(".srcitem.is-linked", panel).forEach((x) => x.classList.remove("is-linked")); };
-  const waitHTML = '<section class="ans ans--wait" aria-label="Answer, not ready yet"><div class="ans__k"><span class="memc">Institutional Memory</span><span class="badge badge--plain">Answer</span></div>' +
+  const waitHTML = '<section class="ans ans--wait" aria-label="Answer, not ready yet"><div class="ans__k"><span class="rsum"><span class="rsum__k">Response</span><span class="rsum__t">Waiting for the first figure</span></span></div>' +
     '<div class="skl" aria-hidden="true"><i style="width:88%;height:18px"></i><i style="width:62%;height:18px"></i><i style="width:100%;height:44px;border-radius:12px;margin-top:6px"></i><i style="width:100%;height:96px;border-radius:14px"></i></div>' +
     '<p class="waitnote">The answer fills in here as soon as the first figure is confirmed. It is marked Draft until every check has finished.</p></section>';
   function draftHTML(d) {
-    return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="memc">Institutional Memory</span></div>' +
+    return '<section class="ans' + (animOK() ? " enter" : "") + '" aria-label="Draft answer"><div class="ans__k"><span class="rsum"><span class="rsum__k">Response</span><span class="rsum__t">Draft · still checking</span></span></div>' +
       '<p class="ans__line">' + esc(d.headline) + '</p><p class="conf conf--draft"><b class="lvl">Still checking.</b><span class="gaps af-note">' + esc(d.note) + " Confidence is set when every check has finished.</span></p></section>";
   }
   function flash(lineEl, tagEl) { if (animOK()) { lineEl.classList.remove("is-flash"); void lineEl.offsetWidth; lineEl.classList.add("is-flash"); }  }
