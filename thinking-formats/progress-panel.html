@@ -950,6 +950,9 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 
 /* no agents button or popover in this version */
 #agBtn,#agPop{display:none!important}
+
+/* status line above the input removed: the ticker above the response covers it */
+#act{display:none!important}
 </style>
 </head>
 <body>
@@ -2058,7 +2061,7 @@ RENDERERS.side = function (ctx) {
         case "say":
           if (ev.id === "ack") {
             const first = P("#spRail .ri"); first.className = "ri is-done"; first.querySelector(".ri__b").innerHTML = '<p class="ri__t">Understood the question</p><p class="ri__f">' + esc(ev.lines[0].replace(/^Understood: (.)/, (m, c) => c.toUpperCase())) + "</p>";
-            tkFirst = "Thought for " + secs(thoughtMs) + "s";
+            tkFirst = "Thinking";
             ticker('<span class="tkr__dot"></span><span class="tkr__a">' + tkFirst + '</span><span class="tkr__s">·</span><span>' + esc(ev.lines[0]) + "</span>", true);
           }
           break;
@@ -2082,7 +2085,7 @@ RENDERERS.side = function (ctx) {
           if (cur) { cur.className = "ri is-done"; cur.querySelector(".ri__b").innerHTML = '<p class="ri__t">Response ready</p>'; }
           collapse(); setMeta();
           P("#spUsed").hidden = false; P(".spu").innerHTML = usedEl();
-          ticker('<span class="tkr__ok">' + I.check + '</span><span class="tkr__a">' + tkFirst + '</span><span class="tkr__s">·</span><span>Worked for ' + secs(ev.at) + "s · " + N + ' steps</span><span class="tkr__go">View activity' + CHV + "</span>", false);
+          ticker('<span class="tkr__ok">' + I.check + '</span><span>Worked for ' + secs(ev.at) + "s · " + N + ' steps</span><span class="tkr__go">View activity' + CHV + "</span>", false);
           body.appendChild(narrAnswer(sc, { noSources: true }));
           fc.innerHTML = (FOLLOWUPS[S.sc] || []).map((f, i) => '<button type="button" class="fchip" style="animation-delay:' + (i * 60) + 'ms" data-fup="' + esc(f[1]) + '">' + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>' + esc(f[1]) + "</button>").join("");
           fc.hidden = !fc.children.length;
