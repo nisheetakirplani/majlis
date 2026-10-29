@@ -866,7 +866,6 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .ans.br{padding:4px 0 8px}
 
 /* ===== progress panel version ===== */
-.actv{display:none!important}
 .app.has-panel .frame__body{grid-template-columns:minmax(0,1fr) 380px}
 .sp{display:flex;flex-direction:column;min-height:0;padding:0;background:var(--surface);border:1px solid var(--line-2);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;animation:spIn .32s var(--ease-out) both}
 @keyframes spIn{from{opacity:0;transform:translateX(16px)}}
@@ -924,6 +923,17 @@ body{background-color:var(--bg);background-image:var(--bgimg);background-attachm
 .sp__dh b{display:block;font-size:15px;font-weight:600}
 .sp__detail .kv{font-size:12.5px}
 .sp__detail .tbl{font-size:12.5px}
+/* collapsible sources */
+.sp__tog{display:flex;align-items:center;gap:8px;width:100%;height:36px;margin:-4px 0 6px;padding:0 6px 0 0;border-radius:10px;text-align:start}
+.sp__tog span{font-size:15px;font-weight:600}
+.sp__tog em{font-style:normal;font-size:12px;font-weight:600;padding:1px 7px;border-radius:6px;background:var(--surface-3);color:var(--ink-2)}
+.sp__chev{margin-left:auto;color:var(--muted);transition:transform var(--d-base) var(--ease-out)}
+.sp__tog:hover .sp__chev{color:var(--ink)}
+.sp__sec.is-closed .sp__chev{transform:rotate(-90deg)}
+.sp__coll{display:grid;grid-template-rows:1fr;transition:grid-template-rows 280ms var(--ease-out),opacity 200ms var(--ease-out)}
+.sp__coll>ol{min-height:0;overflow:hidden}
+.sp__sec.is-closed .sp__coll{grid-template-rows:0fr;opacity:0}
+.sp__sec.is-closed .sp__tog{margin-bottom:-8px}
 /* chat ticker: one line only */
 .tkr{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;max-width:100%;min-height:34px;padding:0 12px 0 8px;border-radius:10px;font-size:14px;color:var(--ink-2);text-align:start;transition:background var(--d-fast)}
 .tkr:hover{background:var(--surface)}
@@ -1946,16 +1956,45 @@ RENDERERS.side = function (ctx) {
   const app = $("#frame"); app.classList.add("has-panel"); panel.hidden = false;
   const fc = $("#fchips"); fc.hidden = true; fc.innerHTML = "";
   let body, tk, tkFirst = "", thoughtMs = 0, done = 0, seen = {}, cur = null;
+  const act = $("#act"); act.dataset.state = "run";
+  const pop = $("#agPop"), popList = $("#agPopList"), agBtn = $("#agBtn"), agState = {};
+  pop.hidden = true; popList.innerHTML = ""; agBtn.hidden = true; agBtn.setAttribute("aria-expanded", "false"); $("#agBtnT").textContent = "View agents in progress"; $("#agBtnAv").innerHTML = "";
+  agBtn.onclick = () => togglePop();
+  function togglePop(force) {
+    const open = force !== undefined ? force : pop.hidden;
+    agBtn.setAttribute("aria-expanded", String(open));
+    if (open) { pop.hidden = false; requestAnimationFrame(() => pop.classList.add("is-open")); }
+    else { pop.classList.remove("is-open"); setTimeout(() => { if (!pop.classList.contains("is-open")) pop.hidden = true; }, animOK() ? 200 : 0); }
+  }
+  const grid = '<span class="dgrid" aria-hidden="true">' + "<i></i>".repeat(9) + "</span>";
+  function popDraw() {
+    const ks = Object.keys(agState), working = ks.filter((k) => agState[k].st === "w").length, done = ks.filter((k) => agState[k].st === "d").length;
+    $("#agPopN").textContent = done + "/" + ks.length;
+    ks.forEach((k) => {
+      const a = agState[k]; let li = popList.querySelector('[data-ag="' + k + '"]');
+      if (!li) { li = frag('<li class="agi" data-ag="' + k + '"><span class="agi__st"></span><span class="agi__av ag-' + k + '"><i>' + AK[k] + '</i></span><span class="agi__t"><b>' + esc(AGENTS[k].name) + '</b><small></small></span><span class="agi__n"></span></li>'); popList.appendChild(li); }
+      li.className = "agi is-" + a.st;
+      const st = li.querySelector(".agi__st"), want = a.st === "w" ? "w" : "d";
+      if (st.dataset.v !== want) { st.dataset.v = want; st.innerHTML = want === "w" ? grid : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="ck" d="M5 12.5l4.5 4.5L19 7.5"/></svg>'; }
+      li.querySelector("small").textContent = a.st === "w" ? a.task : "Done · " + a.task;
+      li.querySelector(".agi__n").textContent = a.n + (a.n === 1 ? " step" : " steps");
+    });
+    $("#agBtnAv").innerHTML = ks.map((k) => '<i class="ag-' + k + (agState[k].st === "w" ? " is-w" : "") + '">' + AK[k] + "</i>").join("");
+    agBtn.hidden = ks.length === 0;
+  }
+  function agStart(k, task) { const a = agState[k] || (agState[k] = { n: 0 }); a.st = "w"; a.task = task; a.n++; Object.keys(agState).forEach((x) => { if (x !== k && agState[x].st === "w") agState[x].st = "d"; }); popDraw(); }
+  function agEnd(k, result) { const a = agState[k]; if (!a) return; a.st = "d"; a.task = result; popDraw(); }
   const CHV = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   panel.innerHTML =
     '<div class="sp__h"><b id="spTitle">Progress</b><span class="sp__meta" id="spMeta"></span><button type="button" class="sp__x" id="spClose" aria-label="Close panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>' +
     '<div class="sp__body" id="spBody">' +
       '<section class="sp__prog"><button type="button" class="ri__more" id="spMore" hidden></button><ol class="prail" id="spRail"></ol></section>' +
-      '<section class="sp__sec" id="spSrc" hidden><h4>Sources</h4><ol class="sps"></ol></section>' +
+      '<section class="sp__sec" id="spSrc" hidden><button type="button" class="sp__tog" aria-expanded="true" aria-controls="spSrcList"><span>Sources</span><em id="spSrcN">0</em>' + '<svg class="sp__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="sp__coll" id="spSrcList"><ol class="sps"></ol></div></section>' +
       '<section class="sp__sec" id="spUsed" hidden><h4>Used in this response</h4><div class="spu"></div></section>' +
     '</div>' +
     '<div class="sp__detail" id="spDetail" hidden></div>';
   const P = (s) => panel.querySelector(s);
+  P(".sp__tog").onclick = (e) => { const b = e.currentTarget, o = b.getAttribute("aria-expanded") === "true"; b.setAttribute("aria-expanded", String(!o)); P("#spSrc").classList.toggle("is-closed", o); };
   P("#spClose").onclick = () => app.classList.remove("has-panel");
   const KEEP = 4;
   function collapse() {
@@ -1973,6 +2012,7 @@ RENDERERS.side = function (ctx) {
       const li = frag('<li class="' + (animOK() ? "enter" : "") + '"><button type="button" class="spr" data-src="' + id + '" data-key=""><span class="spr__n">' + n + '</span><span class="spr__t"><b>' + esc(s.system.split(",")[0]) + " · " + esc(s.short) + '</b><small class="is-' + st.toLowerCase() + '">' + (s.kind === "locked" ? "Not read" : esc(s.asOf.replace(/,.*$/, ""))) + " · " + st + '</small></span><span class="spr__go">' + CHV + "</span></button></li>");
       const list = P(".sps"), items = Array.from(list.children); const before = items.find((x) => +x.querySelector(".spr__n").textContent > n);
       before ? list.insertBefore(li, before) : list.appendChild(li);
+      P("#spSrcN").textContent = String(Object.keys(seen).length);
     });
   }
   function showDetail(id, key) {
@@ -2024,6 +2064,7 @@ RENDERERS.side = function (ctx) {
           const s = sc.plan[ev.step];
           cur = railItem("is-cur", '<p class="ri__t">' + esc(s.title) + '</p><p class="ri__f shim">' + esc(s.say[1] || s.say[0]) + "</p>");
           ticker('<span class="tkr__dot"></span><span class="tkr__a">' + tkFirst + '</span><span class="tkr__s">·</span><span class="shim">' + esc(s.title) + "</span>", true);
+          agStart(s.agent, s.title);
           break;
         }
         case "stepEnd": {
@@ -2031,11 +2072,11 @@ RENDERERS.side = function (ctx) {
           const txt = (FOUND[S.sc] || [])[ev.step] || s.result;
           cur.className = "ri is-done st-" + st;
           cur.querySelector(".ri__b").innerHTML = '<p class="ri__t">' + esc(s.title) + '</p><p class="ri__f">' + fmt(txt, order) + statusBadge(s) + '</p><p class="ri__m">' + esc(AGENTS[s.agent].name) + " · " + (s.ms / 1000).toFixed(1) + "s</p>";
-          addSources(s); collapse(); setMeta();
+          addSources(s); collapse(); setMeta(); agEnd(s.agent, s.result);
           break;
         }
         case "answer": {
-          finished = true;
+          finished = true; $("#agBtnT").textContent = "View agents"; act.dataset.state = "done";
           if (cur) { cur.className = "ri is-done"; cur.querySelector(".ri__b").innerHTML = '<p class="ri__t">Response ready</p>'; }
           collapse(); setMeta();
           P("#spUsed").hidden = false; P(".spu").innerHTML = usedEl();
